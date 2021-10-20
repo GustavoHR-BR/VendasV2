@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 603
-  Width = 469
+  Height = 619
+  Width = 555
   object SQLConn: TSQLConnection
     DriverName = 'MySQL'
     GetDriverFunc = 'getSQLDriverMYSQL'
@@ -41,8 +41,8 @@ object dm: Tdm
       'ErrorResourceFile=')
     VendorLib = 'LIBMYSQL.dll'
     Connected = True
-    Left = 408
-    Top = 56
+    Left = 488
+    Top = 40
   end
   object cdsClientes: TClientDataSet
     Active = True
@@ -50,7 +50,7 @@ object dm: Tdm
     Params = <>
     ProviderName = 'dspClientes'
     Left = 224
-    Top = 48
+    Top = 24
     object cdsClientesid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -83,6 +83,16 @@ object dm: Tdm
       FieldName = 'endereco'
       Size = 60
     end
+    object cdsClientesRua: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Rua'
+      LookupDataSet = dSetRuas
+      LookupKeyFields = 'id'
+      LookupResultField = 'nome'
+      KeyFields = 'fk_rua'
+      Size = 80
+      Lookup = True
+    end
   end
   object dSetClientes: TSQLDataSet
     CommandText = 'select * from cliente;'
@@ -91,17 +101,17 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 48
+    Top = 24
   end
   object dspClientes: TDataSetProvider
     DataSet = dSetClientes
     Left = 128
-    Top = 48
+    Top = 24
   end
   object dSourceClientes: TDataSource
     DataSet = cdsClientes
     Left = 320
-    Top = 48
+    Top = 24
   end
   object cdsProdutos: TClientDataSet
     Active = True
@@ -109,7 +119,7 @@ object dm: Tdm
     Params = <>
     ProviderName = 'dspProdutos'
     Left = 224
-    Top = 112
+    Top = 88
     object cdsProdutosid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -140,24 +150,24 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 112
+    Top = 88
   end
   object dspProdutos: TDataSetProvider
     DataSet = dSetProdutos
     Left = 128
-    Top = 112
+    Top = 88
   end
   object dSourceProdutos: TDataSource
     DataSet = cdsProdutos
     Left = 320
-    Top = 112
+    Top = 88
   end
   object cdsRuas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRuas'
     Left = 224
-    Top = 184
+    Top = 160
     object cdsRuasid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -172,30 +182,31 @@ object dm: Tdm
   end
   object dSetRuas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from rua;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 184
+    Top = 160
   end
   object dspRuas: TDataSetProvider
     DataSet = dSetRuas
     Left = 128
-    Top = 184
+    Top = 160
   end
   object dSourceRuas: TDataSource
     DataSet = cdsRuas
     Left = 320
-    Top = 184
+    Top = 160
   end
   object cdsBairros: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspBairros'
     Left = 224
-    Top = 256
+    Top = 232
     object cdsBairrosid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -216,24 +227,24 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 256
+    Top = 232
   end
   object dspBairros: TDataSetProvider
     DataSet = dSetBairros
     Left = 128
-    Top = 256
+    Top = 232
   end
   object dSourceBairros: TDataSource
     DataSet = cdsBairros
     Left = 320
-    Top = 256
+    Top = 232
   end
   object cdsCidades: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCidades'
     Left = 224
-    Top = 328
+    Top = 304
     object cdsCidadesid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -254,24 +265,24 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 328
+    Top = 304
   end
   object dspCidades: TDataSetProvider
     DataSet = dSetCidades
     Left = 128
-    Top = 328
+    Top = 304
   end
   object dSourceCidades: TDataSource
     DataSet = cdsCidades
     Left = 320
-    Top = 328
+    Top = 304
   end
   object cdsEstados: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstados'
     Left = 224
-    Top = 400
+    Top = 376
     object cdsEstadosid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -293,24 +304,24 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 400
+    Top = 376
   end
   object dspEstados: TDataSetProvider
     DataSet = dSetEstados
     Left = 128
-    Top = 400
+    Top = 376
   end
   object dSourceEstados: TDataSource
     DataSet = cdsEstados
     Left = 320
-    Top = 400
+    Top = 376
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVendas'
     Left = 224
-    Top = 464
+    Top = 440
     object cdsVendasid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -336,24 +347,24 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 464
+    Top = 440
   end
   object dspVendas: TDataSetProvider
     DataSet = dSetVendas
     Left = 128
-    Top = 464
+    Top = 440
   end
   object dSourceVendas: TDataSource
     DataSet = cdsVendas
     Left = 320
-    Top = 464
+    Top = 440
   end
   object cdsItens: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dpsItens'
     Left = 224
-    Top = 536
+    Top = 512
     object cdsItensid: TIntegerField
       FieldName = 'id'
       Required = True
@@ -389,16 +400,29 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 536
+    Top = 512
   end
   object dpsItens: TDataSetProvider
     DataSet = dSetItens
     Left = 128
-    Top = 536
+    Top = 512
   end
   object dSourceItens: TDataSource
     DataSet = cdsItens
     Left = 320
-    Top = 536
+    Top = 512
+  end
+  object SQLDataSet1: TSQLDataSet
+    SchemaName = 'gustavo_reblin'
+    CommandText = 
+      'select * from estado est '#13#10'inner join cidade cid on'#13#10'est.id = ci' +
+      'd.fk_estado '#13#10'inner join bairro bai on'#13#10'bai.id = est.fk_bairro'#13#10 +
+      'inner join rua rua on '#13#10'rua.id = bai.fk_rua;'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConn
+    Left = 488
+    Top = 96
   end
 end

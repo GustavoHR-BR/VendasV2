@@ -14,6 +14,7 @@ type
     Produto1: TMenuItem;
     Pedidosdevenda1: TMenuItem;
     Nova1: TMenuItem;
+    procedure Cliente1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,5 +27,17 @@ var
 implementation
 
 {$R *.dfm}
+
+uses uCadastrarCliente, uClientes, uDataModule;
+
+procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
+begin
+  Application.CreateForm(TfrmClientes, frmClientes);
+  try
+    frmClientes.ShowModal;
+  finally
+    FreeAndNil(frmClientes);
+  end;
+end;
 
 end.

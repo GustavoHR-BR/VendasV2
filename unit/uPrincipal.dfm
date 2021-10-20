@@ -14,6 +14,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Style = []
   Menu = menu
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object menu: TMainMenu
@@ -23,6 +24,7 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Cadastrar'
       object Cliente1: TMenuItem
         Caption = 'Cliente'
+        OnClick = Cliente1Click
       end
       object Produto1: TMenuItem
         Caption = 'Produto'

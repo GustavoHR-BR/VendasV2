@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/10/07 14:08:57.000.056,=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/10/20 14:26:47.201,=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/10/20 14:26:58.798,C:\Users\Administrador\Desktop\vendaV2\unit\uMain.dfm=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2021/10/20 14:26:58.798,C:\Users\Administrador\Desktop\vendaV2\unit\uMain.pas=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/10/20 14:27:36.442,C:\Users\Administrador\Desktop\vendaV2\unit\uPrincipal.pas=C:\Users\Administrador\Desktop\vendaV2\unit\uMain.pas</Transaction>
+    <Transaction>2021/10/20 14:27:36.442,C:\Users\Administrador\Desktop\vendaV2\unit\uPrincipal.dfm=C:\Users\Administrador\Desktop\vendaV2\unit\uMain.dfm</Transaction>
+    <Transaction>2021/10/20 14:30:28.442,=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/10/20 14:30:41.962,C:\Users\Administrador\Desktop\vendaV2\data_module\uDataModule.dfm=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2021/10/20 14:30:41.962,C:\Users\Administrador\Desktop\vendaV2\data_module\uDataModule.pas=C:\Users\Administrador\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/10/20 14:31:08.318,C:\Users\Administrador\Desktop\vendaV2\data_module\Sistema.dproj=C:\Users\Administrador\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -74,22 +74,22 @@ procedure TfrmCadastrarCliente.btnCadastrarClick(Sender: TObject);
 begin
   if dbEdtNome.Text = '' then
   begin
-    ShowMessage('Preencha o nome!');
+    ShowMessage('Nome inválido!');
     dbEdtNome.SetFocus;
   end
   else if dbEdtTelefone.Text = '(  )     -    ' then
   begin
-    ShowMessage('Preencha o telefone!');
+    ShowMessage('Telefone inválido!');
     dbEdtTelefone.SetFocus;
   end
   else if dbEdtCpf.Text = '   .   .   -  ' then
   begin
-    ShowMessage('Preencha o CPF!');
+    ShowMessage('CPF inválido!');
     dbEdtCpf.SetFocus;
   end
   else if dbEdtEmail.Text = '' then
   begin
-    ShowMessage('Preencha o e-mail!');
+    ShowMessage('E-mail inválido!');
     dbEdtEmail.SetFocus;
   end
   else if cboxEstados.Text = '' then
@@ -102,11 +102,6 @@ begin
     ShowMessage('Selecione uma cidade!');
     dbEdtDtNascimento.SetFocus;
   end
-  else if dbEdtDtNascimento.Text = '  /  /    ' then
-  begin
-    ShowMessage('Preencha a data de nascimento!');
-    dbEdtDtNascimento.SetFocus;
-  end
   else if edtBairro.Text = '' then
   begin
     ShowMessage('Selecione um bairro!');
@@ -117,17 +112,23 @@ begin
     ShowMessage('Selecione uma rua!');
     dbEdtDtNascimento.SetFocus;
   end
+  else if (dbEdtDtNascimento.Text = '  /  /    ') then
+  begin
+    ShowMessage('Data de nascimento inválida!');
+    dbEdtDtNascimento.SetFocus;
+  end
   else
   begin
-    dm.cdsClientesid.Text := '';
+    dm.cdsClientesid.Text := '0';
     dm.cdsClientesfk_rua.AsInteger := dm.cdsRuasid.AsInteger;
-    dm.cdsClientes.Post;
     try
+      dm.cdsClientes.Post;
       dm.cdsClientes.ApplyUpdates(0);
       ShowMessage('Cliente cadastrado com sucesso! ');
+      Tag := 1;
     except
       on E: Exception do
-        ShowMessage('Erro ao cadastrar o cliente! ');
+        ShowMessage('Erro ao cadastrar o cliente! ' + E.ToString);
     end;
   end;
 end;
@@ -136,17 +137,26 @@ procedure TfrmCadastrarCliente.btnCancelarbairroClick(Sender: TObject);
 begin
   if edtBairro.Text <> '' then
     edtBairro.Clear;
+  if edtRua.Text <> '' then
+    edtRua.Clear;
   edtBairro.SetFocus;
   fechaBuscaBairro;
+  edtRua.Enabled := false;
 end;
 
 procedure TfrmCadastrarCliente.btnCancelarCidadeClick(Sender: TObject);
 begin
   if edtCidade.Text <> '' then
     edtCidade.Clear;
+  if edtBairro.Text <> '' then
+    edtBairro.Clear;
+  if edtRua.Text <> '' then
+    edtRua.Clear;
   fechaBuscaBairro;
   edtCidade.SetFocus;
   fechaBuscaCidade;
+  edtRua.Enabled := false;
+  edtBairro.Enabled := false;
 end;
 
 procedure TfrmCadastrarCliente.btnCancelarClick(Sender: TObject);
@@ -195,21 +205,16 @@ end;
 
 procedure TfrmCadastrarCliente.edtCidadeChange(Sender: TObject);
 begin
-  fechaBuscaBairro;
-  fechaBuscaRua;
-  if edtBairro.Text <> '' then
-    edtBairro.Clear;
-  if edtRua.Text <> '' then
-    edtRua.Clear;
-  gridCidades.Visible := true;
-  btnCancelarCidade.Visible := true;
   buscarCidade;
+  edtBairro.Clear;
+  edtBairro.Enabled := false;
+  edtRua.Clear;
+  edtRua.Enabled := false;
 end;
 
 procedure TfrmCadastrarCliente.edtCidadeClick(Sender: TObject);
 begin
-  gridCidades.Visible := true;
-  btnCancelarCidade.Visible := true;
+  abreBuscaCidade;
   fechaBuscaBairro;
   fechaBuscaRua;
   buscarCidade;
@@ -217,67 +222,60 @@ end;
 
 procedure TfrmCadastrarCliente.edtBairroChange(Sender: TObject);
 begin
-  fechaBuscaCidade;
-  fechaBuscaRua;
-  if edtRua.Text <> '' then
-    edtRua.Clear;
-  gridBairros.Visible := true;
-  btnCancelarbairro.Visible := true;
   buscarBairro;
+  edtRua.Clear;
+  edtRua.Enabled := false;
 end;
 
 procedure TfrmCadastrarCliente.edtBairroClick(Sender: TObject);
 begin
-  gridBairros.Visible := true;
-  btnCancelarbairro.Visible := true;
+  abreBuscaBairro;
+  buscarBairro;
   fechaBuscaCidade;
   fechaBuscaRua;
-  buscarBairro;
 end;
 
 procedure TfrmCadastrarCliente.edtRuaChange(Sender: TObject);
 begin
-  fechaBuscaCidade;
-  fechaBuscaBairro;
-  if edtRua.Text <> '' then
-    edtRua.Clear;
-  gridRuas.Visible := true;
-  btnCancelarRua.Visible := true;
   buscarRua;
 end;
 
 procedure TfrmCadastrarCliente.edtRuaClick(Sender: TObject);
 begin
-  gridRuas.Visible := true;
-  btnCancelarRua.Visible := true;
+  abreBuscaRua;
+  buscarRua;
   fechaBuscaCidade;
   fechaBuscaBairro;
-  buscarRua;
 end;
 
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if Application.MessageBox('Deseja realmente sair?', 'Atenção',
-    MB_YESNO + MB_ICONQUESTION) = mrYes then
+  if Tag <> 1 then// tag 1 -> cadastrado
   begin
-    dm.dSetCidades.Close;
-    dm.cdsCidades.Close;
-    dm.dSetBairros.Close;
-    dm.cdsBairros.Close;
-    dm.dSetRuas.Close;
-    dm.cdsRuas.Close;
-    dm.dSetClientes.Close;
-    dm.cdsClientes.Close;
-    dm.dSetClientes.Open;
-    dm.cdsClientes.Open;
-  end
-  else
-    Abort;
+    if Application.MessageBox('Deseja realmente sair?', 'Atenção',
+      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    begin
+      dm.dSetCidades.Close;
+      dm.cdsCidades.Close;
+      dm.dSetBairros.Close;
+      dm.cdsBairros.Close;
+      dm.dSetRuas.Close;
+      dm.cdsRuas.Close;
+      dm.dSetClientes.Close;
+      dm.cdsClientes.Close;
+      dm.dSetClientes.Open;
+      dm.cdsClientes.Open;
+    end
+    else
+      Abort;
+  end;
 end;
 
 procedure TfrmCadastrarCliente.FormShow(Sender: TObject);
 begin
+  dm.SQLConn.Close;
+  dm.SQLConn.Open;
   dm.dSetRuas.Open;
   dm.cdsRuas.Open;
   dm.cdsClientes.Edit;
@@ -286,14 +284,15 @@ end;
 
 procedure TfrmCadastrarCliente.gridCidadesCellClick(Column: TColumn);
 begin
+  edtCidade.OnChange := nil;
   edtCidade.Text := dm.cdsCidadesnome.AsString;
+  edtCidade.OnChange := edtCidadeChange;
   if edtCidade.Text <> '' then
   begin
+    fechaBuscaCidade;
     edtBairro.Enabled := true;
     edtBairro.SetFocus;
-    fechaBuscaCidade;
-    fechaBuscaBairro;
-    fechaBuscaRua;
+    edtBairro.Clear;
   end
   else
     edtCidade.SetFocus;
@@ -301,14 +300,14 @@ end;
 
 procedure TfrmCadastrarCliente.gridBairrosCellClick(Column: TColumn);
 begin
+  edtBairro.OnChange := nil;
   edtBairro.Text := dm.cdsBairrosnome.AsString;
+  edtBairro.OnChange := edtBairroChange;
   if edtBairro.Text <> '' then
   begin
     edtRua.Enabled := true;
-    edtRua.SetFocus;
-    fechaBuscaCidade;
     fechaBuscaBairro;
-    fechaBuscaRua;
+    edtRua.SetFocus;
   end
   else
     edtBairro.SetFocus;
@@ -316,8 +315,15 @@ end;
 
 procedure TfrmCadastrarCliente.gridRuasCellClick(Column: TColumn);
 begin
+  edtRua.OnChange := nil;
   edtRua.Text := dm.cdsRuasnome.AsString;
-  fechaBuscaRua;
+  edtRua.OnChange := edtRuaChange;
+  if edtBairro.Text <> '' then
+  begin
+    fechaBuscaRua;
+  end
+  else
+    edtBairro.SetFocus;
 end;
 
 end.

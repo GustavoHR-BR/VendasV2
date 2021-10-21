@@ -9,6 +9,9 @@ procedure buscarRua;
 procedure fechaBuscaCidade;
 procedure fechaBuscaBairro;
 procedure fechaBuscaRua;
+procedure abreBuscaCidade;
+procedure abreBuscaBairro;
+procedure abreBuscaRua;
 
 implementation
 
@@ -156,6 +159,24 @@ procedure fechaBuscaRua;
 begin
   frmCadastrarCliente.gridRuas.Visible := false;
   frmCadastrarCliente.btnCancelarRua.Visible := false;
+end;
+
+procedure abreBuscaCidade;
+begin
+  frmCadastrarCliente.gridCidades.Visible := true;
+  frmCadastrarCliente.btnCancelarCidade.Visible := true;
+end;
+
+procedure abreBuscaBairro;
+begin
+  frmCadastrarCliente.gridBairros.Visible := true;
+  frmCadastrarCliente.btnCancelarBairro.Visible := true;
+end;
+
+procedure abreBuscaRua;
+begin
+  frmCadastrarCliente.gridRuas.Visible := true;
+  frmCadastrarCliente.btnCancelarRua.Visible := true;
 end;
 
 end.

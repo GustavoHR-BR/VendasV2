@@ -45,6 +45,7 @@ object dm: Tdm
     Top = 16
   end
   object cdsClientes: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientes'
@@ -98,6 +99,7 @@ object dm: Tdm
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'SELECT * FROM cliente ORDER BY id ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -185,6 +187,7 @@ object dm: Tdm
   end
   object dSetRuas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from rua;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1

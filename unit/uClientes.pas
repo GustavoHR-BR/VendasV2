@@ -59,6 +59,7 @@ end;
 
 procedure TfrmClientes.FormShow(Sender: TObject);
 begin
+  dm.SQLConn.Open;
   dm.dSetClientes.Open;
   dm.cdsClientes.Open;
 end;

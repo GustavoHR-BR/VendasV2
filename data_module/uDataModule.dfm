@@ -41,11 +41,10 @@ object dm: Tdm
       'ErrorResourceFile=')
     VendorLib = 'LIBMYSQL.dll'
     Connected = True
-    Left = 488
-    Top = 40
+    Left = 496
+    Top = 16
   end
   object cdsClientes: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientes'
@@ -65,10 +64,12 @@ object dm: Tdm
     end
     object cdsClientescpf: TStringField
       FieldName = 'cpf'
+      EditMask = '!999.999.999-99;1;_'
       Size = 16
     end
     object cdsClientestelefone: TStringField
       FieldName = 'telefone'
+      EditMask = '!(99) 99999-9999;1;_'
       Size = 15
     end
     object cdsClientesemail: TStringField
@@ -77,6 +78,7 @@ object dm: Tdm
     end
     object cdsClientesdata_nascimento: TStringField
       FieldName = 'data_nascimento'
+      EditMask = '!99/99/9999;1;_'
       Size = 10
     end
     object cdsClientesendereco: TStringField
@@ -95,7 +97,8 @@ object dm: Tdm
     end
   end
   object dSetClientes: TSQLDataSet
-    CommandText = 'select * from cliente;'
+    SchemaName = 'gustavo_reblin'
+    CommandText = 'SELECT * FROM cliente ORDER BY id ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -114,7 +117,6 @@ object dm: Tdm
     Top = 24
   end
   object cdsProdutos: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProdutos'
@@ -144,7 +146,7 @@ object dm: Tdm
   end
   object dSetProdutos: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from produto;'
+    CommandText = 'SELECT * FROM produto ORDER BY id ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -170,6 +172,7 @@ object dm: Tdm
     Top = 160
     object cdsRuasid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsRuasnome: TStringField
@@ -182,7 +185,6 @@ object dm: Tdm
   end
   object dSetRuas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from rua;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -202,6 +204,7 @@ object dm: Tdm
     Top = 160
   end
   object cdsBairros: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspBairros'
@@ -209,6 +212,7 @@ object dm: Tdm
     Top = 232
     object cdsBairrosid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsBairrosnome: TStringField
@@ -221,6 +225,7 @@ object dm: Tdm
   end
   object dSetBairros: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from bairro;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -411,18 +416,5 @@ object dm: Tdm
     DataSet = cdsItens
     Left = 320
     Top = 512
-  end
-  object SQLDataSet1: TSQLDataSet
-    SchemaName = 'gustavo_reblin'
-    CommandText = 
-      'select * from estado est '#13#10'inner join cidade cid on'#13#10'est.id = ci' +
-      'd.fk_estado '#13#10'inner join bairro bai on'#13#10'bai.id = est.fk_bairro'#13#10 +
-      'inner join rua rua on '#13#10'rua.id = bai.fk_rua;'
-    DbxCommandType = 'Dbx.SQL'
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = SQLConn
-    Left = 488
-    Top = 96
   end
 end

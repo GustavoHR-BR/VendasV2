@@ -78,7 +78,6 @@ type
     cdsItensdescricao: TStringField;
     cdsItensquantidade: TIntegerField;
     cdsClientesRua: TStringField;
-    SQLDataSet1: TSQLDataSet;
   private
     { Private declarations }
   public

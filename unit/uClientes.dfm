@@ -14,6 +14,7 @@ object frmClientes: TfrmClientes
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -53,11 +54,6 @@ object frmClientes: TfrmClientes
       item
         Expanded = False
         FieldName = 'cpf'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = []
         Title.Caption = 'CPF'
         Visible = True
       end
@@ -98,7 +94,7 @@ object frmClientes: TfrmClientes
   end
   object btnAdicionar: TButton
     Left = 48
-    Top = 440
+    Top = 442
     Width = 75
     Height = 25
     Caption = 'Adicionar'
@@ -113,7 +109,7 @@ object frmClientes: TfrmClientes
   end
   object btnEditar: TButton
     Left = 136
-    Top = 440
+    Top = 442
     Width = 75
     Height = 25
     Caption = 'Editar'
@@ -127,7 +123,7 @@ object frmClientes: TfrmClientes
   end
   object btnSair: TButton
     Left = 731
-    Top = 440
+    Top = 442
     Width = 75
     Height = 25
     Caption = 'Sair'

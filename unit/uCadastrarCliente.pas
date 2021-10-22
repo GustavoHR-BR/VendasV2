@@ -294,7 +294,7 @@ begin
       dm.cdsCidades.Close;
       dm.dSetBairros.Close;
       dm.cdsBairros.Close;
-      verificarOrdenacao;
+      verificarOrdenacaoCliente;
     end
     else
       Abort;
@@ -302,7 +302,7 @@ begin
   else
   begin
     frmClientes.edtBuscar.Text := '';
-    verificarOrdenacao;
+    verificarOrdenacaoCliente;
   end;
 end;
 

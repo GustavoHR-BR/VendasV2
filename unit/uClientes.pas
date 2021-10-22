@@ -69,7 +69,7 @@ end;
 
 procedure TfrmClientes.cbOrdenarPorSelect(Sender: TObject);
 begin
-  verificarOrdenacao;
+  verificarOrdenacaoCliente;
 end;
 
 procedure TfrmClientes.edtBuscarChange(Sender: TObject);

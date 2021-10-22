@@ -4,6 +4,10 @@ interface
 
 procedure threadBuscarCliente;
 procedure buscarCliente(orderBy: string);
+procedure verificarOrdenacaoCliente;
+procedure threadBuscarProduto;
+// procedure buscarProduto(orderBy: string);
+procedure verificarOrdenacaoProduto;
 procedure buscarCidade;
 procedure buscarBairro;
 procedure buscarRua;
@@ -14,13 +18,12 @@ procedure abreBuscaCidade;
 procedure abreBuscaBairro;
 procedure abreBuscaRua;
 procedure buscarEnderecoCliente;
-procedure verificarOrdenacao;
 
 implementation
 
 uses
   System.Classes, System.SysUtils,
-  uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal;
+  uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos;
 
 procedure buscarCliente(orderBy: string);
 begin
@@ -31,10 +34,10 @@ begin
   dm.dSetRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
   dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
     + ' ASC;';
-  dm.dSetClientes.Open;
-  dm.cdsClientes.Open;
   dm.dSetRuas.Open;
   dm.cdsRuas.Open;
+  dm.dSetClientes.Open;
+  dm.cdsClientes.Open;
 end;
 
 procedure threadBuscarCliente;
@@ -59,6 +62,75 @@ begin
     end);
   t.FreeOnTerminate := true;
   t.Start;
+end;
+
+procedure verificarOrdenacaoCliente;
+begin
+
+  case frmClientes.cbOrdenarPor.ItemIndex of
+    0:
+      buscarCliente('id');
+    1:
+      buscarCliente('nome');
+    2:
+      buscarCliente('telefone');
+    3:
+      buscarCliente('email');
+    4:
+      buscarCliente('data_nascimento');
+  end;
+end;
+
+procedure buscarProduto(orderBy: string);
+begin
+  dm.dSetProdutos.Close;
+  dm.cdsProdutos.Close;
+  // dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
+  // + ' ASC;';
+  dm.cdsProdutos.IndexFieldNames := orderBy;
+  dm.dSetProdutos.Open;
+  dm.cdsProdutos.Open;
+end;
+
+procedure threadBuscarProduto;
+var
+  t: TThread;
+begin
+  t := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      dm.dSetProdutos.Close;
+      dm.cdsProdutos.Close;
+      dm.dSetProdutos.CommandText := 'SELECT * FROM produto WHERE nome LIKE "%'
+        + LowerCase(Trim(frmProdutos.edtBuscar.Text)) + '%" ORDER BY nome ASC;';
+      dm.dSetProdutos.Open;
+      dm.cdsProdutos.Open;
+
+      TThread.Synchronize(nil,
+        procedure
+        begin
+          frmProdutos.dbgrid.DataSource := dm.dSourceProdutos;
+        end);
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
+end;
+
+procedure verificarOrdenacaoProduto;
+begin
+
+  case frmProdutos.cbOrdenarPor.ItemIndex of
+    0:
+      buscarProduto('id');
+    1:
+      buscarProduto('nome');
+    2:
+      buscarProduto('preco');
+    3:
+      buscarProduto('descricao');
+    4:
+      buscarProduto('quantidade_estoque');
+  end;
 end;
 
 procedure buscarCidade;
@@ -226,23 +298,6 @@ procedure abreBuscaRua;
 begin
   frmCadastrarCliente.gridRuas.Visible := true;
   frmCadastrarCliente.btnCancelarRua.Visible := true;
-end;
-
-procedure verificarOrdenacao;
-begin
-
-  case frmClientes.cbOrdenarPor.ItemIndex of
-    0:
-      buscarCliente('id');
-    1:
-      buscarCliente('nome');
-    2:
-      buscarCliente('telefone');
-    3:
-      buscarCliente('email');
-    4:
-      buscarCliente('data_nascimento');
-  end;
 end;
 
 end.

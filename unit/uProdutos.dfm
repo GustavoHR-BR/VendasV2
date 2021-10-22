@@ -1,9 +1,11 @@
 object frmProdutos: TfrmProdutos
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'Produtos'
-  ClientHeight = 474
-  ClientWidth = 839
+  ClientHeight = 482
+  ClientWidth = 849
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +13,7 @@ object frmProdutos: TfrmProdutos
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -48,9 +51,15 @@ object frmProdutos: TfrmProdutos
     TitleFont.Style = []
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'id'
         Title.Caption = 'C'#243'digo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 50
         Visible = True
       end
@@ -58,13 +67,24 @@ object frmProdutos: TfrmProdutos
         Expanded = False
         FieldName = 'nome'
         Title.Caption = 'Nome'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 160
         Visible = True
       end
       item
+        Alignment = taLeftJustify
         Expanded = False
         FieldName = 'preco'
         Title.Caption = 'Pre'#231'o'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 80
         Visible = True
       end
@@ -72,13 +92,24 @@ object frmProdutos: TfrmProdutos
         Expanded = False
         FieldName = 'descricao'
         Title.Caption = 'Descri'#231#227'o'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 450
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'quantidade_estoque'
         Title.Caption = 'No estoque'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 90
         Visible = True
       end>
@@ -124,6 +155,7 @@ object frmProdutos: TfrmProdutos
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    OnClick = btnSairClick
   end
   object edtBuscar: TEdit
     Left = 97
@@ -131,6 +163,7 @@ object frmProdutos: TfrmProdutos
     Width = 273
     Height = 21
     TabOrder = 4
+    OnChange = edtBuscarChange
   end
   object btnFiltrar: TButton
     Left = 384
@@ -156,11 +189,12 @@ object frmProdutos: TfrmProdutos
     ItemIndex = 1
     TabOrder = 6
     Text = 'Nome'
+    OnSelect = cbOrdenarPorSelect
     Items.Strings = (
       'C'#243'digo'
       'Nome'
-      'Telefone'
-      'E-mail'
-      'Anivers'#225'rio')
+      'Pre'#231'o'
+      'Descri'#231#227'o'
+      'Quantidade no estoque')
   end
 end

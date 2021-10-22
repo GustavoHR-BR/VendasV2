@@ -52,6 +52,7 @@ object frmClientes: TfrmClientes
     TitleFont.Style = []
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'id'
         Title.Caption = 'C'#243'dgo'
@@ -86,6 +87,7 @@ object frmClientes: TfrmClientes
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'data_nascimento'
         Title.Caption = 'Anivers'#225'rio'

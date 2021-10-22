@@ -2,6 +2,7 @@ unit uFunctions;
 
 interface
 
+procedure threadBuscarCliente;
 procedure buscarCliente;
 procedure buscarCidade;
 procedure buscarBairro;
@@ -12,6 +13,7 @@ procedure fechaBuscaRua;
 procedure abreBuscaCidade;
 procedure abreBuscaBairro;
 procedure abreBuscaRua;
+procedure buscarEnderecoCliente;
 
 implementation
 
@@ -21,7 +23,22 @@ uses
 
 procedure buscarCliente;
 begin
-  TThread.CreateAnonymousThread(
+  dm.dSetRuas.Close;
+  dm.cdsRuas.Close;
+  dm.dSetClientes.Close;
+  dm.cdsClientes.Close;
+  dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY id ASC;';
+  dm.dSetClientes.Open;
+  dm.cdsClientes.Open;
+  dm.dSetRuas.Open;
+  dm.cdsRuas.Open;
+end;
+
+procedure threadBuscarCliente;
+var
+  t: TThread;
+begin
+  t := TThread.CreateAnonymousThread(
     procedure
     begin
       dm.dSetClientes.Close;
@@ -36,22 +53,25 @@ begin
         begin
           frmClientes.dbgrid.DataSource := dm.dSourceClientes;
         end);
-    end).Start;
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
 end;
 
 procedure buscarCidade;
+var
+  t: TThread;
 begin
-  TThread.CreateAnonymousThread(
+  t := TThread.CreateAnonymousThread(
     procedure
     begin
       dm.dSetCidades.Close;
       dm.cdsCidades.Close;
-      dm.dSetCidades.CommandText :=
-        'SELECT * FROM cidade cid JOIN estado est ON ' +
-        'cid.fk_estado = est.id WHERE (est.uf = "' +
+      dm.dSetCidades.CommandText := 'SELECT * FROM cidade c JOIN estado e ON ' +
+        'c.fk_estado = e.id WHERE (e.uf = "' +
         UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text)) +
-        '") AND (cid.nome LIKE "' + frmCadastrarCliente.edtCidade.Text +
-        '%") ORDER BY cid.nome DESC;';
+        '") AND (c.nome LIKE "' + frmCadastrarCliente.edtCidade.Text +
+        '%") ORDER BY c.nome DESC;';
       dm.dSetCidades.Open;
       dm.cdsCidades.Open;
       dm.cdsCidadesnome.Text;
@@ -61,38 +81,28 @@ begin
         begin
           frmCadastrarCliente.gridCidades.DataSource := dm.dSourceCidades;
         end);
-    end).Start;
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
 end;
 
 procedure buscarBairro;
+var
+  t: TThread;
 begin
-  TThread.CreateAnonymousThread(
+  t := TThread.CreateAnonymousThread(
     procedure
     begin
       dm.dSetBairros.Close;
       dm.cdsBairros.Close;
 
-      {
-        dm.dSetBairros.CommandText :=
-        'SELECT bai.id, bai.nome FROM bairro bai JOIN cidade cid ON ' +
-        'bai.fk_cidade = cid.id JOIN estado est ON ' +
-        'cid.fk_estado = est.id WHERE (est.uf = "' +
-        UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text)) +
-        '") AND (cid.nome = "' +
-        LowerCase(Trim(frmCadastrarCliente.edtCidade.Text)) +
-        '") AND (bai.nome LIKE "' +
+      dm.dSetBairros.CommandText := 'SELECT * FROM bairro b JOIN cidade c ON ' +
+        'b.fk_cidade = c.id JOIN estado e ON ' +
+        'c.fk_estado = e.id WHERE (e.uf = "' +
+        UpperCase(Trim(dm.cdsEstadosuf.AsString)) + '") AND (c.nome = "' +
+        LowerCase(Trim(dm.cdsCidadesnome.AsString)) + '") AND (b.nome LIKE "' +
         LowerCase(Trim(frmCadastrarCliente.edtBairro.Text)) +
-        '%") ORDER BY bai.nome ASC;';
-
-        VERIFICAR PQ N DEU CERTO;
-      }
-
-      dm.dSetBairros.CommandText :=
-        'SELECT * FROM bairro bai JOIN cidade cid ON ' +
-        'bai.fk_cidade = cid.id WHERE (cid.nome = "' +
-        UpperCase(Trim(frmCadastrarCliente.edtCidade.Text)) +
-        '") AND (bai.nome LIKE "' + frmCadastrarCliente.edtBairro.Text +
-        '%") ORDER BY bai.nome DESC;';
+        '%") ORDER BY b.nome ASC;';
 
       dm.dSetBairros.Open;
       dm.cdsBairros.Open;
@@ -102,35 +112,30 @@ begin
         begin
           frmCadastrarCliente.gridBairros.DataSource := dm.dSourceBairros;
         end);
-    end).Start;
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
 end;
 
 procedure buscarRua;
+var
+  t: TThread;
 begin
-  TThread.CreateAnonymousThread(
+  t := TThread.CreateAnonymousThread(
     procedure
     begin
       dm.dSetRuas.Close;
       dm.cdsRuas.Close;
 
-      {
-        dm.dSetRuas.CommandText := 'SELECT * FROM rua rua JOIN bairro bai ON ' +
-        'rua.fk_bairro = bai.id JOIN cidade cid ON ' +
-        'bai.fk_cidade = cid.id JOIN estado est ON ' +
-        'cid.fk_estado = est.id WHERE (est.uf = "' +
-        UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text)) +
-        '") AND rua.nome LIKE "' +
+      dm.dSetRuas.CommandText := 'SELECT * FROM rua r JOIN bairro b ON ' +
+        'r.fk_bairro = b.id JOIN cidade c ON ' +
+        'b.fk_cidade = c.id JOIN estado e ON ' +
+        'c.fk_estado = e.id WHERE (e.uf = "' +
+        UpperCase(Trim(dm.cdsEstadosuf.AsString)) + '") AND (c.nome = "' +
+        LowerCase(Trim(dm.cdsCidadesnome.AsString)) + '") AND b.nome = "' +
+        LowerCase(Trim(dm.cdsBairrosnome.AsString)) + '" AND r.nome LIKE "%' +
         LowerCase(Trim(frmCadastrarCliente.edtRua.Text)) +
-        '%" ORDER BY rua.nome ASC;';
-
-        VERIFICAR PQ N DEU CERTO;
-      }
-
-      dm.dSetRuas.CommandText := 'SELECT * FROM rua rua JOIN bairro bai ON '
-        + 'rua.fk_bairro = bai.id WHERE (bai.nome = "' +
-        UpperCase(Trim(frmCadastrarCliente.edtBairro.Text)) +
-        '") AND (rua.nome LIKE "' + frmCadastrarCliente.edtRua.Text +
-        '%") ORDER BY rua.nome DESC;';
+        '%" ORDER BY r.nome ASC;';
 
       dm.dSetRuas.Open;
       dm.cdsRuas.Open;
@@ -140,7 +145,48 @@ begin
         begin
           frmCadastrarCliente.gridRuas.DataSource := dm.dSourceRuas;
         end);
-    end).Start;
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
+end;
+
+procedure buscarEnderecoCliente;
+var
+  t: TThread;
+begin
+
+  t := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      dm.dSetRuas.Close;
+      dm.cdsRuas.Close;
+
+      dm.queryEnderecoCliente.Close;
+      dm.queryEnderecoCliente.SQL.Text := 'SELECT e.uf, c.nome, b.nome, r.nome '
+        + 'FROM rua r JOIN bairro b ON r.fk_bairro = b.id JOIN cidade c ON ' +
+        'b.fk_cidade = c.id JOIN estado e ON c.fk_estado = e.id WHERE r.id = "'
+        + dm.cdsClientesfk_rua.AsString + '"';
+
+      dm.queryEnderecoCliente.Open;
+      TThread.Synchronize(nil,
+        procedure
+        begin
+          frmCadastrarCliente.cboxEstados.ItemIndex :=
+            frmCadastrarCliente.cboxEstados.Items.IndexOf
+            (dm.queryEnderecoCliente.Fields[0].AsString);
+          frmCadastrarCliente.edtCidade.Text :=
+            (dm.queryEnderecoCliente.Fields[1].AsString);
+          frmCadastrarCliente.edtBairro.Text :=
+            (dm.queryEnderecoCliente.Fields[2].AsString);
+          frmCadastrarCliente.edtRua.Text := (dm.queryEnderecoCliente.Fields[3]
+            .AsString);
+
+          dm.dSetRuas.Open;
+          dm.cdsRuas.Open;
+        end);
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
 end;
 
 procedure fechaBuscaCidade;

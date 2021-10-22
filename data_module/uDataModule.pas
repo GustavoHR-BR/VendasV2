@@ -78,6 +78,7 @@ type
     cdsItensdescricao: TStringField;
     cdsItensquantidade: TIntegerField;
     cdsClientesRua: TStringField;
+    queryEnderecoCliente: TSQLQuery;
   private
     { Private declarations }
   public

@@ -45,7 +45,6 @@ object dm: Tdm
     Top = 16
   end
   object cdsClientes: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientes'
@@ -89,7 +88,7 @@ object dm: Tdm
     object cdsClientesRua: TStringField
       FieldKind = fkLookup
       FieldName = 'Rua'
-      LookupDataSet = dSetRuas
+      LookupDataSet = cdsRuas
       LookupKeyFields = 'id'
       LookupResultField = 'nome'
       KeyFields = 'fk_rua'
@@ -167,6 +166,7 @@ object dm: Tdm
     Top = 88
   end
   object cdsRuas: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRuas'
@@ -248,6 +248,7 @@ object dm: Tdm
     Top = 232
   end
   object cdsCidades: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCidades'
@@ -255,6 +256,7 @@ object dm: Tdm
     Top = 304
     object cdsCidadesid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCidadesnome: TStringField
@@ -267,6 +269,7 @@ object dm: Tdm
   end
   object dSetCidades: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from cidade;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -286,6 +289,7 @@ object dm: Tdm
     Top = 304
   end
   object cdsEstados: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstados'
@@ -293,6 +297,7 @@ object dm: Tdm
     Top = 376
     object cdsEstadosid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsEstadosnome: TStringField
@@ -306,6 +311,7 @@ object dm: Tdm
   end
   object dSetEstados: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from estado;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -419,5 +425,12 @@ object dm: Tdm
     DataSet = cdsItens
     Left = 320
     Top = 512
+  end
+  object queryEnderecoCliente: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConn
+    Left = 456
+    Top = 496
   end
 end

@@ -20,6 +20,7 @@ type
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,7 +39,19 @@ uses uCadastrarCliente, uDataModule, uPrincipal, uFiltroCli, uFunctions;
 procedure TfrmClientes.btnAdicionarClick(Sender: TObject);
 begin
   Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
+  Tag := 1;
   dm.cdsClientes.Append;
+  try
+    frmCadastrarCliente.ShowModal;
+  finally
+    FreeAndNil(frmCadastrarCliente);
+  end;
+end;
+
+procedure TfrmClientes.btnEditarClick(Sender: TObject);
+begin
+  Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
+  Tag := 2;
   try
     frmCadastrarCliente.ShowModal;
   finally
@@ -53,7 +66,7 @@ end;
 
 procedure TfrmClientes.edtBuscarChange(Sender: TObject);
 begin
-  buscarCliente;
+  threadBuscarCliente;
   Sleep(110);
 end;
 

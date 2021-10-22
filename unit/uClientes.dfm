@@ -120,6 +120,7 @@ object frmClientes: TfrmClientes
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    OnClick = btnEditarClick
   end
   object btnSair: TButton
     Left = 731

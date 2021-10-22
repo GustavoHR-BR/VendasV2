@@ -170,7 +170,6 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Height = 21
     DataField = 'cpf'
     DataSource = dm.dSourceClientes
-    MaxLength = 14
     TabOrder = 2
   end
   object dbEdtTelefone: TDBEdit
@@ -180,7 +179,6 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Height = 21
     DataField = 'telefone'
     DataSource = dm.dSourceClientes
-    MaxLength = 15
     TabOrder = 1
   end
   object dbEdtEmail: TDBEdit
@@ -199,7 +197,6 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Height = 21
     DataField = 'data_nascimento'
     DataSource = dm.dSourceClientes
-    MaxLength = 10
     TabOrder = 6
   end
   object edtCidade: TEdit

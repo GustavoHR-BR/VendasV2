@@ -284,8 +284,6 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  frmClientes.edtBuscar.Text := '';
-  buscarCliente;
 
   if (Tag <> 1) AND (Tag <> 2) then // close pelo usuário;
   begin
@@ -296,15 +294,15 @@ begin
       dm.cdsCidades.Close;
       dm.dSetBairros.Close;
       dm.cdsBairros.Close;
-      dm.dSetRuas.Close;
-      dm.cdsRuas.Close;
-      dm.dSetClientes.Close;
-      dm.cdsClientes.Close;
-      dm.dSetClientes.Open;
-      dm.cdsClientes.Open;
+      verificarOrdenacao;
     end
     else
       Abort;
+  end
+  else
+  begin
+    frmClientes.edtBuscar.Text := '';
+    verificarOrdenacao;
   end;
 end;
 

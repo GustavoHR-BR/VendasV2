@@ -104,7 +104,7 @@ object frmClientes: TfrmClientes
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 4
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
@@ -119,7 +119,7 @@ object frmClientes: TfrmClientes
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 5
     OnClick = btnEditarClick
   end
   object btnSair: TButton
@@ -134,7 +134,7 @@ object frmClientes: TfrmClientes
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 6
     OnClick = btnSairClick
   end
   object edtBuscar: TEdit
@@ -142,7 +142,7 @@ object frmClientes: TfrmClientes
     Top = 21
     Width = 273
     Height = 21
-    TabOrder = 4
+    TabOrder = 1
     OnChange = edtBuscarChange
   end
   object Button1: TButton
@@ -157,6 +157,23 @@ object frmClientes: TfrmClientes
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 2
+  end
+  object cbOrdenarPor: TComboBox
+    Left = 661
+    Top = 21
+    Width = 145
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 1
+    TabOrder = 3
+    Text = 'Nome'
+    OnSelect = cbOrdenarPorSelect
+    Items.Strings = (
+      'C'#243'digo'
+      'Nome'
+      'Telefone'
+      'E-mail'
+      'Anivers'#225'rio')
   end
 end

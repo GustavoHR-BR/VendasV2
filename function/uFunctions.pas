@@ -3,7 +3,7 @@ unit uFunctions;
 interface
 
 procedure threadBuscarCliente;
-procedure buscarCliente;
+procedure buscarCliente(orderBy: string);
 procedure buscarCidade;
 procedure buscarBairro;
 procedure buscarRua;
@@ -14,6 +14,7 @@ procedure abreBuscaCidade;
 procedure abreBuscaBairro;
 procedure abreBuscaRua;
 procedure buscarEnderecoCliente;
+procedure verificarOrdenacao;
 
 implementation
 
@@ -21,14 +22,15 @@ uses
   System.Classes, System.SysUtils,
   uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal;
 
-procedure buscarCliente;
+procedure buscarCliente(orderBy: string);
 begin
   dm.dSetRuas.Close;
   dm.cdsRuas.Close;
   dm.dSetClientes.Close;
   dm.cdsClientes.Close;
   dm.dSetRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
-  dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY id ASC;';
+  dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
+    + ' ASC;';
   dm.dSetClientes.Open;
   dm.cdsClientes.Open;
   dm.dSetRuas.Open;
@@ -45,7 +47,7 @@ begin
       dm.dSetClientes.Close;
       dm.cdsClientes.Close;
       dm.dSetClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "%'
-        + LowerCase(Trim(frmClientes.edtBuscar.Text)) + '%" ORDER BY id ASC;';
+        + LowerCase(Trim(frmClientes.edtBuscar.Text)) + '%" ORDER BY nome ASC;';
       dm.dSetClientes.Open;
       dm.cdsClientes.Open;
 
@@ -224,6 +226,23 @@ procedure abreBuscaRua;
 begin
   frmCadastrarCliente.gridRuas.Visible := true;
   frmCadastrarCliente.btnCancelarRua.Visible := true;
+end;
+
+procedure verificarOrdenacao;
+begin
+
+  case frmClientes.cbOrdenarPor.ItemIndex of
+    0:
+      buscarCliente('id');
+    1:
+      buscarCliente('nome');
+    2:
+      buscarCliente('telefone');
+    3:
+      buscarCliente('email');
+    4:
+      buscarCliente('data_nascimento');
+  end;
 end;
 
 end.

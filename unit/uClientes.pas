@@ -16,11 +16,13 @@ type
     edtBuscar: TEdit;
     Label1: TLabel;
     Button1: TButton;
+    cbOrdenarPor: TComboBox;
     procedure edtBuscarChange(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
+    procedure cbOrdenarPorSelect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,14 +66,20 @@ begin
   frmClientes.Close;
 end;
 
+procedure TfrmClientes.cbOrdenarPorSelect(Sender: TObject);
+begin
+  verificarOrdenacao;
+end;
+
 procedure TfrmClientes.edtBuscarChange(Sender: TObject);
 begin
   threadBuscarCliente;
-  Sleep(110);
+  Sleep(60);
 end;
 
 procedure TfrmClientes.FormShow(Sender: TObject);
 begin
+  dm.SQLConn.Close;
   dm.SQLConn.Open;
   dm.dSetClientes.Open;
   dm.cdsClientes.Open;

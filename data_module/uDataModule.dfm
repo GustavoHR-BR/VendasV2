@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 619
-  Width = 555
+  Height = 573
+  Width = 581
   object SQLConn: TSQLConnection
     DriverName = 'MySQL'
     GetDriverFunc = 'getSQLDriverMYSQL'
@@ -40,7 +40,6 @@ object dm: Tdm
       'BlobSize=-1'
       'ErrorResourceFile=')
     VendorLib = 'LIBMYSQL.dll'
-    Connected = True
     Left = 496
     Top = 16
   end
@@ -98,8 +97,7 @@ object dm: Tdm
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
-    CommandText = 'SELECT * FROM cliente ORDER BY id ASC;'
+    CommandText = 'SELECT * FROM cliente ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -187,7 +185,6 @@ object dm: Tdm
   end
   object dSetRuas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from rua;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -228,7 +225,6 @@ object dm: Tdm
   end
   object dSetBairros: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from bairro;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -269,7 +265,6 @@ object dm: Tdm
   end
   object dSetCidades: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from cidade;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -311,7 +306,6 @@ object dm: Tdm
   end
   object dSetEstados: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from estado;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -430,7 +424,7 @@ object dm: Tdm
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConn
-    Left = 456
-    Top = 496
+    Left = 496
+    Top = 72
   end
 end

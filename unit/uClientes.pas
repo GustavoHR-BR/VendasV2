@@ -15,8 +15,9 @@ type
     btnSair: TButton;
     edtBuscar: TEdit;
     Label1: TLabel;
-    Button1: TButton;
+    btnFiltrar: TButton;
     cbOrdenarPor: TComboBox;
+    Label2: TLabel;
     procedure edtBuscarChange(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);

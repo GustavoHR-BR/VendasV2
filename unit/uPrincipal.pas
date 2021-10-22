@@ -3,7 +3,8 @@ unit uPrincipal;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
 
 type
@@ -15,6 +16,7 @@ type
     Pedidosdevenda1: TMenuItem;
     Nova1: TMenuItem;
     procedure Cliente1Click(Sender: TObject);
+    procedure Produto1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,7 +30,8 @@ implementation
 
 {$R *.dfm}
 
-uses uCadastrarCliente, uClientes, uDataModule;
+uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
+  uProdutos;
 
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
@@ -37,6 +40,16 @@ begin
     frmClientes.ShowModal;
   finally
     FreeAndNil(frmClientes);
+  end;
+end;
+
+procedure TfrmPrincipal.Produto1Click(Sender: TObject);
+begin
+  Application.CreateForm(TfrmProdutos, frmProdutos);
+  try
+    frmProdutos.ShowModal;
+  finally
+    FreeAndNil(frmProdutos);
   end;
 end;
 

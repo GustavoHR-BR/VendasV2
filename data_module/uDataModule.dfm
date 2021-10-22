@@ -40,6 +40,7 @@ object dm: Tdm
       'BlobSize=-1'
       'ErrorResourceFile=')
     VendorLib = 'LIBMYSQL.dll'
+    Connected = True
     Left = 496
     Top = 16
   end
@@ -116,6 +117,7 @@ object dm: Tdm
     Top = 24
   end
   object cdsProdutos: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProdutos'
@@ -145,7 +147,7 @@ object dm: Tdm
   end
   object dSetProdutos: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'SELECT * FROM produto ORDER BY id ASC;'
+    CommandText = 'SELECT * FROM produto ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>

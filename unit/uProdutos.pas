@@ -21,6 +21,7 @@ type
     procedure edtBuscarChange(Sender: TObject);
     procedure cbOrdenarPorSelect(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure btnAdicionarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,7 +36,19 @@ implementation
 {$R *.dfm}
 
 uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
-  uPrincipal;
+  uPrincipal, uCadastrarProduto;
+
+procedure TfrmProdutos.btnAdicionarClick(Sender: TObject);
+begin
+  Application.CreateForm(TfrmCadastrarProduto, frmCadastrarProduto);
+  Tag := 1;
+  dm.cdsProdutos.Append;
+  try
+    frmCadastrarProduto.ShowModal;
+  finally
+    FreeAndNil(frmCadastrarProduto);
+  end;
+end;
 
 procedure TfrmProdutos.btnSairClick(Sender: TObject);
 begin

@@ -308,7 +308,7 @@ end;
 
 procedure TfrmCadastrarCliente.FormShow(Sender: TObject);
 begin
-  if frmClientes.Tag = 1 then // frmClientes.Tag = 1 -> cadastrar
+  if frmClientes.Tag = 1 then // Tag = 1 -> cadastrar
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
@@ -317,7 +317,7 @@ begin
     dm.cdsClientes.Edit;
     dm.cdsClientes.ClearFields;
   end
-  else if frmClientes.Tag = 2 then // frmClientes.Tag = 2 -> editar
+  else if frmClientes.Tag = 2 then // Tag = 2 -> editar
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;

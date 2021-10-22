@@ -127,6 +127,7 @@ object frmProdutos: TfrmProdutos
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
     Left = 136

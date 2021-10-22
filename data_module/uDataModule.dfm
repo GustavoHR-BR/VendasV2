@@ -29,10 +29,10 @@ object dm: Tdm
       'VendorLib=LIBMYSQL.dll'
       'VendorLibWin64=libmysql.dll'
       'VendorLibOsx=libmysqlclient.dylib'
-      'HostName=gustavo_reblin.mysql.dbaas.com.br'
-      'Database=gustavo_reblin'
-      'User_Name=gustavo_reblin'
-      'Password=otsgt.3.47Jea'
+      'HostName=localhost'
+      'Database=vendas'
+      'User_Name=root'
+      'Password=root'
       'MaxBlobSize=-1'
       'LocaleCode=0000'
       'Compressed=False'
@@ -45,6 +45,7 @@ object dm: Tdm
     Top = 16
   end
   object cdsClientes: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientes'
@@ -98,6 +99,7 @@ object dm: Tdm
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'SELECT * FROM cliente ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -147,6 +149,7 @@ object dm: Tdm
   end
   object dSetProdutos: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'SELECT * FROM produto ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -187,6 +190,7 @@ object dm: Tdm
   end
   object dSetRuas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from rua;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -227,6 +231,7 @@ object dm: Tdm
   end
   object dSetBairros: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from bairro;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -267,6 +272,7 @@ object dm: Tdm
   end
   object dSetCidades: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from cidade;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -308,6 +314,7 @@ object dm: Tdm
   end
   object dSetEstados: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from estado;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -351,6 +358,7 @@ object dm: Tdm
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from venda;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -404,6 +412,7 @@ object dm: Tdm
   end
   object dSetItens: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'select * from item;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1

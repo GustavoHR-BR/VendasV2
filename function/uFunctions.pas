@@ -27,6 +27,7 @@ begin
   dm.cdsRuas.Close;
   dm.dSetClientes.Close;
   dm.cdsClientes.Close;
+  dm.dSetRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
   dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY id ASC;';
   dm.dSetClientes.Open;
   dm.cdsClientes.Open;

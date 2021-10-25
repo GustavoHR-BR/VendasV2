@@ -117,6 +117,10 @@
 				<Form>frmVendaReport</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
+			<DCCReference Include="..\unit\uCadastrarVenda.pas">
+				<Form>frmCadastrarVenda</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -170,6 +174,7 @@
 					<Platform value="Win64">False</Platform>
 					<Platform value="Win32">True</Platform>
 				</Platforms>
+				<ModelSupport>False</ModelSupport>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>

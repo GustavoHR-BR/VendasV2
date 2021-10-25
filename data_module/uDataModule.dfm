@@ -109,6 +109,7 @@ object dm: Tdm
   end
   object dspClientes: TDataSetProvider
     DataSet = dSetClientes
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 24
   end
@@ -130,6 +131,7 @@ object dm: Tdm
   end
   object dspProdutos: TDataSetProvider
     DataSet = dSetProdutos
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 88
   end
@@ -170,6 +172,7 @@ object dm: Tdm
   end
   object dspRuas: TDataSetProvider
     DataSet = dSetRuas
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 160
   end
@@ -210,6 +213,7 @@ object dm: Tdm
   end
   object dspBairros: TDataSetProvider
     DataSet = dSetBairros
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 232
   end
@@ -250,6 +254,7 @@ object dm: Tdm
   end
   object dspCidades: TDataSetProvider
     DataSet = dSetCidades
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 304
   end
@@ -291,6 +296,7 @@ object dm: Tdm
   end
   object dspEstados: TDataSetProvider
     DataSet = dSetEstados
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 376
   end
@@ -347,6 +353,7 @@ object dm: Tdm
   end
   object dspVendas: TDataSetProvider
     DataSet = dSetVendas
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 440
   end
@@ -400,13 +407,20 @@ object dm: Tdm
     CommandText = 'select * from item order by id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
-    Params = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'fk_venda'
+        ParamType = ptInput
+        Value = 1
+      end>
     SQLConnection = SQLConn
     Left = 32
     Top = 512
   end
   object dpsItens: TDataSetProvider
     DataSet = dSetItens
+    Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 512
   end

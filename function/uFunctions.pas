@@ -2,7 +2,7 @@ unit uFunctions;
 
 interface
 
-procedure threadBuscarCliente;
+procedure threadBuscarCliente(busca: string);
 procedure buscarCliente(orderBy: string);
 procedure verificarOrdenacaoCliente;
 procedure threadBuscarProduto;
@@ -27,7 +27,7 @@ implementation
 uses
   System.Classes, System.SysUtils,
   uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos,
-  uCadastrarProduto, uVendas;
+  uCadastrarProduto, uVendas, uCadastrarVenda, uVendaReport;
 
 procedure buscarCliente(orderBy: string);
 begin
@@ -44,7 +44,7 @@ begin
   dm.cdsClientes.Open;
 end;
 
-procedure threadBuscarCliente;
+procedure threadBuscarCliente(busca: string);
 var
   t: TThread;
 begin
@@ -54,7 +54,7 @@ begin
       dm.dSetClientes.Close;
       dm.cdsClientes.Close;
       dm.dSetClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "%'
-        + LowerCase(Trim(frmClientes.edtBuscar.Text)) + '%" ORDER BY nome ASC;';
+        + busca + '%" ORDER BY nome ASC;';
       dm.dSetClientes.Open;
       dm.cdsClientes.Open;
 
@@ -273,7 +273,7 @@ begin
         UpperCase(Trim(dm.cdsEstadosuf.AsString)) + '") AND (c.nome = "' +
         LowerCase(Trim(dm.cdsCidadesnome.AsString)) + '") AND b.nome = "' +
         LowerCase(Trim(dm.cdsBairrosnome.AsString)) + '" AND r.nome LIKE "%' +
-        LowerCase(Trim(frmCadastrarCliente.edtRua.Text)) +
+        LowerCase(Trim(frmCadastrarCliente.EdtRua.Text)) +
         '%" ORDER BY r.nome ASC;';
 
       dm.dSetRuas.Open;
@@ -317,7 +317,7 @@ begin
             (dm.queryEnderecoCliente.Fields[1].AsString);
           frmCadastrarCliente.edtBairro.Text :=
             (dm.queryEnderecoCliente.Fields[2].AsString);
-          frmCadastrarCliente.edtRua.Text := (dm.queryEnderecoCliente.Fields[3]
+          frmCadastrarCliente.EdtRua.Text := (dm.queryEnderecoCliente.Fields[3]
             .AsString);
 
           dm.dSetRuas.Open;

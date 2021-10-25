@@ -74,7 +74,7 @@ end;
 
 procedure TfrmClientes.edtBuscarChange(Sender: TObject);
 begin
-  threadBuscarCliente;
+  threadBuscarCliente(LowerCase(Trim(frmClientes.edtBuscar.Text)));
   Sleep(60);
 end;
 

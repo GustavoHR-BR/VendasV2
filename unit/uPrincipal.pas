@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, RpRave, RpBase, RpSystem,
+  RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF, Winapi.ShellAPI;
 
 type
   TfrmPrincipal = class(TForm)
@@ -68,9 +69,18 @@ begin
 end;
 
 procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
+var
+  arquivo_pdf: string;
 begin
-  //
-
+  frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
+  frmVendaReport.rvsVENDAS.DoNativeOutput := False;
+  frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
+  arquivo_pdf := ExtractFilePath(Application.ExeName) + 'RELATORIO  VENDAS.pdf';
+  frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;
+  frmVendaReport.rvsVENDAS.Execute;
+  ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
+    Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
+    SW_NORMAL);
 end;
 
 end.

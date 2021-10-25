@@ -22,55 +22,55 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 32
     Top = 37
     Width = 38
-    Height = 16
+    Height = 18
     Caption = 'Nome:'
     FocusControl = dbEdtNome
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
   object Label4: TLabel
     Left = 478
     Top = 37
-    Width = 27
-    Height = 16
+    Width = 30
+    Height = 18
     Caption = 'CPF:'
     FocusControl = dbEdtCpf
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
   object Label5: TLabel
     Left = 277
     Top = 37
-    Width = 55
-    Height = 16
+    Width = 54
+    Height = 18
     Caption = 'Telefone:'
     FocusControl = dbEdtTelefone
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
   object Label6: TLabel
     Left = 32
     Top = 98
-    Width = 36
-    Height = 16
+    Width = 37
+    Height = 18
     Caption = 'E-mail'
     FocusControl = dbEdtEmail
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
@@ -92,27 +92,27 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 358
     Top = 98
     Width = 44
-    Height = 16
+    Height = 18
     Caption = 'Cidade:'
     FocusControl = dbEdtEmail
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
   object Label2: TLabel
     Left = 32
     Top = 161
-    Width = 39
-    Height = 16
+    Width = 38
+    Height = 18
     Caption = 'Bairro:'
     FocusControl = dbEdtEmail
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
@@ -120,27 +120,27 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 260
     Top = 160
     Width = 27
-    Height = 16
+    Height = 18
     Caption = 'Rua:'
     FocusControl = dbEdtEmail
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
   object Label9: TLabel
     Left = 277
     Top = 98
-    Width = 20
-    Height = 16
+    Width = 21
+    Height = 18
     Caption = 'UF:'
     FocusControl = dbEdtEmail
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
@@ -148,8 +148,14 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 260
     Top = 183
     Width = 199
-    Height = 21
+    Height = 23
     Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 16
     OnChange = edtRuaChange
     OnClick = edtRuaClick
@@ -158,38 +164,62 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 32
     Top = 59
     Width = 225
-    Height = 21
+    Height = 23
     DataField = 'nome'
     DataSource = dm.dSourceClientes
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
   end
   object dbEdtCpf: TDBEdit
     Left = 478
     Top = 59
     Width = 137
-    Height = 21
+    Height = 23
     DataField = 'cpf'
     DataSource = dm.dSourceClientes
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
     MaxLength = 14
+    ParentFont = False
     TabOrder = 2
   end
   object dbEdtTelefone: TDBEdit
     Left = 277
     Top = 59
     Width = 182
-    Height = 21
+    Height = 23
     DataField = 'telefone'
     DataSource = dm.dSourceClientes
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
     MaxLength = 15
+    ParentFont = False
     TabOrder = 1
   end
   object dbEdtEmail: TDBEdit
     Left = 32
     Top = 120
     Width = 225
-    Height = 21
+    Height = 23
     DataField = 'email'
     DataSource = dm.dSourceClientes
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
   end
   object dbEdtDtNascimento: TDBEdit
@@ -206,8 +236,14 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 358
     Top = 120
     Width = 257
-    Height = 21
+    Height = 23
     Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 5
     OnChange = edtCidadeChange
     OnClick = edtCidadeClick
@@ -216,8 +252,14 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 32
     Top = 183
     Width = 199
-    Height = 21
+    Height = 23
     Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 7
     OnChange = edtBairroChange
     OnClick = edtBairroClick
@@ -228,7 +270,13 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 199
     Height = 110
     DataSource = dm.dSourceRuas
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
     Options = [dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentFont = False
     TabOrder = 8
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -255,8 +303,14 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Left = 277
     Top = 120
     Width = 75
-    Height = 21
+    Height = 23
     Style = csDropDownList
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
     OnSelect = cboxEstadosSelect
     Items.Strings = (
@@ -294,6 +348,12 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 75
     Height = 25
     Caption = 'Cancelar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 9
     Visible = False
     OnClick = btnCancelarRuaClick
@@ -304,6 +364,12 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 67
     Height = 25
     Caption = 'Cadastrar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 10
     OnClick = btnCadastrarClick
   end
@@ -313,6 +379,12 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 75
     Height = 25
     Caption = 'Cancelar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 11
     OnClick = btnCancelarClick
   end
@@ -322,7 +394,13 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 199
     Height = 110
     DataSource = dm.dSourceBairros
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
     Options = [dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentFont = False
     TabOrder = 12
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -351,7 +429,13 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 257
     Height = 110
     DataSource = dm.dSourceCidades
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
     Options = [dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentFont = False
     TabOrder = 13
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -380,6 +464,12 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 75
     Height = 25
     Caption = 'Cancelar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 14
     Visible = False
     OnClick = btnCancelarBairroClick
@@ -390,6 +480,12 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Width = 75
     Height = 25
     Caption = 'Cancelar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 15
     Visible = False
     OnClick = btnCancelarCidadeClick

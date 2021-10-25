@@ -15,9 +15,12 @@ type
     Produto1: TMenuItem;
     Pedidosdevenda1: TMenuItem;
     Nova1: TMenuItem;
+    Relatrios1: TMenuItem;
+    Vendas1: TMenuItem;
     procedure Cliente1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Nova1Click(Sender: TObject);
+    procedure Vendas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +35,7 @@ implementation
 {$R *.dfm}
 
 uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
-  uProdutos, uCadastrarProduto, uVendas;
+  uProdutos, uCadastrarProduto, uVendas, uVendaReport;
 
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
@@ -62,6 +65,12 @@ begin
   finally
     FreeAndNil(frmProdutos);
   end;
+end;
+
+procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
+begin
+  //
+
 end;
 
 end.

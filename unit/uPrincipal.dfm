@@ -10,13 +10,13 @@ object frmPrincipal: TfrmPrincipal
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Arial Unicode MS'
   Font.Style = []
   Menu = menu
   OldCreateOrder = False
   Position = poDesktopCenter
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object menu: TMainMenu
     Left = 16
     Top = 8
@@ -36,6 +36,13 @@ object frmPrincipal: TfrmPrincipal
       object Nova1: TMenuItem
         Caption = 'Nova'
         OnClick = Nova1Click
+      end
+    end
+    object Relatrios1: TMenuItem
+      Caption = 'Relat'#243'rios'
+      object Vendas1: TMenuItem
+        Caption = 'Vendas'
+        OnClick = Vendas1Click
       end
     end
   end

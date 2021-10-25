@@ -19,13 +19,13 @@ object frmProdutos: TfrmProdutos
   object Label1: TLabel
     Left = 31
     Top = 22
-    Width = 64
-    Height = 19
+    Width = 62
+    Height = 18
     Caption = 'Pesquisar:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
@@ -33,8 +33,14 @@ object frmProdutos: TfrmProdutos
     Left = 592
     Top = 24
     Width = 63
-    Height = 13
+    Height = 15
     Caption = 'Ordenar por:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
   end
   object dbgrid: TDBGrid
     Left = -14
@@ -45,7 +51,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     Options = [dgTitles, dgIndicator, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
@@ -129,7 +135,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 1
@@ -144,7 +150,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
@@ -159,7 +165,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 3
@@ -169,7 +175,13 @@ object frmProdutos: TfrmProdutos
     Left = 97
     Top = 21
     Width = 273
-    Height = 21
+    Height = 23
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
     OnChange = edtBuscarChange
   end
@@ -183,7 +195,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 5
@@ -192,12 +204,12 @@ object frmProdutos: TfrmProdutos
     Left = 661
     Top = 21
     Width = 145
-    Height = 24
+    Height = 23
     Style = csDropDownList
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ItemIndex = 1
     ParentFont = False

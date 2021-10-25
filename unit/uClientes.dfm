@@ -10,32 +10,38 @@ object frmClientes: TfrmClientes
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Terminal'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 8
   object Label1: TLabel
-    Left = 31
-    Top = 22
-    Width = 64
-    Height = 19
+    Left = 32
+    Top = 18
+    Width = 62
+    Height = 18
     Caption = 'Pesquisar:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 648
-    Top = 24
+    Left = 632
+    Top = 20
     Width = 63
-    Height = 13
+    Height = 15
     Caption = 'Ordenar por:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
   end
   object dbgrid: TDBGrid
     Left = 0
@@ -46,7 +52,7 @@ object frmClientes: TfrmClientes
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     Options = [dgTitles, dgIndicator, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
@@ -152,7 +158,7 @@ object frmClientes: TfrmClientes
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 4
@@ -167,14 +173,14 @@ object frmClientes: TfrmClientes
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 5
     OnClick = btnEditarClick
   end
   object btnSair: TButton
-    Left = 787
+    Left = 771
     Top = 458
     Width = 75
     Height = 25
@@ -182,23 +188,29 @@ object frmClientes: TfrmClientes
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 6
     OnClick = btnSairClick
   end
   object edtBuscar: TEdit
-    Left = 97
-    Top = 21
+    Left = 94
+    Top = 17
     Width = 273
-    Height = 21
+    Height = 23
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     OnChange = edtBuscarChange
   end
   object btnFiltrar: TButton
-    Left = 384
-    Top = 19
+    Left = 373
+    Top = 16
     Width = 75
     Height = 25
     Caption = 'Filtrar'
@@ -206,21 +218,21 @@ object frmClientes: TfrmClientes
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
   end
   object cbOrdenarPor: TComboBox
-    Left = 717
-    Top = 21
+    Left = 701
+    Top = 17
     Width = 145
-    Height = 24
+    Height = 23
     Style = csDropDownList
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
-    Font.Name = 'Sitka Text'
+    Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ItemIndex = 1
     ParentFont = False

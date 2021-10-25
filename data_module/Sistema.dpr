@@ -10,7 +10,8 @@ uses
   uPrincipal in '..\unit\uPrincipal.pas' {frmPrincipal},
   uProdutos in '..\unit\uProdutos.pas' {frmProdutos},
   uCadastrarProduto in '..\unit\uCadastrarProduto.pas' {frmCadastrarProduto},
-  uVendas in '..\unit\uVendas.pas' {frmVendas};
+  uVendas in '..\unit\uVendas.pas' {frmVendas},
+  uVendaReport in '..\report\uVendaReport.pas' {frmVendaReport};
 
 {$R *.res}
 
@@ -26,5 +27,6 @@ begin
   Application.CreateForm(TfrmProdutos, frmProdutos);
   Application.CreateForm(TfrmCadastrarProduto, frmCadastrarProduto);
   Application.CreateForm(TfrmVendas, frmVendas);
+  Application.CreateForm(TfrmVendaReport, frmVendaReport);
   Application.Run;
 end.

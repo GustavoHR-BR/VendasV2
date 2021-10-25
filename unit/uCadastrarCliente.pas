@@ -75,70 +75,70 @@ begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
 
-  if frmClientes.Tag = 2 then
+  if dbEdtNome.Text = '' then
   begin
-    if dm.cdsClientesfk_rua.AsInteger = 0 then
-      if dm.cdsClientesfk_rua.AsInteger <> dm.cdsRuasid.AsInteger then
-        dm.cdsClientesfk_rua.AsInteger := dm.cdsRuasid.AsInteger;
-    try
-      dm.cdsClientes.Post;
-      dm.cdsClientes.ApplyUpdates(0);
-      ShowMessage('Cliente editado com sucesso! ');
-      Tag := 2;
-      frmCadastrarCliente.Close;
-    except
-      on E: Exception do
-        ShowMessage('Erro ao editar o cliente! ' + E.ToString);
-    end;
+    ShowMessage('Nome inválido!');
+    dbEdtNome.SetFocus;
   end
-  else if frmClientes.Tag = 1 then
+  else if dbEdtTelefone.Text = '(  )     -    ' then
   begin
-    if dbEdtNome.Text = '' then
+    ShowMessage('Telefone inválido!');
+    dbEdtTelefone.SetFocus;
+  end
+  else if dbEdtCpf.Text = '   .   .   -  ' then
+  begin
+    ShowMessage('CPF inválido!');
+    dbEdtCpf.SetFocus;
+  end
+  else if dbEdtEmail.Text = '' then
+  begin
+    ShowMessage('E-mail inválido!');
+    dbEdtEmail.SetFocus;
+  end
+  else if cboxEstados.Text = '' then
+  begin
+    ShowMessage('Selecione um estado!');
+    dbEdtDtNascimento.SetFocus;
+  end
+  else if edtCidade.Text = '' then
+  begin
+    ShowMessage('Selecione uma cidade!');
+    dbEdtDtNascimento.SetFocus;
+  end
+  else if edtBairro.Text = '' then
+  begin
+    ShowMessage('Selecione um bairro!');
+    dbEdtDtNascimento.SetFocus;
+  end
+  else if edtRua.Text = '' then
+  begin
+    ShowMessage('Selecione uma rua!');
+    dbEdtDtNascimento.SetFocus;
+  end
+  else if (dbEdtDtNascimento.Text = '  /  /    ') then
+  begin
+    ShowMessage('Data de nascimento inválida!');
+    dbEdtDtNascimento.SetFocus;
+  end
+  else
+  begin
+    if frmClientes.Tag = 2 then
     begin
-      ShowMessage('Nome inválido!');
-      dbEdtNome.SetFocus;
+      if dm.cdsClientesfk_rua.AsInteger = 0 then
+        if dm.cdsClientesfk_rua.AsInteger <> dm.cdsRuasid.AsInteger then
+          dm.cdsClientesfk_rua.AsInteger := dm.cdsRuasid.AsInteger;
+      try
+        dm.cdsClientes.Post;
+        dm.cdsClientes.ApplyUpdates(0);
+        ShowMessage('Cliente editado com sucesso! ');
+        Tag := 2;
+        frmCadastrarCliente.Close;
+      except
+        on E: Exception do
+          ShowMessage('Erro ao editar o cliente! ' + E.ToString);
+      end;
     end
-    else if dbEdtTelefone.Text = '(  )     -    ' then
-    begin
-      ShowMessage('Telefone inválido!');
-      dbEdtTelefone.SetFocus;
-    end
-    else if dbEdtCpf.Text = '   .   .   -  ' then
-    begin
-      ShowMessage('CPF inválido!');
-      dbEdtCpf.SetFocus;
-    end
-    else if dbEdtEmail.Text = '' then
-    begin
-      ShowMessage('E-mail inválido!');
-      dbEdtEmail.SetFocus;
-    end
-    else if cboxEstados.Text = '' then
-    begin
-      ShowMessage('Selecione um estado!');
-      dbEdtDtNascimento.SetFocus;
-    end
-    else if edtCidade.Text = '' then
-    begin
-      ShowMessage('Selecione uma cidade!');
-      dbEdtDtNascimento.SetFocus;
-    end
-    else if edtBairro.Text = '' then
-    begin
-      ShowMessage('Selecione um bairro!');
-      dbEdtDtNascimento.SetFocus;
-    end
-    else if edtRua.Text = '' then
-    begin
-      ShowMessage('Selecione uma rua!');
-      dbEdtDtNascimento.SetFocus;
-    end
-    else if (dbEdtDtNascimento.Text = '  /  /    ') then
-    begin
-      ShowMessage('Data de nascimento inválida!');
-      dbEdtDtNascimento.SetFocus;
-    end
-    else
+    else if frmClientes.Tag = 1 then
     begin
       if frmClientes.Tag = 1 then
       begin
@@ -284,7 +284,6 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-
   if (Tag <> 1) AND (Tag <> 2) then // close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',

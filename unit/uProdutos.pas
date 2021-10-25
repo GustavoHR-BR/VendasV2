@@ -22,6 +22,7 @@ type
     procedure cbOrdenarPorSelect(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,6 +44,17 @@ begin
   Application.CreateForm(TfrmCadastrarProduto, frmCadastrarProduto);
   Tag := 1;
   dm.cdsProdutos.Append;
+  try
+    frmCadastrarProduto.ShowModal;
+  finally
+    FreeAndNil(frmCadastrarProduto);
+  end;
+end;
+
+procedure TfrmProdutos.btnEditarClick(Sender: TObject);
+begin
+  Application.CreateForm(TfrmCadastrarProduto, frmCadastrarProduto);
+  Tag := 2;
   try
     frmCadastrarProduto.ShowModal;
   finally

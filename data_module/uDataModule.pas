@@ -33,11 +33,6 @@ type
     dSetBairros: TSQLDataSet;
     dspBairros: TDataSetProvider;
     dSourceBairros: TDataSource;
-    cdsProdutosid: TIntegerField;
-    cdsProdutosnome: TStringField;
-    cdsProdutospreco: TFMTBCDField;
-    cdsProdutosdescricao: TStringField;
-    cdsProdutosquantidade_estoque: TIntegerField;
     cdsRuasid: TIntegerField;
     cdsRuasnome: TStringField;
     cdsRuasfk_bairro: TIntegerField;
@@ -79,6 +74,11 @@ type
     cdsItensquantidade: TIntegerField;
     cdsClientesRua: TStringField;
     queryEnderecoCliente: TSQLQuery;
+    cdsProdutosid: TIntegerField;
+    cdsProdutosnome: TStringField;
+    cdsProdutospreco: TFloatField;
+    cdsProdutosdescricao: TStringField;
+    cdsProdutosquantidade_estoque: TIntegerField;
   private
     { Private declarations }
   public

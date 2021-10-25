@@ -6,7 +6,7 @@ procedure threadBuscarCliente;
 procedure buscarCliente(orderBy: string);
 procedure verificarOrdenacaoCliente;
 procedure threadBuscarProduto;
-// procedure buscarProduto(orderBy: string);
+procedure buscarProduto(orderBy: string);
 procedure verificarOrdenacaoProduto;
 procedure buscarCidade;
 procedure buscarBairro;
@@ -83,10 +83,10 @@ end;
 
 procedure buscarProduto(orderBy: string);
 begin
+  dm.SQLConn.Close;
+  dm.SQLConn.Open;
   dm.dSetProdutos.Close;
   dm.cdsProdutos.Close;
-  // dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
-  // + ' ASC;';
   dm.cdsProdutos.IndexFieldNames := orderBy;
   dm.dSetProdutos.Open;
   dm.cdsProdutos.Open;

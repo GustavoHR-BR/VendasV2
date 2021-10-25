@@ -76,7 +76,7 @@ object frmProdutos: TfrmProdutos
         Visible = True
       end
       item
-        Alignment = taLeftJustify
+        Alignment = taCenter
         Expanded = False
         FieldName = 'preco'
         Title.Caption = 'Pre'#231'o'
@@ -142,6 +142,7 @@ object frmProdutos: TfrmProdutos
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    OnClick = btnEditarClick
   end
   object btnSair: TButton
     Left = 731

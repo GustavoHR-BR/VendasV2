@@ -10,16 +10,19 @@ uses
 type
   TfrmCadastrarProduto = class(TForm)
     Label1: TLabel;
-    DBEdit1: TDBEdit;
+    dbEdtNome: TDBEdit;
     Label2: TLabel;
-    DBEdit2: TDBEdit;
     Label3: TLabel;
-    DBEdit3: TDBEdit;
+    dbEdtDescricao: TDBEdit;
     Label4: TLabel;
-    DBEdit4: TDBEdit;
+    dbEdtEstoque: TDBEdit;
     btnCadastrar: TButton;
     btnCancelar: TButton;
+    dbEdtPreco: TDBEdit;
     procedure FormShow(Sender: TObject);
+    procedure btnCadastrarClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -36,6 +39,86 @@ implementation
 uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
   uPrincipal, uProdutos;
 
+procedure TfrmCadastrarProduto.btnCadastrarClick(Sender: TObject);
+begin
+  if dbEdtNome.Text = '' then
+  begin
+    ShowMessage('Nome inválido! ');
+    dbEdtNome.SetFocus;
+  end
+  else if (dbEdtPreco.Text = '') OR (StrToFloat(dbEdtPreco.Text) < 0) then
+  begin
+    ShowMessage('Preço inválido! ');
+    dbEdtPreco.SetFocus;
+  end
+  else if dbEdtDescricao.Text = '' then
+  begin
+    ShowMessage('Descrição inválida! ');
+    dbEdtNome.SetFocus;
+  end
+  else if (dbEdtEstoque.Text = '') OR (StrToInt(dbEdtEstoque.Text) < 0) then
+  begin
+    ShowMessage('Quantidade inválida! ');
+    dbEdtNome.SetFocus;
+  end
+  else
+  begin
+    if frmProdutos.Tag = 1 then
+    begin
+      dm.cdsProdutosid.Text := '0';
+      try
+        dm.cdsProdutos.Post;
+        dm.cdsProdutos.ApplyUpdates(0);
+        ShowMessage('Sucesso ao cadastrar o produto! ');
+        frmCadastrarProduto.Close;
+        Tag := 1;
+      except
+        on E: Exception do
+          ShowMessage('Erro ao cadastrar o produto! ' + E.ToString);
+      end;
+    end
+    else if frmProdutos.Tag = 2 then
+    begin
+      try
+        dm.cdsProdutos.Post;
+        dm.cdsProdutos.ApplyUpdates(0);
+        ShowMessage('Sucesso ao editar o produto! ');
+        Tag := 2;
+        frmCadastrarProduto.Close;
+      except
+        on E: Exception do
+          ShowMessage('Erro ao editar o produto! ' + E.ToString);
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmCadastrarProduto.btnCancelarClick(Sender: TObject);
+begin
+  frmCadastrarProduto.Close;
+end;
+
+procedure TfrmCadastrarProduto.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if (Tag <> 1) AND (Tag <> 2) then // close pelo usuário;
+  begin
+    if Application.MessageBox('Deseja realmente sair?', 'Atenção',
+      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    begin
+      dm.dSetProdutos.Close;
+      dm.dSetProdutos.Close;
+      verificarOrdenacaoProduto;
+    end
+    else
+      Abort;
+  end
+  else
+  begin
+    frmProdutos.edtBuscar.Text := '';
+  end;
+end;
+
 procedure TfrmCadastrarProduto.FormShow(Sender: TObject);
 begin
   if frmProdutos.Tag = 1 then // Tag = 1 -> cadastrar
@@ -47,7 +130,7 @@ begin
   end
   else if frmProdutos.Tag = 2 then // Tag = 2 -> editar
   begin
-    //
+    btnCadastrar.Caption := 'Editar';
   end;
 end;
 

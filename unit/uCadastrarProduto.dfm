@@ -4,7 +4,7 @@ object frmCadastrarProduto: TfrmCadastrarProduto
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro de produtos'
-  ClientHeight = 200
+  ClientHeight = 204
   ClientWidth = 494
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,6 +14,7 @@ object frmCadastrarProduto: TfrmCadastrarProduto
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -23,15 +24,14 @@ object frmCadastrarProduto: TfrmCadastrarProduto
     Width = 31
     Height = 13
     Caption = 'Nome:'
-    FocusControl = DBEdit1
+    FocusControl = dbEdtNome
   end
   object Label2: TLabel
     Left = 24
-    Top = 109
+    Top = 106
     Width = 31
     Height = 13
     Caption = 'Pre'#231'o:'
-    FocusControl = DBEdit2
   end
   object Label3: TLabel
     Left = 264
@@ -39,7 +39,7 @@ object frmCadastrarProduto: TfrmCadastrarProduto
     Width = 50
     Height = 13
     Caption = 'Descri'#231#227'o:'
-    FocusControl = DBEdit3
+    FocusControl = dbEdtDescricao
   end
   object Label4: TLabel
     Left = 135
@@ -47,9 +47,9 @@ object frmCadastrarProduto: TfrmCadastrarProduto
     Width = 59
     Height = 13
     Caption = 'No estoque:'
-    FocusControl = DBEdit4
+    FocusControl = dbEdtEstoque
   end
-  object DBEdit1: TDBEdit
+  object dbEdtNome: TDBEdit
     Left = 24
     Top = 61
     Width = 193
@@ -58,25 +58,16 @@ object frmCadastrarProduto: TfrmCadastrarProduto
     DataSource = dm.dSourceProdutos
     TabOrder = 0
   end
-  object DBEdit2: TDBEdit
-    Left = 24
-    Top = 125
-    Width = 73
-    Height = 21
-    DataField = 'preco'
-    DataSource = dm.dSourceProdutos
-    TabOrder = 1
-  end
-  object DBEdit3: TDBEdit
+  object dbEdtDescricao: TDBEdit
     Left = 264
     Top = 61
     Width = 201
     Height = 21
     DataField = 'descricao'
     DataSource = dm.dSourceProdutos
-    TabOrder = 2
+    TabOrder = 1
   end
-  object DBEdit4: TDBEdit
+  object dbEdtEstoque: TDBEdit
     Left = 135
     Top = 125
     Width = 82
@@ -92,6 +83,7 @@ object frmCadastrarProduto: TfrmCadastrarProduto
     Height = 25
     Caption = 'Cadastrar'
     TabOrder = 4
+    OnClick = btnCadastrarClick
   end
   object btnCancelar: TButton
     Left = 353
@@ -100,5 +92,15 @@ object frmCadastrarProduto: TfrmCadastrarProduto
     Height = 25
     Caption = 'Cancelar'
     TabOrder = 5
+    OnClick = btnCancelarClick
+  end
+  object dbEdtPreco: TDBEdit
+    Left = 24
+    Top = 125
+    Width = 97
+    Height = 21
+    DataField = 'preco'
+    DataSource = dm.dSourceProdutos
+    TabOrder = 2
   end
 end

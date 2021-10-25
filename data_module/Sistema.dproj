@@ -82,10 +82,6 @@
 			<DelphiCompile Include="$(MainSource)">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
-			<DCCReference Include="..\unit\uPrincipal.pas">
-				<Form>frmPrincipal</Form>
-				<FormType>dfm</FormType>
-			</DCCReference>
 			<DCCReference Include="uDataModule.pas">
 				<Form>dm</Form>
 				<FormType>dfm</FormType>
@@ -104,6 +100,16 @@
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="..\function\uFunctions.pas"/>
+			<DCCReference Include="..\unit\uPrincipal.pas">
+				<Form>frmPrincipal</Form>
+			</DCCReference>
+			<DCCReference Include="..\unit\uProdutos.pas">
+				<Form>frmProdutos</Form>
+			</DCCReference>
+			<DCCReference Include="..\unit\uCadastrarProduto.pas">
+				<Form>frmCadastrarProduto</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

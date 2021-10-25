@@ -21,7 +21,6 @@ type
     cdsClientesemail: TStringField;
     cdsClientesdata_nascimento: TStringField;
     cdsClientesendereco: TStringField;
-    cdsProdutos: TClientDataSet;
     dSetProdutos: TSQLDataSet;
     dspProdutos: TDataSetProvider;
     dSourceProdutos: TDataSource;
@@ -74,9 +73,10 @@ type
     cdsItensquantidade: TIntegerField;
     cdsClientesRua: TStringField;
     queryEnderecoCliente: TSQLQuery;
+    cdsProdutos: TClientDataSet;
     cdsProdutosid: TIntegerField;
     cdsProdutosnome: TStringField;
-    cdsProdutospreco: TFloatField;
+    cdsProdutospreco: TSingleField;
     cdsProdutosdescricao: TStringField;
     cdsProdutosquantidade_estoque: TIntegerField;
   private

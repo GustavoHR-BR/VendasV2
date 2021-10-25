@@ -40,6 +40,8 @@ uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
   uPrincipal, uProdutos;
 
 procedure TfrmCadastrarProduto.btnCadastrarClick(Sender: TObject);
+var
+  id, qtd, preco, nome, desc: string;
 begin
   if dbEdtNome.Text = '' then
   begin
@@ -82,7 +84,6 @@ begin
       try
         dm.cdsProdutos.Post;
         dm.cdsProdutos.ApplyUpdates(0);
-        ShowMessage('Sucesso ao editar o produto! ');
         Tag := 2;
         frmCadastrarProduto.Close;
       except
@@ -116,6 +117,7 @@ begin
   else
   begin
     frmProdutos.edtBuscar.Text := '';
+    verificarOrdenacaoProduto;
   end;
 end;
 
@@ -130,6 +132,7 @@ begin
   end
   else if frmProdutos.Tag = 2 then // Tag = 2 -> editar
   begin
+    dm.cdsProdutos.Edit;
     btnCadastrar.Caption := 'Editar';
   end;
 end;

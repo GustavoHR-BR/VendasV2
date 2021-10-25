@@ -97,7 +97,7 @@ object frmCadastrarProduto: TfrmCadastrarProduto
   object dbEdtPreco: TDBEdit
     Left = 24
     Top = 125
-    Width = 97
+    Width = 89
     Height = 21
     DataField = 'preco'
     DataSource = dm.dSourceProdutos

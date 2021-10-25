@@ -23,9 +23,9 @@
     <Transaction>2021/10/20 15:51:28.000.213,=C:\Users\Administrador\Desktop\vendaV2\data_module\Unit1.pas</Transaction>
     <Transaction>2021/10/20 15:51:43.000.739,C:\Users\Administrador\Desktop\vendaV2\function\uFunctions.pas=C:\Users\Administrador\Desktop\vendaV2\data_module\Unit1.pas</Transaction>
     <Transaction>2021/10/21 16:12:44.000.056,=C:\Users\Administrador\Desktop\vendaV2\data_module\Unit2.pas</Transaction>
-    <Transaction>2021/10/22 15:10:55.989,=C:\Users\Administrador\Desktop\VendasV2\unit\uProdutos.pas</Transaction>
-    <Transaction>2021/10/22 17:00:31.826,=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
-    <Transaction>2021/10/22 17:00:44.661,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarProduto.pas=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
-    <Transaction>2021/10/22 17:00:44.661,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarProduto.dfm=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.dfm</Transaction>
+    <Transaction>2021/10/22 15:10:55.000.989,=C:\Users\Administrador\Desktop\VendasV2\unit\uProdutos.pas</Transaction>
+    <Transaction>2021/10/22 17:00:31.000.826,=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
+    <Transaction>2021/10/22 17:00:44.000.661,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarProduto.pas=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
+    <Transaction>2021/10/22 17:00:44.000.661,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarProduto.dfm=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.dfm</Transaction>
   </Transactions>
 </BorlandProject>

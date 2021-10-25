@@ -117,34 +117,6 @@ object dm: Tdm
     Left = 320
     Top = 24
   end
-  object cdsProdutos: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspProdutos'
-    Left = 224
-    Top = 88
-    object cdsProdutosid: TIntegerField
-      FieldName = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsProdutosnome: TStringField
-      FieldName = 'nome'
-      Size = 60
-    end
-    object cdsProdutospreco: TFloatField
-      FieldName = 'preco'
-      DisplayFormat = '#.00'
-    end
-    object cdsProdutosdescricao: TStringField
-      FieldName = 'descricao'
-      Size = 100
-    end
-    object cdsProdutosquantidade_estoque: TIntegerField
-      FieldName = 'quantidade_estoque'
-    end
-  end
   object dSetProdutos: TSQLDataSet
     SchemaName = 'gustavo_reblin'
     Active = True
@@ -429,5 +401,32 @@ object dm: Tdm
     SQLConnection = SQLConn
     Left = 496
     Top = 72
+  end
+  object cdsProdutos: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProdutos'
+    Left = 224
+    Top = 88
+    object cdsProdutosid: TIntegerField
+      FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsProdutosnome: TStringField
+      FieldName = 'nome'
+      Size = 60
+    end
+    object cdsProdutospreco: TSingleField
+      FieldName = 'preco'
+    end
+    object cdsProdutosdescricao: TStringField
+      FieldName = 'descricao'
+      Size = 100
+    end
+    object cdsProdutosquantidade_estoque: TIntegerField
+      FieldName = 'quantidade_estoque'
+    end
   end
 end

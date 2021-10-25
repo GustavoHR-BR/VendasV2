@@ -9,7 +9,8 @@ uses
   uFunctions in '..\function\uFunctions.pas',
   uPrincipal in '..\unit\uPrincipal.pas' {frmPrincipal},
   uProdutos in '..\unit\uProdutos.pas' {frmProdutos},
-  uCadastrarProduto in '..\unit\uCadastrarProduto.pas' {frmCadastrarProduto};
+  uCadastrarProduto in '..\unit\uCadastrarProduto.pas' {frmCadastrarProduto},
+  uVendas in '..\unit\uVendas.pas' {frmVendas};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmProdutos, frmProdutos);
   Application.CreateForm(TfrmCadastrarProduto, frmCadastrarProduto);
+  Application.CreateForm(TfrmVendas, frmVendas);
   Application.Run;
 end.

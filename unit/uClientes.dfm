@@ -4,8 +4,8 @@ object frmClientes: TfrmClientes
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Clientes'
-  ClientHeight = 484
-  ClientWidth = 849
+  ClientHeight = 508
+  ClientWidth = 901
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,18 +20,18 @@ object frmClientes: TfrmClientes
   object Label1: TLabel
     Left = 31
     Top = 22
-    Width = 60
-    Height = 16
+    Width = 64
+    Height = 19
     Caption = 'Pesquisar:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 592
+    Left = 648
     Top = 24
     Width = 63
     Height = 13
@@ -40,10 +40,16 @@ object frmClientes: TfrmClientes
   object dbgrid: TDBGrid
     Left = 0
     Top = 56
-    Width = 853
-    Height = 369
+    Width = 905
+    Height = 377
     DataSource = dm.dSourceClientes
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Sitka Text'
+    Font.Style = []
+    Options = [dgTitles, dgIndicator, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
+    ParentFont = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -55,7 +61,12 @@ object frmClientes: TfrmClientes
         Alignment = taCenter
         Expanded = False
         FieldName = 'id'
-        Title.Caption = 'C'#243'dgo'
+        Title.Caption = 'C'#243'digo'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 50
         Visible = True
       end
@@ -63,12 +74,23 @@ object frmClientes: TfrmClientes
         Expanded = False
         FieldName = 'cpf'
         Title.Caption = 'CPF'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 125
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'nome'
         Title.Caption = 'Nome'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 140
         Visible = True
       end
@@ -76,13 +98,23 @@ object frmClientes: TfrmClientes
         Expanded = False
         FieldName = 'telefone'
         Title.Caption = 'Telefone'
-        Width = 95
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 125
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'email'
         Title.Caption = 'E-mail'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 180
         Visible = True
       end
@@ -91,26 +123,36 @@ object frmClientes: TfrmClientes
         Expanded = False
         FieldName = 'data_nascimento'
         Title.Caption = 'Anivers'#225'rio'
-        Width = 75
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 90
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'Rua'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
         Width = 200
         Visible = True
       end>
   end
   object btnAdicionar: TButton
     Left = 48
-    Top = 442
+    Top = 458
     Width = 75
     Height = 25
     Caption = 'Adicionar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 4
@@ -118,29 +160,29 @@ object frmClientes: TfrmClientes
   end
   object btnEditar: TButton
     Left = 136
-    Top = 442
+    Top = 458
     Width = 75
     Height = 25
     Caption = 'Editar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 5
     OnClick = btnEditarClick
   end
   object btnSair: TButton
-    Left = 731
-    Top = 442
+    Left = 787
+    Top = 458
     Width = 75
     Height = 25
     Caption = 'Sair'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 6
@@ -164,18 +206,24 @@ object frmClientes: TfrmClientes
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
   end
   object cbOrdenarPor: TComboBox
-    Left = 661
+    Left = 717
     Top = 21
     Width = 145
-    Height = 21
+    Height = 24
     Style = csDropDownList
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Sitka Text'
+    Font.Style = []
     ItemIndex = 1
+    ParentFont = False
     TabOrder = 3
     Text = 'Nome'
     OnSelect = cbOrdenarPorSelect

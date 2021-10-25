@@ -79,6 +79,7 @@ type
     cdsProdutospreco: TSingleField;
     cdsProdutosdescricao: TStringField;
     cdsProdutosquantidade_estoque: TIntegerField;
+    cdsVendasCliente: TStringField;
   private
     { Private declarations }
   public

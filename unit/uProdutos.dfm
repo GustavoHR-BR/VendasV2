@@ -19,13 +19,13 @@ object frmProdutos: TfrmProdutos
   object Label1: TLabel
     Left = 31
     Top = 22
-    Width = 60
-    Height = 16
+    Width = 64
+    Height = 19
     Caption = 'Pesquisar:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
   end
@@ -42,7 +42,13 @@ object frmProdutos: TfrmProdutos
     Width = 853
     Height = 369
     DataSource = dm.dSourceProdutos
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Sitka Text'
+    Font.Style = []
+    Options = [dgTitles, dgIndicator, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
+    ParentFont = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -123,22 +129,22 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 1
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
-    Left = 136
-    Top = 442
+    Left = 129
+    Top = 441
     Width = 75
     Height = 25
     Caption = 'Editar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
@@ -153,7 +159,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 3
@@ -177,7 +183,7 @@ object frmProdutos: TfrmProdutos
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Tahoma'
+    Font.Name = 'Sitka Text'
     Font.Style = []
     ParentFont = False
     TabOrder = 5
@@ -186,9 +192,15 @@ object frmProdutos: TfrmProdutos
     Left = 661
     Top = 21
     Width = 145
-    Height = 21
+    Height = 24
     Style = csDropDownList
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Sitka Text'
+    Font.Style = []
     ItemIndex = 1
+    ParentFont = False
     TabOrder = 6
     Text = 'Nome'
     OnSelect = cbOrdenarPorSelect

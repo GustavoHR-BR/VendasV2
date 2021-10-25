@@ -8,6 +8,9 @@ procedure verificarOrdenacaoCliente;
 procedure threadBuscarProduto;
 procedure buscarProduto(orderBy: string);
 procedure verificarOrdenacaoProduto;
+procedure threadBuscarVenda;
+procedure buscarVenda(orderBy: string);
+procedure verificarOrdenacaoVenda;
 procedure buscarCidade;
 procedure buscarBairro;
 procedure buscarRua;
@@ -23,7 +26,8 @@ implementation
 
 uses
   System.Classes, System.SysUtils,
-  uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos;
+  uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos,
+  uCadastrarProduto, uVendas;
 
 procedure buscarCliente(orderBy: string);
 begin
@@ -130,6 +134,66 @@ begin
       buscarProduto('descricao');
     4:
       buscarProduto('quantidade_estoque');
+  end;
+end;
+
+procedure buscarVenda(orderBy: string);
+begin
+  dm.SQLConn.Close;
+  dm.SQLConn.Open;
+  dm.dSetVendas.Close;
+  dm.cdsVendas.Close;
+  // dm.cdsVendas.IndexFieldNames := orderBy;
+  if orderBy = 'fk_cliente' then
+  begin
+    dm.dSetVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ON ' +
+      'c.id = v.fk_cliente ORDER BY c.nome ASC';
+  end
+  else
+  begin
+    dm.dSetVendas.CommandText := 'SELECT * FROM venda ORDER BY ' + orderBy;
+  end;
+  dm.dSetVendas.Open;
+  dm.cdsVendas.Open;
+end;
+
+procedure threadBuscarVenda;
+var
+  t: TThread;
+begin
+  t := TThread.CreateAnonymousThread(
+    procedure
+    begin
+      dm.dSetVendas.Close;
+      dm.cdsVendas.Close;
+      dm.dSetVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ' +
+        ' ON v.fk_cliente = c.id WHERE c.nome LIKE "' +
+        LowerCase(Trim(frmVendas.edtBuscar.Text)) + '%" ORDER BY c.id ASC;';
+      dm.dSetVendas.Open;
+      dm.cdsVendas.Open;
+
+      TThread.Synchronize(nil,
+        procedure
+        begin
+          frmVendas.DBGridVendas.DataSource := dm.dSourceVendas;
+        end);
+    end);
+  t.FreeOnTerminate := true;
+  t.Start;
+end;
+
+procedure verificarOrdenacaoVenda;
+begin
+
+  case frmVendas.cbOrdenarPor.ItemIndex of
+    0:
+      buscarVenda('id');
+    1:
+      buscarVenda('fk_cliente');
+    2:
+      buscarVenda('total');
+    3:
+      buscarVenda('data');
   end;
 end;
 

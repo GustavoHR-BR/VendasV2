@@ -17,6 +17,7 @@ type
     Nova1: TMenuItem;
     procedure Cliente1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
+    procedure Nova1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
-  uProdutos;
+  uProdutos, uCadastrarProduto, uVendas;
 
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
@@ -40,6 +41,16 @@ begin
     frmClientes.ShowModal;
   finally
     FreeAndNil(frmClientes);
+  end;
+end;
+
+procedure TfrmPrincipal.Nova1Click(Sender: TObject);
+begin
+  Application.CreateForm(Tfrmvendas, frmVendas);
+  try
+    frmVendas.ShowModal;
+  finally
+    FreeAndNil(frmVendas);
   end;
 end;
 

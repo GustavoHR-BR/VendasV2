@@ -300,6 +300,7 @@ object dm: Tdm
     Top = 376
   end
   object cdsVendas: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVendas'
@@ -307,6 +308,7 @@ object dm: Tdm
     Top = 440
     object cdsVendasid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsVendasfk_cliente: TIntegerField
@@ -324,7 +326,8 @@ object dm: Tdm
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from venda;'
+    Active = True
+    CommandText = 'select * from venda order by id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -343,6 +346,7 @@ object dm: Tdm
     Top = 440
   end
   object cdsItens: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dpsItens'
@@ -350,6 +354,7 @@ object dm: Tdm
     Top = 512
     object cdsItensid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsItensfk_venda: TIntegerField
@@ -377,7 +382,8 @@ object dm: Tdm
   end
   object dSetItens: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from item;'
+    Active = True
+    CommandText = 'select * from item order by id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>

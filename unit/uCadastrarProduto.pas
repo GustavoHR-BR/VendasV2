@@ -40,8 +40,6 @@ uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
   uPrincipal, uProdutos;
 
 procedure TfrmCadastrarProduto.btnCadastrarClick(Sender: TObject);
-var
-  id, qtd, preco, nome, desc: string;
 begin
   if dbEdtNome.Text = '' then
   begin

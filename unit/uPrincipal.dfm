@@ -35,6 +35,7 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Pedidos de venda'
       object Nova1: TMenuItem
         Caption = 'Nova'
+        OnClick = Nova1Click
       end
     end
   end

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
   RpRave, RpBase, RpSystem, RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF,
-  Winapi.ShellAPI;
+  Winapi.ShellAPI, Data.FMTBcd, Data.DB, Data.SqlExpr;
 
 type
   TfrmVendas = class(TForm)
@@ -71,10 +71,8 @@ procedure TfrmVendas.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  dm.dSetVendas.Open;
-  dm.cdsVendas.Open;
-  dm.dSetItens.Open;
-  dm.cdsItens.Open;
+  abrirDados('venda', true);
+  abrirDados('item', true);
 end;
 
 end.

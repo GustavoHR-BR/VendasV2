@@ -105,8 +105,7 @@ begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
-      dm.dSetProdutos.Close;
-      dm.dSetProdutos.Close;
+      abrirDados('produto', false);
       verificarOrdenacaoProduto;
     end
     else

@@ -5,7 +5,7 @@ interface
 procedure threadBuscarCliente(busca: string);
 procedure buscarCliente(orderBy: string);
 procedure verificarOrdenacaoCliente;
-procedure threadBuscarProduto;
+procedure threadBuscarProduto(busca: string);
 procedure buscarProduto(orderBy: string);
 procedure verificarOrdenacaoProduto;
 procedure threadBuscarVenda;
@@ -21,27 +21,24 @@ procedure abreBuscaCidade;
 procedure abreBuscaBairro;
 procedure abreBuscaRua;
 procedure buscarEnderecoCliente;
+procedure abrirDados(tabela: string; estado: Boolean);
 
 implementation
 
 uses
   System.Classes, System.SysUtils,
   uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos,
-  uCadastrarProduto, uVendas, uCadastrarVenda, uVendaReport;
+  uCadastrarProduto, uVendas, uCadastrarVenda, uVendaReport, uAdicionarItem;
 
 procedure buscarCliente(orderBy: string);
 begin
-  dm.dSetRuas.Close;
-  dm.cdsRuas.Close;
-  dm.dSetClientes.Close;
-  dm.cdsClientes.Close;
-  dm.dSetRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
-  dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
+  abrirDados('rua', false);
+  abrirDados('cliente', false);
+  dm.cdsRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
+  dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
     + ' ASC;';
-  dm.cdsRuas.Open;
-  dm.dSetRuas.Open;
-  dm.cdsClientes.Open;
-  dm.dSetClientes.Open;
+  abrirDados('rua', true);
+  abrirDados('cliente', true);
 end;
 
 procedure threadBuscarCliente(busca: string);
@@ -51,12 +48,10 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetClientes.Close;
-      dm.cdsClientes.Close;
+      abrirDados('cliente', false);
       dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
         busca + '%" ORDER BY nome ASC;';
-      dm.cdsClientes.Open;
-      dm.dSetClientes.Open;
+      abrirDados('cliente', true);
 
       TThread.Synchronize(nil,
         procedure
@@ -89,31 +84,28 @@ procedure buscarProduto(orderBy: string);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  dm.dSetProdutos.Close;
-  dm.cdsProdutos.Close;
+  abrirDados('produto', false);
   dm.cdsProdutos.IndexFieldNames := orderBy;
-  dm.dSetProdutos.Open;
-  dm.cdsProdutos.Open;
+  abrirDados('produto', true);
 end;
 
-procedure threadBuscarProduto;
+procedure threadBuscarProduto(busca: string);
 var
   t: TThread;
 begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetProdutos.Close;
-      dm.cdsProdutos.Close;
-      dm.dSetProdutos.CommandText := 'SELECT * FROM produto WHERE nome LIKE "%'
-        + LowerCase(Trim(frmProdutos.edtBuscar.Text)) + '%" ORDER BY nome ASC;';
-      dm.dSetProdutos.Open;
-      dm.cdsProdutos.Open;
+      abrirDados('produto', false);
+      dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE nome LIKE "%' +
+        busca + '%" ORDER BY nome ASC;';
+      abrirDados('produto', true);
 
       TThread.Synchronize(nil,
         procedure
         begin
           frmProdutos.dbgrid.DataSource := dm.dSourceProdutos;
+          frmAdicionarItem.dbgrid.DataSource := dm.dSourceProdutos;
         end);
     end);
   t.FreeOnTerminate := true;
@@ -141,20 +133,17 @@ procedure buscarVenda(orderBy: string);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  dm.dSetVendas.Close;
-  dm.cdsVendas.Close;
-  // dm.cdsVendas.IndexFieldNames := orderBy;
+  abrirDados('venda', false);
   if orderBy = 'fk_cliente' then
   begin
-    dm.dSetVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ON ' +
+    dm.cdsVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ON ' +
       'c.id = v.fk_cliente ORDER BY c.nome ASC';
   end
   else
   begin
-    dm.dSetVendas.CommandText := 'SELECT * FROM venda ORDER BY ' + orderBy;
+    dm.cdsVendas.CommandText := 'SELECT * FROM venda ORDER BY ' + orderBy;
   end;
-  dm.dSetVendas.Open;
-  dm.cdsVendas.Open;
+  abrirDados('venda', true);
 end;
 
 procedure threadBuscarVenda;
@@ -164,13 +153,11 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetVendas.Close;
-      dm.cdsVendas.Close;
-      dm.dSetVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ' +
+      abrirDados('venda', false);
+      dm.cdsVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ' +
         ' ON v.fk_cliente = c.id WHERE c.nome LIKE "' +
         LowerCase(Trim(frmVendas.edtBuscar.Text)) + '%" ORDER BY c.id ASC;';
-      dm.dSetVendas.Open;
-      dm.cdsVendas.Open;
+      abrirDados('venda', true);
 
       TThread.Synchronize(nil,
         procedure
@@ -204,16 +191,14 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetCidades.Close;
-      dm.cdsCidades.Close;
-      dm.dSetCidades.CommandText := 'SELECT * FROM cidade c JOIN estado e ON ' +
+      abrirDados('cidade', false);
+      dm.cdsCidades.CommandText := 'SELECT * FROM cidade c JOIN estado e ON ' +
         'c.fk_estado = e.id WHERE (e.uf = "' +
         UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text)) +
         '") AND (c.nome LIKE "' + frmCadastrarCliente.edtCidade.Text +
         '%") ORDER BY c.nome DESC;';
-      dm.dSetCidades.Open;
-      dm.cdsCidades.Open;
       dm.cdsCidadesnome.Text;
+      abrirDados('cidade', true);
 
       TThread.Synchronize(nil,
         procedure
@@ -232,19 +217,15 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetBairros.Close;
-      dm.cdsBairros.Close;
-
-      dm.dSetBairros.CommandText := 'SELECT * FROM bairro b JOIN cidade c ON ' +
+      abrirDados('bairro', false);
+      dm.cdsBairros.CommandText := 'SELECT * FROM bairro b JOIN cidade c ON ' +
         'b.fk_cidade = c.id JOIN estado e ON ' +
         'c.fk_estado = e.id WHERE (e.uf = "' +
         UpperCase(Trim(dm.cdsEstadosuf.AsString)) + '") AND (c.nome = "' +
         LowerCase(Trim(dm.cdsCidadesnome.AsString)) + '") AND (b.nome LIKE "' +
         LowerCase(Trim(frmCadastrarCliente.edtBairro.Text)) +
         '%") ORDER BY b.nome ASC;';
-
-      dm.dSetBairros.Open;
-      dm.cdsBairros.Open;
+      abrirDados('bairro', true);
 
       TThread.Synchronize(nil,
         procedure
@@ -263,10 +244,8 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetRuas.Close;
-      dm.cdsRuas.Close;
-
-      dm.dSetRuas.CommandText := 'SELECT * FROM rua r JOIN bairro b ON ' +
+      abrirDados('rua', false);
+      dm.cdsRuas.CommandText := 'SELECT * FROM rua r JOIN bairro b ON ' +
         'r.fk_bairro = b.id JOIN cidade c ON ' +
         'b.fk_cidade = c.id JOIN estado e ON ' +
         'c.fk_estado = e.id WHERE (e.uf = "' +
@@ -275,9 +254,7 @@ begin
         LowerCase(Trim(dm.cdsBairrosnome.AsString)) + '" AND r.nome LIKE "%' +
         LowerCase(Trim(frmCadastrarCliente.EdtRua.Text)) +
         '%" ORDER BY r.nome ASC;';
-
-      dm.dSetRuas.Open;
-      dm.cdsRuas.Open;
+      abrirDados('rua', true);
 
       TThread.Synchronize(nil,
         procedure
@@ -297,8 +274,7 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.dSetRuas.Close;
-      dm.cdsRuas.Close;
+      abrirDados('rua', false);
 
       dm.queryEnderecoCliente.Close;
       dm.queryEnderecoCliente.SQL.Text := 'SELECT e.uf, c.nome, b.nome, r.nome '
@@ -320,8 +296,8 @@ begin
           frmCadastrarCliente.EdtRua.Text := (dm.queryEnderecoCliente.Fields[3]
             .AsString);
 
-          dm.dSetRuas.Open;
-          dm.cdsRuas.Open;
+          abrirDados('rua', true);
+
         end);
     end);
   t.FreeOnTerminate := true;
@@ -362,6 +338,116 @@ procedure abreBuscaRua;
 begin
   frmCadastrarCliente.gridRuas.Visible := true;
   frmCadastrarCliente.btnCancelarRua.Visible := true;
+end;
+
+procedure abrirDados(tabela: string; estado: Boolean);
+begin
+
+  if tabela = 'cliente' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsClientes.Open;
+      dm.dSetClientes.Open;
+    end
+    else
+    begin
+      dm.cdsClientes.Close;
+      dm.dSetClientes.Close;
+    end;
+  end
+  else if tabela = 'produto' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsProdutos.Open;
+      dm.dSetProdutos.Open;
+    end
+    else
+    begin
+      dm.cdsProdutos.Close;
+      dm.dSetProdutos.Close;
+    end;
+  end
+  else if tabela = 'estado' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsEstados.Open;
+      dm.dSetEstados.Open;
+    end
+    else
+    begin
+      dm.cdsEstados.Close;
+      dm.dSetEstados.Close;
+    end;
+  end
+  else if tabela = 'cidade' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsCidades.Open;
+      dm.dSetCidades.Open;
+    end
+    else
+    begin
+      dm.cdsCidades.Close;
+      dm.dSetCidades.Close;
+    end;
+  end
+  else if tabela = 'bairro' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsBairros.Open;
+      dm.dSetBairros.Open;
+    end
+    else
+    begin
+      dm.cdsBairros.Close;
+      dm.dSetBairros.Close;
+    end;
+  end
+  else if tabela = 'rua' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsRuas.Open;
+      dm.dSetRuas.Open;
+    end
+    else
+    begin
+      dm.cdsRuas.Close;
+      dm.dSetRuas.Close;
+    end;
+  end
+  else if tabela = 'item' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsItens.Open;
+      dm.dSetItens.Open;
+    end
+    else
+    begin
+      dm.cdsItens.Close;
+      dm.dSetItens.Close;
+    end;
+  end
+  else if tabela = 'venda' then
+  begin
+    if estado = true then
+    begin
+      dm.cdsVendas.Open;
+      dm.dSetVendas.Open;
+    end
+    else
+    begin
+      dm.cdsVendas.Close;
+      dm.dSetVendas.Close;
+    end;
+  end;
+
 end;
 
 end.

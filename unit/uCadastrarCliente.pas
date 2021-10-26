@@ -227,12 +227,10 @@ begin
   if edtRua.Text <> '' then
     edtRua.Clear;
 
-  dm.cdsEstados.Close;
-  dm.dSetEstados.Close;
+  abrirDados('estado', false);
   dm.dSetEstados.CommandText := 'SELECT * from estado WHERE uf = "' +
     cboxEstados.Text + '"';
-  dm.dSetEstados.Open;
-  dm.cdsEstados.Open;
+  abrirDados('estado', true);
 
   edtCidade.SetFocus;
 end;
@@ -285,8 +283,7 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  dm.dSetClientes.Close;
-  dm.cdsClientes.Close;
+  abrirDados('cliente', false);
   if (Tag <> 1) AND (Tag <> 2) then // Tag <> 1 e 2 -> close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
@@ -296,10 +293,8 @@ begin
       // Tag = 1 -> Cadastrar cliente pela venda
       // Tag = 2 ->  Editar cliente pela venda
       begin
-        dm.dSetCidades.Close;
-        dm.cdsCidades.Close;
-        dm.dSetBairros.Close;
-        dm.cdsBairros.Close;
+        abrirDados('cidade', false);
+        abrirDados('bairro', false);
         Sleep(150);
         verificarOrdenacaoCliente;
       end;
@@ -320,8 +315,7 @@ begin
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
-    dm.dSetRuas.Open;
-    dm.cdsRuas.Open;
+    abrirDados('rua', true);
     dm.cdsClientes.Edit;
     dm.cdsClientes.ClearFields;
   end
@@ -329,8 +323,7 @@ begin
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
-    dm.dSetRuas.Open;
-    dm.cdsRuas.Open;
+    abrirDados('rua', true);
     dm.cdsClientes.Edit;
     btnCadastrar.Caption := 'Editar';
     buscarEnderecoCliente;

@@ -74,7 +74,7 @@ end;
 
 procedure TfrmProdutos.edtBuscarChange(Sender: TObject);
 begin
-  threadBuscarProduto;
+  threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
 end;
 

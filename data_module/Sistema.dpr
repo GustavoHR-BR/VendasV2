@@ -12,7 +12,8 @@ uses
   uCadastrarProduto in '..\unit\uCadastrarProduto.pas' {frmCadastrarProduto},
   uVendas in '..\unit\uVendas.pas' {frmVendas},
   uVendaReport in '..\report\uVendaReport.pas' {frmVendaReport},
-  uCadastrarVenda in '..\unit\uCadastrarVenda.pas' {frmCadastrarVenda};
+  uCadastrarVenda in '..\unit\uCadastrarVenda.pas' {frmCadastrarVenda},
+  uAdicionarItem in '..\unit\uAdicionarItem.pas' {frmAdicionarItem};
 
 {$R *.res}
 
@@ -30,5 +31,6 @@ begin
   Application.CreateForm(TfrmVendas, frmVendas);
   Application.CreateForm(TfrmVendaReport, frmVendaReport);
   Application.CreateForm(TfrmCadastrarVenda, frmCadastrarVenda);
+  Application.CreateForm(TfrmAdicionarItem, frmAdicionarItem);
   Application.Run;
 end.

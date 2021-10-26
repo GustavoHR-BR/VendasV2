@@ -14,6 +14,7 @@ object frmAdicionarItem: TfrmAdicionarItem
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -178,7 +179,9 @@ object frmAdicionarItem: TfrmAdicionarItem
     Width = 121
     Height = 21
     Alignment = taRightJustify
+    Enabled = False
     TabOrder = 6
+    Text = '0'
   end
   object edtSubTotal: TEdit
     Left = 354
@@ -186,7 +189,9 @@ object frmAdicionarItem: TfrmAdicionarItem
     Width = 121
     Height = 21
     Alignment = taRightJustify
+    Enabled = False
     TabOrder = 9
+    Text = '0'
   end
   object edtValUnitario: TEdit
     Left = 184
@@ -194,7 +199,9 @@ object frmAdicionarItem: TfrmAdicionarItem
     Width = 121
     Height = 21
     Alignment = taRightJustify
+    Enabled = False
     TabOrder = 4
+    Text = '0'
   end
   object edtAcrescimo: TEdit
     Left = 24
@@ -203,6 +210,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Height = 21
     Alignment = taRightJustify
     TabOrder = 5
+    Text = '0'
   end
   object edtQuantidade: TEdit
     Left = 24
@@ -211,6 +219,8 @@ object frmAdicionarItem: TfrmAdicionarItem
     Height = 21
     Alignment = taRightJustify
     TabOrder = 3
+    Text = '1'
+    OnChange = edtQuantidadeChange
   end
   object edtValTotal: TEdit
     Left = 354
@@ -218,7 +228,9 @@ object frmAdicionarItem: TfrmAdicionarItem
     Width = 121
     Height = 21
     Alignment = taRightJustify
+    Enabled = False
     TabOrder = 10
+    Text = '0'
   end
   object edtValDesconto: TEdit
     Left = 184
@@ -226,7 +238,9 @@ object frmAdicionarItem: TfrmAdicionarItem
     Width = 121
     Height = 21
     Alignment = taRightJustify
+    Enabled = False
     TabOrder = 8
+    Text = '0'
   end
   object edtDesconto: TEdit
     Left = 24
@@ -235,6 +249,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Height = 21
     Alignment = taRightJustify
     TabOrder = 7
+    Text = '0'
   end
   object edtBuscar: TEdit
     Left = 24
@@ -248,6 +263,8 @@ object frmAdicionarItem: TfrmAdicionarItem
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    OnChange = edtBuscarChange
+    OnClick = edtBuscarClick
   end
   object dbgrid: TDBGrid
     Left = 24
@@ -269,6 +286,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     Visible = False
+    OnCellClick = dbgridCellClick
     Columns = <
       item
         Alignment = taCenter

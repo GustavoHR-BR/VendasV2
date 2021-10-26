@@ -477,6 +477,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentShowHint = False
     ShowHint = True
     TabOrder = 11
+    OnClick = btnFinalizarClick
   end
   object btnCancelar: TButton
     Left = 641

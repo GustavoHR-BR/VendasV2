@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.DBCtrls,
-  Vcl.Mask, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Data.FMTBcd, Data.DB, Data.SqlExpr;
 
 type
   TfrmCadastrarVenda = class(TForm)
@@ -52,6 +52,7 @@ type
     procedure edtBuscarClick(Sender: TObject);
     procedure btnFecharBuscaClick(Sender: TObject);
     procedure dbgridCellClick(Column: TColumn);
+    procedure btnFinalizarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -96,6 +97,11 @@ begin
   btnEditarCliente.Enabled := false;
 end;
 
+procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
+begin
+  Tag := 1;
+end;
+
 procedure TfrmCadastrarVenda.dbgridCellClick(Column: TColumn);
 begin
   edtBuscar.Text := dm.cdsClientesnome.AsString;
@@ -110,12 +116,10 @@ end;
 
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);
 begin
-  dm.dSetClientes.Close;
-  dm.cdsClientes.Close;
+  abrirDados('cliente', false);
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
     LowerCase(Trim(edtBuscar.Text)) + '%" ORDER BY nome ASC;';
-  dm.cdsClientes.Open;
-  dm.dSetClientes.Open;
+  abrirDados('cliente', True);
   Sleep(60);
   frmCadastrarVenda.dbgrid.DataSource := dm.dSourceClientes;
   if edtBuscar.Text = dm.cdsClientesnome.Text then
@@ -131,46 +135,56 @@ end;
 
 procedure TfrmCadastrarVenda.FormClose(Sender: TObject;
   var Action: TCloseAction);
+var
+  id: Integer;
 begin
-  dm.cdsClientes.Close;
-  dm.dSetClientes.Close;
-  if Application.MessageBox('Deseja realmente sair?', 'Atenção',
-    MB_YESNO + MB_ICONQUESTION) = mrYes then
+  abrirDados('cliente', false);
+  if Tag <> 1 then
   begin
-    dm.SQLConn.Close;
-    dm.SQLConn.Open;
-    btnFecharBuscaClick(Self);
-    threadBuscarVenda;
-    dm.dSetItens.Close;
-    dm.cdsItens.Close;
-    dm.cdsItens.CommandText := 'SELECT * FROM item';
-    dm.cdsItens.Open;
-    dm.dSetItens.Open;
-  end
-  else
-  begin
-    Abort;
-    dm.cdsClientes.Open;
-    dm.dSetVendas.Open;
+    if Application.MessageBox('Deseja realmente sair?', 'Atenção',
+      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    begin
+      dm.SQLConn.Close;
+      dm.SQLConn.Open;
+      btnFecharBuscaClick(Self);
+      threadBuscarVenda;
+      abrirDados('item', false);
+      abrirDados('venda', false);
+      // deletar
+      dm.cdsItens.CommandText := 'SELECT * FROM item';
+      abrirDados('item', True);
+      abrirDados('venda', True);
+    end
+    else
+    begin
+      Abort;
+      abrirDados('cliente', True);
+    end;
   end;
 end;
 
 procedure TfrmCadastrarVenda.FormShow(Sender: TObject);
+var
+  id: Integer;
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  dm.cdsVendas.Open;
-  dm.dSetVendas.Open;
-  dm.cdsClientes.Close;
-  dm.cdsClientes.Close;
+  abrirDados('venda', false);
+  dm.cdsVendas.CommandText := 'SELECT * FROM venda';
+  abrirDados('venda', True);
+  dm.cdsVendas.Last;
+  dm.cdsVendas.Edit;
+  id := dm.cdsVendasid.AsInteger + 1;
+  dm.cdsVendas.Append;
+  dm.cdsVendasid.AsInteger := id;
+  dm.cdsVendas.Post;
+  dm.cdsVendas.ApplyUpdates(0);
+  abrirDados('cliente', false);
+  abrirDados('item', false);
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
-  dm.cdsItens.Close;
-  dm.dSetItens.Close;
   dm.cdsItens.CommandText := 'SELECT * FROM item LIMIT 0';
-  dm.cdsItens.Open;
-  dm.dSetItens.Open;
-  dm.cdsClientes.Open;
-  dm.cdsClientes.Open;
+  abrirDados('item', True);
+  abrirDados('cliente', True);
   dm.cdsClientes.Edit;
   dm.cdsClientes.ClearFields;
 end;

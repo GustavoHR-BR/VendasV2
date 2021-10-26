@@ -38,10 +38,10 @@ begin
   dm.dSetRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
   dm.dSetClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
     + ' ASC;';
-  dm.dSetRuas.Open;
   dm.cdsRuas.Open;
-  dm.dSetClientes.Open;
+  dm.dSetRuas.Open;
   dm.cdsClientes.Open;
+  dm.dSetClientes.Open;
 end;
 
 procedure threadBuscarCliente(busca: string);
@@ -53,10 +53,10 @@ begin
     begin
       dm.dSetClientes.Close;
       dm.cdsClientes.Close;
-      dm.dSetClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "%'
-        + busca + '%" ORDER BY nome ASC;';
-      dm.dSetClientes.Open;
+      dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
+        busca + '%" ORDER BY nome ASC;';
       dm.cdsClientes.Open;
+      dm.dSetClientes.Open;
 
       TThread.Synchronize(nil,
         procedure

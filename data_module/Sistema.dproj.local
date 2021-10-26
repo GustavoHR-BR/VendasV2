@@ -31,10 +31,11 @@
     <Transaction>2021/10/25 13:11:03.000.182,=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
     <Transaction>2021/10/25 13:13:08.000.813,C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.dfm=C:\Users\Administrador\Desktop\VendasV2\report\uVendaReport.dfm</Transaction>
     <Transaction>2021/10/25 13:13:08.000.813,C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas=C:\Users\Administrador\Desktop\VendasV2\report\uVendaReport.pas</Transaction>
-    <Transaction>2021/10/25 16:21:35.550,=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
-    <Transaction>2021/10/25 16:22:11.562,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarVenda.dfm=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.dfm</Transaction>
-    <Transaction>2021/10/25 16:22:11.562,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarVenda.pas=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
-  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <Transaction>2021/10/25 16:21:35.000.550,=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
+    <Transaction>2021/10/25 16:22:11.000.562,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarVenda.pas=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.pas</Transaction>
+    <Transaction>2021/10/25 16:22:11.000.562,C:\Users\Administrador\Desktop\VendasV2\unit\uCadastrarVenda.dfm=C:\Users\Administrador\Desktop\VendasV2\data_module\Unit2.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="..\..\VendasV2"/>
     <File Path="..\function"/>
     <File Path="..\function\uFunctions.pas"/>

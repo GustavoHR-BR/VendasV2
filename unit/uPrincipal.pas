@@ -77,7 +77,7 @@ begin
   frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) + 'RELATORIO  VENDAS.pdf';
   frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;
-  frmVendaReport.rvsVENDAS.Execute;
+  frmVendaReport.RvProject1.Execute;
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
     SW_NORMAL);

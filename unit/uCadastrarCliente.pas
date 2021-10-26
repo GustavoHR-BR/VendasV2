@@ -68,7 +68,8 @@ implementation
 
 {$R *.dfm}
 
-uses uClientes, uDataModule, uFiltroCli, uFunctions, uPrincipal;
+uses uClientes, uDataModule, uFiltroCli, uFunctions, uPrincipal,
+  uCadastrarProduto, uCadastrarVenda, uProdutos, uVendaReport, uVendas;
 
 procedure TfrmCadastrarCliente.btnCadastrarClick(Sender: TObject);
 begin
@@ -284,16 +285,24 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if (Tag <> 1) AND (Tag <> 2) then // close pelo usuário;
+  dm.dSetClientes.Close;
+  dm.cdsClientes.Close;
+  if (Tag <> 1) AND (Tag <> 2) then // Tag <> 1 e 2 -> close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
-      dm.dSetCidades.Close;
-      dm.cdsCidades.Close;
-      dm.dSetBairros.Close;
-      dm.cdsBairros.Close;
-      verificarOrdenacaoCliente;
+      if (frmCadastrarVenda.Tag <> 1) AND (frmCadastrarVenda.Tag <> 2) then
+      // Tag = 1 -> Cadastrar cliente pela venda
+      // Tag = 2 ->  Editar cliente pela venda
+      begin
+        dm.dSetCidades.Close;
+        dm.cdsCidades.Close;
+        dm.dSetBairros.Close;
+        dm.cdsBairros.Close;
+        Sleep(150);
+        verificarOrdenacaoCliente;
+      end;
     end
     else
       Abort;

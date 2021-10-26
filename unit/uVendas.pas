@@ -24,6 +24,7 @@ type
     procedure btnSairClick(Sender: TObject);
     procedure cbOrdenarPorSelect(Sender: TObject);
     procedure btnNovaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,6 +65,16 @@ procedure TfrmVendas.edtBuscarChange(Sender: TObject);
 begin
   threadBuscarVenda;
   Sleep(60);
+end;
+
+procedure TfrmVendas.FormShow(Sender: TObject);
+begin
+  dm.SQLConn.Close;
+  dm.SQLConn.Open;
+  dm.dSetVendas.Open;
+  dm.cdsVendas.Open;
+  dm.dSetItens.Open;
+  dm.cdsItens.Open;
 end;
 
 end.

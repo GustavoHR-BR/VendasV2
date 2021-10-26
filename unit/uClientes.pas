@@ -82,8 +82,7 @@ procedure TfrmClientes.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  dm.dSetClientes.Open;
-  dm.cdsClientes.Open;
+  threadBuscarCliente('');
 end;
 
 end.

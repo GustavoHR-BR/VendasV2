@@ -65,13 +65,18 @@ implementation
 
 uses
   uCadastrarCliente, uCadastrarProduto, uClientes, uDataModule, uFiltroCli,
-  uFunctions, uPrincipal, uProdutos, uVendaReport, uVendas;
+  uFunctions, uPrincipal, uProdutos, uVendaReport, uVendas, uAdicionarItem;
 
 {$R *.dfm}
 
 procedure TfrmCadastrarVenda.btnAdicionarClick(Sender: TObject);
 begin
-  //
+  Application.CreateForm(TfrmAdicionarItem, frmAdicionarItem);
+  try
+    frmAdicionarItem.ShowModal;
+  finally
+    FreeAndNil(frmAdicionarItem);
+  end;
 end;
 
 procedure TfrmCadastrarVenda.btnCancelarClick(Sender: TObject);

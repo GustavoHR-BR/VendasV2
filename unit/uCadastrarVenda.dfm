@@ -603,7 +603,10 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 225
     Width = 75
     Height = 25
+    Hint = 'Fechar busca'
     Caption = 'Cancelar'
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 18
     Visible = False
     OnClick = btnFecharBuscaClick

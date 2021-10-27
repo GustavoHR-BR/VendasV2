@@ -110,7 +110,13 @@ end;
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
 begin
   Tag := 1;
-
+  dm.cdsVendas.Edit;
+  dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
+  dm.cdsVendastotal.Text := edtTotalVenda.Text;
+  dm.cdsVendasdata.Text := DateToStr(now);
+  dm.cdsVendas.Post;
+  dm.cdsVendas.ApplyUpdates(0);
+  frmCadastrarVenda.Close;
 end;
 
 procedure TfrmCadastrarVenda.dbgridCellClick(Column: TColumn);

@@ -94,6 +94,7 @@ begin
   frmCadastrarVenda.edtAcrescimo.Enabled := True;
   frmCadastrarVenda.edtFrete.Enabled := True;
   calculaSubTotalDaVenda;
+  calculaTotalDaVenda;
   Tag := 1;
 end;
 

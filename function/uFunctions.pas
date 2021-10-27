@@ -26,6 +26,10 @@ procedure calculaSubTotalDoItem;
 procedure calculaAcrescimoItem;
 procedure calculaDescontoItem;
 procedure calculaTotalDoItem;
+procedure calculaSubTotalDaVenda;
+procedure calculaTotalDaVenda;
+procedure calculaDescontoDaVenda;
+procedure calculaAcrescimoDaVenda;
 
 var
   subTotalDaVenda, totalDaVenda, frete, totalDoItem, valDescontoItem,
@@ -464,7 +468,6 @@ begin
       dm.dSetVendas.Close;
     end;
   end;
-
 end;
 
 procedure calculaSubTotalDoItem;
@@ -496,6 +499,36 @@ begin
   subTotalDoItem := StrToFloat(frmAdicionarItem.edtSubTotal.Text);
   frmAdicionarItem.edtValTotal.Text :=
     FloatToStr(valAcrescimoItem + subTotalDoItem - valDescontoItem);
+end;
+
+procedure calculaSubTotalDaVenda;
+begin
+  frmCadastrarVenda.edtSubtTotal.Text :=
+    FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
+    StrToFloat(frmAdicionarItem.edtValTotal.Text));
+end;
+
+procedure calculaDescontoDaVenda;
+begin
+  desconto := StrToFloat(frmCadastrarVenda.edtDesconto.Text) / 100;
+end;
+
+procedure calculaAcrescimoDaVenda;
+begin
+
+end;
+
+procedure calculaTotalDaVenda;
+var
+  subTotal: Double;
+begin
+  desconto := StrToFloat(frmCadastrarVenda.edtDesconto.Text) / 100;
+  acrescimo := StrToFloat(frmCadastrarVenda.edtAcrescimo.Text) / 100;
+  frete := StrToFloat(frmCadastrarVenda.edtFrete.Text);
+  subTotal := StrToFloat(frmCadastrarVenda.edtSubtTotal.Text);
+  frmCadastrarVenda.edtTotalVenda.Text :=
+    FloatToStr(subTotal + frete + (subTotal * acrescimo) -
+    (subTotal * desconto));
 end;
 
 end.

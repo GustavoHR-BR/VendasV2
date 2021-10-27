@@ -42,6 +42,8 @@ type
     btnExcluir: TButton;
     dbgrid: TDBGrid;
     btnFecharBusca: TButton;
+    edtTotalVenda: TEdit;
+    Label12: TLabel;
     procedure edtBuscarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnCadastrarClienteClick(Sender: TObject);
@@ -53,8 +55,11 @@ type
     procedure btnFecharBuscaClick(Sender: TObject);
     procedure dbgridCellClick(Column: TColumn);
     procedure btnFinalizarClick(Sender: TObject);
+    procedure edtDescontoChange(Sender: TObject);
+    procedure edtAcrescimoChange(Sender: TObject);
+    procedure edtFreteChange(Sender: TObject);
   private
-    { Private declarations }
+    passouAqui: Boolean;
   public
     numeroDeItens: Integer;
     idDoItem: string;
@@ -137,6 +142,63 @@ begin
   dbgrid.Visible := True;
   btnFecharBusca.Visible := True;
   edtBuscarChange(Self);
+end;
+
+procedure TfrmCadastrarVenda.edtAcrescimoChange(Sender: TObject);
+begin
+  passouAqui := false;
+  if edtAcrescimo.Text = '' then
+  begin
+    edtAcrescimo.Text := '0';
+    passouAqui := True;
+  end
+  else
+  begin
+    if passouAqui = True then
+    begin
+      edtAcrescimo.Text := copy(edtAcrescimo.Text, 0, 1);
+      passouAqui := false;
+    end;
+  end;
+  calculaTotalDaVenda;
+end;
+
+procedure TfrmCadastrarVenda.edtDescontoChange(Sender: TObject);
+begin
+  passouAqui := false;
+  if edtDesconto.Text = '' then
+  begin
+    edtDesconto.Text := '0';
+    passouAqui := True;
+  end
+  else
+  begin
+    if passouAqui = True then
+    begin
+      edtDesconto.Text := copy(edtDesconto.Text, 0, 1);
+      passouAqui := false;
+    end;
+  end;
+  calculaTotalDaVenda;
+end;
+
+procedure TfrmCadastrarVenda.edtFreteChange(Sender: TObject);
+begin
+  passouAqui := false;
+  if edtFrete.Text = '' then
+  begin
+    edtFrete.Text := '0';
+    passouAqui := True;
+  end
+  else
+  begin
+    if passouAqui = True then
+    begin
+      edtFrete.Text := copy(edtFrete.Text, 0, 1);
+      passouAqui := false;
+    end;
+  end;
+  calculaTotalDaVenda;
 end;
 
 procedure TfrmCadastrarVenda.FormClose(Sender: TObject;

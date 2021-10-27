@@ -93,6 +93,7 @@ begin
   frmCadastrarVenda.edtDesconto.Enabled := True;
   frmCadastrarVenda.edtAcrescimo.Enabled := True;
   frmCadastrarVenda.edtFrete.Enabled := True;
+  calculaSubTotalDaVenda;
   Tag := 1;
 end;
 
@@ -104,6 +105,7 @@ begin
   btnCancelarItem.Visible := false;
   btnFinalizar.Enabled := True;
   calculaSubTotalDoItem;
+  calculaTotalDoItem;
 end;
 
 procedure TfrmAdicionarItem.edtBuscarChange(Sender: TObject);

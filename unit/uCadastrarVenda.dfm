@@ -270,6 +270,20 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Style = []
     ParentFont = False
   end
+  object Label12: TLabel
+    Left = 545
+    Top = 162
+    Width = 90
+    Height = 18
+    Caption = 'Total da venda:'
+    FocusControl = DBEdtTelefone
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
+  end
   object edtBuscar: TEdit
     Left = 24
     Top = 39
@@ -381,7 +395,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object DBGridVendas: TDBGrid
     Left = -4
-    Top = 192
+    Top = 197
     Width = 749
     Height = 193
     DataSource = dm.dSourceItens
@@ -464,7 +478,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     TabOrder = 14
     Text = '0'
-    OnChange = edtBuscarChange
+    OnChange = edtDescontoChange
   end
   object edtAcrescimo: TEdit
     Left = 230
@@ -480,7 +494,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     TabOrder = 15
     Text = '0'
-    OnChange = edtBuscarChange
+    OnChange = edtAcrescimoChange
   end
   object edtFrete: TEdit
     Left = 336
@@ -496,7 +510,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     TabOrder = 16
     Text = '0'
-    OnChange = edtBuscarChange
+    OnChange = edtFreteChange
   end
   object btnFinalizar: TButton
     Left = 559
@@ -649,5 +663,21 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TabOrder = 18
     Visible = False
     OnClick = btnFecharBuscaClick
+  end
+  object edtTotalVenda: TEdit
+    Left = 641
+    Top = 161
+    Width = 75
+    Height = 23
+    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 19
+    Text = '0'
+    OnChange = edtBuscarChange
   end
 end

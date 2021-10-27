@@ -166,6 +166,7 @@ begin
             frmCadastrarVenda.dbEdtEmail.Text := dm.cdsClientesemail.Text;
             frmCadastrarVenda.dbEdtDtNascimento.Text :=
               dm.cdsClientesdata_nascimento.Text;
+            frmCadastrarVenda.edtBuscar.Clear;
           end;
           Tag := 1;
           frmCadastrarCliente.Close;

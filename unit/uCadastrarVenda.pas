@@ -58,6 +58,7 @@ type
     procedure edtDescontoChange(Sender: TObject);
     procedure edtAcrescimoChange(Sender: TObject);
     procedure edtFreteChange(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     passouAqui: Boolean;
   public
@@ -247,8 +248,9 @@ begin
       end;
       btnCancelarClick(Self);
     end;
-  end;
-  ShowMessage('Venda realizada com sucesso! ');
+  end
+  else
+    ShowMessage('Venda realizada com sucesso! ');
   threadBuscarVenda;
 end;
 
@@ -290,6 +292,56 @@ procedure TfrmCadastrarVenda.btnEditarClienteClick(Sender: TObject);
 begin
   Tag := 2;
   frmClientes.btnEditarClick(Self);
+end;
+
+procedure TfrmCadastrarVenda.btnExcluirClick(Sender: TObject);
+var
+  I, J, aux, A: Integer;
+begin
+  if Application.MessageBox('Deseja realmente excluir?', 'Atenção',
+    MB_YESNO + MB_ICONQUESTION) = mrYes then
+  begin
+    aux := dm.cdsItensid.AsInteger;
+    dm.cdsItens.Delete;
+    numeroDeItens := numeroDeItens - 1;
+    try
+      dm.cdsItens.ApplyUpdates(0);
+      for I := 1 to numeroDeItens - 1 do
+      begin
+        abrirDados('item', false);
+        dm.cdsItens.CommandText := 'SELECT * FROM item';
+        abrirDados('item', True);
+        dm.cdsItens.Last;
+        A := (dm.cdsItensid.AsInteger - aux) - 1;
+        if A > 1 then
+        begin
+          for J := 1 to A do
+          begin
+            dm.cdsItens.Prior;
+          end;
+        end;
+        dm.cdsItens.Edit;
+        dm.cdsItensid.AsInteger := aux;
+        dm.cdsItens.Post;
+        dm.cdsItens.ApplyUpdates(0);
+        aux := aux + 1;
+        idDoItem := inttostr(aux);
+      end;
+      abrirDados('item', false);
+      ShowMessage('Item excluído com sucesso! ');
+      dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
+        dm.cdsVendasid.Text;
+      abrirDados('item', True);
+      abrirDados('cliente', false);
+      dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
+      abrirDados('cliente', True);
+    except
+      on E: Exception do
+      begin
+        ShowMessage('Erro ao deletar item! ' + E.ToString);
+      end;
+    end;
+  end;
 end;
 
 end.

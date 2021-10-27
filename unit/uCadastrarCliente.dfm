@@ -203,7 +203,6 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
-    MaxLength = 15
     ParentFont = False
     TabOrder = 1
   end
@@ -229,7 +228,6 @@ object frmCadastrarCliente: TfrmCadastrarCliente
     Height = 21
     DataField = 'data_nascimento'
     DataSource = dm.dSourceClientes
-    MaxLength = 10
     TabOrder = 6
   end
   object edtCidade: TEdit

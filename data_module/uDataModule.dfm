@@ -45,7 +45,6 @@ object dm: Tdm
     Top = 16
   end
   object cdsClientes: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientes'

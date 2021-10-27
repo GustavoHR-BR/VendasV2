@@ -348,6 +348,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     ParentShowHint = False
     ShowHint = True
     TabOrder = 11
+    OnClick = btnFinalizarClick
   end
   object Button1: TButton
     Left = 400

@@ -279,21 +279,21 @@ object frmVendas: TfrmVendas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dm.SQLConn
-    Left = 208
-    Top = 168
+    Left = 376
+    Top = 360
   end
   object dspVendas: TDataSetProvider
     DataSet = dSetVendas
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 304
-    Top = 168
+    Left = 472
+    Top = 360
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVendas'
-    Left = 400
-    Top = 168
+    Left = 568
+    Top = 360
     object cdsVendasid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -324,13 +324,13 @@ object frmVendas: TfrmVendas
   end
   object dSourceVendas: TDataSource
     DataSet = cdsVendas
-    Left = 496
-    Top = 168
+    Left = 664
+    Top = 360
   end
   object dSourceItens: TDataSource
     DataSet = cdsItens
-    Left = 496
-    Top = 240
+    Left = 664
+    Top = 432
   end
   object cdsItens: TClientDataSet
     Aggregates = <>
@@ -340,8 +340,8 @@ object frmVendas: TfrmVendas
     PacketRecords = 0
     Params = <>
     ProviderName = 'dspItens'
-    Left = 400
-    Top = 240
+    Left = 568
+    Top = 432
     object cdsItensid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -373,8 +373,8 @@ object frmVendas: TfrmVendas
   object dspItens: TDataSetProvider
     DataSet = dSetItens
     Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 304
-    Top = 240
+    Left = 472
+    Top = 432
   end
   object dSetItens: TSQLDataSet
     SchemaName = 'gustavo_reblin'
@@ -389,7 +389,7 @@ object frmVendas: TfrmVendas
         Value = 1
       end>
     SQLConnection = dm.SQLConn
-    Left = 208
-    Top = 240
+    Left = 376
+    Top = 432
   end
 end

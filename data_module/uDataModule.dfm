@@ -427,5 +427,31 @@ object dm: Tdm
     ProviderName = 'dpsItens'
     Left = 224
     Top = 512
+    object cdsItensid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object cdsItensfk_venda: TIntegerField
+      FieldName = 'fk_venda'
+    end
+    object cdsItensfk_produto: TIntegerField
+      FieldName = 'fk_produto'
+    end
+    object cdsItensnome: TStringField
+      FieldName = 'nome'
+      Size = 60
+    end
+    object cdsItenspreco: TFMTBCDField
+      FieldName = 'preco'
+      Precision = 12
+      Size = 2
+    end
+    object cdsItensdescricao: TStringField
+      FieldName = 'descricao'
+      Size = 100
+    end
+    object cdsItensquantidade: TIntegerField
+      FieldName = 'quantidade'
+    end
   end
 end

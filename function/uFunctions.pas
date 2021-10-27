@@ -32,13 +32,15 @@ uses
 
 procedure buscarCliente(orderBy: string);
 begin
-  abrirDados('rua', false);
+
   abrirDados('cliente', false);
-  dm.cdsRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
     + ' ASC;';
-  abrirDados('rua', true);
   abrirDados('cliente', true);
+
+  // abrirDados('rua', false);
+  // dm.cdsRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
+  // abrirDados('rua', true);
 end;
 
 procedure threadBuscarCliente(busca: string);
@@ -133,17 +135,21 @@ procedure buscarVenda(orderBy: string);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  abrirDados('venda', false);
+  frmVendas.cdsVendas.Close;
+  frmVendas.dSetVendas.Close;
   if orderBy = 'fk_cliente' then
   begin
-    dm.cdsVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ON ' +
+    frmVendas.cdsVendas.CommandText :=
+      'SELECT * FROM venda v JOIN cliente c ON ' +
       'c.id = v.fk_cliente ORDER BY c.nome ASC';
   end
   else
   begin
-    dm.cdsVendas.CommandText := 'SELECT * FROM venda ORDER BY ' + orderBy;
+    frmVendas.cdsVendas.CommandText := 'SELECT * FROM venda ORDER BY '
+      + orderBy;
   end;
-  abrirDados('venda', true);
+  frmVendas.cdsVendas.Open;
+  frmVendas.dSetVendas.Open;
 end;
 
 procedure threadBuscarVenda;

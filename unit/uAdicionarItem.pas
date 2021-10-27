@@ -39,6 +39,7 @@ type
     procedure edtBuscarChange(Sender: TObject);
     procedure dbgridCellClick(Column: TColumn);
     procedure edtQuantidadeChange(Sender: TObject);
+    procedure btnFinalizarClick(Sender: TObject);
   private
     passouAqui: Boolean;
   public
@@ -56,6 +57,25 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmAdicionarItem.btnFinalizarClick(Sender: TObject);
+begin
+  abrirDados('item', false);
+  dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
+    dm.cdsVendasid.Text + ' ORDER BY id ASC;';
+  abrirDados('item', true);
+  dm.cdsItens.Last;
+  dm.cdsItens.Edit;
+  dm.cdsItensid.Text := dm.cdsItensid.Text;
+  dm.cdsItensfk_produto.Text := dm.cdsProdutosid.Text;
+  dm.cdsItensnome.Text := dm.cdsProdutosnome.Text;
+  dm.cdsItenspreco.Text := dm.cdsProdutospreco.Text;
+  dm.cdsItensdescricao.Text := dm.cdsProdutosdescricao.Text;
+  dm.cdsItensquantidade.Text := edtQuantidade.Text;
+  dm.cdsItens.Post;
+  dm.cdsItens.ApplyUpdates(0);
+  frmAdicionarItem.Close;
+end;
+
 procedure TfrmAdicionarItem.dbgridCellClick(Column: TColumn);
 begin
   edtBuscar.Text := dm.cdsProdutosnome.AsString;
@@ -64,6 +84,7 @@ begin
   edtValTotal.Text := dm.cdsProdutospreco.AsString;
   dbgrid.Visible := false;
   btnCancelar.Visible := false;
+  btnFinalizar.Enabled := true;
 end;
 
 procedure TfrmAdicionarItem.edtBuscarChange(Sender: TObject);
@@ -73,8 +94,8 @@ end;
 
 procedure TfrmAdicionarItem.edtBuscarClick(Sender: TObject);
 begin
-  btnCancelar.Visible := True;
-  dbgrid.Visible := True;
+  btnCancelar.Visible := true;
+  dbgrid.Visible := true;
   threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
 end;
@@ -84,11 +105,11 @@ begin
   if edtQuantidade.Text = '' then
   begin
     edtQuantidade.Text := '1';
-    passouAqui := True;
+    passouAqui := true;
   end
   else
   begin
-    if passouAqui = True then
+    if passouAqui = true then
       edtQuantidade.Text := copy(edtQuantidade.Text, 0, 1);
 
     edtSubTotal.Text := FloatToStr(strtoFloat(edtQuantidade.Text) *
@@ -97,14 +118,18 @@ begin
 end;
 
 procedure TfrmAdicionarItem.FormShow(Sender: TObject);
+var
+  id: Integer;
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  dm.dSetProdutos.Close;
-  dm.cdsProdutos.Close;
-  dm.cdsProdutos.CommandText := 'SELECT * FROM produto LIMIT 0';
-  dm.cdsProdutos.Open;
-  dm.dSetProdutos.Open;
+  abrirDados('item', true);
+  dm.cdsItens.Edit;
+  dm.cdsItens.Append;
+  dm.cdsItensid.AsInteger := frmCadastrarVenda.numeroDeItens;
+  dm.cdsItensfk_venda.Text := dm.cdsVendasid.Text;
+  dm.cdsItens.Post;
+  dm.cdsItens.ApplyUpdates(0);
 end;
 
 end.

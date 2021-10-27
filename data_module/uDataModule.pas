@@ -73,6 +73,13 @@ type
     cdsProdutosquantidade_estoque: TIntegerField;
     cdsVendasCliente: TStringField;
     cdsItens: TClientDataSet;
+    cdsItensid: TIntegerField;
+    cdsItensfk_venda: TIntegerField;
+    cdsItensfk_produto: TIntegerField;
+    cdsItensnome: TStringField;
+    cdsItenspreco: TFMTBCDField;
+    cdsItensdescricao: TStringField;
+    cdsItensquantidade: TIntegerField;
   private
     { Private declarations }
   public

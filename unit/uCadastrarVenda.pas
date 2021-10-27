@@ -56,7 +56,7 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    numeroDeItens: Integer;
   end;
 
 var
@@ -136,29 +136,22 @@ end;
 procedure TfrmCadastrarVenda.FormClose(Sender: TObject;
   var Action: TCloseAction);
 var
-  id: Integer;
+  id: string;
 begin
-  abrirDados('cliente', false);
   if Tag <> 1 then
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
-      dm.SQLConn.Close;
-      dm.SQLConn.Open;
-      btnFecharBuscaClick(Self);
-      threadBuscarVenda;
-      abrirDados('item', false);
+      id := dm.cdsVendasid.Text;
       abrirDados('venda', false);
-      // deletar
-      dm.cdsItens.CommandText := 'SELECT * FROM item';
-      abrirDados('item', True);
-      abrirDados('venda', True);
-    end
-    else
-    begin
-      Abort;
-      abrirDados('cliente', True);
+      dm.cdsVendas.CommandText := 'DELETE FROM venda WHERE id = ' + id;
+      try
+        abrirDados('venda', True);
+      except
+        on E: Exception do
+      end;
+      btnCancelarClick(Self);
     end;
   end;
 end;
@@ -182,11 +175,13 @@ begin
   abrirDados('cliente', false);
   abrirDados('item', false);
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
-  dm.cdsItens.CommandText := 'SELECT * FROM item LIMIT 0';
+  dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
+    dm.cdsVendasid.Text;
   abrirDados('item', True);
   abrirDados('cliente', True);
   dm.cdsClientes.Edit;
   dm.cdsClientes.ClearFields;
+  numeroDeItens := 0;
 end;
 
 procedure TfrmCadastrarVenda.btnCadastrarClienteClick(Sender: TObject);

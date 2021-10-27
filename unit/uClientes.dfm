@@ -195,9 +195,9 @@ object frmClientes: TfrmClientes
     OnClick = btnSairClick
   end
   object edtBuscar: TEdit
-    Left = 94
+    Left = 96
     Top = 17
-    Width = 273
+    Width = 425
     Height = 23
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -209,7 +209,7 @@ object frmClientes: TfrmClientes
     OnChange = edtBuscarChange
   end
   object btnFiltrar: TButton
-    Left = 373
+    Left = 527
     Top = 16
     Width = 75
     Height = 25

@@ -42,6 +42,8 @@ type
     procedure btnFinalizarClick(Sender: TObject);
     procedure btnCancelarItemClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edtAcrescimoChange(Sender: TObject);
+    procedure edtDescontoChange(Sender: TObject);
   private
     passouAqui: Boolean;
   public
@@ -87,6 +89,10 @@ begin
   dm.cdsItens.ApplyUpdates(0);
   frmAdicionarItem.Close;
   frmCadastrarVenda.numeroDeItens := frmCadastrarVenda.numeroDeItens + 1;
+  frmCadastrarVenda.btnFinalizar.Enabled := True;
+  frmCadastrarVenda.edtDesconto.Enabled := True;
+  frmCadastrarVenda.edtAcrescimo.Enabled := True;
+  frmCadastrarVenda.edtFrete.Enabled := True;
   Tag := 1;
 end;
 
@@ -94,11 +100,10 @@ procedure TfrmAdicionarItem.dbgridCellClick(Column: TColumn);
 begin
   edtBuscar.Text := dm.cdsProdutosnome.AsString;
   edtValUnitario.Text := dm.cdsProdutospreco.AsString;
-  edtSubTotal.Text := dm.cdsProdutospreco.AsString;
-  edtValTotal.Text := dm.cdsProdutospreco.AsString;
   dbgrid.Visible := false;
   btnCancelarItem.Visible := false;
-  btnFinalizar.Enabled := true;
+  btnFinalizar.Enabled := True;
+  calculaSubTotalDoItem;
 end;
 
 procedure TfrmAdicionarItem.edtBuscarChange(Sender: TObject);
@@ -110,26 +115,72 @@ end;
 
 procedure TfrmAdicionarItem.edtBuscarClick(Sender: TObject);
 begin
-  btnCancelarItem.Visible := true;
-  dbgrid.Visible := true;
+  btnCancelarItem.Visible := True;
+  dbgrid.Visible := True;
   threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
 end;
 
-procedure TfrmAdicionarItem.edtQuantidadeChange(Sender: TObject);
+procedure TfrmAdicionarItem.edtDescontoChange(Sender: TObject);
 begin
-  if edtQuantidade.Text = '' then
+  passouAqui := false;
+  if edtDesconto.Text = '' then
   begin
-    edtQuantidade.Text := '1';
-    passouAqui := true;
+    edtDesconto.Text := '0';
+    passouAqui := True;
   end
   else
   begin
-    if passouAqui = true then
-      edtQuantidade.Text := copy(edtQuantidade.Text, 0, 1);
+    if passouAqui = True then
+    begin
+      edtDesconto.Text := copy(edtDesconto.Text, 0, 1);
+      passouAqui := false;
+    end;
 
-    edtSubTotal.Text := FloatToStr(strtoFloat(edtQuantidade.Text) *
-      strtoFloat(dm.cdsProdutospreco.Text));
+    calculaDescontoItem;
+    calculaTotalDoItem;
+  end;
+end;
+
+procedure TfrmAdicionarItem.edtAcrescimoChange(Sender: TObject);
+begin
+  passouAqui := false;
+  if edtAcrescimo.Text = '' then
+  begin
+    edtAcrescimo.Text := '0';
+    passouAqui := True;
+  end
+  else
+  begin
+    if passouAqui = True then
+    begin
+      edtAcrescimo.Text := copy(edtAcrescimo.Text, 0, 1);
+      passouAqui := false;
+    end;
+
+    calculaAcrescimoItem;
+    calculaTotalDoItem;
+  end;
+end;
+
+procedure TfrmAdicionarItem.edtQuantidadeChange(Sender: TObject);
+begin
+  passouAqui := false;
+  if edtQuantidade.Text = '' then
+  begin
+    edtQuantidade.Text := '1';
+    passouAqui := True;
+  end
+  else
+  begin
+    if passouAqui = True then
+    begin
+      edtQuantidade.Text := copy(edtQuantidade.Text, 0, 1);
+      passouAqui := false;
+    end;
+
+    calculaSubTotalDoItem;
+    calculaTotalDoItem;
   end;
 end;
 
@@ -145,7 +196,7 @@ begin
       dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' +
         frmCadastrarVenda.idDoItem;
       try
-        abrirDados('item', true);
+        abrirDados('item', True);
       except
         on E: Exception do
       end;
@@ -158,7 +209,7 @@ procedure TfrmAdicionarItem.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  abrirDados('item', true);
+  abrirDados('item', True);
   dm.cdsItens.Edit;
   dm.cdsItens.Append;
   dm.cdsItensid.AsInteger := frmCadastrarVenda.numeroDeItens;
@@ -168,7 +219,7 @@ begin
   abrirDados('item', false);
   dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
     dm.cdsVendasid.Text + ' ORDER BY id ASC;';
-  abrirDados('item', true);
+  abrirDados('item', True);
   dm.cdsItens.Last;
   dm.cdsItens.Edit;
   dm.cdsItensid.Text := dm.cdsItensid.Text;

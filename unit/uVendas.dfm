@@ -46,7 +46,7 @@ object frmVendas: TfrmVendas
   object edtBuscar: TEdit
     Left = 16
     Top = 31
-    Width = 337
+    Width = 561
     Height = 23
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -78,6 +78,7 @@ object frmVendas: TfrmVendas
     Width = 75
     Height = 25
     Caption = 'Imprimir'
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

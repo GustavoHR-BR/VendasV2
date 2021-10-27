@@ -28,9 +28,9 @@ type
     EdtRua: TEdit;
     DBGridVendas: TDBGrid;
     edtSubtTotal: TEdit;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
+    edtDesconto: TEdit;
+    edtAcrescimo: TEdit;
+    edtFrete: TEdit;
     btnFinalizar: TButton;
     btnCancelar: TButton;
     btnAdicionar: TButton;
@@ -105,6 +105,7 @@ end;
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
 begin
   Tag := 1;
+
 end;
 
 procedure TfrmCadastrarVenda.dbgridCellClick(Column: TColumn);
@@ -144,13 +145,13 @@ var
   idVenda: string;
   I: Integer;
 begin
-  if Tag <> 1 then
+  if Tag <> 1 then // USER ESTÁ CANCELANDO A VENDA
   begin
-    if Application.MessageBox('Deseja realmente sair?', 'Atenção',
-      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    if Application.MessageBox('Deseja realmente sair? A venda será cancelada!',
+      'Atenção', MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
 
-      // DELETAR TODOS OS ITENS DA VENDA
+      // DELETA TODOS OS ITENS DA VENDA
       for I := 1 to numeroDeItens do
       begin
         abrirDados('item', false);
@@ -164,6 +165,7 @@ begin
         idDoItem := inttostr(strtoint(idDoItem) - 1);
       end;
 
+      // DELETA A VENDA
       idVenda := dm.cdsVendasid.Text;
       abrirDados('venda', false);
       dm.cdsVendas.CommandText := 'DELETE FROM venda WHERE id = ' + idVenda;

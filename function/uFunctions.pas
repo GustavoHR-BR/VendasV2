@@ -22,6 +22,17 @@ procedure abreBuscaBairro;
 procedure abreBuscaRua;
 procedure buscarEnderecoCliente;
 procedure abrirDados(tabela: string; estado: Boolean);
+procedure calculaSubTotalDoItem;
+procedure calculaAcrescimoItem;
+procedure calculaDescontoItem;
+procedure calculaTotalDoItem;
+
+var
+  subTotalDaVenda, totalDaVenda, frete, totalDoItem, valDescontoItem,
+    valAcrescimoItem, valUnitario, subTotalDoItem, desconto, acrescimo,
+    descontoDoItem, acrescimoDoItem: Double;
+
+  quantidadeDeProdutos: Integer;
 
 implementation
 
@@ -454,6 +465,37 @@ begin
     end;
   end;
 
+end;
+
+procedure calculaSubTotalDoItem;
+begin
+  quantidadeDeProdutos := StrToInt(frmAdicionarItem.edtQuantidade.Text);
+  valUnitario := StrToFloat(frmAdicionarItem.edtValUnitario.Text);
+  frmAdicionarItem.edtSubTotal.Text :=
+    FloatToStr(quantidadeDeProdutos * valUnitario);
+end;
+
+procedure calculaAcrescimoItem;
+begin
+  acrescimoDoItem := StrToFloat(frmAdicionarItem.edtAcrescimo.Text) / 100;
+  frmAdicionarItem.edtValAcrescimo.Text :=
+    FloatToStr(acrescimoDoItem * StrToFloat(frmAdicionarItem.edtSubTotal.Text));
+end;
+
+procedure calculaDescontoItem;
+begin
+  descontoDoItem := StrToFloat(frmAdicionarItem.edtDesconto.Text) / 100;
+  frmAdicionarItem.edtValDesconto.Text :=
+    FloatToStr(descontoDoItem * StrToFloat(frmAdicionarItem.edtSubTotal.Text));
+end;
+
+procedure calculaTotalDoItem;
+begin
+  valAcrescimoItem := StrToFloat(frmAdicionarItem.edtValAcrescimo.Text);
+  valDescontoItem := StrToFloat(frmAdicionarItem.edtValDesconto.Text);
+  subTotalDoItem := StrToFloat(frmAdicionarItem.edtSubTotal.Text);
+  frmAdicionarItem.edtValTotal.Text :=
+    FloatToStr(valAcrescimoItem + subTotalDoItem - valDescontoItem);
 end;
 
 end.

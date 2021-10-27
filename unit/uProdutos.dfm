@@ -174,7 +174,7 @@ object frmProdutos: TfrmProdutos
   object edtBuscar: TEdit
     Left = 97
     Top = 21
-    Width = 273
+    Width = 384
     Height = 23
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -186,8 +186,8 @@ object frmProdutos: TfrmProdutos
     OnChange = edtBuscarChange
   end
   object btnFiltrar: TButton
-    Left = 384
-    Top = 19
+    Left = 487
+    Top = 20
     Width = 75
     Height = 25
     Caption = 'Filtrar'

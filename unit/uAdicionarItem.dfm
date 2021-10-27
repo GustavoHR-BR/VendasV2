@@ -212,6 +212,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Alignment = taRightJustify
     TabOrder = 5
     Text = '0'
+    OnChange = edtAcrescimoChange
   end
   object edtQuantidade: TEdit
     Left = 24
@@ -251,6 +252,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Alignment = taRightJustify
     TabOrder = 7
     Text = '0'
+    OnChange = edtDescontoChange
   end
   object edtBuscar: TEdit
     Left = 24

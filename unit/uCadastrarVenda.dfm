@@ -273,7 +273,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
-    MaxLength = 14
     ParentFont = False
     TabOrder = 1
   end
@@ -290,7 +289,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
-    MaxLength = 15
     ParentFont = False
     TabOrder = 4
   end
@@ -323,7 +321,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
-    MaxLength = 10
     ParentFont = False
     TabOrder = 2
   end

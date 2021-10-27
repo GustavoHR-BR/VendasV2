@@ -14,6 +14,7 @@ object frmAdicionarItem: TfrmAdicionarItem
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -319,7 +320,7 @@ object frmAdicionarItem: TfrmAdicionarItem
         Visible = True
       end>
   end
-  object btnCancelar: TButton
+  object btnCancelarItem: TButton
     Left = 400
     Top = 201
     Width = 75
@@ -330,6 +331,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     ShowHint = True
     TabOrder = 2
     Visible = False
+    OnClick = btnCancelarItemClick
   end
   object btnFinalizar: TButton
     Left = 314
@@ -350,7 +352,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     TabOrder = 11
     OnClick = btnFinalizarClick
   end
-  object Button1: TButton
+  object btnCancelar: TButton
     Left = 400
     Top = 287
     Width = 75

@@ -77,6 +77,10 @@ begin
     frmAdicionarItem.ShowModal;
   finally
     FreeAndNil(frmAdicionarItem);
+    abrirDados('item', false);
+    dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
+      dm.cdsVendasid.Text;
+    abrirDados('item', True);
   end;
 end;
 

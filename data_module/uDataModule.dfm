@@ -306,7 +306,6 @@ object dm: Tdm
     Top = 376
   end
   object cdsVendas: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVendas'
@@ -342,7 +341,6 @@ object dm: Tdm
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from venda order by id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -362,48 +360,8 @@ object dm: Tdm
     Left = 320
     Top = 440
   end
-  object cdsItens: TClientDataSet
-    Active = True
-    Aggregates = <>
-    IndexFieldNames = 'fk_venda'
-    MasterFields = 'id'
-    MasterSource = dSourceVendas
-    PacketRecords = 0
-    Params = <>
-    ProviderName = 'dpsItens'
-    Left = 224
-    Top = 512
-    object cdsItensid: TIntegerField
-      FieldName = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsItensfk_venda: TIntegerField
-      FieldName = 'fk_venda'
-    end
-    object cdsItensfk_produto: TIntegerField
-      FieldName = 'fk_produto'
-    end
-    object cdsItensnome: TStringField
-      FieldName = 'nome'
-      Size = 60
-    end
-    object cdsItenspreco: TFMTBCDField
-      FieldName = 'preco'
-      Precision = 12
-      Size = 2
-    end
-    object cdsItensdescricao: TStringField
-      FieldName = 'descricao'
-      Size = 100
-    end
-    object cdsItensquantidade: TIntegerField
-      FieldName = 'quantidade'
-    end
-  end
   object dSetItens: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'select * from item order by id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -462,5 +420,12 @@ object dm: Tdm
     object cdsProdutosquantidade_estoque: TIntegerField
       FieldName = 'quantidade_estoque'
     end
+  end
+  object cdsItens: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dpsItens'
+    Left = 224
+    Top = 512
   end
 end

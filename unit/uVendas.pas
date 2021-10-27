@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
   RpRave, RpBase, RpSystem, RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF,
-  Winapi.ShellAPI, Data.FMTBcd, Data.DB, Data.SqlExpr;
+  Winapi.ShellAPI, Data.FMTBcd, Data.DB, Data.SqlExpr, Datasnap.DBClient,
+  Datasnap.Provider;
 
 type
   TfrmVendas = class(TForm)
@@ -20,6 +21,26 @@ type
     Label1: TLabel;
     DBGridVendas: TDBGrid;
     DBGridItens: TDBGrid;
+    dSetVendas: TSQLDataSet;
+    dspVendas: TDataSetProvider;
+    cdsVendas: TClientDataSet;
+    cdsVendasid: TIntegerField;
+    cdsVendasfk_cliente: TIntegerField;
+    cdsVendastotal: TFMTBCDField;
+    cdsVendasdata: TStringField;
+    dSourceVendas: TDataSource;
+    dSourceItens: TDataSource;
+    cdsItens: TClientDataSet;
+    cdsItensid: TIntegerField;
+    cdsItensfk_venda: TIntegerField;
+    cdsItensfk_produto: TIntegerField;
+    cdsItensnome: TStringField;
+    cdsItenspreco: TFMTBCDField;
+    cdsItensdescricao: TStringField;
+    cdsItensquantidade: TIntegerField;
+    dspItens: TDataSetProvider;
+    dSetItens: TSQLDataSet;
+    cdsVendascliente: TStringField;
     procedure edtBuscarChange(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure cbOrdenarPorSelect(Sender: TObject);
@@ -71,8 +92,10 @@ procedure TfrmVendas.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  abrirDados('venda', true);
-  abrirDados('item', true);
+  cdsVendas.Open;
+  dSetVendas.Open;
+  cdsItens.Open;
+  dSetItens.Open;
 end;
 
 end.

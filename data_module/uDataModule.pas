@@ -56,7 +56,6 @@ type
     dSetVendas: TSQLDataSet;
     dspVendas: TDataSetProvider;
     dSourceVendas: TDataSource;
-    cdsItens: TClientDataSet;
     dSetItens: TSQLDataSet;
     dpsItens: TDataSetProvider;
     dSourceItens: TDataSource;
@@ -64,13 +63,6 @@ type
     cdsVendasfk_cliente: TIntegerField;
     cdsVendastotal: TFMTBCDField;
     cdsVendasdata: TStringField;
-    cdsItensid: TIntegerField;
-    cdsItensfk_venda: TIntegerField;
-    cdsItensfk_produto: TIntegerField;
-    cdsItensnome: TStringField;
-    cdsItenspreco: TFMTBCDField;
-    cdsItensdescricao: TStringField;
-    cdsItensquantidade: TIntegerField;
     cdsClientesRua: TStringField;
     queryEnderecoCliente: TSQLQuery;
     cdsProdutos: TClientDataSet;
@@ -80,6 +72,7 @@ type
     cdsProdutosdescricao: TStringField;
     cdsProdutosquantidade_estoque: TIntegerField;
     cdsVendasCliente: TStringField;
+    cdsItens: TClientDataSet;
   private
     { Private declarations }
   public

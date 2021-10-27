@@ -128,7 +128,7 @@ object frmVendas: TfrmVendas
     Top = 67
     Width = 849
     Height = 223
-    DataSource = dm.dSourceVendas
+    DataSource = dSourceVendas
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -157,7 +157,7 @@ object frmVendas: TfrmVendas
       end
       item
         Expanded = False
-        FieldName = 'Cliente'
+        FieldName = 'cliente'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11
@@ -196,7 +196,7 @@ object frmVendas: TfrmVendas
     Top = 296
     Width = 849
     Height = 128
-    DataSource = dm.dSourceItens
+    DataSource = dSourceItens
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -271,5 +271,125 @@ object frmVendas: TfrmVendas
         Width = 90
         Visible = True
       end>
+  end
+  object dSetVendas: TSQLDataSet
+    SchemaName = 'gustavo_reblin'
+    CommandText = 'select * from venda order by id;'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dm.SQLConn
+    Left = 208
+    Top = 168
+  end
+  object dspVendas: TDataSetProvider
+    DataSet = dSetVendas
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 304
+    Top = 168
+  end
+  object cdsVendas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspVendas'
+    Left = 400
+    Top = 168
+    object cdsVendasid: TIntegerField
+      FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsVendasfk_cliente: TIntegerField
+      FieldName = 'fk_cliente'
+    end
+    object cdsVendastotal: TFMTBCDField
+      FieldName = 'total'
+      Precision = 12
+      Size = 2
+    end
+    object cdsVendasdata: TStringField
+      FieldName = 'data'
+      Size = 10
+    end
+    object cdsVendascliente: TStringField
+      FieldKind = fkLookup
+      FieldName = 'cliente'
+      LookupDataSet = dm.cdsClientes
+      LookupKeyFields = 'id'
+      LookupResultField = 'nome'
+      KeyFields = 'fk_cliente'
+      Size = 100
+      Lookup = True
+    end
+  end
+  object dSourceVendas: TDataSource
+    DataSet = cdsVendas
+    Left = 496
+    Top = 168
+  end
+  object dSourceItens: TDataSource
+    DataSet = cdsItens
+    Left = 496
+    Top = 240
+  end
+  object cdsItens: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'fk_venda'
+    MasterFields = 'id'
+    MasterSource = dSourceVendas
+    PacketRecords = 0
+    Params = <>
+    ProviderName = 'dspItens'
+    Left = 400
+    Top = 240
+    object cdsItensid: TIntegerField
+      FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsItensfk_venda: TIntegerField
+      FieldName = 'fk_venda'
+    end
+    object cdsItensfk_produto: TIntegerField
+      FieldName = 'fk_produto'
+    end
+    object cdsItensnome: TStringField
+      FieldName = 'nome'
+      Size = 60
+    end
+    object cdsItenspreco: TFMTBCDField
+      FieldName = 'preco'
+      Precision = 12
+      Size = 2
+    end
+    object cdsItensdescricao: TStringField
+      FieldName = 'descricao'
+      Size = 100
+    end
+    object cdsItensquantidade: TIntegerField
+      FieldName = 'quantidade'
+    end
+  end
+  object dspItens: TDataSetProvider
+    DataSet = dSetItens
+    Options = [poAllowCommandText, poUseQuoteChar]
+    Left = 304
+    Top = 240
+  end
+  object dSetItens: TSQLDataSet
+    SchemaName = 'gustavo_reblin'
+    CommandText = 'select * from item order by id;'
+    DbxCommandType = 'Dbx.SQL'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'fk_venda'
+        ParamType = ptInput
+        Value = 1
+      end>
+    SQLConnection = dm.SQLConn
+    Left = 208
+    Top = 240
   end
 end

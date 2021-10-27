@@ -57,6 +57,7 @@ type
     { Private declarations }
   public
     numeroDeItens: Integer;
+    idDoItem: string;
   end;
 
 var
@@ -140,16 +141,32 @@ end;
 procedure TfrmCadastrarVenda.FormClose(Sender: TObject;
   var Action: TCloseAction);
 var
-  id: string;
+  idVenda: string;
+  I: Integer;
 begin
   if Tag <> 1 then
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
-      id := dm.cdsVendasid.Text;
+
+      // DELETAR TODOS OS ITENS DA VENDA
+      for I := 1 to numeroDeItens do
+      begin
+        abrirDados('item', false);
+        dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' + idDoItem;
+        try
+          abrirDados('item', True);
+        except
+          on E: Exception do
+        end;
+        numeroDeItens := numeroDeItens - 1;
+        idDoItem := inttostr(strtoint(idDoItem) - 1);
+      end;
+
+      idVenda := dm.cdsVendasid.Text;
       abrirDados('venda', false);
-      dm.cdsVendas.CommandText := 'DELETE FROM venda WHERE id = ' + id;
+      dm.cdsVendas.CommandText := 'DELETE FROM venda WHERE id = ' + idVenda;
       try
         abrirDados('venda', True);
       except

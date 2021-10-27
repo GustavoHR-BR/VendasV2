@@ -44,9 +44,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     passouAqui: Boolean;
-    idDoItem: string;
   public
-    { Public declarations }
+
   end;
 
 var
@@ -87,6 +86,7 @@ begin
   dm.cdsItens.Post;
   dm.cdsItens.ApplyUpdates(0);
   frmAdicionarItem.Close;
+  frmCadastrarVenda.numeroDeItens := frmCadastrarVenda.numeroDeItens + 1;
   Tag := 1;
 end;
 
@@ -142,7 +142,8 @@ begin
       'Atenção', MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
       abrirDados('item', false);
-      dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' + idDoItem;
+      dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' +
+        frmCadastrarVenda.idDoItem;
       try
         abrirDados('item', true);
       except
@@ -171,7 +172,7 @@ begin
   dm.cdsItens.Last;
   dm.cdsItens.Edit;
   dm.cdsItensid.Text := dm.cdsItensid.Text;
-  idDoItem := dm.cdsItensid.Text;
+  frmCadastrarVenda.idDoItem := dm.cdsItensid.Text;
 end;
 
 end.

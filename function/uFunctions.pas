@@ -52,10 +52,6 @@ begin
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
     + ' ASC;';
   abrirDados('cliente', true);
-
-  // abrirDados('rua', false);
-  // dm.cdsRuas.CommandText := 'SELECT * FROM rua ORDER BY id ASC;';
-  // abrirDados('rua', true);
 end;
 
 procedure threadBuscarCliente(busca: string);
@@ -174,16 +170,18 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      abrirDados('venda', false);
-      dm.cdsVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c ' +
-        ' ON v.fk_cliente = c.id WHERE c.nome LIKE "' +
+      frmVendas.cdsVendas.Close;
+      frmVendas.dSetVendas.Close;
+      frmVendas.cdsVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c '
+        + ' ON v.fk_cliente = c.id WHERE c.nome LIKE "' +
         LowerCase(Trim(frmVendas.edtBuscar.Text)) + '%" ORDER BY c.id ASC;';
-      abrirDados('venda', true);
+      frmVendas.cdsVendas.Open;
+      frmVendas.dSetVendas.Open;
 
       TThread.Synchronize(nil,
         procedure
         begin
-          frmVendas.DBGridVendas.DataSource := dm.dSourceVendas;
+          frmVendas.DBGridVendas.DataSource := frmVendas.dSourceVendas;
         end);
     end);
   t.FreeOnTerminate := true;

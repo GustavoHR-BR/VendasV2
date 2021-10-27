@@ -23,6 +23,7 @@ type
     procedure btnSairClick(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -76,6 +77,13 @@ procedure TfrmProdutos.edtBuscarChange(Sender: TObject);
 begin
   threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
+end;
+
+procedure TfrmProdutos.FormShow(Sender: TObject);
+begin
+  dm.SQLConn.Close;
+  dm.SQLConn.Open;
+  threadBuscarProduto('');
 end;
 
 end.

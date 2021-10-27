@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, RpRave, RpBase, RpSystem,
-  RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF, Winapi.ShellAPI;
+  RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF, Winapi.ShellAPI, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TfrmPrincipal = class(TForm)
@@ -22,6 +23,8 @@ type
     procedure Produto1Click(Sender: TObject);
     procedure Nova1Click(Sender: TObject);
     procedure Vendas1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -48,6 +51,24 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  abrirDados('cliente', false);
+  abrirDados('produto', false);
+  abrirDados('rua', false);
+  abrirDados('bairro', false);
+  abrirDados('cidade', false);
+  abrirDados('estado', false);
+  abrirDados('item', false);
+  abrirDados('venda', false);
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+begin
+  dm.cdsVendas.Open;
+  dm.cdsItens.Open;
+end;
+
 procedure TfrmPrincipal.Nova1Click(Sender: TObject);
 begin
   Application.CreateForm(Tfrmvendas, frmVendas);
@@ -72,8 +93,9 @@ procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
+
   frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
-  frmVendaReport.rvsVENDAS.DoNativeOutput := False;
+  frmVendaReport.rvsVENDAS.DoNativeOutput := false;
   frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) + 'RELATORIO  VENDAS.pdf';
   frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;

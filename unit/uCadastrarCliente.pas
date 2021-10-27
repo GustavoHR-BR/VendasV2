@@ -132,6 +132,15 @@ begin
         dm.cdsClientes.Post;
         dm.cdsClientes.ApplyUpdates(0);
         ShowMessage('Cliente editado com sucesso! ');
+        if frmCadastrarVenda.Tag = 2 then
+        begin
+          frmCadastrarVenda.dbEdtNome.Text := dm.cdsClientesnome.Text;
+          frmCadastrarVenda.dbEdtCpf.Text := dm.cdsClientescpf.Text;
+          frmCadastrarVenda.dbEdtTelefone.Text := dm.cdsClientestelefone.Text;
+          frmCadastrarVenda.dbEdtEmail.Text := dm.cdsClientesemail.Text;
+          frmCadastrarVenda.dbEdtDtNascimento.Text :=
+            dm.cdsClientesdata_nascimento.Text;
+        end;
         Tag := 2;
         frmCadastrarCliente.Close;
       except
@@ -149,6 +158,15 @@ begin
           dm.cdsClientes.Post;
           dm.cdsClientes.ApplyUpdates(0);
           ShowMessage('Cliente cadastrado com sucesso! ');
+          if frmCadastrarVenda.Tag = 2 then
+          begin
+            frmCadastrarVenda.dbEdtNome.Text := dm.cdsClientesnome.Text;
+            frmCadastrarVenda.dbEdtCpf.Text := dm.cdsClientescpf.Text;
+            frmCadastrarVenda.dbEdtTelefone.Text := dm.cdsClientestelefone.Text;
+            frmCadastrarVenda.dbEdtEmail.Text := dm.cdsClientesemail.Text;
+            frmCadastrarVenda.dbEdtDtNascimento.Text :=
+              dm.cdsClientesdata_nascimento.Text;
+          end;
           Tag := 1;
           frmCadastrarCliente.Close;
         except
@@ -214,7 +232,7 @@ end;
 
 procedure TfrmCadastrarCliente.cboxEstadosSelect(Sender: TObject);
 begin
-  edtCidade.Enabled := true;
+  edtCidade.Enabled := True;
   if edtCidade.Text <> '' then
     edtCidade.Clear;
   fechaBuscaCidade;
@@ -230,7 +248,7 @@ begin
   abrirDados('estado', false);
   dm.dSetEstados.CommandText := 'SELECT * from estado WHERE uf = "' +
     cboxEstados.Text + '"';
-  abrirDados('estado', true);
+  abrirDados('estado', True);
 
   edtCidade.SetFocus;
 end;
@@ -304,8 +322,12 @@ begin
   end
   else
   begin
-    frmClientes.edtBuscar.Text := '';
-    verificarOrdenacaoCliente;
+    if frmCadastrarVenda.Tag <> 2 then
+    begin
+      frmClientes.edtBuscar.Text := '';
+      threadBuscarCliente('');
+      frmClientes.cbOrdenarPor.ItemIndex := 1;
+    end;
   end;
 end;
 
@@ -315,7 +337,7 @@ begin
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
-    abrirDados('rua', true);
+    abrirDados('rua', True);
     dm.cdsClientes.Edit;
     dm.cdsClientes.ClearFields;
   end
@@ -323,7 +345,7 @@ begin
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
-    abrirDados('rua', true);
+    abrirDados('rua', True);
     dm.cdsClientes.Edit;
     btnCadastrar.Caption := 'Editar';
     buscarEnderecoCliente;
@@ -338,7 +360,7 @@ begin
   if edtCidade.Text <> '' then
   begin
     fechaBuscaCidade;
-    edtBairro.Enabled := true;
+    edtBairro.Enabled := True;
     edtBairro.SetFocus;
     edtBairro.Clear;
   end
@@ -353,7 +375,7 @@ begin
   edtBairro.OnChange := edtBairroChange;
   if edtBairro.Text <> '' then
   begin
-    edtRua.Enabled := true;
+    edtRua.Enabled := True;
     fechaBuscaBairro;
     edtRua.SetFocus;
   end

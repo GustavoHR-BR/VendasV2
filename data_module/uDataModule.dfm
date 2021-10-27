@@ -45,6 +45,7 @@ object dm: Tdm
     Top = 16
   end
   object cdsClientes: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspClientes'
@@ -180,7 +181,6 @@ object dm: Tdm
     Top = 160
   end
   object cdsBairros: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspBairros'
@@ -221,7 +221,6 @@ object dm: Tdm
     Top = 232
   end
   object cdsCidades: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCidades'
@@ -262,7 +261,6 @@ object dm: Tdm
     Top = 304
   end
   object cdsEstados: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstados'
@@ -426,6 +424,7 @@ object dm: Tdm
     Top = 512
     object cdsItensid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsItensfk_venda: TIntegerField

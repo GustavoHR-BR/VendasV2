@@ -15,6 +15,8 @@ object frmPrincipal: TfrmPrincipal
   Menu = menu
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 15
   object menu: TMainMenu

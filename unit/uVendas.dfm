@@ -145,6 +145,7 @@ object frmVendas: TfrmVendas
     TitleFont.Style = []
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'id'
         Title.Caption = 'C'#243'digo'
@@ -159,6 +160,7 @@ object frmVendas: TfrmVendas
       item
         Expanded = False
         FieldName = 'cliente'
+        Title.Caption = 'Cliente'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11
@@ -168,6 +170,7 @@ object frmVendas: TfrmVendas
         Visible = True
       end
       item
+        Alignment = taLeftJustify
         Expanded = False
         FieldName = 'total'
         Title.Caption = 'Total'
@@ -213,6 +216,7 @@ object frmVendas: TfrmVendas
     TitleFont.Style = []
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'id'
         Title.Caption = 'C'#243'digo'
@@ -237,6 +241,7 @@ object frmVendas: TfrmVendas
         Visible = True
       end
       item
+        Alignment = taLeftJustify
         Expanded = False
         FieldName = 'preco'
         Title.Caption = 'Pre'#231'o'
@@ -261,9 +266,10 @@ object frmVendas: TfrmVendas
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'quantidade'
-        Title.Caption = 'Em estoque'
+        Title.Caption = 'Quantidade'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11

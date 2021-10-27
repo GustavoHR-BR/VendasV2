@@ -117,6 +117,9 @@ begin
   dm.cdsVendas.Post;
   dm.cdsVendas.ApplyUpdates(0);
   frmCadastrarVenda.Close;
+  abrirDados('cliente', false);
+  dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
+  abrirDados('cliente', True);
 end;
 
 procedure TfrmCadastrarVenda.dbgridCellClick(Column: TColumn);
@@ -245,6 +248,8 @@ begin
       btnCancelarClick(Self);
     end;
   end;
+  ShowMessage('Venda realizada com sucesso! ');
+  threadBuscarVenda;
 end;
 
 procedure TfrmCadastrarVenda.FormShow(Sender: TObject);
@@ -277,7 +282,7 @@ end;
 
 procedure TfrmCadastrarVenda.btnCadastrarClienteClick(Sender: TObject);
 begin
-  Tag := 1;
+  Tag := 2;
   frmClientes.btnAdicionarClick(Self);
 end;
 

@@ -28,6 +28,6 @@ implementation
 {$R *.dfm}
 
 uses uCadastrarCliente, uCadastrarProduto, uClientes, uDataModule, uFiltroCli,
-  uFunctions, uPrincipal, uProdutos, uVendas;
+  uFunctions, uPrincipal, uProdutos, uVendas, uAdicionarItem, uCadastrarVenda;
 
 end.

@@ -24,6 +24,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure cbOrdenarPorSelect(Sender: TObject);
+    procedure btnFiltrarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,6 +60,16 @@ begin
     frmCadastrarCliente.ShowModal;
   finally
     FreeAndNil(frmCadastrarCliente);
+  end;
+end;
+
+procedure TfrmClientes.btnFiltrarClick(Sender: TObject);
+begin
+  Application.CreateForm(TfrmFiltrosCli, frmFiltrosCli);
+  try
+    frmFiltrosCli.ShowModal;
+  finally
+    FreeAndNil(frmFiltrosCli);
   end;
 end;
 

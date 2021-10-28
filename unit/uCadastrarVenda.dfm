@@ -412,6 +412,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = DBGridVendasCellClick
     Columns = <
       item
         Expanded = False

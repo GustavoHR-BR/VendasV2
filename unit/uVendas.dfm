@@ -48,12 +48,15 @@ object frmVendas: TfrmVendas
     Top = 31
     Width = 561
     Height = 23
+    Hint = 'Digite algum cliente para buscar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 0
     OnChange = edtBuscarChange
   end
@@ -62,6 +65,7 @@ object frmVendas: TfrmVendas
     Top = 438
     Width = 75
     Height = 25
+    Hint = 'Criar nova venda'
     Caption = 'Nova'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -69,6 +73,8 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     OnClick = btnNovaClick
   end
@@ -77,6 +83,7 @@ object frmVendas: TfrmVendas
     Top = 438
     Width = 75
     Height = 25
+    Hint = 'Imprimir venda selecionada'
     Caption = 'Imprimir'
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
@@ -85,6 +92,8 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
   end
   object btnSair: TButton
@@ -92,6 +101,7 @@ object frmVendas: TfrmVendas
     Top = 438
     Width = 75
     Height = 25
+    Hint = 'Fechar as vendas'
     Caption = 'Sair'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -99,6 +109,8 @@ object frmVendas: TfrmVendas
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 3
     OnClick = btnSairClick
   end

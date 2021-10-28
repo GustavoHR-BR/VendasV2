@@ -59,6 +59,7 @@ type
     procedure edtAcrescimoChange(Sender: TObject);
     procedure edtFreteChange(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
+    procedure DBGridVendasCellClick(Column: TColumn);
   private
     passouAqui: Boolean;
   public
@@ -109,8 +110,6 @@ begin
 end;
 
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
-var
-  I: Integer;
 begin
   Tag := 1;
   dm.cdsVendas.Edit;
@@ -137,6 +136,11 @@ begin
     btnAdicionar.Enabled := True;
   btnEditarCliente.Enabled := True;
   btnCadastrarCliente.Enabled := false;
+end;
+
+procedure TfrmCadastrarVenda.DBGridVendasCellClick(Column: TColumn);
+begin
+  btnExcluir.Enabled := True;
 end;
 
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);
@@ -219,7 +223,7 @@ procedure TfrmCadastrarVenda.FormClose(Sender: TObject;
   var Action: TCloseAction);
 var
   idVenda: string;
-  I, J, K, qtdDaqueleItem, idProduto, novoEstoque, estoqueAtual,
+  I, J, qtdDaqueleItem, idProduto, novoEstoque, estoqueAtual,
     idDoItemExcluido: Integer;
 begin
   if Tag <> 1 then // USER ESTÁ CANCELANDO A VENDA
@@ -229,7 +233,6 @@ begin
     begin
 
       // DELETA TODOS OS ITENS DA VENDA
-
       abrirDados('item', false);
       dm.cdsItens.CommandText := 'SELECT * FROM item';
       abrirDados('item', True);
@@ -260,17 +263,6 @@ begin
           dm.cdsItens.Prior;
         end;
         idPrimeiroItem := dm.cdsItensid.AsInteger;
-
-//        for K := 1 to numeroDeItens do
-        // begin
-        // dm.cdsItens.Edit;
-        // dm.cdsItensid.AsInteger := idPrimeiroItem;
-        // idPrimeiroItem := idPrimeiroItem + 1;
-        // dm.cdsItens.Post;
-        // dm.cdsItens.ApplyUpdates(0);
-        // dm.cdsItens.Next;
-        // ///
-        // end;
 
         abrirDados('produto', false);
         dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
@@ -357,7 +349,6 @@ procedure TfrmCadastrarVenda.btnExcluirClick(Sender: TObject);
 var
   I, J, idDoItemExcluido, qtdDoItemExcluido, novoEstoque, idProduto,
     qtdAtualNoEstoque: Integer;
-  vetorIds: array of Integer;
 begin
   if Application.MessageBox('Deseja realmente excluir?', 'Atenção',
     MB_YESNO + MB_ICONQUESTION) = mrYes then

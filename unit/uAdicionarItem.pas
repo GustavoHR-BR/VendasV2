@@ -105,7 +105,6 @@ begin
     frmCadastrarVenda.edtDesconto.Enabled := true;
     frmCadastrarVenda.edtAcrescimo.Enabled := true;
     frmCadastrarVenda.edtFrete.Enabled := true;
-    frmCadastrarVenda.btnExcluir.Enabled := true;
     calculaSubTotalDaVenda;
     calculaTotalDaVenda;
 

@@ -259,12 +259,15 @@ object frmAdicionarItem: TfrmAdicionarItem
     Top = 45
     Width = 451
     Height = 23
+    Hint = 'Digite para buscar algum produto'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 0
     OnChange = edtBuscarChange
     OnClick = edtBuscarClick

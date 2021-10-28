@@ -4,7 +4,7 @@ object frmClientes: TfrmClientes
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Clientes'
-  ClientHeight = 508
+  ClientHeight = 493
   ClientWidth = 901
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -45,7 +45,7 @@ object frmClientes: TfrmClientes
   end
   object dbgrid: TDBGrid
     Left = 0
-    Top = 56
+    Top = 55
     Width = 905
     Height = 377
     DataSource = dm.dSourceClientes
@@ -151,9 +151,10 @@ object frmClientes: TfrmClientes
   end
   object btnAdicionar: TButton
     Left = 48
-    Top = 458
+    Top = 450
     Width = 75
     Height = 25
+    Hint = 'Cadastrar novo cliente'
     Caption = 'Adicionar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -161,14 +162,17 @@ object frmClientes: TfrmClientes
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 4
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
     Left = 136
-    Top = 458
+    Top = 450
     Width = 75
     Height = 25
+    Hint = 'Editar cliente selecionado'
     Caption = 'Editar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -176,14 +180,17 @@ object frmClientes: TfrmClientes
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 5
     OnClick = btnEditarClick
   end
   object btnSair: TButton
     Left = 771
-    Top = 458
+    Top = 450
     Width = 75
     Height = 25
+    Hint = 'Sair dos clientes'
     Caption = 'Sair'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -191,6 +198,8 @@ object frmClientes: TfrmClientes
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 6
     OnClick = btnSairClick
   end
@@ -199,12 +208,15 @@ object frmClientes: TfrmClientes
     Top = 17
     Width = 425
     Height = 23
+    Hint = 'Digite algum cliente para buscar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     OnChange = edtBuscarChange
   end
@@ -213,15 +225,18 @@ object frmClientes: TfrmClientes
     Top = 16
     Width = 75
     Height = 25
+    Hint = 'Selecione os filtros para os clientes'
     Caption = 'Filtrar'
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
+    OnClick = btnFiltrarClick
   end
   object cbOrdenarPor: TComboBox
     Left = 701

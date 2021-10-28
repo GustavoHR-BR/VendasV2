@@ -54,6 +54,7 @@ object frmPrincipal: TfrmPrincipal
         01000000B6B6B6000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       Caption = '  Cadastrar   '
+      Hint = 'Menu de cadastros'
       object Cliente1: TMenuItem
         Bitmap.Data = {
           060C0000424D060C0000000000003600000028000000230000001C0000000100
@@ -154,6 +155,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFF000000}
         Caption = ' Cliente '
+        Hint = 'Novo cliente'
         OnClick = Cliente1Click
       end
       object Produto1: TMenuItem
@@ -255,6 +257,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
         Caption = ' Produto '
+        Hint = 'Novo produto'
         OnClick = Produto1Click
       end
     end
@@ -347,6 +350,7 @@ object frmPrincipal: TfrmPrincipal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       Caption = ' Pedidos de venda   '
+      Hint = 'Menu de vendas'
       object Nova1: TMenuItem
         Bitmap.Data = {
           EE0B0000424DEE0B0000000000003600000028000000210000001E0000000100
@@ -446,6 +450,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
         Caption = ' Nova Venda  '
+        Hint = 'Cadastrar nova venda'
         OnClick = Nova1Click
       end
     end
@@ -503,6 +508,7 @@ object frmPrincipal: TfrmPrincipal
         0000000000000000000000000000000000000000000000FFFFFFB1B1B10D0D0D
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       Caption = ' Relat'#243'rios    '
+      Hint = 'Gerar relat'#243'rios'
       object Vendas1: TMenuItem
         Bitmap.Data = {
           EE0B0000424DEE0B0000000000003600000028000000210000001E0000000100
@@ -602,6 +608,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
         Caption = ' Vendas  '
+        Hint = 'Relat'#243'rio das vendas'
         OnClick = Vendas1Click
       end
     end

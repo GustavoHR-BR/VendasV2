@@ -132,6 +132,7 @@ object frmProdutos: TfrmProdutos
     Top = 442
     Width = 75
     Height = 25
+    Hint = 'Cadastrar novo produto'
     Caption = 'Adicionar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -139,6 +140,8 @@ object frmProdutos: TfrmProdutos
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 1
     OnClick = btnAdicionarClick
   end
@@ -147,6 +150,7 @@ object frmProdutos: TfrmProdutos
     Top = 441
     Width = 75
     Height = 25
+    Hint = 'Editar produto selecionado'
     Caption = 'Editar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -154,6 +158,8 @@ object frmProdutos: TfrmProdutos
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 2
     OnClick = btnEditarClick
   end
@@ -162,6 +168,7 @@ object frmProdutos: TfrmProdutos
     Top = 441
     Width = 75
     Height = 25
+    Hint = 'Fechar produtos'
     Caption = 'Sair'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -169,6 +176,8 @@ object frmProdutos: TfrmProdutos
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 3
     OnClick = btnSairClick
   end
@@ -177,12 +186,15 @@ object frmProdutos: TfrmProdutos
     Top = 21
     Width = 384
     Height = 23
+    Hint = 'Digite algum produto para buscar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 4
     OnChange = edtBuscarChange
   end
@@ -191,6 +203,7 @@ object frmProdutos: TfrmProdutos
     Top = 20
     Width = 75
     Height = 25
+    Hint = 'Selecionar filtros dos produtos'
     Caption = 'Filtrar'
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
@@ -199,6 +212,8 @@ object frmProdutos: TfrmProdutos
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 5
   end
   object cbOrdenarPor: TComboBox

@@ -186,6 +186,9 @@ begin
             ShowMessage('Erro ao cadastrar o cliente! ' + E.ToString);
         end;
       end;
+      abrirDados('rua', false);
+      dm.cdsRuas.CommandText := 'SELECT * FROM rua';
+      abrirDados('rua', true);
     end;
   end;
 end;
@@ -244,7 +247,7 @@ end;
 
 procedure TfrmCadastrarCliente.cboxEstadosSelect(Sender: TObject);
 begin
-  edtCidade.Enabled := True;
+  edtCidade.Enabled := true;
   if edtCidade.Text <> '' then
     edtCidade.Clear;
   fechaBuscaCidade;
@@ -260,7 +263,7 @@ begin
   abrirDados('estado', false);
   dm.dSetEstados.CommandText := 'SELECT * from estado WHERE uf = "' +
     cboxEstados.Text + '"';
-  abrirDados('estado', True);
+  abrirDados('estado', true);
 
   edtCidade.SetFocus;
 end;
@@ -313,9 +316,16 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  abrirDados('rua', false);
+  dm.cdsRuas.CommandText := 'SELECT * FROM rua';
+  abrirDados('rua', true);
   abrirDados('cliente', false);
+
   if (Tag <> 1) AND (Tag <> 2) then // Tag <> 1 e 2 -> close pelo usuário;
   begin
+    abrirDados('rua', false);
+    dm.cdsRuas.CommandText := 'SELECT * FROM rua';
+    abrirDados('rua', true);
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
@@ -349,7 +359,7 @@ begin
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
-    abrirDados('rua', True);
+    abrirDados('rua', true);
     dm.cdsClientes.Edit;
     dm.cdsClientes.ClearFields;
   end
@@ -357,7 +367,7 @@ begin
   begin
     dm.SQLConn.Close;
     dm.SQLConn.Open;
-    abrirDados('rua', True);
+    abrirDados('rua', true);
     dm.cdsClientes.Edit;
     btnCadastrar.Caption := 'Editar';
     buscarEnderecoCliente;
@@ -372,7 +382,7 @@ begin
   if edtCidade.Text <> '' then
   begin
     fechaBuscaCidade;
-    edtBairro.Enabled := True;
+    edtBairro.Enabled := true;
     edtBairro.SetFocus;
     edtBairro.Clear;
   end
@@ -387,7 +397,7 @@ begin
   edtBairro.OnChange := edtBairroChange;
   if edtBairro.Text <> '' then
   begin
-    edtRua.Enabled := True;
+    edtRua.Enabled := true;
     fechaBuscaBairro;
     edtRua.SetFocus;
   end

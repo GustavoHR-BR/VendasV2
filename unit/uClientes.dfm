@@ -85,7 +85,7 @@ object frmClientes: TfrmClientes
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 125
+        Width = 115
         Visible = True
       end
       item
@@ -97,7 +97,7 @@ object frmClientes: TfrmClientes
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 140
+        Width = 150
         Visible = True
       end
       item

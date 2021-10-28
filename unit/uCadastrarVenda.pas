@@ -109,6 +109,8 @@ begin
 end;
 
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
+var
+  I: Integer;
 begin
   Tag := 1;
   dm.cdsVendas.Edit;
@@ -117,7 +119,9 @@ begin
   dm.cdsVendasdata.Text := DateToStr(now);
   dm.cdsVendas.Post;
   dm.cdsVendas.ApplyUpdates(0);
+
   frmCadastrarVenda.Close;
+
   abrirDados('cliente', false);
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
   abrirDados('cliente', True);
@@ -246,6 +250,9 @@ begin
       except
         on E: Exception do
       end;
+      abrirDados('cliente', false);
+      dm.cdsClientes.CommandText := 'select * from cliente';
+      abrirDados('cliente', True);
       btnCancelarClick(Self);
     end;
   end

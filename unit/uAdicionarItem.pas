@@ -78,25 +78,50 @@ begin
 end;
 
 procedure TfrmAdicionarItem.btnFinalizarClick(Sender: TObject);
+var
+  novoEstoque, idDoProduto: string;
 begin
-  dm.cdsItens.Edit;
-  dm.cdsItensfk_produto.Text := dm.cdsProdutosid.Text;
-  dm.cdsItensnome.Text := dm.cdsProdutosnome.Text;
-  dm.cdsItenspreco.Text := dm.cdsProdutospreco.Text;
-  dm.cdsItensdescricao.Text := dm.cdsProdutosdescricao.Text;
-  dm.cdsItensquantidade.Text := edtQuantidade.Text;
-  dm.cdsItens.Post;
-  dm.cdsItens.ApplyUpdates(0);
-  frmAdicionarItem.Close;
-  frmCadastrarVenda.numeroDeItens := frmCadastrarVenda.numeroDeItens + 1;
-  frmCadastrarVenda.btnFinalizar.Enabled := True;
-  frmCadastrarVenda.edtDesconto.Enabled := True;
-  frmCadastrarVenda.edtAcrescimo.Enabled := True;
-  frmCadastrarVenda.edtFrete.Enabled := True;
-  frmCadastrarVenda.btnExcluir.Enabled := True;
-  calculaSubTotalDaVenda;
-  calculaTotalDaVenda;
-  Tag := 1;
+  if StrToInt(edtQuantidade.Text) > dm.cdsProdutosquantidade_estoque.AsInteger
+  then
+  begin
+    ShowMessage('Quantidade inválida! Estoque insuficiente.');
+    edtQuantidade.Text := '1';
+    edtQuantidade.SetFocus;
+  end
+  else
+  begin
+
+    dm.cdsItens.Edit;
+    dm.cdsItensfk_produto.Text := dm.cdsProdutosid.Text;
+    dm.cdsItensnome.Text := dm.cdsProdutosnome.Text;
+    dm.cdsItenspreco.Text := dm.cdsProdutospreco.Text;
+    dm.cdsItensdescricao.Text := dm.cdsProdutosdescricao.Text;
+    dm.cdsItensquantidade.Text := edtQuantidade.Text;
+    dm.cdsItens.Post;
+    dm.cdsItens.ApplyUpdates(0);
+    frmAdicionarItem.Close;
+    frmCadastrarVenda.numeroDeItens := frmCadastrarVenda.numeroDeItens + 1;
+    frmCadastrarVenda.btnFinalizar.Enabled := true;
+    frmCadastrarVenda.edtDesconto.Enabled := true;
+    frmCadastrarVenda.edtAcrescimo.Enabled := true;
+    frmCadastrarVenda.edtFrete.Enabled := true;
+    frmCadastrarVenda.btnExcluir.Enabled := true;
+    calculaSubTotalDaVenda;
+    calculaTotalDaVenda;
+
+    idDoProduto := dm.cdsProdutosid.AsString;
+    novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
+      StrToInt(edtQuantidade.Text));
+    abrirDados('produto', false);
+    dm.cdsProdutos.CommandText := 'UPDATE produto SET quantidade_estoque = ' +
+      novoEstoque + ' WHERE id = ' + idDoProduto;
+    try
+      abrirDados('produto', true);
+    except
+      on E: Exception do
+    end;
+    Tag := 1;
+  end;
 end;
 
 procedure TfrmAdicionarItem.dbgridCellClick(Column: TColumn);
@@ -105,7 +130,7 @@ begin
   edtValUnitario.Text := dm.cdsProdutospreco.AsString;
   dbgrid.Visible := false;
   btnCancelarItem.Visible := false;
-  btnFinalizar.Enabled := True;
+  btnFinalizar.Enabled := true;
   calculaSubTotalDoItem;
   calculaTotalDoItem;
 end;
@@ -119,8 +144,8 @@ end;
 
 procedure TfrmAdicionarItem.edtBuscarClick(Sender: TObject);
 begin
-  btnCancelarItem.Visible := True;
-  dbgrid.Visible := True;
+  btnCancelarItem.Visible := true;
+  dbgrid.Visible := true;
   threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
 end;
@@ -131,11 +156,11 @@ begin
   if edtDesconto.Text = '' then
   begin
     edtDesconto.Text := '0';
-    passouAqui := True;
+    passouAqui := true;
   end
   else
   begin
-    if passouAqui = True then
+    if passouAqui = true then
     begin
       edtDesconto.Text := copy(edtDesconto.Text, 0, 1);
       passouAqui := false;
@@ -152,11 +177,11 @@ begin
   if edtAcrescimo.Text = '' then
   begin
     edtAcrescimo.Text := '0';
-    passouAqui := True;
+    passouAqui := true;
   end
   else
   begin
-    if passouAqui = True then
+    if passouAqui = true then
     begin
       edtAcrescimo.Text := copy(edtAcrescimo.Text, 0, 1);
       passouAqui := false;
@@ -173,11 +198,11 @@ begin
   if edtQuantidade.Text = '' then
   begin
     edtQuantidade.Text := '1';
-    passouAqui := True;
+    passouAqui := true;
   end
   else
   begin
-    if passouAqui = True then
+    if passouAqui = true then
     begin
       edtQuantidade.Text := copy(edtQuantidade.Text, 0, 1);
       passouAqui := false;
@@ -200,7 +225,7 @@ begin
       dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' +
         frmCadastrarVenda.idDoItem;
       try
-        abrirDados('item', True);
+        abrirDados('item', true);
       except
         on E: Exception do
       end;
@@ -213,7 +238,7 @@ procedure TfrmAdicionarItem.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  abrirDados('item', True);
+  abrirDados('item', true);
   dm.cdsItens.Edit;
   dm.cdsItens.Append;
   dm.cdsItensid.AsInteger := frmCadastrarVenda.numeroDeItens;
@@ -223,7 +248,7 @@ begin
   abrirDados('item', false);
   dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
     dm.cdsVendasid.Text + ' ORDER BY id ASC;';
-  abrirDados('item', True);
+  abrirDados('item', true);
   dm.cdsItens.Last;
   dm.cdsItens.Edit;
   dm.cdsItensid.Text := dm.cdsItensid.Text;

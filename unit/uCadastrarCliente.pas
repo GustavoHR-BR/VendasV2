@@ -72,26 +72,32 @@ uses uClientes, uDataModule, uFiltroCli, uFunctions, uPrincipal,
   uCadastrarProduto, uCadastrarVenda, uProdutos, uVendaReport, uVendas;
 
 procedure TfrmCadastrarCliente.btnCadastrarClick(Sender: TObject);
+var
+  dia, mes, ano: string;
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
 
-  if dbEdtNome.Text = '' then
+  dia := Copy(dbEdtDtNascimento.Text, 0, 2);
+  mes := Copy(dbEdtDtNascimento.Text, 4, 2);
+  ano := Copy(dbEdtDtNascimento.Text, 7, 4);
+
+  if (dbEdtNome.Text = '') OR (Length(dbEdtNome.Text) < 5) then
   begin
     ShowMessage('Nome inválido!');
     dbEdtNome.SetFocus;
   end
-  else if dbEdtTelefone.Text = '(  )     -    ' then
+  else if dbEdtTelefone.Text = '(  )     -    ' OR (Length(dbEdtTelefone.Text) < 13) then
   begin
     ShowMessage('Telefone inválido!');
     dbEdtTelefone.SetFocus;
   end
-  else if dbEdtCpf.Text = '   .   .   -  ' then
+  else if dbEdtCpf.Text = '   .   .   -  ' OR (Length(dbEdtTelefone.Text) < 14)then
   begin
     ShowMessage('CPF inválido!');
     dbEdtCpf.SetFocus;
   end
-  else if dbEdtEmail.Text = '' then
+  else if dbEdtEmail.Text = '' OR (Length(dbEdtTelefone.Text) < 8) then
   begin
     ShowMessage('E-mail inválido!');
     dbEdtEmail.SetFocus;
@@ -116,7 +122,10 @@ begin
     ShowMessage('Selecione uma rua!');
     dbEdtDtNascimento.SetFocus;
   end
-  else if (dbEdtDtNascimento.Text = '  /  /    ') then
+  else if (dbEdtDtNascimento.Text = '  /  /    ') OR
+    ((StrToInt(dia) < 1) OR (StrToInt(dia) > 31)) OR
+    ((StrToInt(mes) < 1) OR (StrToInt(mes) > 12)) OR
+    ((StrToInt(ano) < 1921) OR (StrToInt(dia) > 2021))then
   begin
     ShowMessage('Data de nascimento inválida!');
     dbEdtDtNascimento.SetFocus;

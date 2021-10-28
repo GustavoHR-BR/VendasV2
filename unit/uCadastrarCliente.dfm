@@ -264,7 +264,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   end
   object gridRuas: TDBGrid
     Left = 260
-    Top = 203
+    Top = 205
     Width = 199
     Height = 110
     DataSource = dm.dSourceRuas
@@ -342,7 +342,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   end
   object btnCancelarRua: TButton
     Left = 260
-    Top = 288
+    Top = 290
     Width = 75
     Height = 25
     Caption = 'Cancelar'
@@ -388,7 +388,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   end
   object gridBairros: TDBGrid
     Left = 32
-    Top = 203
+    Top = 205
     Width = 199
     Height = 110
     DataSource = dm.dSourceBairros
@@ -423,7 +423,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   end
   object gridCidades: TDBGrid
     Left = 358
-    Top = 140
+    Top = 142
     Width = 257
     Height = 110
     DataSource = dm.dSourceCidades
@@ -458,7 +458,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   end
   object btnCancelarbairro: TButton
     Left = 32
-    Top = 288
+    Top = 290
     Width = 75
     Height = 25
     Caption = 'Cancelar'
@@ -474,7 +474,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   end
   object btnCancelarCidade: TButton
     Left = 358
-    Top = 225
+    Top = 227
     Width = 75
     Height = 25
     Caption = 'Cancelar'

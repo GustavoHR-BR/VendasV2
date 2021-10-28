@@ -62,7 +62,7 @@ type
   private
     passouAqui: Boolean;
   public
-    numeroDeItens: Integer;
+    numeroDeItens, idPrimeiroItem: Integer;
     idDoItem: string;
   end;
 
@@ -231,14 +231,15 @@ begin
       for I := 1 to numeroDeItens do
       begin
         abrirDados('item', false);
-        dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' + idDoItem;
+        dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' +
+          IntToStr(idPrimeiroItem);
         try
           abrirDados('item', True);
         except
           on E: Exception do
         end;
         numeroDeItens := numeroDeItens - 1;
-        idDoItem := inttostr(strtoint(idDoItem) - 1);
+        idPrimeiroItem := idPrimeiroItem + 1;
       end;
 
       // DELETA A VENDA
@@ -303,51 +304,54 @@ end;
 
 procedure TfrmCadastrarVenda.btnExcluirClick(Sender: TObject);
 var
-  I, J, A, B, qtdDoItemExcluido, novoEstoque, idProduto,
+  I, J, idDoItemExcluido, qtdDoItemExcluido, novoEstoque, idProduto,
     qtdAtualNoEstoque: Integer;
+  vetorIds: array of Integer;
 begin
   if Application.MessageBox('Deseja realmente excluir?', 'Atenção',
     MB_YESNO + MB_ICONQUESTION) = mrYes then
   begin
     qtdDoItemExcluido := dm.cdsItensquantidade.AsInteger;
-    B := dm.cdsItensid.AsInteger;
+    idDoItemExcluido := dm.cdsItensid.AsInteger;
     numeroDeItens := numeroDeItens - 1;
     idProduto := dm.cdsItensfk_produto.AsInteger;
     abrirDados('produto', false);
     dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
-      inttostr(idProduto);
+      IntToStr(idProduto);
     abrirDados('produto', True);
     qtdAtualNoEstoque := dm.cdsProdutosquantidade_estoque.AsInteger;
     dm.cdsItens.Delete;
     try
       dm.cdsItens.ApplyUpdates(0);
-      for I := 1 to numeroDeItens - 1 do
+
+      abrirDados('item', false);
+      dm.cdsItens.CommandText := 'SELECT * FROM item';
+      abrirDados('item', True);
+      dm.cdsItens.Last;
+
+      for J := 1 to numeroDeItens - 1 do
       begin
-        abrirDados('item', false);
-        dm.cdsItens.CommandText := 'SELECT * FROM item';
-        abrirDados('item', True);
-        dm.cdsItens.Last;
-        A := (dm.cdsItensid.AsInteger - B) - 1;
-        if A > 1 then
-        begin
-          for J := 1 to A do
-          begin
-            dm.cdsItens.Prior;
-          end;
-        end;
+        dm.cdsItens.Prior;
+      end;
+      idPrimeiroItem := dm.cdsItensid.AsInteger;
+      if idDoItemExcluido < idPrimeiroItem then
+        idPrimeiroItem := idDoItemExcluido;
+
+      for I := 1 to numeroDeItens do
+      begin
         dm.cdsItens.Edit;
-        dm.cdsItensid.AsInteger := B;
+        dm.cdsItensid.AsInteger := idPrimeiroItem;
+        idPrimeiroItem := idPrimeiroItem + 1;
         dm.cdsItens.Post;
         dm.cdsItens.ApplyUpdates(0);
-        B := B + 1;
-        idDoItem := inttostr(B);
+        dm.cdsItens.Next;
       end;
 
       // voltarEstoque
       novoEstoque := qtdAtualNoEstoque + qtdDoItemExcluido;
       abrirDados('produto', false);
       dm.cdsProdutos.CommandText := 'UPDATE produto SET quantidade_estoque = "'
-        + inttostr(novoEstoque) + '" WHERE id = ' + inttostr(idProduto);
+        + IntToStr(novoEstoque) + '" WHERE id = ' + IntToStr(idProduto);
       try
         abrirDados('produto', True);
       except

@@ -41,7 +41,7 @@ uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
 
 procedure TfrmCadastrarProduto.btnCadastrarClick(Sender: TObject);
 begin
-  if dbEdtNome.Text = '' then
+  if (dbEdtNome.Text = '') OR (Length(dbEdtNome.Text) < 5)then
   begin
     ShowMessage('Nome inválido! ');
     dbEdtNome.SetFocus;
@@ -51,15 +51,15 @@ begin
     ShowMessage('Preço inválido! ');
     dbEdtPreco.SetFocus;
   end
-  else if dbEdtDescricao.Text = '' then
+  else if (dbEdtDescricao.Text = '') OR (Length(dbEdtDescricao.Text) < 5) then
   begin
     ShowMessage('Descrição inválida! ');
-    dbEdtNome.SetFocus;
+    dbEdtDescricao.SetFocus;
   end
   else if (dbEdtEstoque.Text = '') OR (StrToInt(dbEdtEstoque.Text) < 0) then
   begin
     ShowMessage('Quantidade inválida! ');
-    dbEdtNome.SetFocus;
+    dbEdtEstoque.SetFocus;
   end
   else
   begin

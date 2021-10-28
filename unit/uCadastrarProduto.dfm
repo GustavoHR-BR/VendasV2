@@ -62,9 +62,9 @@ object frmCadastrarProduto: TfrmCadastrarProduto
   object Label4: TLabel
     Left = 135
     Top = 106
-    Width = 59
+    Width = 60
     Height = 15
-    Caption = 'No estoque:'
+    Caption = 'Em estoque:'
     FocusControl = dbEdtEstoque
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

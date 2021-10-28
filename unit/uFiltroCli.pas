@@ -29,6 +29,8 @@ type
     btnCancelar: TButton;
     procedure FormShow(Sender: TObject);
     procedure btnFiltrarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,24 +49,64 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmFiltrosCli.btnCancelarClick(Sender: TObject);
+begin
+  frmClientes.idCli := '';
+  frmClientes.nomeCli := '';
+  frmClientes.cpf := '';
+  frmClientes.ufPosition := -1;
+  frmClientes.nomeCid := '';
+  frmClientes.nomeBai := '';
+  frmClientes.nomeRua := '';
+  frmClientes.telefone := '';
+  frmFiltrosCli.Close;
+end;
+
 procedure TfrmFiltrosCli.btnFiltrarClick(Sender: TObject);
 begin
   abrirDados('cliente', false);
-  dm.cdsClientes.CommandText :=
-  'SELECT * FROM cliente c' +
-  ' INNER JOIN rua r ON r.id = c.fk_rua' +
-  ' INNER JOIN bairro b ON b.id = r.fk_bairro' +
-  ' INNER JOIN cidade cid ON cid.id = b.fk_cidade' +
-  ' INNER JOIN estado e ON e.id = cid.fk_estado' +
-  ' WHERE (c.id = "'+ edtId.Text +'") ' +
-  ' AND (c.nome LIKE "'+ edtNome.Text +'%")' +
-  ' AND (c.cpf LIKE "%'+ edtCpf.Text +'%")' +
-  ' AND (e.uf LIKE "%'+ cboxEstados.Text +'%")' +
-  ' AND (cid.nome LIKE "%'+ edtCidade.Text +'%")' +
-  ' AND (b.nome LIKE "%'+ edtBairro.Text +'%")' +
-  ' AND (r.nome LIKE "%'+ edtRua.Text +'%")' +
-  ' AND (c.telefone LIKE "%'+ edtTelefone.Text +'%")';
+
+  if edtId.Text <> '' then
+  begin
+    dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
+      ' INNER JOIN rua r ON r.id = c.fk_rua' +
+      ' INNER JOIN bairro b ON b.id = r.fk_bairro' +
+      ' INNER JOIN cidade cid ON cid.id = b.fk_cidade' +
+      ' INNER JOIN estado e ON e.id = cid.fk_estado' + ' WHERE (c.id = "' +
+      edtId.Text + '") ' + ' AND (c.nome LIKE "' + edtNome.Text + '%")' +
+      ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' + ' AND (e.uf LIKE "%' +
+      cboxEstados.Text + '%")' + ' AND (cid.nome LIKE "%' + edtCidade.Text +
+      '%")' + ' AND (b.nome LIKE "%' + edtBairro.Text + '%")' +
+      ' AND (r.nome LIKE "%' + edtRua.Text + '%")' + ' AND (c.telefone LIKE "%'
+      + edtTelefone.Text + '%")';
+  end
+  else
+  begin
+    dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
+      ' INNER JOIN rua r ON r.id = c.fk_rua' +
+      ' INNER JOIN bairro b ON b.id = r.fk_bairro' +
+      ' INNER JOIN cidade cid ON cid.id = b.fk_cidade' +
+      ' INNER JOIN estado e ON e.id = cid.fk_estado' + ' WHERE (c.nome LIKE "' +
+      edtNome.Text + '%")' + ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' +
+      ' AND (e.uf LIKE "%' + cboxEstados.Text + '%")' + ' AND (cid.nome LIKE "%'
+      + edtCidade.Text + '%")' + ' AND (b.nome LIKE "%' + edtBairro.Text + '%")'
+      + ' AND (r.nome LIKE "%' + edtRua.Text + '%")' +
+      ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
+  end;
   abrirDados('cliente', true);
+  frmFiltrosCli.Close;
+end;
+
+procedure TfrmFiltrosCli.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  frmClientes.idCli := edtId.Text;
+  frmClientes.nomeCli := edtNome.Text;
+  frmClientes.cpf := edtCpf.Text;
+  frmClientes.ufPosition := cboxEstados.ItemIndex;
+  frmClientes.nomeCid := edtCidade.Text;
+  frmClientes.nomeBai := edtBairro.Text;
+  frmClientes.nomeRua := edtRua.Text;
+  frmClientes.telefone := edtTelefone.Text;
 end;
 
 procedure TfrmFiltrosCli.FormShow(Sender: TObject);

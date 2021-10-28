@@ -3,7 +3,7 @@ object frmFiltrosCli: TfrmFiltrosCli
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Filtrar os clientes'
+  Caption = 'Filtrar clientes'
   ClientHeight = 267
   ClientWidth = 497
   Color = clBtnFace
@@ -14,6 +14,7 @@ object frmFiltrosCli: TfrmFiltrosCli
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -198,5 +199,6 @@ object frmFiltrosCli: TfrmFiltrosCli
     Font.Style = []
     ParentFont = False
     TabOrder = 9
+    OnClick = btnCancelarClick
   end
 end

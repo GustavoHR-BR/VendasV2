@@ -18,6 +18,7 @@ type
     btnFiltrar: TButton;
     cbOrdenarPor: TComboBox;
     Label2: TLabel;
+    btnLimparFiltros: TButton;
     procedure edtBuscarChange(Sender: TObject);
     procedure btnAdicionarClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
@@ -25,10 +26,12 @@ type
     procedure btnEditarClick(Sender: TObject);
     procedure cbOrdenarPorSelect(Sender: TObject);
     procedure btnFiltrarClick(Sender: TObject);
+    procedure btnLimparFiltrosClick(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    idCli, nomeCli, cpf, nomeCid, nomeBai, nomeRua, telefone: string;
+    ufPosition: Integer;
   end;
 
 var
@@ -66,11 +69,48 @@ end;
 procedure TfrmClientes.btnFiltrarClick(Sender: TObject);
 begin
   Application.CreateForm(TfrmFiltrosCli, frmFiltrosCli);
+  frmFiltrosCli.edtId.Text := idCli;
+  frmFiltrosCli.edtNome.Text := nomeCli;
+  frmFiltrosCli.edtCpf.Text := cpf;
+  frmFiltrosCli.cboxEstados.ItemIndex := ufPosition;
+  frmFiltrosCli.edtCidade.Text := nomeCid;
+  frmFiltrosCli.edtBairro.Text := nomeBai;
+  frmFiltrosCli.edtRua.Text := nomeRua;
+  frmFiltrosCli.edtTelefone.Text := telefone;
   try
     frmFiltrosCli.ShowModal;
   finally
     FreeAndNil(frmFiltrosCli);
   end;
+end;
+
+procedure TfrmClientes.btnLimparFiltrosClick(Sender: TObject);
+var
+  orderBy: string;
+begin
+  if cbOrdenarPor.ItemIndex = 0 then
+    orderBy := 'id'
+  else if cbOrdenarPor.ItemIndex = 1 then
+    orderBy := 'nome'
+  else if cbOrdenarPor.ItemIndex = 2 then
+    orderBy := 'telefone'
+  else if cbOrdenarPor.ItemIndex = 3 then
+    orderBy := 'email'
+  else if cbOrdenarPor.ItemIndex = 4 then
+    orderBy := 'data_nascimento';
+
+  idCli := '';
+  nomeCli := '';
+  cpf := '';
+  ufPosition := -1;
+  nomeCid := '';
+  nomeBai := '';
+  nomeRua := '';
+  telefone := '';
+
+  abrirDados('cliente', false);
+  dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy;
+  abrirDados('cliente', true);
 end;
 
 procedure TfrmClientes.btnSairClick(Sender: TObject);
@@ -94,6 +134,7 @@ begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
   threadBuscarCliente('');
+  ufPosition := -1;
 end;
 
 end.

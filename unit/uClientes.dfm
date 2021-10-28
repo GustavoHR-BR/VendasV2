@@ -204,9 +204,9 @@ object frmClientes: TfrmClientes
     OnClick = btnSairClick
   end
   object edtBuscar: TEdit
-    Left = 96
+    Left = 99
     Top = 17
-    Width = 425
+    Width = 329
     Height = 23
     Hint = 'Digite algum cliente para buscar'
     Font.Charset = DEFAULT_CHARSET
@@ -221,7 +221,7 @@ object frmClientes: TfrmClientes
     OnChange = edtBuscarChange
   end
   object btnFiltrar: TButton
-    Left = 527
+    Left = 434
     Top = 16
     Width = 75
     Height = 25
@@ -260,5 +260,23 @@ object frmClientes: TfrmClientes
       'Telefone'
       'E-mail'
       'Anivers'#225'rio')
+  end
+  object btnLimparFiltros: TButton
+    Left = 515
+    Top = 16
+    Width = 90
+    Height = 25
+    Hint = 'Selecione os filtros para os clientes'
+    Caption = 'Limpar filtros'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+    OnClick = btnLimparFiltrosClick
   end
 end

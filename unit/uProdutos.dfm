@@ -182,9 +182,9 @@ object frmProdutos: TfrmProdutos
     OnClick = btnSairClick
   end
   object edtBuscar: TEdit
-    Left = 97
+    Left = 98
     Top = 21
-    Width = 384
+    Width = 296
     Height = 23
     Hint = 'Digite algum produto para buscar'
     Font.Charset = DEFAULT_CHARSET
@@ -199,13 +199,12 @@ object frmProdutos: TfrmProdutos
     OnChange = edtBuscarChange
   end
   object btnFiltrar: TButton
-    Left = 487
+    Left = 399
     Top = 20
     Width = 75
     Height = 25
     Hint = 'Selecionar filtros dos produtos'
     Caption = 'Filtrar'
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -215,6 +214,7 @@ object frmProdutos: TfrmProdutos
     ParentShowHint = False
     ShowHint = True
     TabOrder = 5
+    OnClick = btnFiltrarClick
   end
   object cbOrdenarPor: TComboBox
     Left = 661
@@ -238,5 +238,23 @@ object frmProdutos: TfrmProdutos
       'Pre'#231'o'
       'Descri'#231#227'o'
       'Quantidade no estoque')
+  end
+  object btnLimparFiltros: TButton
+    Left = 479
+    Top = 20
+    Width = 90
+    Height = 25
+    Hint = 'Selecione os filtros para os clientes'
+    Caption = 'Limpar filtros'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+    OnClick = btnLimparFiltrosClick
   end
 end

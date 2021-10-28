@@ -22,14 +22,12 @@ procedure abreBuscaBairro;
 procedure abreBuscaRua;
 procedure buscarEnderecoCliente;
 procedure abrirDados(tabela: string; estado: Boolean);
-procedure calculaSubTotalDoItem;
+procedure calculaSubTotalItem;
 procedure calculaAcrescimoItem;
 procedure calculaDescontoItem;
-procedure calculaTotalDoItem;
-procedure calculaSubTotalDaVenda;
-procedure calculaTotalDaVenda;
-procedure calculaDescontoDaVenda;
-procedure calculaAcrescimoDaVenda;
+procedure calculaTotalItem;
+procedure calculaSubTotalVenda;
+procedure calculaTotalVenda;
 
 var
   subTotalDaVenda, totalDaVenda, frete, totalDoItem, valDescontoItem,
@@ -47,10 +45,8 @@ uses
 
 procedure buscarCliente(orderBy: string);
 begin
-
   abrirDados('cliente', false);
-  dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy
-    + ' ASC;';
+  dm.cdsClientes.IndexFieldNames := orderBy;
   abrirDados('cliente', true);
 end;
 
@@ -468,7 +464,7 @@ begin
   end;
 end;
 
-procedure calculaSubTotalDoItem;
+procedure calculaSubTotalItem;
 begin
   quantidadeDeProdutos := StrToInt(frmAdicionarItem.edtQuantidade.Text);
   valUnitario := StrToFloat(frmAdicionarItem.edtValUnitario.Text);
@@ -490,7 +486,7 @@ begin
     FloatToStr(descontoDoItem * StrToFloat(frmAdicionarItem.edtSubTotal.Text));
 end;
 
-procedure calculaTotalDoItem;
+procedure calculaTotalItem;
 begin
   valAcrescimoItem := StrToFloat(frmAdicionarItem.edtValAcrescimo.Text);
   valDescontoItem := StrToFloat(frmAdicionarItem.edtValDesconto.Text);
@@ -499,24 +495,14 @@ begin
     FloatToStr(valAcrescimoItem + subTotalDoItem - valDescontoItem);
 end;
 
-procedure calculaSubTotalDaVenda;
+procedure calculaSubTotalVenda;
 begin
   frmCadastrarVenda.edtSubtTotal.Text :=
     FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
     StrToFloat(frmAdicionarItem.edtValTotal.Text));
 end;
 
-procedure calculaDescontoDaVenda;
-begin
-  desconto := StrToFloat(frmCadastrarVenda.edtDesconto.Text) / 100;
-end;
-
-procedure calculaAcrescimoDaVenda;
-begin
-
-end;
-
-procedure calculaTotalDaVenda;
+procedure calculaTotalVenda;
 var
   subTotal: Double;
 begin

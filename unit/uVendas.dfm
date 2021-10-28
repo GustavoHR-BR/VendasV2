@@ -85,7 +85,6 @@ object frmVendas: TfrmVendas
     Height = 25
     Hint = 'Imprimir venda selecionada'
     Caption = 'Imprimir'
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -95,6 +94,7 @@ object frmVendas: TfrmVendas
     ParentShowHint = False
     ShowHint = True
     TabOrder = 2
+    OnClick = btnImprimirClick
   end
   object btnSair: TButton
     Left = 734

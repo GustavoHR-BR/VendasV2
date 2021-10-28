@@ -20,7 +20,6 @@ type
     cdsClientestelefone: TStringField;
     cdsClientesemail: TStringField;
     cdsClientesdata_nascimento: TStringField;
-    cdsClientesendereco: TStringField;
     dSetProdutos: TSQLDataSet;
     dspProdutos: TDataSetProvider;
     dSourceProdutos: TDataSource;

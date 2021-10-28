@@ -111,19 +111,26 @@ end;
 
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
 begin
-  Tag := 1;
-  dm.cdsVendas.Edit;
-  dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
-  dm.cdsVendastotal.Text := edtTotalVenda.Text;
-  dm.cdsVendasdata.Text := DateToStr(now);
-  dm.cdsVendas.Post;
-  dm.cdsVendas.ApplyUpdates(0);
 
-  frmCadastrarVenda.Close;
+  if Application.MessageBox('Deseja relamente finalizar?', 'Atenção',
+    MB_YESNO + MB_ICONQUESTION) = mrYes then
+  begin
+    Tag := 1;
+    dm.cdsVendas.Edit;
+    dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
+    dm.cdsVendastotal.Text := edtTotalVenda.Text;
+    dm.cdsVendasdata.Text := DateToStr(now);
+    dm.cdsVendas.Post;
+    dm.cdsVendas.ApplyUpdates(0);
 
-  abrirDados('cliente', false);
-  dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
-  abrirDados('cliente', True);
+    frmCadastrarVenda.Close;
+
+    abrirDados('cliente', false);
+    dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
+    abrirDados('cliente', True);
+  end
+  else
+    Abort;
 end;
 
 procedure TfrmCadastrarVenda.dbgridCellClick(Column: TColumn);
@@ -178,7 +185,7 @@ begin
       passouAqui := false;
     end;
   end;
-  calculaTotalDaVenda;
+  calculaTotalVenda;
 end;
 
 procedure TfrmCadastrarVenda.edtDescontoChange(Sender: TObject);
@@ -197,7 +204,7 @@ begin
       passouAqui := false;
     end;
   end;
-  calculaTotalDaVenda;
+  calculaTotalVenda;
 end;
 
 procedure TfrmCadastrarVenda.edtFreteChange(Sender: TObject);
@@ -216,7 +223,7 @@ begin
       passouAqui := false;
     end;
   end;
-  calculaTotalDaVenda;
+  calculaTotalVenda;
 end;
 
 procedure TfrmCadastrarVenda.FormClose(Sender: TObject;

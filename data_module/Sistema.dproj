@@ -96,7 +96,7 @@
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="..\unit\uFiltroCli.pas">
-				<Form>Form1</Form>
+				<Form>frmFiltrosCli</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="..\function\uFunctions.pas"/>
@@ -123,6 +123,14 @@
 			</DCCReference>
 			<DCCReference Include="..\unit\uAdicionarItem.pas">
 				<Form>frmAdicionarItem</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="..\unit\uFiltroPro.pas">
+				<Form>frmFiltrarPro</Form>
+				<FormType>dfm</FormType>
+			</DCCReference>
+			<DCCReference Include="..\report\uClienteReport.pas">
+				<Form>frmClienteReport</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<BuildConfiguration Include="Release">

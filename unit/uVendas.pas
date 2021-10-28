@@ -46,6 +46,7 @@ type
     procedure cbOrdenarPorSelect(Sender: TObject);
     procedure btnNovaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,6 +62,31 @@ implementation
 
 uses uCadastrarCliente, uCadastrarProduto, uClientes, uDataModule, uFiltroCli,
   uFunctions, uPrincipal, uProdutos, uVendaReport, uCadastrarVenda;
+
+procedure TfrmVendas.btnImprimirClick(Sender: TObject);
+var
+  arquivo_pdf: string;
+  id: Integer;
+begin
+  id := frmVendas.cdsVendasid.AsInteger;
+  abrirDados('item', false);
+  dm.cdsItens.CommandText := 'SELECT * FROM item ';
+  abrirDados('item', True);
+  abrirDados('venda', false);
+  dm.cdsVendas.CommandText := 'SELECT * FROM venda WHERE id = ' + IntToStr(id);
+  abrirDados('venda', True);
+
+  frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
+  frmVendaReport.rvsVENDAS.DoNativeOutput := false;
+  frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
+  arquivo_pdf := ExtractFilePath(Application.ExeName) +
+    'RELATORIO VENDA UNICA.pdf';
+  frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;
+  frmVendaReport.RvProject1.Execute;
+  ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
+    Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
+    SW_NORMAL);
+end;
 
 procedure TfrmVendas.btnNovaClick(Sender: TObject);
 begin

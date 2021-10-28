@@ -51,14 +51,7 @@ uses
 
 procedure TfrmFiltrosCli.btnCancelarClick(Sender: TObject);
 begin
-  frmClientes.idCli := '';
-  frmClientes.nomeCli := '';
-  frmClientes.cpf := '';
-  frmClientes.ufPosition := -1;
-  frmClientes.nomeCid := '';
-  frmClientes.nomeBai := '';
-  frmClientes.nomeRua := '';
-  frmClientes.telefone := '';
+  Tag := -1;
   frmFiltrosCli.Close;
 end;
 
@@ -99,14 +92,28 @@ end;
 
 procedure TfrmFiltrosCli.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  frmClientes.idCli := edtId.Text;
-  frmClientes.nomeCli := edtNome.Text;
-  frmClientes.cpf := edtCpf.Text;
-  frmClientes.ufPosition := cboxEstados.ItemIndex;
-  frmClientes.nomeCid := edtCidade.Text;
-  frmClientes.nomeBai := edtBairro.Text;
-  frmClientes.nomeRua := edtRua.Text;
-  frmClientes.telefone := edtTelefone.Text;
+  if Tag = -1 then
+  begin
+    frmClientes.idCli := '';
+    frmClientes.nomeCli := '';
+    frmClientes.cpf := '';
+    frmClientes.ufPosition := -1;
+    frmClientes.nomeCid := '';
+    frmClientes.nomeBai := '';
+    frmClientes.nomeRua := '';
+    frmClientes.telefone := '';
+  end
+  else
+  begin
+    frmClientes.idCli := edtId.Text;
+    frmClientes.nomeCli := edtNome.Text;
+    frmClientes.cpf := edtCpf.Text;
+    frmClientes.ufPosition := cboxEstados.ItemIndex;
+    frmClientes.nomeCid := edtCidade.Text;
+    frmClientes.nomeBai := edtBairro.Text;
+    frmClientes.nomeRua := edtRua.Text;
+    frmClientes.telefone := edtTelefone.Text;
+  end;
 end;
 
 procedure TfrmFiltrosCli.FormShow(Sender: TObject);

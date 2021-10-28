@@ -81,10 +81,6 @@ object dm: Tdm
       EditMask = '!99/99/9999;1;_'
       Size = 10
     end
-    object cdsClientesendereco: TStringField
-      FieldName = 'endereco'
-      Size = 60
-    end
     object cdsClientesRua: TStringField
       FieldKind = fkLookup
       FieldName = 'Rua'

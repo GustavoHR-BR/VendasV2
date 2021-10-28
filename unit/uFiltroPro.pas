@@ -30,6 +30,7 @@ type
     procedure btnFiltrarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -50,13 +51,7 @@ uses
 
 procedure TfrmFiltrarPro.btnCancelarClick(Sender: TObject);
 begin
-  frmProdutos.id := '';
-  frmProdutos.nome := '';
-  frmProdutos.precoDe := '';
-  frmProdutos.precoAte := '';
-  frmProdutos.qtdEstoqueDe := '';
-  frmProdutos.qtdEstoqueAte := '';
-  frmProdutos.descricao := '';
+  Tag := -1;
   frmFiltrarPro.Close;
 end;
 
@@ -92,13 +87,6 @@ begin
               '") ORDER BY ' + frmProdutos.orderBy;
           end;
           abrirDados('produto', true);
-          frmProdutos.id := edtId.Text;
-          frmProdutos.nome := edtNome.Text;
-          frmProdutos.precoDe := edtPrecoDe.Text;
-          frmProdutos.precoAte := edtPrecoAte.Text;
-          frmProdutos.qtdEstoqueDe := edtEstoqueDe.Text;
-          frmProdutos.qtdEstoqueAte := edtEstoqueAte.Text;
-          frmProdutos.descricao := edtDescricao.Text;
           frmFiltrarPro.Close;
         end
         else
@@ -127,6 +115,30 @@ begin
     ShowMessage('Informe apenas valores acima de 0! ');
     edtEstoqueDe.Text := '0';
     edtEstoqueDe.SetFocus;
+  end;
+end;
+
+procedure TfrmFiltrarPro.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if Tag = -1 then
+  begin
+    frmProdutos.id := '';
+    frmProdutos.nome := '';
+    frmProdutos.precoDe := '0';
+    frmProdutos.precoAte := '10000';
+    frmProdutos.qtdEstoqueDe := '0';
+    frmProdutos.qtdEstoqueAte := '10000';
+    frmProdutos.descricao := '';
+  end
+  else
+  begin
+    frmProdutos.id := edtId.Text;
+    frmProdutos.nome := edtNome.Text;
+    frmProdutos.precoDe := edtPrecoDe.Text;
+    frmProdutos.precoAte := edtPrecoAte.Text;
+    frmProdutos.qtdEstoqueDe := edtEstoqueDe.Text;
+    frmProdutos.qtdEstoqueAte := edtEstoqueAte.Text;
+    frmProdutos.descricao := edtDescricao.Text;
   end;
 end;
 

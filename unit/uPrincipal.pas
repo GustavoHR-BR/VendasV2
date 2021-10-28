@@ -19,12 +19,16 @@ type
     Nova1: TMenuItem;
     Relatrios1: TMenuItem;
     Vendas1: TMenuItem;
+    Clientes1: TMenuItem;
+    Produtos1: TMenuItem;
     procedure Cliente1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Nova1Click(Sender: TObject);
     procedure Vendas1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Clientes1Click(Sender: TObject);
+    procedure Produtos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,7 +43,8 @@ implementation
 {$R *.dfm}
 
 uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
-  uProdutos, uCadastrarProduto, uVendas, uVendaReport;
+  uProdutos, uCadastrarProduto, uVendas, uVendaReport, uCadastrarVenda,
+  uClienteReport, uAdicionarItem, uFiltroPro, uProdutoReport;
 
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
@@ -65,8 +70,9 @@ end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
-  dm.cdsVendas.Open;
-  dm.cdsItens.Open;
+  abrirDados('venda', True);
+  abrirDados('item', True);
+  abrirDados('cliente', True);
 end;
 
 procedure TfrmPrincipal.Nova1Click(Sender: TObject);
@@ -89,15 +95,61 @@ begin
   end;
 end;
 
+procedure TfrmPrincipal.Produtos1Click(Sender: TObject);
+var
+  arquivo_pdf: string;
+begin
+  abrirDados('produto', false);
+  dm.cdsProdutos.CommandText := 'SELECT * FROM produto ORDER BY id';
+  abrirDados('produto', True);
+
+  frmProdutoReport.rvsProdutos.DefaultDest := rdFile;
+  frmProdutoReport.rvsProdutos.DoNativeOutput := false;
+  frmProdutoReport.rvsProdutos.RenderObject := frmVendaReport.rvRelVendasPDF;
+  arquivo_pdf := ExtractFilePath(Application.ExeName) +
+    'RELATORIO PRODUTOS.pdf';
+  frmProdutoReport.rvsProdutos.OutputFileName := arquivo_pdf;
+  frmProdutoReport.RvProject1.Execute;
+  ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
+    Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
+    SW_NORMAL);
+end;
+
+procedure TfrmPrincipal.Clientes1Click(Sender: TObject);
+var
+  arquivo_pdf: string;
+begin
+  abrirDados('cliente', false);
+  dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY id';
+  abrirDados('cliente', True);
+
+  frmClienteReport.rvsClientes.DefaultDest := rdFile;
+  frmClienteReport.rvsClientes.DoNativeOutput := false;
+  frmClienteReport.rvsClientes.RenderObject := frmVendaReport.rvRelVendasPDF;
+  arquivo_pdf := ExtractFilePath(Application.ExeName) +
+    'RELATORIO CLIENTES.pdf';
+  frmClienteReport.rvsClientes.OutputFileName := arquivo_pdf;
+  frmClienteReport.RvProject1.Execute;
+  ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
+    Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
+    SW_NORMAL);
+end;
+
 procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
+  abrirDados('item', false);
+  dm.cdsItens.CommandText := 'SELECT * FROM item';
+  abrirDados('item', True);
+  abrirDados('venda', false);
+  dm.cdsVendas.CommandText := 'SELECT * FROM venda';
+  abrirDados('venda', True);
 
   frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
   frmVendaReport.rvsVENDAS.DoNativeOutput := false;
   frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
-  arquivo_pdf := ExtractFilePath(Application.ExeName) + 'RELATORIO  VENDAS.pdf';
+  arquivo_pdf := ExtractFilePath(Application.ExeName) + 'RELATORIO VENDAS.pdf';
   frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;
   frmVendaReport.RvProject1.Execute;
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,

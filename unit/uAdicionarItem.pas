@@ -105,8 +105,8 @@ begin
     frmCadastrarVenda.edtDesconto.Enabled := true;
     frmCadastrarVenda.edtAcrescimo.Enabled := true;
     frmCadastrarVenda.edtFrete.Enabled := true;
-    calculaSubTotalDaVenda;
-    calculaTotalDaVenda;
+    calculaSubTotalVenda;
+    calculaTotalVenda;
 
     idDoProduto := dm.cdsProdutosid.AsString;
     novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
@@ -130,8 +130,8 @@ begin
   dbgrid.Visible := false;
   btnCancelarItem.Visible := false;
   btnFinalizar.Enabled := true;
-  calculaSubTotalDoItem;
-  calculaTotalDoItem;
+  calculaSubTotalItem;
+  calculaTotalItem;
 end;
 
 procedure TfrmAdicionarItem.edtBuscarChange(Sender: TObject);
@@ -166,7 +166,7 @@ begin
     end;
 
     calculaDescontoItem;
-    calculaTotalDoItem;
+    calculaTotalItem;
   end;
 end;
 
@@ -187,7 +187,7 @@ begin
     end;
 
     calculaAcrescimoItem;
-    calculaTotalDoItem;
+    calculaTotalItem;
   end;
 end;
 
@@ -207,8 +207,8 @@ begin
       passouAqui := false;
     end;
 
-    calculaSubTotalDoItem;
-    calculaTotalDoItem;
+    calculaSubTotalItem;
+    calculaTotalItem;
   end;
 end;
 

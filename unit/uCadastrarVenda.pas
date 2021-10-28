@@ -303,14 +303,22 @@ end;
 
 procedure TfrmCadastrarVenda.btnExcluirClick(Sender: TObject);
 var
-  I, J, aux, A: Integer;
+  I, J, A, B, qtdDoItemExcluido, novoEstoque, idProduto,
+    qtdAtualNoEstoque: Integer;
 begin
   if Application.MessageBox('Deseja realmente excluir?', 'Atenção',
     MB_YESNO + MB_ICONQUESTION) = mrYes then
   begin
-    aux := dm.cdsItensid.AsInteger;
-    dm.cdsItens.Delete;
+    qtdDoItemExcluido := dm.cdsItensquantidade.AsInteger;
+    B := dm.cdsItensid.AsInteger;
     numeroDeItens := numeroDeItens - 1;
+    idProduto := dm.cdsItensfk_produto.AsInteger;
+    abrirDados('produto', false);
+    dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
+      inttostr(idProduto);
+    abrirDados('produto', True);
+    qtdAtualNoEstoque := dm.cdsProdutosquantidade_estoque.AsInteger;
+    dm.cdsItens.Delete;
     try
       dm.cdsItens.ApplyUpdates(0);
       for I := 1 to numeroDeItens - 1 do
@@ -319,7 +327,7 @@ begin
         dm.cdsItens.CommandText := 'SELECT * FROM item';
         abrirDados('item', True);
         dm.cdsItens.Last;
-        A := (dm.cdsItensid.AsInteger - aux) - 1;
+        A := (dm.cdsItensid.AsInteger - B) - 1;
         if A > 1 then
         begin
           for J := 1 to A do
@@ -328,12 +336,24 @@ begin
           end;
         end;
         dm.cdsItens.Edit;
-        dm.cdsItensid.AsInteger := aux;
+        dm.cdsItensid.AsInteger := B;
         dm.cdsItens.Post;
         dm.cdsItens.ApplyUpdates(0);
-        aux := aux + 1;
-        idDoItem := inttostr(aux);
+        B := B + 1;
+        idDoItem := inttostr(B);
       end;
+
+      // voltarEstoque
+      novoEstoque := qtdAtualNoEstoque + qtdDoItemExcluido;
+      abrirDados('produto', false);
+      dm.cdsProdutos.CommandText := 'UPDATE produto SET quantidade_estoque = "'
+        + inttostr(novoEstoque) + '" WHERE id = ' + inttostr(idProduto);
+      try
+        abrirDados('produto', True);
+      except
+        on E: Exception do
+      end;
+
       abrirDados('item', false);
       ShowMessage('Item excluído com sucesso! ');
       dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +

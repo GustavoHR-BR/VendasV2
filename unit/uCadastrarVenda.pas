@@ -219,7 +219,8 @@ procedure TfrmCadastrarVenda.FormClose(Sender: TObject;
   var Action: TCloseAction);
 var
   idVenda: string;
-  I: Integer;
+  I, J, K, qtdDaqueleItem, idProduto, novoEstoque, estoqueAtual,
+    idDoItemExcluido: Integer;
 begin
   if Tag <> 1 then // USER ESTÁ CANCELANDO A VENDA
   begin
@@ -228,18 +229,68 @@ begin
     begin
 
       // DELETA TODOS OS ITENS DA VENDA
+
+      abrirDados('item', false);
+      dm.cdsItens.CommandText := 'SELECT * FROM item';
+      abrirDados('item', True);
+      dm.cdsItens.Last;
+
+      for I := 1 to numeroDeItens - 1 do
+      begin
+        dm.cdsItens.Prior;
+      end;
+
       for I := 1 to numeroDeItens do
       begin
+        idProduto := dm.cdsItensfk_produto.AsInteger;
+        qtdDaqueleItem := dm.cdsItensquantidade.AsInteger;
+        idDoItemExcluido := dm.cdsItensid.AsInteger;
+        dm.cdsItens.Delete;
+        dm.cdsItens.ApplyUpdates(0);
+        numeroDeItens := numeroDeItens - 1;
+
         abrirDados('item', false);
-        dm.cdsItens.CommandText := 'DELETE FROM item WHERE id = ' +
-          IntToStr(idPrimeiroItem);
+        ///
+        dm.cdsItens.CommandText := 'SELECT * FROM item';
+        abrirDados('item', True);
+        dm.cdsItens.Last;
+
+        for J := 1 to numeroDeItens - 1 do
+        begin
+          dm.cdsItens.Prior;
+        end;
+        idPrimeiroItem := dm.cdsItensid.AsInteger;
+
+//        for K := 1 to numeroDeItens do
+        // begin
+        // dm.cdsItens.Edit;
+        // dm.cdsItensid.AsInteger := idPrimeiroItem;
+        // idPrimeiroItem := idPrimeiroItem + 1;
+        // dm.cdsItens.Post;
+        // dm.cdsItens.ApplyUpdates(0);
+        // dm.cdsItens.Next;
+        // ///
+        // end;
+
+        abrirDados('produto', false);
+        dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
+          IntToStr(idProduto);
         try
-          abrirDados('item', True);
+          abrirDados('produto', True);
         except
           on E: Exception do
         end;
-        numeroDeItens := numeroDeItens - 1;
-        idPrimeiroItem := idPrimeiroItem + 1;
+        estoqueAtual := dm.cdsProdutosquantidade_estoque.AsInteger;
+        novoEstoque := estoqueAtual + qtdDaqueleItem;
+        abrirDados('produto', false);
+        dm.cdsProdutos.CommandText :=
+          'UPDATE produto SET quantidade_estoque = "' + IntToStr(novoEstoque) +
+          '" WHERE id = ' + IntToStr(idProduto);
+        try
+          abrirDados('produto', True);
+        except
+          on E: Exception do
+        end;
       end;
 
       // DELETA A VENDA

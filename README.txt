@@ -3,4 +3,4 @@ Incompleto ->
 
 BUG -> 
   Erro na edição ou cadastro de cliente na tela de venda.
-  Adicionando no estoque 2 vezes.
+  Adicionando no estoque cada vez que edita o item.

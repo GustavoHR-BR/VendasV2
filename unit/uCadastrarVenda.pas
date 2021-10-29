@@ -319,7 +319,9 @@ begin
       dm.cdsClientes.CommandText := 'select * from cliente';
       abrirDados('cliente', True);
       btnCancelarClick(Self);
-    end;
+    end
+    else
+      Abort;
   end
   else
     ShowMessage('Venda realizada com sucesso! ');

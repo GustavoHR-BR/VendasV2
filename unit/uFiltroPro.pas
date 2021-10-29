@@ -87,6 +87,7 @@ begin
               '") ORDER BY ' + frmProdutos.orderBy;
           end;
           abrirDados('produto', true);
+          frmProdutos.btnLimparFiltros.Enabled := true;
           frmFiltrarPro.Close;
         end
         else

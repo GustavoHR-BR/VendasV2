@@ -268,6 +268,7 @@ object frmClientes: TfrmClientes
     Height = 25
     Hint = 'Selecione os filtros para os clientes'
     Caption = 'Limpar filtros'
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12

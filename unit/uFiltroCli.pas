@@ -87,6 +87,7 @@ begin
       ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
   end;
   abrirDados('cliente', true);
+  frmClientes.btnLimparFiltros.Enabled := true;
   frmFiltrosCli.Close;
 end;
 

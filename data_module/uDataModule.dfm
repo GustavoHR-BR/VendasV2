@@ -412,6 +412,7 @@ object dm: Tdm
     end
   end
   object cdsItens: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dpsItens'
@@ -443,6 +444,15 @@ object dm: Tdm
     end
     object cdsItensquantidade: TIntegerField
       FieldName = 'quantidade'
+    end
+    object cdsItensacrescimo: TIntegerField
+      FieldName = 'acrescimo'
+    end
+    object cdsItensdesconto: TIntegerField
+      FieldName = 'desconto'
+    end
+    object cdsItensvalor_total: TFloatField
+      FieldName = 'valor_total'
     end
   end
 end

@@ -60,6 +60,7 @@ type
     procedure edtFreteChange(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure DBGridVendasCellClick(Column: TColumn);
+    procedure btnEditarClick(Sender: TObject);
   private
     passouAqui: Boolean;
   public
@@ -81,6 +82,7 @@ uses
 procedure TfrmCadastrarVenda.btnAdicionarClick(Sender: TObject);
 begin
   Application.CreateForm(TfrmAdicionarItem, frmAdicionarItem);
+  Tag := 4;
   try
     frmAdicionarItem.ShowModal;
   finally
@@ -89,6 +91,17 @@ begin
     dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
       dm.cdsVendasid.Text;
     abrirDados('item', True);
+  end;
+end;
+
+procedure TfrmCadastrarVenda.btnEditarClick(Sender: TObject);
+begin
+  Application.CreateForm(TfrmAdicionarItem, frmAdicionarItem);
+  Tag := 3;
+  try
+    frmAdicionarItem.ShowModal;
+  finally
+    FreeAndNil(frmAdicionarItem);
   end;
 end;
 
@@ -148,6 +161,7 @@ end;
 procedure TfrmCadastrarVenda.DBGridVendasCellClick(Column: TColumn);
 begin
   btnExcluir.Enabled := True;
+  btnEditar.Enabled := True;
 end;
 
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);
@@ -360,6 +374,13 @@ begin
   if Application.MessageBox('Deseja realmente excluir?', 'Atenção',
     MB_YESNO + MB_ICONQUESTION) = mrYes then
   begin
+
+    // Altera valores da venda
+    edtSubtTotal.Text := FloatToStr(StrToFloat(edtSubtTotal.Text) -
+      dm.cdsItensvalor_total.AsFloat);
+    calculaTotalVenda;
+
+    // Altera ids
     qtdDoItemExcluido := dm.cdsItensquantidade.AsInteger;
     idDoItemExcluido := dm.cdsItensid.AsInteger;
     numeroDeItens := numeroDeItens - 1;

@@ -373,5 +373,6 @@ object frmAdicionarItem: TfrmAdicionarItem
     ParentShowHint = False
     ShowHint = True
     TabOrder = 12
+    OnClick = btnCancelarClick
   end
 end

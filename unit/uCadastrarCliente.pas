@@ -186,9 +186,11 @@ begin
             ShowMessage('Erro ao cadastrar o cliente! ' + E.ToString);
         end;
       end;
+      abrirDados('cliente', false);
       abrirDados('rua', false);
       dm.cdsRuas.CommandText := 'SELECT * FROM rua';
       abrirDados('rua', true);
+      abrirDados('cliente', true);
     end;
   end;
 end;

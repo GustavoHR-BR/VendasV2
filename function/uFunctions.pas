@@ -496,10 +496,38 @@ begin
 end;
 
 procedure calculaSubTotalVenda;
+var
+  novoValDoItem, diferenca: Double;
 begin
-  frmCadastrarVenda.edtSubtTotal.Text :=
-    FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
-    StrToFloat(frmAdicionarItem.edtValTotal.Text));
+  if frmCadastrarVenda.Tag = 4 then // adicionando algum item
+  begin
+    frmCadastrarVenda.edtSubtTotal.Text :=
+      FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
+      StrToFloat(frmAdicionarItem.edtValTotal.Text));
+  end
+  else if frmCadastrarVenda.Tag = 3 then // editando um item
+  begin
+    if frmCadastrarVenda.DBGridVendas.DataSource.DataSet.RecordCount = 0 then
+      frmCadastrarVenda.edtSubtTotal.Text := '0'
+    else
+    begin
+      novoValDoItem := dm.cdsItensvalor_total.AsFloat;
+      diferenca := novoValDoItem - frmAdicionarItem.valAtualDoItem;
+
+      if diferenca > 0 then
+      begin
+        frmCadastrarVenda.edtSubtTotal.Text :=
+          FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
+          diferenca);
+      end
+      else
+      begin
+        frmCadastrarVenda.edtSubtTotal.Text :=
+          FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
+          diferenca);
+      end;
+    end;
+  end;
 end;
 
 procedure calculaTotalVenda;

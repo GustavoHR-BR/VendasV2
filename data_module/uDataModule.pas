@@ -79,6 +79,9 @@ type
     cdsItenspreco: TFMTBCDField;
     cdsItensdescricao: TStringField;
     cdsItensquantidade: TIntegerField;
+    cdsItensacrescimo: TIntegerField;
+    cdsItensdesconto: TIntegerField;
+    cdsItensvalor_total: TFloatField;
   private
     { Private declarations }
   public

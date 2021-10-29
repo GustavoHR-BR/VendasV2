@@ -586,6 +586,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentShowHint = False
     ShowHint = True
     TabOrder = 8
+    OnClick = btnEditarClick
   end
   object btnExcluir: TButton
     Left = 212
@@ -608,7 +609,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object dbgrid: TDBGrid
     Left = 24
-    Top = 60
+    Top = 61
     Width = 321
     Height = 190
     DataSource = dm.dSourceClientes
@@ -655,7 +656,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object btnFecharBusca: TButton
     Left = 270
-    Top = 225
+    Top = 226
     Width = 75
     Height = 25
     Hint = 'Fechar busca'

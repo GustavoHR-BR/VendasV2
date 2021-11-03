@@ -96,6 +96,7 @@ end;
 
 procedure TfrmCadastrarVenda.btnExcluirClick(Sender: TObject);
 var
+  idCliente: string;
   I, J, idDoItemExcluido, qtdDoItemExcluido, novoEstoque, idProduto,
     qtdAtualNoEstoque: Integer;
 begin
@@ -161,14 +162,22 @@ begin
       dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
         dm.cdsVendasid.Text;
       abrirDados('item', True);
+      idCliente := dm.cdsClientesid.AsString;
       abrirDados('cliente', false);
-      dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
+      dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE id = ' +
+        idCliente;
       abrirDados('cliente', True);
     except
       on E: Exception do
       begin
         ShowMessage('Erro ao deletar item! ' + E.ToString);
       end;
+    end;
+
+    if frmCadastrarVenda.DBGridVendas.DataSource.DataSet.RecordCount <= 0 then
+    begin
+      btnEditar.Enabled := false;
+      btnExcluir.Enabled := false;
     end;
   end;
 end;
@@ -272,9 +281,12 @@ end;
 
 procedure TfrmCadastrarVenda.edtBuscarClick(Sender: TObject);
 begin
-  dbgrid.Visible := True;
-  btnFecharBusca.Visible := True;
-  edtBuscarChange(Self);
+  if DBGridVendas.DataSource.DataSet.RecordCount <= 0 then
+  begin
+    dbgrid.Visible := True;
+    btnFecharBusca.Visible := True;
+    edtBuscarChange(Self);
+  end;
 end;
 
 procedure TfrmCadastrarVenda.edtAcrescimoChange(Sender: TObject);
@@ -368,7 +380,6 @@ begin
         numeroDeItens := numeroDeItens - 1;
 
         abrirDados('item', false);
-        ///
         dm.cdsItens.CommandText := 'SELECT * FROM item';
         abrirDados('item', True);
         dm.cdsItens.Last;

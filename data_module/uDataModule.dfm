@@ -401,9 +401,11 @@ object dm: Tdm
       FieldName = 'nome'
       Size = 60
     end
-    object cdsProdutospreco: TSingleField
+    object cdsProdutospreco: TFMTBCDField
       FieldName = 'preco'
       currency = True
+      Precision = 22
+      Size = 6
     end
     object cdsProdutosdescricao: TStringField
       FieldName = 'descricao'
@@ -414,7 +416,6 @@ object dm: Tdm
     end
   end
   object cdsItens: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dpsItens'
@@ -437,7 +438,6 @@ object dm: Tdm
     end
     object cdsItenspreco: TFMTBCDField
       FieldName = 'preco'
-      currency = True
       Precision = 12
       Size = 2
     end

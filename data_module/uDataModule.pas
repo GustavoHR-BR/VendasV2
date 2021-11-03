@@ -65,13 +65,13 @@ type
     cdsClientesRua: TStringField;
     queryEnderecoCliente: TSQLQuery;
     cdsProdutos: TClientDataSet;
-    cdsProdutosid: TIntegerField;
-    cdsProdutosnome: TStringField;
-    cdsProdutospreco: TSingleField;
-    cdsProdutosdescricao: TStringField;
-    cdsProdutosquantidade_estoque: TIntegerField;
     cdsVendasCliente: TStringField;
     cdsItens: TClientDataSet;
+    cdsProdutosid: TIntegerField;
+    cdsProdutosnome: TStringField;
+    cdsProdutospreco: TFMTBCDField;
+    cdsProdutosdescricao: TStringField;
+    cdsProdutosquantidade_estoque: TIntegerField;
     cdsItensid: TIntegerField;
     cdsItensfk_venda: TIntegerField;
     cdsItensfk_produto: TIntegerField;

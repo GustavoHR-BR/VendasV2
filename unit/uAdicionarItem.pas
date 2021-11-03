@@ -114,13 +114,14 @@ var
 begin
   if frmCadastrarVenda.Tag = 3 then
   begin
-    novoEstoque := dm.cdsItensquantidade.Text + IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
-    StrToInt(edtQuantidade.text));
+    novoEstoque := dm.cdsItensquantidade.text +
+      IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
+      StrToInt(edtQuantidade.text));
   end;
   novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
     StrToInt(edtQuantidade.text));
-  if (StrToInt(novoEstoque) + StrToInt(edtQuantidade.text)) > dm.cdsProdutosquantidade_estoque.AsInteger
-  then
+  if (StrToInt(novoEstoque) + StrToInt(edtQuantidade.text)) >
+    dm.cdsProdutosquantidade_estoque.AsInteger then
   begin
     ShowMessage('Quantidade inválida! Estoque insuficiente.');
     edtQuantidade.text := '1';
@@ -319,7 +320,8 @@ procedure TfrmAdicionarItem.FormClose(Sender: TObject;
 begin
   if Tag <> 1 then
   begin
-    if frmCadastrarVenda.Tag = 4 then // User está cancelando adição de um item
+    if frmCadastrarVenda.Tag = 4 then
+    // User está cancelando a adição de um item
     begin
       if Application.MessageBox
         ('Deseja realmente fechar? O item será cancelado!', 'Atenção',
@@ -334,10 +336,12 @@ begin
           on E: Exception do
         end;
         dbgrid.DataSource := dm.cdsItens.DataSource;
-      end;
+      end
+      else
+        Abort;
     end
     else if frmCadastrarVenda.Tag = 3 then
-    // User está cancelando edição de um item
+    // User está cancelando a edição de um item
     begin
       if Application.MessageBox
         ('Deseja realmente fechar? Qualquer alteração não será aplicada!',
@@ -348,40 +352,22 @@ begin
           dm.cdsVendasid.text + ' ORDER BY id ASC;';
         abrirDados('item', true);
         dbgrid.DataSource := dm.cdsItens.DataSource;
-      end;
+      end
+      else
+        Abort;
     end;
   end;
 end;
 
 procedure TfrmAdicionarItem.FormShow(Sender: TObject);
-var
-  resetEstoque, idProduto, estoqueAtual: Integer;
 begin
   if frmCadastrarVenda.Tag = 3 then // Editando item
   begin
-//    idProduto := StrToInt(dm.cdsItensfk_produto.text);
-//
-//    abrirDados('produto', false);
-//    dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
-//      IntToStr(idProduto);
-//    abrirDados('produto', true);
-//    estoqueAtual := dm.cdsProdutosquantidade_estoque.AsInteger;
-//    resetEstoque := dm.cdsProdutosquantidade_estoque.AsInteger +
-//      dm.cdsItensquantidade.AsInteger;
-//    abrirDados('produto', false);
-//    dm.cdsProdutos.CommandText := 'UPDATE produto SET quantidade_estoque = ' +
-//      IntToStr(resetEstoque) + ' WHERE id = ' + IntToStr(idProduto);
-//    try
-//      abrirDados('produto', true);
-//    except
-//      on E: Exception do
-//    end;
-
     btnFinalizar.Caption := 'Editar';
     btnFinalizar.Enabled := true;
     edtBuscar.Enabled := false;
     edtBuscar.text := dm.cdsItensnome.text;
-    edtEmEstoque.Text := dm.cdsProdutosquantidade_estoque.AsString;
+    edtEmEstoque.text := dm.cdsProdutosquantidade_estoque.AsString;
     edtQuantidade.text := dm.cdsItensquantidade.AsString;
     edtValUnitario.text := dm.cdsItenspreco.AsString;
     edtAcrescimo.text := dm.cdsItensacrescimo.AsString;

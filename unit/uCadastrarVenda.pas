@@ -191,14 +191,26 @@ end;
 
 procedure TfrmCadastrarVenda.btnFecharBuscaClick(Sender: TObject);
 begin
-  dbgrid.Visible := false;
-  btnFecharBusca.Visible := false;
-  edtBuscar.Clear;
-  dm.cdsClientes.Edit;
-  dm.cdsClientes.ClearFields;
-  btnAdicionar.Enabled := false;
-  btnCadastrarCliente.Enabled := True;
-  btnEditarCliente.Enabled := false;
+  if DBGridVendas.DataSource.DataSet.RecordCount <= 0 then
+  begin
+    dbgrid.Visible := false;
+    btnFecharBusca.Visible := false;
+    edtBuscar.Clear;
+    dm.cdsClientes.Edit;
+    dm.cdsClientes.ClearFields;
+    btnAdicionar.Enabled := false;
+    btnEditar.Enabled := false;
+    btnExcluir.Enabled := false;
+    btnCadastrarCliente.Enabled := True;
+    btnEditarCliente.Enabled := false;
+  end
+  else
+  begin
+    ShowMessage
+      ('Já existe ao menos um item vinculado a venda! Cancele-a primeiro para alterar o cliente.');
+    dbgrid.Visible := false;
+    btnFecharBusca.Visible := false;
+  end;
 end;
 
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
@@ -239,8 +251,11 @@ end;
 
 procedure TfrmCadastrarVenda.DBGridVendasCellClick(Column: TColumn);
 begin
-  btnExcluir.Enabled := True;
-  btnEditar.Enabled := True;
+  if DBGridVendas.DataSource.DataSet.RecordCount > 0 then
+  begin
+    btnExcluir.Enabled := True;
+    btnEditar.Enabled := True;
+  end;
 end;
 
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);

@@ -312,6 +312,7 @@ object dm: Tdm
     end
     object cdsVendastotal: TFMTBCDField
       FieldName = 'total'
+      currency = True
       Precision = 12
       Size = 2
     end
@@ -402,6 +403,7 @@ object dm: Tdm
     end
     object cdsProdutospreco: TSingleField
       FieldName = 'preco'
+      currency = True
     end
     object cdsProdutosdescricao: TStringField
       FieldName = 'descricao'
@@ -435,6 +437,7 @@ object dm: Tdm
     end
     object cdsItenspreco: TFMTBCDField
       FieldName = 'preco'
+      currency = True
       Precision = 12
       Size = 2
     end
@@ -453,6 +456,7 @@ object dm: Tdm
     end
     object cdsItensvalor_total: TFloatField
       FieldName = 'valor_total'
+      currency = True
     end
   end
 end

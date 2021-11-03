@@ -34,6 +34,8 @@ type
     edtValTotal: TEdit;
     btnFinalizar: TButton;
     btnCancelar: TButton;
+    Label13: TLabel;
+    edtEmEstoque: TEdit;
     procedure FormShow(Sender: TObject);
     procedure edtBuscarClick(Sender: TObject);
     procedure edtBuscarChange(Sender: TObject);
@@ -70,14 +72,15 @@ begin
     edtBuscar.Clear;
     dbgrid.Visible := false;
     btnCancelarItem.Visible := false;
-    edtQuantidade.Text := '1';
-    edtValUnitario.Text := '0';
-    edtAcrescimo.Text := '0';
-    edtValAcrescimo.Text := '0';
-    edtDesconto.Text := '0';
-    edtValDesconto.Text := '0';
-    edtSubTotal.Text := '0';
-    edtValTotal.Text := '0';
+    edtEmEstoque.text := '';
+    edtQuantidade.text := '1';
+    edtValUnitario.text := '0';
+    edtAcrescimo.text := '0';
+    edtValAcrescimo.text := '0';
+    edtDesconto.text := '0';
+    edtValDesconto.text := '0';
+    edtSubTotal.text := '0';
+    edtValTotal.text := '0';
     btnFinalizar.Enabled := false;
   end
   else if frmCadastrarVenda.Tag = 3 then
@@ -92,14 +95,15 @@ begin
   edtBuscar.Clear;
   dbgrid.Visible := false;
   btnCancelarItem.Visible := false;
-  edtQuantidade.Text := '1';
-  edtValUnitario.Text := '0';
-  edtAcrescimo.Text := '0';
-  edtValAcrescimo.Text := '0';
-  edtDesconto.Text := '0';
-  edtValDesconto.Text := '0';
-  edtSubTotal.Text := '0';
-  edtValTotal.Text := '0';
+  edtEmEstoque.text := '';
+  edtQuantidade.text := '1';
+  edtValUnitario.text := '0';
+  edtAcrescimo.text := '0';
+  edtValAcrescimo.text := '0';
+  edtDesconto.text := '0';
+  edtValDesconto.text := '0';
+  edtSubTotal.text := '0';
+  edtValTotal.text := '0';
   btnFinalizar.Enabled := false;
 end;
 
@@ -108,46 +112,51 @@ var
   novoEstoque, idDoProduto, qtdDeProdutosBeforeEdit: string;
   diferenca: Integer;
 begin
+  if frmCadastrarVenda.Tag = 3 then
+  begin
+    novoEstoque := dm.cdsItensquantidade.Text + IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
+    StrToInt(edtQuantidade.text));
+  end;
   novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
-    StrToInt(edtQuantidade.Text));
-  if StrToInt(edtQuantidade.Text) > dm.cdsProdutosquantidade_estoque.AsInteger
+    StrToInt(edtQuantidade.text));
+  if (StrToInt(novoEstoque) + StrToInt(edtQuantidade.text)) > dm.cdsProdutosquantidade_estoque.AsInteger
   then
   begin
     ShowMessage('Quantidade inválida! Estoque insuficiente.');
-    edtQuantidade.Text := '1';
+    edtQuantidade.text := '1';
     edtQuantidade.SetFocus;
   end
-  else if StrToInt(edtQuantidade.Text) < 1 then
+  else if StrToInt(edtQuantidade.text) < 1 then
   begin
     ShowMessage('Valor inválido! A quantidade mínima é de 1 item.');
-    edtQuantidade.Text := '1';
+    edtQuantidade.text := '1';
     edtQuantidade.SetFocus;
   end
-  else if (StrToInt(edtAcrescimo.Text) < 0) OR
-    (StrToInt(edtAcrescimo.Text) > 100) then
+  else if (StrToInt(edtAcrescimo.text) < 0) OR
+    (StrToInt(edtAcrescimo.text) > 100) then
   begin
     ShowMessage('Acréscimo inválido!');
-    edtAcrescimo.Text := '0';
+    edtAcrescimo.text := '0';
     edtAcrescimo.SetFocus;
   end
-  else if (StrToInt(edtDesconto.Text) < 0) OR (StrToInt(edtDesconto.Text) > 100)
+  else if (StrToInt(edtDesconto.text) < 0) OR (StrToInt(edtDesconto.text) > 100)
   then
   begin
     ShowMessage('Desconto inválido!');
-    edtDesconto.Text := '0';
+    edtDesconto.text := '0';
     edtDesconto.SetFocus;
   end
   else if frmCadastrarVenda.Tag = 4 then // Adicionando Item a venda
   begin
     dm.cdsItens.Edit;
-    dm.cdsItensfk_produto.Text := dm.cdsProdutosid.Text;
-    dm.cdsItensnome.Text := dm.cdsProdutosnome.Text;
-    dm.cdsItenspreco.Text := dm.cdsProdutospreco.Text;
-    dm.cdsItensdescricao.Text := dm.cdsProdutosdescricao.Text;
-    dm.cdsItensquantidade.Text := edtQuantidade.Text;
-    dm.cdsItensacrescimo.AsInteger := StrToInt(edtAcrescimo.Text);
-    dm.cdsItensdesconto.AsInteger := StrToInt(edtDesconto.Text);
-    dm.cdsItensvalor_total.AsFloat := StrToFloat(edtValTotal.Text);
+    dm.cdsItensfk_produto.text := dm.cdsProdutosid.text;
+    dm.cdsItensnome.text := dm.cdsProdutosnome.text;
+    dm.cdsItenspreco.text := dm.cdsProdutospreco.text;
+    dm.cdsItensdescricao.text := dm.cdsProdutosdescricao.text;
+    dm.cdsItensquantidade.text := edtQuantidade.text;
+    dm.cdsItensacrescimo.AsInteger := StrToInt(edtAcrescimo.text);
+    dm.cdsItensdesconto.AsInteger := StrToInt(edtDesconto.text);
+    dm.cdsItensvalor_total.AsFloat := StrToFloat(edtValTotal.text);
     dm.cdsItens.Post;
     dm.cdsItens.ApplyUpdates(0);
     frmCadastrarVenda.numeroDeItens := frmCadastrarVenda.numeroDeItens + 1;
@@ -173,27 +182,27 @@ begin
   end
   else if frmCadastrarVenda.Tag = 3 then // Editando Item da venda
   begin
-    qtdDeProdutosBeforeEdit := dm.cdsItensquantidade.Text;
+    qtdDeProdutosBeforeEdit := dm.cdsItensquantidade.text;
     dm.cdsItens.Edit;
-    dm.cdsItensquantidade.Text := edtQuantidade.Text;
-    dm.cdsItensacrescimo.AsInteger := StrToInt(edtAcrescimo.Text);
-    dm.cdsItensdesconto.AsInteger := StrToInt(edtDesconto.Text);
-    dm.cdsItensvalor_total.AsFloat := StrToFloat(edtValTotal.Text);
+    dm.cdsItensquantidade.text := edtQuantidade.text;
+    dm.cdsItensacrescimo.AsInteger := StrToInt(edtAcrescimo.text);
+    dm.cdsItensdesconto.AsInteger := StrToInt(edtDesconto.text);
+    dm.cdsItensvalor_total.AsFloat := StrToFloat(edtValTotal.text);
     dm.cdsItens.Post;
     dm.cdsItens.ApplyUpdates(0);
 
     idDoProduto := dm.cdsItensfk_produto.AsString;
-    if StrToInt(qtdDeProdutosBeforeEdit) > StrToInt(dm.cdsItensquantidade.Text)
+    if StrToInt(qtdDeProdutosBeforeEdit) > StrToInt(dm.cdsItensquantidade.text)
     then
     begin
       diferenca := StrToInt(qtdDeProdutosBeforeEdit) -
-        StrToInt(dm.cdsItensquantidade.Text);
+        StrToInt(dm.cdsItensquantidade.text);
       novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger +
         diferenca);
     end
     else
     begin
-      diferenca := StrToInt(dm.cdsItensquantidade.Text) -
+      diferenca := StrToInt(dm.cdsItensquantidade.text) -
         StrToInt(qtdDeProdutosBeforeEdit);
       novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
         diferenca);
@@ -217,8 +226,9 @@ end;
 
 procedure TfrmAdicionarItem.dbgridCellClick(Column: TColumn);
 begin
-  edtBuscar.Text := dm.cdsProdutosnome.AsString;
-  edtValUnitario.Text := dm.cdsProdutospreco.AsString;
+  edtBuscar.text := dm.cdsProdutosnome.AsString;
+  edtValUnitario.text := dm.cdsProdutospreco.AsString;
+  edtEmEstoque.text := dm.cdsProdutosquantidade_estoque.AsString;
   dbgrid.Visible := false;
   btnCancelarItem.Visible := false;
   btnFinalizar.Enabled := true;
@@ -228,7 +238,7 @@ end;
 
 procedure TfrmAdicionarItem.edtBuscarChange(Sender: TObject);
 begin
-  threadBuscarProduto(edtBuscar.Text);
+  threadBuscarProduto(edtBuscar.text);
   dbgrid.DataSource := dm.cdsProdutos.DataSource;
   Sleep(60);
 end;
@@ -237,23 +247,23 @@ procedure TfrmAdicionarItem.edtBuscarClick(Sender: TObject);
 begin
   btnCancelarItem.Visible := true;
   dbgrid.Visible := true;
-  threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
+  threadBuscarProduto(LowerCase(Trim(edtBuscar.text)));
   Sleep(60);
 end;
 
 procedure TfrmAdicionarItem.edtDescontoChange(Sender: TObject);
 begin
   passouAqui := false;
-  if edtDesconto.Text = '' then
+  if edtDesconto.text = '' then
   begin
-    edtDesconto.Text := '0';
+    edtDesconto.text := '0';
     passouAqui := true;
   end
   else
   begin
     if passouAqui = true then
     begin
-      edtDesconto.Text := copy(edtDesconto.Text, 0, 1);
+      edtDesconto.text := copy(edtDesconto.text, 0, 1);
       passouAqui := false;
     end;
 
@@ -265,16 +275,16 @@ end;
 procedure TfrmAdicionarItem.edtAcrescimoChange(Sender: TObject);
 begin
   passouAqui := false;
-  if edtAcrescimo.Text = '' then
+  if edtAcrescimo.text = '' then
   begin
-    edtAcrescimo.Text := '0';
+    edtAcrescimo.text := '0';
     passouAqui := true;
   end
   else
   begin
     if passouAqui = true then
     begin
-      edtAcrescimo.Text := copy(edtAcrescimo.Text, 0, 1);
+      edtAcrescimo.text := copy(edtAcrescimo.text, 0, 1);
       passouAqui := false;
     end;
 
@@ -286,16 +296,16 @@ end;
 procedure TfrmAdicionarItem.edtQuantidadeChange(Sender: TObject);
 begin
   passouAqui := false;
-  if edtQuantidade.Text = '' then
+  if edtQuantidade.text = '' then
   begin
-    edtQuantidade.Text := '1';
+    edtQuantidade.text := '1';
     passouAqui := true;
   end
   else
   begin
     if passouAqui = true then
     begin
-      edtQuantidade.Text := copy(edtQuantidade.Text, 0, 1);
+      edtQuantidade.text := copy(edtQuantidade.text, 0, 1);
       passouAqui := false;
     end;
 
@@ -335,7 +345,7 @@ begin
       begin
         abrirDados('item', false);
         dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
-          dm.cdsVendasid.Text + ' ORDER BY id ASC;';
+          dm.cdsVendasid.text + ' ORDER BY id ASC;';
         abrirDados('item', true);
         dbgrid.DataSource := dm.cdsItens.DataSource;
       end;
@@ -349,32 +359,33 @@ var
 begin
   if frmCadastrarVenda.Tag = 3 then // Editando item
   begin
-    idProduto := StrToInt(dm.cdsItensfk_produto.Text);
-
-    abrirDados('produto', false);
-    dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
-      IntToStr(idProduto);
-    abrirDados('produto', true);
-    estoqueAtual := dm.cdsProdutosquantidade_estoque.AsInteger;
-    resetEstoque := dm.cdsProdutosquantidade_estoque.AsInteger +
-      dm.cdsItensquantidade.AsInteger;
-    abrirDados('produto', false);
-    dm.cdsProdutos.CommandText := 'UPDATE produto SET quantidade_estoque = ' +
-      IntToStr(resetEstoque) + ' WHERE id = ' + IntToStr(idProduto);
-    try
-      abrirDados('produto', true);
-    except
-      on E: Exception do
-    end;
+//    idProduto := StrToInt(dm.cdsItensfk_produto.text);
+//
+//    abrirDados('produto', false);
+//    dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE id = ' +
+//      IntToStr(idProduto);
+//    abrirDados('produto', true);
+//    estoqueAtual := dm.cdsProdutosquantidade_estoque.AsInteger;
+//    resetEstoque := dm.cdsProdutosquantidade_estoque.AsInteger +
+//      dm.cdsItensquantidade.AsInteger;
+//    abrirDados('produto', false);
+//    dm.cdsProdutos.CommandText := 'UPDATE produto SET quantidade_estoque = ' +
+//      IntToStr(resetEstoque) + ' WHERE id = ' + IntToStr(idProduto);
+//    try
+//      abrirDados('produto', true);
+//    except
+//      on E: Exception do
+//    end;
 
     btnFinalizar.Caption := 'Editar';
     btnFinalizar.Enabled := true;
     edtBuscar.Enabled := false;
-    edtBuscar.Text := dm.cdsItensnome.Text;
-    edtQuantidade.Text := dm.cdsItensquantidade.AsString;
-    edtValUnitario.Text := dm.cdsItenspreco.AsString;
-    edtAcrescimo.Text := dm.cdsItensacrescimo.AsString;
-    edtDesconto.Text := dm.cdsItensdesconto.AsString;
+    edtBuscar.text := dm.cdsItensnome.text;
+    edtEmEstoque.Text := dm.cdsProdutosquantidade_estoque.AsString;
+    edtQuantidade.text := dm.cdsItensquantidade.AsString;
+    edtValUnitario.text := dm.cdsItenspreco.AsString;
+    edtAcrescimo.text := dm.cdsItensacrescimo.AsString;
+    edtDesconto.text := dm.cdsItensdesconto.AsString;
     valAtualDoItem := dm.cdsItensvalor_total.AsFloat;
     calculaSubTotalItem;
     calculaAcrescimoItem;
@@ -389,17 +400,17 @@ begin
     dm.cdsItens.Edit;
     dm.cdsItens.Append;
     dm.cdsItensid.AsInteger := frmCadastrarVenda.numeroDeItens;
-    dm.cdsItensfk_venda.Text := dm.cdsVendasid.Text;
+    dm.cdsItensfk_venda.text := dm.cdsVendasid.text;
     dm.cdsItens.Post;
     dm.cdsItens.ApplyUpdates(0);
     abrirDados('item', false);
     dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
-      dm.cdsVendasid.Text + ' ORDER BY id ASC;';
+      dm.cdsVendasid.text + ' ORDER BY id ASC;';
     abrirDados('item', true);
     dm.cdsItens.Last;
     dm.cdsItens.Edit;
-    dm.cdsItensid.Text := dm.cdsItensid.Text;
-    frmCadastrarVenda.idDoItem := dm.cdsItensid.Text;
+    dm.cdsItensid.text := dm.cdsItensid.text;
+    frmCadastrarVenda.idDoItem := dm.cdsItensid.text;
   end;
 
 end;

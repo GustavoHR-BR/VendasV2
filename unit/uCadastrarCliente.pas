@@ -180,17 +180,18 @@ begin
             frmCadastrarVenda.edtBuscar.Clear;
           end;
           Tag := 1;
+
+          abrirDados('cliente', false);
+          abrirDados('rua', false);
+          dm.cdsRuas.CommandText := 'SELECT * FROM rua';
+          abrirDados('rua', true);
+          abrirDados('cliente', true);
           frmCadastrarCliente.Close;
         except
           on E: Exception do
             ShowMessage('Erro ao cadastrar o cliente! ' + E.ToString);
         end;
       end;
-      abrirDados('cliente', false);
-      abrirDados('rua', false);
-      dm.cdsRuas.CommandText := 'SELECT * FROM rua';
-      abrirDados('rua', true);
-      abrirDados('cliente', true);
     end;
   end;
 end;

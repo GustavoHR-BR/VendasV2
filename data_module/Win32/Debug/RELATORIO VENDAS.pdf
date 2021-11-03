@@ -41,7 +41,7 @@ endobj
 endobj
 
 5 0 obj
-<< /Length 7747 >>
+<< /Length 7859 >>
 stream
 2 J
 BT
@@ -413,6 +413,16 @@ BT
 ET
 BT
 /F2 10.00 Tf
+103.8700 335.6000 Td
+( do)Tj
+ET
+BT
+/F2 10.00 Tf
+115.4200 335.6000 Td
+( Pantanal)Tj
+ET
+BT
+/F2 10.00 Tf
 403.2000 335.6000 Td
 (2650,89)Tj
 ET
@@ -739,7 +749,7 @@ endobj
 endobj
 
 7 0 obj
-<< /Length 4712 >>
+<< /Length 5772 >>
 stream
 2 J
 BT
@@ -1149,6 +1159,97 @@ BT
 482.4000 350.0000 Td
 (1)Tj
 ET
+BT
+/F2 10.00 Tf
+38.8800 292.4000 Td
+(11)Tj
+ET
+BT
+/F2 10.00 Tf
+72.0000 292.4000 Td
+(Neymar)Tj
+ET
+BT
+/F2 10.00 Tf
+103.8000 292.4000 Td
+( Jr.)Tj
+ET
+BT
+/F2 10.00 Tf
+403.2000 292.4000 Td
+(13046,43)Tj
+ET
+BT
+/F2 10.00 Tf
+482.4000 292.4000 Td
+(28/10/2021)Tj
+ET
+BT
+/F1 10.00 Tf
+28.8000 313.2800 Td
+(Código)Tj
+ET
+BT
+/F1 10.00 Tf
+72.0000 313.2800 Td
+(Cliente)Tj
+ET
+BT
+/F1 10.00 Tf
+403.2000 313.2800 Td
+(Total)Tj
+ET
+BT
+/F1 10.00 Tf
+482.4000 313.2800 Td
+(Data)Tj
+ET
+0 0 0 RG
+0.502 0.502 0.502 rg
+14.4000 279.4800 m
+583.2000 279.4800 l S
+14.4000 337.8000 568.8000 -7.2000 re b
+BT
+0 0 0 rg
+/F1 10.00 Tf
+28.8000 262.8800 Td
+(Código)Tj
+ET
+BT
+/F1 10.00 Tf
+72.0000 262.8800 Td
+(Produto)Tj
+ET
+BT
+/F1 10.00 Tf
+403.2000 262.8800 Td
+(Preço)Tj
+ET
+BT
+/F1 10.00 Tf
+482.4000 262.8800 Td
+(Quantidade)Tj
+ET
+BT
+/F2 10.00 Tf
+39.6000 234.8000 Td
+(9)Tj
+ET
+BT
+/F2 10.00 Tf
+72.0000 234.8000 Td
+(roda)Tj
+ET
+BT
+/F2 10.00 Tf
+403.2000 234.8000 Td
+(549,83)Tj
+ET
+BT
+/F2 10.00 Tf
+482.4000 234.8000 Td
+(20)Tj
+ET
 endstream
 endobj
 
@@ -1272,7 +1373,7 @@ endobj
 <<
 /Creator (Rave Reports \(http://www.nevrona.com/rave\))
 /Producer (Nevrona Designs)
-/CreationDate (D:202110285:7:6 )
+/CreationDate (D:202111038:8:9 )
 >>
 endobj
 
@@ -1284,14 +1385,14 @@ xref
 0000000147 00000 n
 0000000222 00000 n
 0000000393 00000 n
-0000008198 00000 n
-0000008369 00000 n
-0000013139 00000 n
-0000013172 00000 n
-0000014309 00000 n
-0000014590 00000 n
-0000015723 00000 n
-0000015999 00000 n
+0000008310 00000 n
+0000008481 00000 n
+0000014311 00000 n
+0000014344 00000 n
+0000015481 00000 n
+0000015762 00000 n
+0000016895 00000 n
+0000017171 00000 n
 
 trailer
 <<
@@ -1301,5 +1402,5 @@ trailer
 >>
 
 startxref
-16147
+17319
 %%EOF

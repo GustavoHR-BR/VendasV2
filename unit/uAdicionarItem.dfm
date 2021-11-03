@@ -174,6 +174,28 @@ object frmAdicionarItem: TfrmAdicionarItem
     Font.Style = []
     ParentFont = False
   end
+  object Label13: TLabel
+    Left = 354
+    Top = 95
+    Width = 60
+    Height = 15
+    Caption = 'Em estoque:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Arial Unicode MS'
+    Font.Style = []
+    ParentFont = False
+  end
+  object edtEmEstoque: TEdit
+    Left = 354
+    Top = 112
+    Width = 121
+    Height = 21
+    Alignment = taRightJustify
+    Enabled = False
+    TabOrder = 13
+  end
   object edtValAcrescimo: TEdit
     Left = 184
     Top = 176

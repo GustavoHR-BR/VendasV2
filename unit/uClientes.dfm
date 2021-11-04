@@ -85,7 +85,7 @@ object frmClientes: TfrmClientes
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 115
+        Width = 100
         Visible = True
       end
       item
@@ -97,7 +97,7 @@ object frmClientes: TfrmClientes
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 150
+        Width = 160
         Visible = True
       end
       item
@@ -109,7 +109,7 @@ object frmClientes: TfrmClientes
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 125
+        Width = 110
         Visible = True
       end
       item
@@ -125,6 +125,30 @@ object frmClientes: TfrmClientes
         Visible = True
       end
       item
+        Expanded = False
+        FieldName = 'rua'
+        Title.Caption = 'Rua'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'bairro'
+        Title.Caption = 'Bairro'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 100
+        Visible = True
+      end
+      item
         Alignment = taCenter
         Expanded = False
         FieldName = 'data_nascimento'
@@ -135,17 +159,6 @@ object frmClientes: TfrmClientes
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
         Width = 90
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'Rua'
-        Title.Font.Charset = DEFAULT_CHARSET
-        Title.Font.Color = clWindowText
-        Title.Font.Height = -11
-        Title.Font.Name = 'Tahoma'
-        Title.Font.Style = [fsBold]
-        Width = 200
         Visible = True
       end>
   end

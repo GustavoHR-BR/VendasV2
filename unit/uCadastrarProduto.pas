@@ -41,7 +41,8 @@ uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
 
 procedure TfrmCadastrarProduto.btnCadastrarClick(Sender: TObject);
 begin
-  if (dbEdtNome.Text = '') OR (Length(dbEdtNome.Text) < 5)then
+  removeFormatacaoPrecoProduto;
+  if (dbEdtNome.Text = '') OR (Length(dbEdtNome.Text) < 5) then
   begin
     ShowMessage('Nome inválido! ');
     dbEdtNome.SetFocus;
@@ -66,12 +67,15 @@ begin
     if frmProdutos.Tag = 1 then
     begin
       dm.cdsProdutosid.Text := '0';
+
       try
+        dm.cdsprodutospreco.asstring := dbEdtPreco.Text;
         dm.cdsProdutos.Post;
         dm.cdsProdutos.ApplyUpdates(0);
+        Tag := 1;
         ShowMessage('Sucesso ao cadastrar o produto! ');
         frmCadastrarProduto.Close;
-        Tag := 1;
+
       except
         on E: Exception do
           ShowMessage('Erro ao cadastrar o produto! ' + E.ToString);
@@ -83,6 +87,7 @@ begin
         dm.cdsProdutos.Post;
         dm.cdsProdutos.ApplyUpdates(0);
         Tag := 2;
+        ShowMessage('Sucesso ao editar o produto! ');
         frmCadastrarProduto.Close;
       except
         on E: Exception do

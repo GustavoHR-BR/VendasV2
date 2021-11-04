@@ -112,22 +112,28 @@ var
   novoEstoque, idDoProduto, qtdDeProdutosBeforeEdit: string;
   diferenca: Integer;
 begin
-  if frmCadastrarVenda.Tag = 3 then
+  if frmCadastrarVenda.Tag = 3 then // Editando algum Item
   begin
     novoEstoque := dm.cdsItensquantidade.text +
       IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
       StrToInt(edtQuantidade.text));
-  end;
-  novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
-    StrToInt(edtQuantidade.text));
-  if (StrToInt(novoEstoque) + StrToInt(edtQuantidade.text)) >
-    dm.cdsProdutosquantidade_estoque.AsInteger then
-  begin
-    ShowMessage('Quantidade inválida! Estoque insuficiente.');
-    edtQuantidade.text := '1';
-    edtQuantidade.SetFocus;
   end
-  else if StrToInt(edtQuantidade.text) < 1 then
+  else
+  begin
+    if StrToInt(edtQuantidade.text) > dm.cdsProdutosquantidade_estoque.AsInteger
+    then
+    begin
+      ShowMessage('Quantidade inválida! Estoque insuficiente.');
+      edtQuantidade.text := '1';
+      edtQuantidade.SetFocus;
+      Abort;
+    end
+    else
+      novoEstoque := IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
+        StrToInt(edtQuantidade.text));
+  end;
+
+  if StrToInt(edtQuantidade.text) < 1 then
   begin
     ShowMessage('Valor inválido! A quantidade mínima é de 1 item.');
     edtQuantidade.text := '1';

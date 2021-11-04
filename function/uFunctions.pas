@@ -12,14 +12,8 @@ procedure threadBuscarVenda;
 procedure buscarVenda(orderBy: string);
 procedure verificarOrdenacaoVenda;
 procedure buscarCidade;
-procedure buscarBairro;
-procedure buscarRua;
 procedure fechaBuscaCidade;
-procedure fechaBuscaBairro;
-procedure fechaBuscaRua;
 procedure abreBuscaCidade;
-procedure abreBuscaBairro;
-procedure abreBuscaRua;
 procedure buscarEnderecoCliente;
 procedure abrirDados(tabela: string; estado: Boolean);
 procedure calculaSubTotalItem;
@@ -28,12 +22,12 @@ procedure calculaDescontoItem;
 procedure calculaTotalItem;
 procedure calculaSubTotalVenda;
 procedure calculaTotalVenda;
+procedure removeFormatacaoPrecoProduto;
 
 var
   subTotalDaVenda, totalDaVenda, frete, totalDoItem, valDescontoItem,
     valAcrescimoItem, valUnitario, subTotalDoItem, desconto, acrescimo,
     descontoDoItem, acrescimoDoItem: Double;
-
   quantidadeDeProdutos: Integer;
 
 implementation
@@ -74,7 +68,6 @@ end;
 
 procedure verificarOrdenacaoCliente;
 begin
-
   case frmClientes.cbOrdenarPor.ItemIndex of
     0:
       buscarCliente('id');
@@ -123,7 +116,6 @@ end;
 
 procedure verificarOrdenacaoProduto;
 begin
-
   case frmProdutos.cbOrdenarPor.ItemIndex of
     0:
       buscarProduto('id');
@@ -186,7 +178,6 @@ end;
 
 procedure verificarOrdenacaoVenda;
 begin
-
   case frmVendas.cbOrdenarPor.ItemIndex of
     0:
       buscarVenda('id');
@@ -214,7 +205,6 @@ begin
         '%") ORDER BY c.nome DESC;';
       dm.cdsCidadesnome.Text;
       abrirDados('cidade', true);
-
       TThread.Synchronize(nil,
         procedure
         begin
@@ -225,78 +215,18 @@ begin
   t.Start;
 end;
 
-procedure buscarBairro;
-var
-  t: TThread;
-begin
-  t := TThread.CreateAnonymousThread(
-    procedure
-    begin
-      abrirDados('bairro', false);
-      dm.cdsBairros.CommandText := 'SELECT * FROM bairro b JOIN cidade c ON ' +
-        'b.fk_cidade = c.id JOIN estado e ON ' +
-        'c.fk_estado = e.id WHERE (e.uf = "' +
-        UpperCase(Trim(dm.cdsEstadosuf.AsString)) + '") AND (c.nome = "' +
-        LowerCase(Trim(dm.cdsCidadesnome.AsString)) + '") AND (b.nome LIKE "' +
-        LowerCase(Trim(frmCadastrarCliente.edtBairro.Text)) +
-        '%") ORDER BY b.nome ASC;';
-      abrirDados('bairro', true);
-
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmCadastrarCliente.gridBairros.DataSource := dm.dSourceBairros;
-        end);
-    end);
-  t.FreeOnTerminate := true;
-  t.Start;
-end;
-
-procedure buscarRua;
-var
-  t: TThread;
-begin
-  t := TThread.CreateAnonymousThread(
-    procedure
-    begin
-      abrirDados('rua', false);
-      dm.cdsRuas.CommandText := 'SELECT * FROM rua r JOIN bairro b ON ' +
-        'r.fk_bairro = b.id JOIN cidade c ON ' +
-        'b.fk_cidade = c.id JOIN estado e ON ' +
-        'c.fk_estado = e.id WHERE (e.uf = "' +
-        UpperCase(Trim(dm.cdsEstadosuf.AsString)) + '") AND (c.nome = "' +
-        LowerCase(Trim(dm.cdsCidadesnome.AsString)) + '") AND b.nome = "' +
-        LowerCase(Trim(dm.cdsBairrosnome.AsString)) + '" AND r.nome LIKE "%' +
-        LowerCase(Trim(frmCadastrarCliente.EdtRua.Text)) +
-        '%" ORDER BY r.nome ASC;';
-      abrirDados('rua', true);
-
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmCadastrarCliente.gridRuas.DataSource := dm.dSourceRuas;
-        end);
-    end);
-  t.FreeOnTerminate := true;
-  t.Start;
-end;
-
 procedure buscarEnderecoCliente;
 var
   t: TThread;
 begin
-
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      abrirDados('rua', false);
-
       dm.queryEnderecoCliente.Close;
-      dm.queryEnderecoCliente.SQL.Text := 'SELECT e.uf, c.nome, b.nome, r.nome '
-        + 'FROM rua r JOIN bairro b ON r.fk_bairro = b.id JOIN cidade c ON ' +
-        'b.fk_cidade = c.id JOIN estado e ON c.fk_estado = e.id WHERE r.id = "'
-        + dm.cdsClientesfk_rua.AsString + '"';
-
+      dm.queryEnderecoCliente.SQL.Text :=
+        'SELECT e.uf, c.nome, cli.bairro, cli.rua ' +
+        'FROM cliente cli JOIN cidade c ON cli.fk_cidade = c.id JOIN estado e ON c.fk_estado = '
+        + 'e.id WHERE cli.id = "' + dm.cdsClientesid.AsString + '"';
       dm.queryEnderecoCliente.Open;
       TThread.Synchronize(nil,
         procedure
@@ -310,9 +240,6 @@ begin
             (dm.queryEnderecoCliente.Fields[2].AsString);
           frmCadastrarCliente.EdtRua.Text := (dm.queryEnderecoCliente.Fields[3]
             .AsString);
-
-          abrirDados('rua', true);
-
         end);
     end);
   t.FreeOnTerminate := true;
@@ -325,34 +252,10 @@ begin
   frmCadastrarCliente.btnCancelarCidade.Visible := false;
 end;
 
-procedure fechaBuscaBairro;
-begin
-  frmCadastrarCliente.gridBairros.Visible := false;
-  frmCadastrarCliente.btnCancelarBairro.Visible := false;
-end;
-
-procedure fechaBuscaRua;
-begin
-  frmCadastrarCliente.gridRuas.Visible := false;
-  frmCadastrarCliente.btnCancelarRua.Visible := false;
-end;
-
 procedure abreBuscaCidade;
 begin
   frmCadastrarCliente.gridCidades.Visible := true;
   frmCadastrarCliente.btnCancelarCidade.Visible := true;
-end;
-
-procedure abreBuscaBairro;
-begin
-  frmCadastrarCliente.gridBairros.Visible := true;
-  frmCadastrarCliente.btnCancelarBairro.Visible := true;
-end;
-
-procedure abreBuscaRua;
-begin
-  frmCadastrarCliente.gridRuas.Visible := true;
-  frmCadastrarCliente.btnCancelarRua.Visible := true;
 end;
 
 procedure abrirDados(tabela: string; estado: Boolean);
@@ -408,32 +311,6 @@ begin
     begin
       dm.cdsCidades.Close;
       dm.dSetCidades.Close;
-    end;
-  end
-  else if tabela = 'bairro' then
-  begin
-    if estado = true then
-    begin
-      dm.cdsBairros.Open;
-      dm.dSetBairros.Open;
-    end
-    else
-    begin
-      dm.cdsBairros.Close;
-      dm.dSetBairros.Close;
-    end;
-  end
-  else if tabela = 'rua' then
-  begin
-    if estado = true then
-    begin
-      dm.cdsRuas.Open;
-      dm.dSetRuas.Open;
-    end
-    else
-    begin
-      dm.cdsRuas.Close;
-      dm.dSetRuas.Close;
     end;
   end
   else if tabela = 'item' then
@@ -541,6 +418,14 @@ begin
   frmCadastrarVenda.edtTotalVenda.Text :=
     FloatToStr(subTotal + frete + (subTotal * acrescimo) -
     (subTotal * desconto));
+end;
+
+procedure removeFormatacaoPrecoProduto;
+begin
+  frmCadastrarProduto.dbEdtPreco.Text :=
+    copy(frmCadastrarProduto.dbEdtPreco.Text, 4, 10);
+  frmCadastrarProduto.dbEdtPreco.Text :=
+    StringReplace(frmCadastrarProduto.dbEdtPreco.Text, '.', '', [rfReplaceAll]);
 end;
 
 end.

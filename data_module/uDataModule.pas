@@ -13,30 +13,9 @@ type
     dSetClientes: TSQLDataSet;
     dspClientes: TDataSetProvider;
     dSourceClientes: TDataSource;
-    cdsClientesid: TIntegerField;
-    cdsClientesfk_rua: TIntegerField;
-    cdsClientesnome: TStringField;
-    cdsClientescpf: TStringField;
-    cdsClientestelefone: TStringField;
-    cdsClientesemail: TStringField;
-    cdsClientesdata_nascimento: TStringField;
     dSetProdutos: TSQLDataSet;
     dspProdutos: TDataSetProvider;
     dSourceProdutos: TDataSource;
-    cdsRuas: TClientDataSet;
-    dSetRuas: TSQLDataSet;
-    dspRuas: TDataSetProvider;
-    dSourceRuas: TDataSource;
-    cdsBairros: TClientDataSet;
-    dSetBairros: TSQLDataSet;
-    dspBairros: TDataSetProvider;
-    dSourceBairros: TDataSource;
-    cdsRuasid: TIntegerField;
-    cdsRuasnome: TStringField;
-    cdsRuasfk_bairro: TIntegerField;
-    cdsBairrosid: TIntegerField;
-    cdsBairrosnome: TStringField;
-    cdsBairrosfk_cidade: TIntegerField;
     cdsCidades: TClientDataSet;
     dSetCidades: TSQLDataSet;
     dspCidades: TDataSetProvider;
@@ -62,8 +41,6 @@ type
     cdsVendasfk_cliente: TIntegerField;
     cdsVendastotal: TFMTBCDField;
     cdsVendasdata: TStringField;
-    cdsClientesRua: TStringField;
-    queryEnderecoCliente: TSQLQuery;
     cdsProdutos: TClientDataSet;
     cdsVendasCliente: TStringField;
     cdsItens: TClientDataSet;
@@ -82,6 +59,16 @@ type
     cdsItensacrescimo: TIntegerField;
     cdsItensdesconto: TIntegerField;
     cdsItensvalor_total: TFloatField;
+    cdsClientesid: TIntegerField;
+    cdsClientesfk_cidade: TIntegerField;
+    cdsClientesnome: TStringField;
+    cdsClientescpf: TStringField;
+    cdsClientestelefone: TStringField;
+    cdsClientesemail: TStringField;
+    cdsClientesdata_nascimento: TStringField;
+    cdsClientesrua: TStringField;
+    cdsClientesbairro: TStringField;
+    queryEnderecoCliente: TSQLQuery;
   private
     { Private declarations }
   public

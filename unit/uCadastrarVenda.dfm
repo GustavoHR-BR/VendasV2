@@ -131,20 +131,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ShowHint = True
     OnClick = btnEditarClienteClick
   end
-  object Label2: TLabel
-    Left = 24
-    Top = 80
-    Width = 31
-    Height = 15
-    Caption = 'Nome:'
-    FocusControl = DBEdtNome
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Arial Unicode MS'
-    Font.Style = []
-    ParentFont = False
-  end
   object Label3: TLabel
     Left = 440
     Top = 21
@@ -160,7 +146,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 230
+    Left = 24
     Top = 83
     Width = 45
     Height = 15
@@ -174,7 +160,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 367
+    Left = 185
     Top = 80
     Width = 32
     Height = 15
@@ -203,10 +189,10 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object Label8: TLabel
     Left = 559
-    Top = 80
-    Width = 20
+    Top = 79
+    Width = 23
     Height = 15
-    Caption = 'Rua'
+    Caption = 'Rua:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -284,6 +270,14 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Style = []
     ParentFont = False
   end
+  object Label2: TLabel
+    Left = 367
+    Top = 80
+    Width = 32
+    Height = 13
+    Caption = 'Bairro:'
+    FocusControl = DBEdtBairro
+  end
   object edtBuscar: TEdit
     Left = 24
     Top = 39
@@ -298,22 +292,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TabOrder = 0
     OnChange = edtBuscarChange
     OnClick = edtBuscarClick
-  end
-  object DBEdtNome: TDBEdit
-    Left = 24
-    Top = 99
-    Width = 185
-    Height = 23
-    DataField = 'nome'
-    DataSource = dm.dSourceClientes
-    Enabled = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Arial Unicode MS'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 3
   end
   object DBEdtCpf: TDBEdit
     Left = 440
@@ -332,9 +310,9 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TabOrder = 1
   end
   object DBEdtTelefone: TDBEdit
-    Left = 230
+    Left = 24
     Top = 99
-    Width = 115
+    Width = 129
     Height = 23
     DataField = 'telefone'
     DataSource = dm.dSourceClientes
@@ -345,12 +323,12 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 4
+    TabOrder = 3
   end
   object DBEdtEmail: TDBEdit
-    Left = 367
+    Left = 185
     Top = 99
-    Width = 169
+    Width = 152
     Height = 23
     DataField = 'email'
     DataSource = dm.dSourceClientes
@@ -361,7 +339,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 4
   end
   object DBEdtDtNascimento: TDBEdit
     Left = 584
@@ -379,20 +357,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     TabOrder = 2
   end
-  object EdtRua: TEdit
-    Left = 559
-    Top = 99
-    Width = 157
-    Height = 23
-    Enabled = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Arial Unicode MS'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 6
-  end
   object DBGridVendas: TDBGrid
     Left = -4
     Top = 197
@@ -406,7 +370,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Style = []
     Options = [dgTitles, dgIndicator, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
-    TabOrder = 10
+    TabOrder = 8
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -461,7 +425,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 13
+    TabOrder = 11
     Text = '0'
     OnChange = edtBuscarChange
   end
@@ -477,7 +441,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 14
+    TabOrder = 12
     Text = '0'
     OnChange = edtDescontoChange
   end
@@ -493,7 +457,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 15
+    TabOrder = 13
     Text = '0'
     OnChange = edtAcrescimoChange
   end
@@ -509,7 +473,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 16
+    TabOrder = 14
     Text = '0'
     OnChange = edtFreteChange
   end
@@ -529,7 +493,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 11
+    TabOrder = 9
     OnClick = btnFinalizarClick
   end
   object btnCancelar: TButton
@@ -547,7 +511,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 12
+    TabOrder = 10
     OnClick = btnCancelarClick
   end
   object btnAdicionar: TButton
@@ -566,7 +530,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 7
+    TabOrder = 5
     OnClick = btnAdicionarClick
   end
   object btnEditar: TButton
@@ -585,7 +549,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 8
+    TabOrder = 6
     OnClick = btnEditarClick
   end
   object btnExcluir: TButton
@@ -604,7 +568,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 9
+    TabOrder = 7
     OnClick = btnExcluirClick
   end
   object dbgrid: TDBGrid
@@ -620,7 +584,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Style = []
     Options = [dgTitles, dgIndicator, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgTitleClick, dgTitleHotTrack]
     ParentFont = False
-    TabOrder = 17
+    TabOrder = 15
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -663,7 +627,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Caption = 'Cancelar'
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 18
+    TabOrder = 16
     Visible = False
     OnClick = btnFecharBuscaClick
   end
@@ -679,8 +643,28 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
     ParentFont = False
-    TabOrder = 19
+    TabOrder = 17
     Text = '0'
     OnChange = edtBuscarChange
+  end
+  object DBEdtRua: TDBEdit
+    Left = 559
+    Top = 100
+    Width = 157
+    Height = 21
+    DataField = 'rua'
+    DataSource = dm.dSourceClientes
+    Enabled = False
+    TabOrder = 18
+  end
+  object DBEdtBairro: TDBEdit
+    Left = 367
+    Top = 100
+    Width = 168
+    Height = 21
+    DataField = 'bairro'
+    DataSource = dm.dSourceClientes
+    Enabled = False
+    TabOrder = 19
   end
 end

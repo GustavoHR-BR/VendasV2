@@ -62,28 +62,28 @@ begin
   if edtId.Text <> '' then
   begin
     dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
-      ' INNER JOIN rua r ON r.id = c.fk_rua' +
-      ' INNER JOIN bairro b ON b.id = r.fk_bairro' +
-      ' INNER JOIN cidade cid ON cid.id = b.fk_cidade' +
-      ' INNER JOIN estado e ON e.id = cid.fk_estado' + ' WHERE (c.id = "' +
-      edtId.Text + '") ' + ' AND (c.nome LIKE "' + edtNome.Text + '%")' +
-      ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' + ' AND (e.uf LIKE "%' +
-      cboxEstados.Text + '%")' + ' AND (cid.nome LIKE "%' + edtCidade.Text +
-      '%")' + ' AND (b.nome LIKE "%' + edtBairro.Text + '%")' +
-      ' AND (r.nome LIKE "%' + edtRua.Text + '%")' + ' AND (c.telefone LIKE "%'
-      + edtTelefone.Text + '%")';
+      ' INNER JOIN cidade cid ON cid.id = c.fk_cidade' +
+      ' INNER JOIN estado e ON e.id = cid.fk_estado' +
+      ' WHERE (c.id = "' + edtId.Text + '") ' +
+      ' AND (c.nome LIKE "' + edtNome.Text + '%")' +
+      ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' +
+      ' AND (e.uf LIKE "%' + cboxEstados.Text + '%")' +
+      ' AND (cid.nome LIKE "%' + edtCidade.Text + '%")' +
+      ' AND (c.bairro LIKE "%' + edtBairro.Text + '%")' +
+      ' AND (c.rua LIKE "%' + edtRua.Text + '%")' +
+      ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
   end
   else
   begin
     dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
-      ' INNER JOIN rua r ON r.id = c.fk_rua' +
-      ' INNER JOIN bairro b ON b.id = r.fk_bairro' +
-      ' INNER JOIN cidade cid ON cid.id = b.fk_cidade' +
-      ' INNER JOIN estado e ON e.id = cid.fk_estado' + ' WHERE (c.nome LIKE "' +
-      edtNome.Text + '%")' + ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' +
-      ' AND (e.uf LIKE "%' + cboxEstados.Text + '%")' + ' AND (cid.nome LIKE "%'
-      + edtCidade.Text + '%")' + ' AND (b.nome LIKE "%' + edtBairro.Text + '%")'
-      + ' AND (r.nome LIKE "%' + edtRua.Text + '%")' +
+      ' INNER JOIN cidade cid ON cid.id = c.fk_cidade' +
+      ' INNER JOIN estado e ON e.id = cid.fk_estado' +
+      ' WHERE (c.nome LIKE "' + edtNome.Text + '%")' +
+      ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' +
+      ' AND (e.uf LIKE "%' + cboxEstados.Text + '%")' +
+      ' AND (cid.nome LIKE "%' + edtCidade.Text + '%")' +
+      ' AND (c.bairro LIKE "%' + edtBairro.Text + '%")' +
+      ' AND (c.rua LIKE "%' + edtRua.Text + '%")' +
       ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
   end;
   abrirDados('cliente', true);

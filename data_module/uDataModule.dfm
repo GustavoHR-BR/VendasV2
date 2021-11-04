@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 573
-  Width = 581
+  Height = 418
+  Width = 590
   object SQLConn: TSQLConnection
     DriverName = 'MySQL'
     GetDriverFunc = 'getSQLDriverMYSQL'
@@ -52,11 +52,10 @@ object dm: Tdm
     Top = 24
     object cdsClientesid: TIntegerField
       FieldName = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object cdsClientesfk_rua: TIntegerField
-      FieldName = 'fk_rua'
+    object cdsClientesfk_cidade: TIntegerField
+      FieldName = 'fk_cidade'
     end
     object cdsClientesnome: TStringField
       FieldName = 'nome'
@@ -64,12 +63,12 @@ object dm: Tdm
     end
     object cdsClientescpf: TStringField
       FieldName = 'cpf'
-      EditMask = '!999.999.999-99;1;_'
+      EditMask = '000.000.000-00;1;_'
       Size = 16
     end
     object cdsClientestelefone: TStringField
       FieldName = 'telefone'
-      EditMask = '!(99) 99999-9999;1;_'
+      EditMask = '(00)00000-0000;1;_'
       Size = 15
     end
     object cdsClientesemail: TStringField
@@ -78,22 +77,21 @@ object dm: Tdm
     end
     object cdsClientesdata_nascimento: TStringField
       FieldName = 'data_nascimento'
-      EditMask = '!99/99/9999;1;_'
+      EditMask = '00/00/0000;1;_'
       Size = 10
     end
-    object cdsClientesRua: TStringField
-      FieldKind = fkLookup
-      FieldName = 'Rua'
-      LookupDataSet = cdsRuas
-      LookupKeyFields = 'id'
-      LookupResultField = 'nome'
-      KeyFields = 'fk_rua'
-      Size = 80
-      Lookup = True
+    object cdsClientesrua: TStringField
+      FieldName = 'rua'
+      Size = 50
+    end
+    object cdsClientesbairro: TStringField
+      FieldName = 'bairro'
+      Size = 50
     end
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
+    Active = True
     CommandText = 'SELECT * FROM cliente ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -134,93 +132,12 @@ object dm: Tdm
     Left = 320
     Top = 88
   end
-  object cdsRuas: TClientDataSet
-    Active = True
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspRuas'
-    Left = 224
-    Top = 160
-    object cdsRuasid: TIntegerField
-      FieldName = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsRuasnome: TStringField
-      FieldName = 'nome'
-      Size = 45
-    end
-    object cdsRuasfk_bairro: TIntegerField
-      FieldName = 'fk_bairro'
-    end
-  end
-  object dSetRuas: TSQLDataSet
-    SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from rua;'
-    DbxCommandType = 'Dbx.SQL'
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = SQLConn
-    Left = 32
-    Top = 160
-  end
-  object dspRuas: TDataSetProvider
-    DataSet = dSetRuas
-    Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 128
-    Top = 160
-  end
-  object dSourceRuas: TDataSource
-    DataSet = cdsRuas
-    Left = 320
-    Top = 160
-  end
-  object cdsBairros: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspBairros'
-    Left = 224
-    Top = 232
-    object cdsBairrosid: TIntegerField
-      FieldName = 'id'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsBairrosnome: TStringField
-      FieldName = 'nome'
-      Size = 80
-    end
-    object cdsBairrosfk_cidade: TIntegerField
-      FieldName = 'fk_cidade'
-    end
-  end
-  object dSetBairros: TSQLDataSet
-    SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from bairro;'
-    DbxCommandType = 'Dbx.SQL'
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = SQLConn
-    Left = 32
-    Top = 232
-  end
-  object dspBairros: TDataSetProvider
-    DataSet = dSetBairros
-    Options = [poAllowCommandText, poUseQuoteChar]
-    Left = 128
-    Top = 232
-  end
-  object dSourceBairros: TDataSource
-    DataSet = cdsBairros
-    Left = 320
-    Top = 232
-  end
   object cdsCidades: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCidades'
     Left = 224
-    Top = 304
+    Top = 152
     object cdsCidadesid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -242,25 +159,25 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 304
+    Top = 152
   end
   object dspCidades: TDataSetProvider
     DataSet = dSetCidades
     Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
-    Top = 304
+    Top = 152
   end
   object dSourceCidades: TDataSource
     DataSet = cdsCidades
     Left = 320
-    Top = 304
+    Top = 152
   end
   object cdsEstados: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstados'
     Left = 224
-    Top = 376
+    Top = 224
     object cdsEstadosid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -283,25 +200,25 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 376
+    Top = 224
   end
   object dspEstados: TDataSetProvider
     DataSet = dSetEstados
     Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
-    Top = 376
+    Top = 224
   end
   object dSourceEstados: TDataSource
     DataSet = cdsEstados
     Left = 320
-    Top = 376
+    Top = 224
   end
   object cdsVendas: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVendas'
     Left = 224
-    Top = 440
+    Top = 288
     object cdsVendasid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -339,18 +256,18 @@ object dm: Tdm
     Params = <>
     SQLConnection = SQLConn
     Left = 32
-    Top = 440
+    Top = 288
   end
   object dspVendas: TDataSetProvider
     DataSet = dSetVendas
     Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
-    Top = 440
+    Top = 288
   end
   object dSourceVendas: TDataSource
     DataSet = cdsVendas
     Left = 320
-    Top = 440
+    Top = 288
   end
   object dSetItens: TSQLDataSet
     SchemaName = 'gustavo_reblin'
@@ -366,25 +283,18 @@ object dm: Tdm
       end>
     SQLConnection = SQLConn
     Left = 32
-    Top = 512
+    Top = 360
   end
   object dpsItens: TDataSetProvider
     DataSet = dSetItens
     Options = [poAllowCommandText, poUseQuoteChar]
     Left = 128
-    Top = 512
+    Top = 360
   end
   object dSourceItens: TDataSource
     DataSet = cdsItens
     Left = 320
-    Top = 512
-  end
-  object queryEnderecoCliente: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = SQLConn
-    Left = 496
-    Top = 72
+    Top = 360
   end
   object cdsProdutos: TClientDataSet
     Aggregates = <>
@@ -420,7 +330,7 @@ object dm: Tdm
     Params = <>
     ProviderName = 'dpsItens'
     Left = 224
-    Top = 512
+    Top = 360
     object cdsItensid: TIntegerField
       FieldName = 'id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -438,6 +348,7 @@ object dm: Tdm
     end
     object cdsItenspreco: TFMTBCDField
       FieldName = 'preco'
+      currency = True
       Precision = 12
       Size = 2
     end
@@ -458,5 +369,13 @@ object dm: Tdm
       FieldName = 'valor_total'
       currency = True
     end
+  end
+  object queryEnderecoCliente: TSQLQuery
+    DataSource = dSourceClientes
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConn
+    Left = 496
+    Top = 72
   end
 end

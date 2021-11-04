@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, RpRave, RpBase, RpSystem,
   RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF, Winapi.ShellAPI, Vcl.Grids,
-  Vcl.DBGrids;
+  Vcl.DBGrids, Vcl.StdCtrls;
 
 type
   TfrmPrincipal = class(TForm)

@@ -14,8 +14,6 @@ type
     Label1: TLabel;
     btnCadastrarCliente: TSpeedButton;
     btnEditarCliente: TSpeedButton;
-    Label2: TLabel;
-    DBEdtNome: TDBEdit;
     Label3: TLabel;
     DBEdtCpf: TDBEdit;
     Label4: TLabel;
@@ -25,7 +23,6 @@ type
     Label6: TLabel;
     DBEdtDtNascimento: TDBEdit;
     Label8: TLabel;
-    EdtRua: TEdit;
     DBGridVendas: TDBGrid;
     edtSubtTotal: TEdit;
     edtDesconto: TEdit;
@@ -44,6 +41,9 @@ type
     btnFecharBusca: TButton;
     edtTotalVenda: TEdit;
     Label12: TLabel;
+    DBEdtRua: TDBEdit;
+    Label2: TLabel;
+    DBEdtBairro: TDBEdit;
     procedure edtBuscarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnCadastrarClienteClick(Sender: TObject);
@@ -105,9 +105,17 @@ begin
   begin
 
     // Altera valores da venda
-    edtSubtTotal.Text := FloatToStr(StrToFloat(edtSubtTotal.Text) -
-      dm.cdsItensvalor_total.AsFloat);
-    calculaTotalVenda;
+    if DBGridVendas.DataSource.DataSet.RecordCount > 1 then
+    begin
+      edtSubtTotal.Text := FloatToStr(StrToFloat(edtSubtTotal.Text) -
+        dm.cdsItensvalor_total.AsFloat);
+      calculaTotalVenda;
+    end
+    else
+    begin
+      edtSubtTotal.Text := '0,0';
+      calculaTotalVenda;
+    end;
 
     // Altera ids
     qtdDoItemExcluido := dm.cdsItensquantidade.AsInteger;
@@ -225,25 +233,30 @@ end;
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
 begin
 
-  if Application.MessageBox('Deseja relamente finalizar?', 'Atenção',
-    MB_YESNO + MB_ICONQUESTION) = mrYes then
+  if DBGridVendas.DataSource.DataSet.RecordCount > 0 then
   begin
-    Tag := 1;
-    dm.cdsVendas.Edit;
-    dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
-    dm.cdsVendastotal.Text := edtTotalVenda.Text;
-    dm.cdsVendasdata.Text := DateToStr(now);
-    dm.cdsVendas.Post;
-    dm.cdsVendas.ApplyUpdates(0);
+    if Application.MessageBox('Deseja relamente finalizar?', 'Atenção',
+      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    begin
+      Tag := 1;
+      dm.cdsVendas.Edit;
+      dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
+      dm.cdsVendastotal.Text := edtTotalVenda.Text;
+      dm.cdsVendasdata.Text := DateToStr(now);
+      dm.cdsVendas.Post;
+      dm.cdsVendas.ApplyUpdates(0);
 
-    frmCadastrarVenda.Close;
+      frmCadastrarVenda.Close;
 
-    abrirDados('cliente', false);
-    dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
-    abrirDados('cliente', True);
+      abrirDados('cliente', false);
+      dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
+      abrirDados('cliente', True);
+    end
+    else
+      Abort;
   end
   else
-    Abort;
+    ShowMessage('Para ser finalizada a venda precisa possuir ao menos 1 item!');
 end;
 
 procedure TfrmCadastrarVenda.dbgridCellClick(Column: TColumn);
@@ -251,7 +264,6 @@ begin
   edtBuscar.Text := dm.cdsClientesnome.AsString;
   dbgrid.Visible := false;
   btnFecharBusca.Visible := false;
-  EdtRua.Text := dm.cdsClientesRua.AsString;
   if edtBuscar.Text = dm.cdsClientesnome.Text then
     btnAdicionar.Enabled := True;
   btnEditarCliente.Enabled := True;

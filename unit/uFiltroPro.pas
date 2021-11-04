@@ -45,7 +45,7 @@ implementation
 uses
   uAdicionarItem, uCadastrarCliente, uCadastrarProduto, uCadastrarVenda,
   uClientes, uDataModule, uFiltroCli, uFunctions, uPrincipal, uProdutos,
-  uVendaReport, uVendas;
+  uVendaReport, uVendas, db;
 
 {$R *.dfm}
 
@@ -65,29 +65,33 @@ begin
       begin
         if StrToInt(edtPrecoAte.Text) >= 0 then
         begin
-          abrirDados('produto', false);
           if edtId.Text <> '' then
           begin
-            dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE (id = "'
-              + edtId.Text + '")' + ' AND (nome LIKE "%' + edtNome.Text + '%")'
-              + ' AND (preco BETWEEN "' + edtPrecoDe.Text + '" ' + ' AND "' +
+            dm.cdsProdutos.Filtered := false;
+            dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
+            dm.cdsProdutos.Filter := '(id = "' + edtId.Text + '")' +
+              ' AND (nome LIKE "%' + edtNome.Text + '%")' +
+              ' AND (preco BETWEEN "' + edtPrecoDe.Text + '" ' + ' AND "' +
               edtPrecoAte.Text + '")' + ' AND (descricao LIKE "%' +
               edtDescricao.Text + '%") ' + ' AND (quantidade_estoque BETWEEN "'
               + edtEstoqueDe.Text + '" ' + ' AND "' + edtEstoqueAte.Text +
               '") ORDER BY ' + frmProdutos.orderBy;
+            dm.cdsProdutos.Filtered := true;
           end
           else
           begin
-            dm.cdsProdutos.CommandText :=
-              'SELECT * FROM produto WHERE (nome LIKE "' + edtNome.Text + '%")'
-              + ' AND (preco BETWEEN "' + edtPrecoDe.Text + '" ' + ' AND "' +
+            dm.cdsProdutos.Filtered := false;
+            dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
+            dm.cdsProdutos.Filter := '(nome LIKE "' + edtNome.Text + '%")' +
+              ' AND (preco BETWEEN "' + edtPrecoDe.Text + '" ' + ' AND "' +
               edtPrecoAte.Text + '")' + ' AND (descricao LIKE "%' +
               edtDescricao.Text + '%") ' + ' AND (quantidade_estoque BETWEEN "'
               + edtEstoqueDe.Text + '" ' + ' AND "' + edtEstoqueAte.Text +
               '") ORDER BY ' + frmProdutos.orderBy;
+            dm.cdsClientes.Filtered := true;
           end;
-          abrirDados('produto', true);
           frmProdutos.btnLimparFiltros.Enabled := true;
+          frmProdutos.dbgrid.DataSource := dm.dSourceProdutos;
           frmFiltrarPro.Close;
         end
         else

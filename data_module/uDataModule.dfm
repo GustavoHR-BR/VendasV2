@@ -52,6 +52,7 @@ object dm: Tdm
     Top = 24
     object cdsClientesid: TIntegerField
       FieldName = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsClientesfk_cidade: TIntegerField
@@ -91,7 +92,6 @@ object dm: Tdm
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 'SELECT * FROM cliente ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
@@ -113,7 +113,7 @@ object dm: Tdm
   end
   object dSetProdutos: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'SELECT * FROM produto ORDER BY nome'
+    CommandText = 'SELECT * FROM produto ORDER BY nome ASC;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>

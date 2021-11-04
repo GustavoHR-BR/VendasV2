@@ -293,7 +293,7 @@ object frmVendas: TfrmVendas
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from venda order by id;'
+    CommandText = 'select * from venda v JOIN cliente c ON v.fk_cliente = c.id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>

@@ -126,7 +126,7 @@ end;
 
 procedure TfrmClientes.edtBuscarChange(Sender: TObject);
 begin
-  threadBuscarCliente(LowerCase(Trim(frmClientes.edtBuscar.Text)));
+  threadBuscarCliente(Trim(edtBuscar.Text));
   Sleep(60);
 end;
 
@@ -134,7 +134,7 @@ procedure TfrmClientes.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  threadBuscarCliente('');
+  abrirDados('cliente', true);
   ufPosition := -1;
 end;
 

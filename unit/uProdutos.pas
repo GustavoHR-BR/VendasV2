@@ -87,7 +87,6 @@ end;
 
 procedure TfrmProdutos.btnLimparFiltrosClick(Sender: TObject);
 begin
-
   id := '';
   nome := '';
   precoDe := '0';
@@ -96,9 +95,7 @@ begin
   qtdEstoqueAte := '10000';
   descricao := '';
 
-  abrirDados('produto', false);
-  dm.cdsProdutos.CommandText := 'SELECT * FROM produto ORDER BY ' + orderBy;
-  abrirDados('produto', true);
+  dm.cdsProdutos.Filtered := false;
 end;
 
 procedure TfrmProdutos.btnSairClick(Sender: TObject);
@@ -113,7 +110,7 @@ end;
 
 procedure TfrmProdutos.edtBuscarChange(Sender: TObject);
 begin
-  threadBuscarProduto(LowerCase(Trim(edtBuscar.Text)));
+  threadBuscarProduto(Trim(edtBuscar.Text));
   Sleep(60);
 end;
 
@@ -121,7 +118,7 @@ procedure TfrmProdutos.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Close;
   dm.SQLConn.Open;
-  threadBuscarProduto('');
+  abrirDados('produto', true);
 
   precoDe := '0';
   precoAte := '10000';

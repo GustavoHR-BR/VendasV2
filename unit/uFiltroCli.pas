@@ -57,8 +57,6 @@ end;
 
 procedure TfrmFiltrosCli.btnFiltrarClick(Sender: TObject);
 begin
-  abrirDados('cliente', false);
-
   if edtId.Text <> '' then
   begin
     dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
@@ -86,7 +84,6 @@ begin
       ' AND (c.rua LIKE "%' + edtRua.Text + '%")' +
       ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
   end;
-  abrirDados('cliente', true);
   frmClientes.btnLimparFiltros.Enabled := true;
   frmFiltrosCli.Close;
 end;
@@ -120,9 +117,8 @@ end;
 procedure TfrmFiltrosCli.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Open;
-  dm.cdsClientes.Open;
-  dm.cdsEstados.Open;
-  dm.cdsEstados.Open;
+  abrirDados('estado', true);
+  abrirDados('cidade', true);
 end;
 
 end.

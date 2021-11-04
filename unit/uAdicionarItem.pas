@@ -184,6 +184,7 @@ begin
       on E: Exception do
     end;
 
+    frmCadastrarVenda.edtBuscar.Enabled := false;
     Tag := 1;
     frmAdicionarItem.Close;
   end

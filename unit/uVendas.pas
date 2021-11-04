@@ -116,8 +116,6 @@ end;
 
 procedure TfrmVendas.FormShow(Sender: TObject);
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
   cdsVendas.Open;
   dSetVendas.Open;
   cdsItens.Open;

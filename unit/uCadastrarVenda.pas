@@ -113,6 +113,7 @@ begin
     end
     else
     begin
+      edtBuscar.Enabled := True;
       edtSubtTotal.Text := '0,0';
       calculaTotalVenda;
     end;
@@ -235,25 +236,30 @@ begin
 
   if DBGridVendas.DataSource.DataSet.RecordCount > 0 then
   begin
-    if Application.MessageBox('Deseja relamente finalizar?', 'Atenção',
-      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    if edtBuscar.Text = dm.cdsClientesnome.Text then
     begin
-      Tag := 1;
-      dm.cdsVendas.Edit;
-      dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
-      dm.cdsVendastotal.Text := edtTotalVenda.Text;
-      dm.cdsVendasdata.Text := DateToStr(now);
-      dm.cdsVendas.Post;
-      dm.cdsVendas.ApplyUpdates(0);
+      if Application.MessageBox('Deseja relamente finalizar?', 'Atenção',
+        MB_YESNO + MB_ICONQUESTION) = mrYes then
+      begin
+        Tag := 1;
+        dm.cdsVendas.Edit;
+        dm.cdsVendasfk_cliente.Text := dm.cdsClientesid.Text;
+        dm.cdsVendastotal.Text := edtTotalVenda.Text;
+        dm.cdsVendasdata.Text := DateToStr(now);
+        dm.cdsVendas.Post;
+        dm.cdsVendas.ApplyUpdates(0);
 
-      frmCadastrarVenda.Close;
+        frmCadastrarVenda.Close;
 
-      abrirDados('cliente', false);
-      dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
-      abrirDados('cliente', True);
+        abrirDados('cliente', false);
+        dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
+        abrirDados('cliente', True);
+      end
+      else
+        Abort;
     end
     else
-      Abort;
+      ShowMessage('Para finalizar a venda é necessário escolher um cliente!');
   end
   else
     ShowMessage('Para ser finalizada a venda precisa possuir ao menos 1 item!');

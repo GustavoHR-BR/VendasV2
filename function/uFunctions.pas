@@ -35,7 +35,7 @@ implementation
 uses
   System.Classes, System.SysUtils,
   uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos,
-  uCadastrarProduto, uVendas, uCadastrarVenda, uVendaReport, uAdicionarItem;
+  uCadastrarProduto, uVendas, uCadastrarVenda, uVendaReport, uAdicionarItem, db;
 
 procedure buscarCliente(orderBy: string);
 begin
@@ -51,10 +51,10 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      abrirDados('cliente', false);
-      dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
-        busca + '%" ORDER BY nome ASC;';
-      abrirDados('cliente', true);
+      dm.cdsClientes.Filtered := false;
+      dm.cdsClientes.FilterOptions := [foCaseInsensitive];
+      dm.cdsClientes.Filter := 'nome LIKE ' + QuotedStr('%' + busca + '%');
+      dm.cdsClientes.Filtered := true;
 
       TThread.Synchronize(nil,
         procedure
@@ -98,10 +98,10 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      abrirDados('produto', false);
-      dm.cdsProdutos.CommandText := 'SELECT * FROM produto WHERE nome LIKE "%' +
-        busca + '%" ORDER BY nome ASC;';
-      abrirDados('produto', true);
+      dm.cdsProdutos.Filtered := false;
+      dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
+      dm.cdsProdutos.Filter := 'nome LIKE ' + QuotedStr(busca + '%');
+      dm.cdsProdutos.Filtered := true;
 
       TThread.Synchronize(nil,
         procedure

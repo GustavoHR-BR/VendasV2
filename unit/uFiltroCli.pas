@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, db;
 
 type
   TfrmFiltrosCli = class(TForm)
@@ -27,7 +27,6 @@ type
     Label8: TLabel;
     btnFiltrar: TButton;
     btnCancelar: TButton;
-    procedure FormShow(Sender: TObject);
     procedure btnFiltrarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelarClick(Sender: TObject);
@@ -59,30 +58,33 @@ procedure TfrmFiltrosCli.btnFiltrarClick(Sender: TObject);
 begin
   if edtId.Text <> '' then
   begin
-    dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
-      ' INNER JOIN cidade cid ON cid.id = c.fk_cidade' +
-      ' INNER JOIN estado e ON e.id = cid.fk_estado' +
-      ' WHERE (c.id = "' + edtId.Text + '") ' +
-      ' AND (c.nome LIKE "' + edtNome.Text + '%")' +
-      ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' +
-      ' AND (e.uf LIKE "%' + cboxEstados.Text + '%")' +
-      ' AND (cid.nome LIKE "%' + edtCidade.Text + '%")' +
-      ' AND (c.bairro LIKE "%' + edtBairro.Text + '%")' +
-      ' AND (c.rua LIKE "%' + edtRua.Text + '%")' +
-      ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
+    dm.cdsClientes.Filtered := false;
+    dm.cdsClientes.FilterOptions := [foCaseInsensitive];
+    dm.cdsClientes.Filter := '(id = ' + QuotedStr(edtId.Text) + ') ' +
+      ' AND (nome LIKE ' + QuotedStr(Trim(edtNome.Text) + '%') + ')' +
+      ' AND (cpf LIKE ' + QuotedStr('%' + Trim(edtCpf.Text) + '%') + ')' +
+      ' AND (uf LIKE ' + QuotedStr('%' + Trim(cboxEstados.Text) + '%') + ')' +
+      ' AND (nome LIKE ' + QuotedStr('%' + Trim(edtCidade.Text) + '%') + ')' +
+      ' AND (bairro LIKE ' + QuotedStr('%' + Trim(edtBairro.Text) + '%') + ')' +
+      ' AND (rua LIKE ' + QuotedStr('%' + Trim(edtRua.Text) + '%') + ')' +
+      ' AND (telefone LIKE ' + QuotedStr('%' + Trim(edtTelefone.Text) + '%') + ')';
+   dm.cdsClientes.Filtered := true;
   end
   else
   begin
-    dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
-      ' INNER JOIN cidade cid ON cid.id = c.fk_cidade' +
-      ' INNER JOIN estado e ON e.id = cid.fk_estado' +
-      ' WHERE (c.nome LIKE "' + edtNome.Text + '%")' +
-      ' AND (c.cpf LIKE "%' + edtCpf.Text + '%")' +
-      ' AND (e.uf LIKE "%' + cboxEstados.Text + '%")' +
-      ' AND (cid.nome LIKE "%' + edtCidade.Text + '%")' +
-      ' AND (c.bairro LIKE "%' + edtBairro.Text + '%")' +
-      ' AND (c.rua LIKE "%' + edtRua.Text + '%")' +
-      ' AND (c.telefone LIKE "%' + edtTelefone.Text + '%")';
+    edtId.Text := '0';
+    dm.cdsClientes.Filtered := false;
+    dm.cdsClientes.FilterOptions := [foCaseInsensitive];
+    dm.cdsClientes.Filter := '(id > ' + QuotedStr(edtId.Text) + ') ' +
+      ' AND (nome LIKE ' + QuotedStr(Trim(edtNome.Text) + '%') + ')' +
+      ' AND (cpf LIKE ' + QuotedStr('%' + Trim(edtCpf.Text) + '%') + ')' +
+      ' AND (uf LIKE ' + QuotedStr('%' + Trim(cboxEstados.Text) + '%') + ')' +
+      ' AND (nome LIKE ' + QuotedStr('%' + Trim(edtCidade.Text) + '%') + ')' +
+      ' AND (bairro LIKE ' + QuotedStr('%' + Trim(edtBairro.Text) + '%') + ')' +
+      ' AND (rua LIKE ' + QuotedStr('%' + Trim(edtRua.Text) + '%') + ')' +
+      ' AND (telefone LIKE ' + QuotedStr('%' + Trim(edtTelefone.Text) + '%') + ')';
+   dm.cdsClientes.Filtered := true;
+   edtId.Clear;
   end;
   frmClientes.btnLimparFiltros.Enabled := true;
   frmFiltrosCli.Close;
@@ -112,13 +114,6 @@ begin
     frmClientes.nomeRua := edtRua.Text;
     frmClientes.telefone := edtTelefone.Text;
   end;
-end;
-
-procedure TfrmFiltrosCli.FormShow(Sender: TObject);
-begin
-  dm.SQLConn.Open;
-  abrirDados('estado', true);
-  abrirDados('cidade', true);
 end;
 
 end.

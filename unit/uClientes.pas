@@ -47,7 +47,6 @@ procedure TfrmClientes.btnAdicionarClick(Sender: TObject);
 begin
   Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
   Tag := 1;
-  abrirDados('cliente', true);
   dm.cdsClientes.Append;
   try
     frmCadastrarCliente.ShowModal;

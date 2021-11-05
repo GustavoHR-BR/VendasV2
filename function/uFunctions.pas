@@ -191,14 +191,12 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      abrirDados('cidade', false);
-      dm.cdsCidades.CommandText := 'SELECT * FROM cidade c JOIN estado e ON ' +
-        'c.fk_estado = e.id WHERE (e.uf = "' +
-        UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text)) +
-        '") AND (c.nome LIKE "' + frmCadastrarCliente.edtCidade.Text +
-        '%") ORDER BY c.nome DESC;';
-      dm.cdsCidadesnome.Text;
-      abrirDados('cidade', true);
+      dm.cdsCidades.Filtered := false;
+      dm.cdsCidades.FilterOptions := [foCaseInsensitive];
+      dm.cdsCidades.Filter := 'uf = ' +
+        QuotedStr(UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text))) +
+        ' AND nome LIKE ' + QuotedStr(frmCadastrarCliente.edtCidade.Text + '%');
+      dm.cdsCidades.Filtered := true;
       TThread.Synchronize(nil,
         procedure
         begin

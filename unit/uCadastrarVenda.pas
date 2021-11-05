@@ -287,10 +287,11 @@ end;
 
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);
 begin
-  abrirDados('cliente', false);
-  dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
-    LowerCase(Trim(edtBuscar.Text)) + '%" ORDER BY nome ASC;';
-  abrirDados('cliente', True);
+  // abrirDados('cliente', false);
+  // dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
+  // +'%" ORDER BY nome ASC;';
+  // abrirDados('cliente', True);
+  threadBuscarCliente(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
   frmCadastrarVenda.dbgrid.DataSource := dm.dSourceClientes;
   if edtBuscar.Text = dm.cdsClientesnome.Text then
@@ -438,9 +439,6 @@ begin
       except
         on E: Exception do
       end;
-      abrirDados('cliente', false);
-      dm.cdsClientes.CommandText := 'select * from cliente';
-      abrirDados('cliente', True);
       btnCancelarClick(Self);
     end
     else
@@ -455,11 +453,6 @@ procedure TfrmCadastrarVenda.FormShow(Sender: TObject);
 var
   id: Integer;
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
-  abrirDados('venda', false);
-  dm.cdsVendas.CommandText := 'SELECT * FROM venda';
-  abrirDados('venda', True);
   dm.cdsVendas.Last;
   dm.cdsVendas.Edit;
   id := dm.cdsVendasid.AsInteger + 1;
@@ -467,13 +460,11 @@ begin
   dm.cdsVendasid.AsInteger := id;
   dm.cdsVendas.Post;
   dm.cdsVendas.ApplyUpdates(0);
-  abrirDados('cliente', false);
   abrirDados('item', false);
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
   dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
     dm.cdsVendasid.Text;
   abrirDados('item', True);
-  abrirDados('cliente', True);
   dm.cdsClientes.Edit;
   dm.cdsClientes.ClearFields;
   numeroDeItens := 0;

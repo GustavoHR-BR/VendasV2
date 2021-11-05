@@ -69,6 +69,13 @@ type
     cdsClientesrua: TStringField;
     cdsClientesbairro: TStringField;
     queryEnderecoCliente: TSQLQuery;
+    cdsCidadesuf: TStringField;
+    cdsClientesnome_1: TStringField;
+    cdsClientesfk_estado: TIntegerField;
+    cdsClientesid_2: TIntegerField;
+    cdsClientesuf: TStringField;
+    cdsClientesnome_2: TStringField;
+    cdsClientesid_1: TIntegerField;
   private
     { Private declarations }
   public

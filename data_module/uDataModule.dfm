@@ -89,10 +89,36 @@ object dm: Tdm
       FieldName = 'bairro'
       Size = 50
     end
+    object cdsClientesnome_1: TStringField
+      FieldName = 'nome_1'
+      Size = 80
+    end
+    object cdsClientesfk_estado: TIntegerField
+      FieldName = 'fk_estado'
+    end
+    object cdsClientesid_2: TIntegerField
+      FieldName = 'id_2'
+      Required = True
+    end
+    object cdsClientesuf: TStringField
+      FieldName = 'uf'
+      Size = 2
+    end
+    object cdsClientesnome_2: TStringField
+      FieldName = 'nome_2'
+      Size = 100
+    end
+    object cdsClientesid_1: TIntegerField
+      FieldName = 'id_1'
+      Required = True
+    end
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'SELECT * FROM cliente ORDER BY nome ASC;'
+    Active = True
+    CommandText = 
+      'SELECT * FROM cliente c '#13#10'JOIN cidade cid ON cid.id = c.fk_cidad' +
+      'e'#13#10'JOIN estado e ON e.id = cid.fk_estado;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -150,10 +176,14 @@ object dm: Tdm
     object cdsCidadesfk_estado: TIntegerField
       FieldName = 'fk_estado'
     end
+    object cdsCidadesuf: TStringField
+      FieldName = 'uf'
+      Size = 2
+    end
   end
   object dSetCidades: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from cidade;'
+    CommandText = 'SELECT * FROM cidade c JOIN estado e ON c.fk_estado = e.id'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>

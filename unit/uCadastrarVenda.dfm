@@ -280,7 +280,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object edtBuscar: TEdit
     Left = 24
-    Top = 39
+    Top = 37
     Width = 321
     Height = 23
     Font.Charset = DEFAULT_CHARSET
@@ -573,7 +573,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object dbgrid: TDBGrid
     Left = 24
-    Top = 61
+    Top = 59
     Width = 321
     Height = 190
     DataSource = dm.dSourceClientes
@@ -620,7 +620,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object btnFecharBusca: TButton
     Left = 270
-    Top = 226
+    Top = 224
     Width = 75
     Height = 25
     Hint = 'Fechar busca'

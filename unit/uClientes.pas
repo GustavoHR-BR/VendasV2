@@ -109,9 +109,7 @@ begin
   nomeRua := '';
   telefone := '';
 
-  abrirDados('cliente', false);
-  dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY ' + orderBy;
-  abrirDados('cliente', true);
+  dm.cdsClientes.Filtered := false;
 end;
 
 procedure TfrmClientes.btnSairClick(Sender: TObject);
@@ -132,9 +130,6 @@ end;
 
 procedure TfrmClientes.FormShow(Sender: TObject);
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
-  abrirDados('cliente', true);
   ufPosition := -1;
 end;
 

@@ -14,7 +14,7 @@ procedure verificarOrdenacaoVenda;
 procedure buscarCidade;
 procedure fechaBuscaCidade;
 procedure abreBuscaCidade;
-procedure buscarEnderecoCliente;
+procedure buscarEnderecoCliente(id : Integer);
 procedure abrirDados(tabela: string; estado: Boolean);
 procedure calculaSubTotalItem;
 procedure calculaAcrescimoItem;
@@ -207,31 +207,26 @@ begin
   t.Start;
 end;
 
-procedure buscarEnderecoCliente;
+procedure buscarEnderecoCliente(id : Integer);
 var
   t: TThread;
 begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      dm.queryEnderecoCliente.Close;
-      dm.queryEnderecoCliente.SQL.Text :=
-        'SELECT e.uf, c.nome, cli.bairro, cli.rua ' +
-        'FROM cliente cli JOIN cidade c ON cli.fk_cidade = c.id JOIN estado e ON c.fk_estado = '
-        + 'e.id WHERE cli.id = "' + dm.cdsClientesid.AsString + '"';
-      dm.queryEnderecoCliente.Open;
+      dm.cdsClientes.Filtered := false;
+      dm.cdsClientes.FilterOptions := [foCaseInsensitive];
+      dm.cdsClientes.Filter := 'id = ' + IntToStr(id);
+      dm.cdsClientes.Filtered := true;
       TThread.Synchronize(nil,
         procedure
         begin
           frmCadastrarCliente.cboxEstados.ItemIndex :=
             frmCadastrarCliente.cboxEstados.Items.IndexOf
-            (dm.queryEnderecoCliente.Fields[0].AsString);
-          frmCadastrarCliente.edtCidade.Text :=
-            (dm.queryEnderecoCliente.Fields[1].AsString);
-          frmCadastrarCliente.edtBairro.Text :=
-            (dm.queryEnderecoCliente.Fields[2].AsString);
-          frmCadastrarCliente.EdtRua.Text := (dm.queryEnderecoCliente.Fields[3]
-            .AsString);
+            (dm.cdsClientesuf.AsString);
+          frmCadastrarCliente.edtCidade.Text := (dm.cdsClientesnome_1.AsString);
+          frmCadastrarCliente.edtBairro.Text := (dm.cdsClientesbairro.AsString);
+          frmCadastrarCliente.EdtRua.Text := (dm.cdsClientesrua.AsString);
         end);
     end);
   t.FreeOnTerminate := true;

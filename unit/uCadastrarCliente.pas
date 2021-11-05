@@ -227,11 +227,6 @@ begin
   if edtRua.Text <> '' then
     edtRua.Clear;
 
-  abrirDados('estado', false);
-  dm.dSetEstados.CommandText := 'SELECT * from estado WHERE uf = "' +
-    cboxEstados.Text + '"';
-  abrirDados('estado', true);
-
   edtCidade.SetFocus;
 end;
 
@@ -273,24 +268,21 @@ begin
       frmClientes.cbOrdenarPor.ItemIndex := 1;
     end;
   end;
+  dm.cdsClientes.Filtered := false;
 end;
 
 procedure TfrmCadastrarCliente.FormShow(Sender: TObject);
 begin
   if frmClientes.Tag = 1 then // Tag = 1 -> cadastrar
   begin
-    dm.SQLConn.Close;
-    dm.SQLConn.Open;
     dm.cdsClientes.Edit;
     dm.cdsClientes.ClearFields;
   end
   else if frmClientes.Tag = 2 then // Tag = 2 -> editar
   begin
-    dm.SQLConn.Close;
-    dm.SQLConn.Open;
     dm.cdsClientes.Edit;
     btnCadastrar.Caption := 'Editar';
-    buscarEnderecoCliente;
+    buscarEnderecoCliente(dm.cdsClientesid.AsInteger);
     edtCidade.Enabled := true;
     edtBairro.Enabled := true;
     edtRua.Enabled := true;

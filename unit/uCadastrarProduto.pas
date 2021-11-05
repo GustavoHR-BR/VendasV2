@@ -127,8 +127,6 @@ procedure TfrmCadastrarProduto.FormShow(Sender: TObject);
 begin
   if frmProdutos.Tag = 1 then // Tag = 1 -> cadastrar
   begin
-    dm.SQLConn.Close;
-    dm.SQLConn.Open;
     dm.cdsProdutos.Edit;
     dm.cdsProdutos.ClearFields;
   end

@@ -69,26 +69,43 @@ begin
           begin
             dm.cdsProdutos.Filtered := false;
             dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
-            dm.cdsProdutos.Filter := '(id = "' + edtId.Text + '")' +
-              ' AND (nome LIKE "%' + edtNome.Text + '%")' +
-              ' AND (preco BETWEEN "' + edtPrecoDe.Text + '" ' + ' AND "' +
-              edtPrecoAte.Text + '")' + ' AND (descricao LIKE "%' +
-              edtDescricao.Text + '%") ' + ' AND (quantidade_estoque BETWEEN "'
-              + edtEstoqueDe.Text + '" ' + ' AND "' + edtEstoqueAte.Text +
-              '") ORDER BY ' + frmProdutos.orderBy;
+            dm.cdsProdutos.Filter :=
+              '(id = '+(QuotedStr(Trim(edtId.Text))) +')' +
+              ' AND (nome LIKE ' +
+                (QuotedStr(Trim(edtNome.Text)+ '%')) +')' +
+              ' AND (preco >= ' +
+                (QuotedStr(Trim(edtPrecoDe.Text))) +')' +
+              ' AND (preco < ' +
+                (QuotedStr(Trim(edtPrecoAte.Text))) +')' +
+              ' AND (descricao LIKE ' +
+                (QuotedStr( '%' + Trim(edtDescricao.Text)+ '%')) +')' +
+              ' AND (quantidade_estoque >= ' +
+                (QuotedStr(Trim(edtEstoqueDe.Text))) +')' +
+              ' AND (quantidade_estoque < '  +
+                (QuotedStr(Trim(edtEstoqueAte.Text))) +')';
             dm.cdsProdutos.Filtered := true;
           end
           else
           begin
+            edtId.Text := '0';
             dm.cdsProdutos.Filtered := false;
             dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
-            dm.cdsProdutos.Filter := '(nome LIKE "' + edtNome.Text + '%")' +
-              ' AND (preco BETWEEN "' + edtPrecoDe.Text + '" ' + ' AND "' +
-              edtPrecoAte.Text + '")' + ' AND (descricao LIKE "%' +
-              edtDescricao.Text + '%") ' + ' AND (quantidade_estoque BETWEEN "'
-              + edtEstoqueDe.Text + '" ' + ' AND "' + edtEstoqueAte.Text +
-              '") ORDER BY ' + frmProdutos.orderBy;
-            dm.cdsClientes.Filtered := true;
+            dm.cdsProdutos.Filter :=
+              '(id > '+(QuotedStr(Trim(edtId.Text))) +')' +
+              ' AND (nome LIKE ' +
+                (QuotedStr(Trim(edtNome.Text)+ '%')) +')' +
+              ' AND (preco >= ' +
+                (QuotedStr(Trim(edtPrecoDe.Text))) +')' +
+              ' AND (preco < ' +
+                (QuotedStr(Trim(edtPrecoAte.Text))) +')' +
+              ' AND (descricao LIKE ' +
+                (QuotedStr( '%' + Trim(edtDescricao.Text)+ '%')) +')' +
+              ' AND (quantidade_estoque >= ' +
+                (QuotedStr(Trim(edtEstoqueDe.Text))) +')' +
+              ' AND (quantidade_estoque < '  +
+                (QuotedStr(Trim(edtEstoqueAte.Text))) +')';
+            dm.cdsProdutos.Filtered := true;
+            edtId.Clear;
           end;
           frmProdutos.btnLimparFiltros.Enabled := true;
           frmProdutos.dbgrid.DataSource := dm.dSourceProdutos;

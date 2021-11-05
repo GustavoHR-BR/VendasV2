@@ -70,9 +70,14 @@ end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
-  abrirDados('venda', True);
-  abrirDados('item', True);
-  abrirDados('cliente', True);
+  abrirDados('cliente', true);
+  abrirDados('produto', true);
+  abrirDados('rua', true);
+  abrirDados('bairro', true);
+  abrirDados('cidade', true);
+  abrirDados('estado', true);
+  abrirDados('item', true);
+  abrirDados('venda', true);
 end;
 
 procedure TfrmPrincipal.Nova1Click(Sender: TObject);

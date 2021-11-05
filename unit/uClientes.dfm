@@ -5,7 +5,7 @@ object frmClientes: TfrmClientes
   BorderStyle = bsSingle
   Caption = 'Clientes'
   ClientHeight = 493
-  ClientWidth = 901
+  ClientWidth = 925
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -46,7 +46,7 @@ object frmClientes: TfrmClientes
   object dbgrid: TDBGrid
     Left = 0
     Top = 55
-    Width = 905
+    Width = 921
     Height = 377
     DataSource = dm.dSourceClientes
     Font.Charset = DEFAULT_CHARSET
@@ -149,7 +149,6 @@ object frmClientes: TfrmClientes
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
         FieldName = 'data_nascimento'
         Title.Caption = 'Anivers'#225'rio'

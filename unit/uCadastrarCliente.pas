@@ -258,23 +258,11 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  abrirDados('cliente', false);
 
   if (Tag <> 1) AND (Tag <> 2) then // Tag <> 1 e 2 -> close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
-      MB_YESNO + MB_ICONQUESTION) = mrYes then
-    begin
-      if (frmCadastrarVenda.Tag <> 1) AND (frmCadastrarVenda.Tag <> 2) then
-      // Tag = 1 -> Cadastrar cliente pela venda
-      // Tag = 2 ->  Editar cliente pela venda
-      begin
-        abrirDados('cidade', false);
-        Sleep(150);
-        verificarOrdenacaoCliente;
-      end;
-    end
-    else
+      MB_YESNO + MB_ICONQUESTION) <> mrYes then
       Abort;
   end
   else
@@ -282,7 +270,7 @@ begin
     if frmCadastrarVenda.Tag <> 2 then
     begin
       frmClientes.edtBuscar.Text := '';
-      threadBuscarCliente('');
+      // threadBuscarCliente('');
       frmClientes.cbOrdenarPor.ItemIndex := 1;
     end;
   end;

@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.DBGrids,
+  db;
 
 type
   TfrmAdicionarItem = class(TForm)
@@ -370,6 +371,10 @@ procedure TfrmAdicionarItem.FormShow(Sender: TObject);
 begin
   if frmCadastrarVenda.Tag = 3 then // Editando item
   begin
+    dm.cdsProdutos.Filtered := false;
+    dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
+    dm.cdsProdutos.Filter := 'id = ' + dm.cdsItensfk_produto.text;
+    dm.cdsProdutos.Filtered := true;
     btnFinalizar.Caption := 'Editar';
     btnFinalizar.Enabled := true;
     edtBuscar.Enabled := false;

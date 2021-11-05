@@ -40,13 +40,14 @@ type
     cdsItensquantidade: TIntegerField;
     dspItens: TDataSetProvider;
     dSetItens: TSQLDataSet;
-    cdsVendascliente: TStringField;
+    cdsVendasnome: TStringField;
     procedure edtBuscarChange(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure cbOrdenarPorSelect(Sender: TObject);
     procedure btnNovaClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -112,6 +113,14 @@ procedure TfrmVendas.edtBuscarChange(Sender: TObject);
 begin
   threadBuscarVenda;
   Sleep(60);
+end;
+
+procedure TfrmVendas.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  cdsVendas.Close;
+  dSetVendas.Close;
+  cdsItens.Close;
+  dSetItens.Close;
 end;
 
 procedure TfrmVendas.FormShow(Sender: TObject);

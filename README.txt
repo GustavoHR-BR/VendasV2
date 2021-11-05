@@ -1,5 +1,6 @@
 Incompleto -> 
-  Valores de produtos vindo do banco com muitas casas decimais.
+  Implementar cds.Filter nas vendas.
+  Relatórios com campos errados.
 
 BUG -> 
   Erro na edição de cliente.

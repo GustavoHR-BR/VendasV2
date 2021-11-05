@@ -42,7 +42,6 @@ type
     cdsVendastotal: TFMTBCDField;
     cdsVendasdata: TStringField;
     cdsProdutos: TClientDataSet;
-    cdsVendasCliente: TStringField;
     cdsItens: TClientDataSet;
     cdsProdutosid: TIntegerField;
     cdsProdutosnome: TStringField;

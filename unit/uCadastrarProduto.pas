@@ -115,12 +115,10 @@ begin
     end
     else
       Abort;
-  end
-  else
-  begin
-    frmProdutos.edtBuscar.Text := '';
-    verificarOrdenacaoProduto;
   end;
+  frmProdutos.edtBuscar.Text := '';
+  frmProdutos.cbOrdenarPor.ItemIndex := 1;
+  dm.cdsProdutos.Filtered := false;
 end;
 
 procedure TfrmCadastrarProduto.FormShow(Sender: TObject);

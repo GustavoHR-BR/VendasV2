@@ -267,20 +267,10 @@ object dm: Tdm
       FieldName = 'data'
       Size = 10
     end
-    object cdsVendasCliente: TStringField
-      FieldKind = fkLookup
-      FieldName = 'Cliente'
-      LookupDataSet = cdsClientes
-      LookupKeyFields = 'id'
-      LookupResultField = 'nome'
-      KeyFields = 'fk_cliente'
-      Size = 100
-      Lookup = True
-    end
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from venda order by id;'
+    CommandText = 'SELECT * FROM venda;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>

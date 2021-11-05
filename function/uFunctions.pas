@@ -14,7 +14,7 @@ procedure verificarOrdenacaoVenda;
 procedure buscarCidade;
 procedure fechaBuscaCidade;
 procedure abreBuscaCidade;
-procedure buscarEnderecoCliente(id : Integer);
+procedure buscarEnderecoCliente(id: Integer);
 procedure abrirDados(tabela: string; estado: Boolean);
 procedure calculaSubTotalItem;
 procedure calculaAcrescimoItem;
@@ -128,21 +128,11 @@ end;
 
 procedure buscarVenda(orderBy: string);
 begin
-  frmVendas.cdsVendas.Close;
-  frmVendas.dSetVendas.Close;
+  frmVendas.cdsVendas.Filtered := false;
   if orderBy = 'fk_cliente' then
-  begin
-    frmVendas.cdsVendas.CommandText :=
-      'SELECT * FROM venda v JOIN cliente c ON ' +
-      'c.id = v.fk_cliente ORDER BY c.nome ASC';
-  end
+    frmVendas.cdsVendas.IndexFieldNames := 'nome'
   else
-  begin
-    frmVendas.cdsVendas.CommandText := 'SELECT * FROM venda ORDER BY '
-      + orderBy;
-  end;
-  frmVendas.cdsVendas.Open;
-  frmVendas.dSetVendas.Open;
+    frmVendas.cdsVendas.IndexFieldNames := orderBy;
 end;
 
 procedure threadBuscarVenda;
@@ -152,13 +142,11 @@ begin
   t := TThread.CreateAnonymousThread(
     procedure
     begin
-      frmVendas.cdsVendas.Close;
-      frmVendas.dSetVendas.Close;
-      frmVendas.cdsVendas.CommandText := 'SELECT * FROM venda v JOIN cliente c '
-        + ' ON v.fk_cliente = c.id WHERE c.nome LIKE "' +
-        LowerCase(Trim(frmVendas.edtBuscar.Text)) + '%" ORDER BY c.id ASC;';
-      frmVendas.cdsVendas.Open;
-      frmVendas.dSetVendas.Open;
+      frmVendas.cdsVendas.Filtered := false;
+      frmVendas.cdsVendas.FilterOptions := [foCaseInsensitive];
+      frmVendas.cdsVendas.Filter := ' nome LIKE ' +
+        QuotedStr(LowerCase(Trim(frmVendas.edtBuscar.Text)) + '%');
+      frmVendas.cdsVendas.Filtered := true;
 
       TThread.Synchronize(nil,
         procedure
@@ -207,7 +195,7 @@ begin
   t.Start;
 end;
 
-procedure buscarEnderecoCliente(id : Integer);
+procedure buscarEnderecoCliente(id: Integer);
 var
   t: TThread;
 begin

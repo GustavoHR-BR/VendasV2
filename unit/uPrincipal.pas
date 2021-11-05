@@ -106,7 +106,7 @@ var
 begin
   abrirDados('produto', false);
   dm.cdsProdutos.CommandText := 'SELECT * FROM produto ORDER BY id';
-  abrirDados('produto', True);
+  abrirDados('produto', true);
 
   frmProdutoReport.rvsProdutos.DefaultDest := rdFile;
   frmProdutoReport.rvsProdutos.DoNativeOutput := false;
@@ -126,7 +126,7 @@ var
 begin
   abrirDados('cliente', false);
   dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY id';
-  abrirDados('cliente', True);
+  abrirDados('cliente', true);
 
   frmClienteReport.rvsClientes.DefaultDest := rdFile;
   frmClienteReport.rvsClientes.DoNativeOutput := false;
@@ -146,10 +146,10 @@ var
 begin
   abrirDados('item', false);
   dm.cdsItens.CommandText := 'SELECT * FROM item';
-  abrirDados('item', True);
+  abrirDados('item', true);
   abrirDados('venda', false);
   dm.cdsVendas.CommandText := 'SELECT * FROM venda';
-  abrirDados('venda', True);
+  abrirDados('venda', true);
 
   frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
   frmVendaReport.rvsVENDAS.DoNativeOutput := false;

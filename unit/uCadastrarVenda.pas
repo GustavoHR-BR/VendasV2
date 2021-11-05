@@ -207,30 +207,6 @@ begin
   frmCadastrarVenda.Close;
 end;
 
-procedure TfrmCadastrarVenda.btnFecharBuscaClick(Sender: TObject);
-begin
-  if DBGridVendas.DataSource.DataSet.RecordCount <= 0 then
-  begin
-    dbgrid.Visible := false;
-    btnFecharBusca.Visible := false;
-    edtBuscar.Clear;
-    dm.cdsClientes.Edit;
-    dm.cdsClientes.ClearFields;
-    btnAdicionar.Enabled := false;
-    btnEditar.Enabled := false;
-    btnExcluir.Enabled := false;
-    btnCadastrarCliente.Enabled := True;
-    btnEditarCliente.Enabled := false;
-  end
-  else
-  begin
-    ShowMessage
-      ('Já existe ao menos um item vinculado a venda! Cancele-a primeiro para alterar o cliente.');
-    dbgrid.Visible := false;
-    btnFecharBusca.Visible := false;
-  end;
-end;
-
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
 begin
 
@@ -285,12 +261,32 @@ begin
   end;
 end;
 
+procedure TfrmCadastrarVenda.btnFecharBuscaClick(Sender: TObject);
+begin
+  if DBGridVendas.DataSource.DataSet.RecordCount <= 0 then
+  begin
+    dbgrid.Visible := false;
+    btnFecharBusca.Visible := false;
+    edtBuscar.Clear;
+    dm.cdsClientes.Edit;
+    dm.cdsClientes.ClearFields;
+    btnAdicionar.Enabled := false;
+    btnEditar.Enabled := false;
+    btnExcluir.Enabled := false;
+    btnCadastrarCliente.Enabled := True;
+    btnEditarCliente.Enabled := false;
+  end
+  else
+  begin
+    ShowMessage
+      ('Já existe ao menos um item vinculado a venda! Cancele-a primeiro para alterar o cliente.');
+    dbgrid.Visible := false;
+    btnFecharBusca.Visible := false;
+  end;
+end;
+
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);
 begin
-  // abrirDados('cliente', false);
-  // dm.cdsClientes.CommandText := 'SELECT * FROM cliente WHERE nome LIKE "' +
-  // +'%" ORDER BY nome ASC;';
-  // abrirDados('cliente', True);
   threadBuscarCliente(LowerCase(Trim(edtBuscar.Text)));
   Sleep(60);
   frmCadastrarVenda.dbgrid.DataSource := dm.dSourceClientes;
@@ -446,7 +442,7 @@ begin
   end
   else
     ShowMessage('Venda realizada com sucesso! ');
-  threadBuscarVenda;
+  frmVendas.cdsVendas.Filtered := false;
 end;
 
 procedure TfrmCadastrarVenda.FormShow(Sender: TObject);
@@ -461,7 +457,6 @@ begin
   dm.cdsVendas.Post;
   dm.cdsVendas.ApplyUpdates(0);
   abrirDados('item', false);
-  dm.cdsClientes.CommandText := 'SELECT * FROM cliente';
   dm.cdsItens.CommandText := 'SELECT * FROM item WHERE fk_venda = ' +
     dm.cdsVendasid.Text;
   abrirDados('item', True);

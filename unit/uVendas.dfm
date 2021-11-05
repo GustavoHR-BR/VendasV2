@@ -14,6 +14,7 @@ object frmVendas: TfrmVendas
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -166,19 +167,19 @@ object frmVendas: TfrmVendas
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 80
+        Width = 100
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'cliente'
+        FieldName = 'nome'
         Title.Caption = 'Cliente'
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 350
+        Width = 400
         Visible = True
       end
       item
@@ -191,7 +192,7 @@ object frmVendas: TfrmVendas
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 120
+        Width = 130
         Visible = True
       end
       item
@@ -203,7 +204,7 @@ object frmVendas: TfrmVendas
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 120
+        Width = 130
         Visible = True
       end>
   end
@@ -293,7 +294,7 @@ object frmVendas: TfrmVendas
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from venda v JOIN cliente c ON v.fk_cliente = c.id;'
+    CommandText = 'select * from venda v '#13#10'JOIN cliente c ON v.fk_cliente = c.id'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -330,15 +331,9 @@ object frmVendas: TfrmVendas
       FieldName = 'data'
       Size = 10
     end
-    object cdsVendascliente: TStringField
-      FieldKind = fkLookup
-      FieldName = 'cliente'
-      LookupDataSet = dm.cdsClientes
-      LookupKeyFields = 'id'
-      LookupResultField = 'nome'
-      KeyFields = 'fk_cliente'
-      Size = 100
-      Lookup = True
+    object cdsVendasnome: TStringField
+      FieldName = 'nome'
+      Size = 60
     end
   end
   object dSourceVendas: TDataSource

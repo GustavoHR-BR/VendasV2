@@ -39,9 +39,8 @@ uses
 
 procedure buscarCliente(orderBy: string);
 begin
-  abrirDados('cliente', false);
+  dm.cdsClientes.Filtered := false;
   dm.cdsClientes.IndexFieldNames := orderBy;
-  abrirDados('cliente', true);
 end;
 
 procedure threadBuscarCliente(busca: string);
@@ -82,13 +81,26 @@ begin
   end;
 end;
 
+procedure verificarOrdenacaoProduto;
+begin
+  case frmProdutos.cbOrdenarPor.ItemIndex of
+    0:
+      buscarProduto('id');
+    1:
+      buscarProduto('nome');
+    2:
+      buscarProduto('preco');
+    3:
+      buscarProduto('descricao');
+    4:
+      buscarProduto('quantidade_estoque');
+  end;
+end;
+
 procedure buscarProduto(orderBy: string);
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
-  abrirDados('produto', false);
+  dm.cdsProdutos.Filtered := false;
   dm.cdsProdutos.IndexFieldNames := orderBy;
-  abrirDados('produto', true);
 end;
 
 procedure threadBuscarProduto(busca: string);
@@ -114,26 +126,8 @@ begin
   t.Start;
 end;
 
-procedure verificarOrdenacaoProduto;
-begin
-  case frmProdutos.cbOrdenarPor.ItemIndex of
-    0:
-      buscarProduto('id');
-    1:
-      buscarProduto('nome');
-    2:
-      buscarProduto('preco');
-    3:
-      buscarProduto('descricao');
-    4:
-      buscarProduto('quantidade_estoque');
-  end;
-end;
-
 procedure buscarVenda(orderBy: string);
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
   frmVendas.cdsVendas.Close;
   frmVendas.dSetVendas.Close;
   if orderBy = 'fk_cliente' then

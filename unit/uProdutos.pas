@@ -116,10 +116,6 @@ end;
 
 procedure TfrmProdutos.FormShow(Sender: TObject);
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
-  abrirDados('produto', true);
-
   precoDe := '0';
   precoAte := '10000';
   qtdEstoqueDe := '0';

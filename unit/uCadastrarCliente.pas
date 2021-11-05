@@ -270,7 +270,6 @@ begin
     if frmCadastrarVenda.Tag <> 2 then
     begin
       frmClientes.edtBuscar.Text := '';
-      // threadBuscarCliente('');
       frmClientes.cbOrdenarPor.ItemIndex := 1;
     end;
   end;

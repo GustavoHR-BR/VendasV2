@@ -3,8 +3,8 @@ object frmVendaReport: TfrmVendaReport
   Top = 0
   BorderStyle = bsNone
   Caption = 'Relat'#243'rio de vendas'
-  ClientHeight = 120
-  ClientWidth = 453
+  ClientHeight = 112
+  ClientWidth = 508
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,7 +15,7 @@ object frmVendaReport: TfrmVendaReport
   PixelsPerInch = 96
   TextHeight = 15
   object RvProject1: TRvProject
-    Engine = rvsVENDAS
+    Engine = rvsVendas
     ProjectFile = 'C:\Users\Administrador\Desktop\VendasV2\report\vendaReport.rav'
     Left = 56
     Top = 40
@@ -7399,7 +7399,7 @@ object frmVendaReport: TfrmVendaReport
       B0104400610074006100560069006500770008446174615669657700BFED84B0
       0E640076004900740065006E0073000764764974656E73BFED84B0000000}
   end
-  object rvsVENDAS: TRvSystem
+  object rvsVendas: TRvSystem
     SystemSetups = [ssAllowCopies, ssAllowCollate, ssAllowDuplex, ssAllowDestPreview, ssAllowDestPrinter, ssAllowDestFile, ssAllowPrinterSetup, ssAllowPreviewSetup]
     SystemFiler.FileName = 'GLUK - RELATORIO DE VENDAS POR CLIENTE'
     SystemFiler.StatusFormat = 'Gerando P'#225'ginas %p'
@@ -7410,13 +7410,13 @@ object frmVendaReport: TfrmVendaReport
     SystemPrinter.StatusFormat = 'Imprimindo P'#225'ginas %p'
     SystemPrinter.Title = 'Gluk'
     SystemPrinter.UnitsFactor = 1.000000000000000000
-    Left = 128
+    Left = 144
     Top = 39
   end
   object RvVendas: TRvDataSetConnection
     RuntimeVisibility = rtDeveloper
     DataSet = dm.cdsVendas
-    Left = 200
+    Left = 232
     Top = 40
   end
   object rvRelVendasPDF: TRvRenderPDF
@@ -7424,13 +7424,13 @@ object frmVendaReport: TfrmVendaReport
     FileExtension = '*.pdf'
     DocInfo.Creator = 'Rave Reports (http://www.nevrona.com/rave)'
     DocInfo.Producer = 'Nevrona Designs'
-    Left = 344
+    Left = 416
     Top = 40
   end
   object RvItens: TRvDataSetConnection
     RuntimeVisibility = rtDeveloper
     DataSet = dm.cdsItens
-    Left = 272
+    Left = 320
     Top = 40
   end
 end

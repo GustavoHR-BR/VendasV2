@@ -41,8 +41,8 @@ object dm: Tdm
       'ErrorResourceFile=')
     VendorLib = 'LIBMYSQL.dll'
     Connected = True
-    Left = 496
-    Top = 16
+    Left = 400
+    Top = 24
   end
   object cdsClientes: TClientDataSet
     Aggregates = <>
@@ -98,7 +98,6 @@ object dm: Tdm
     end
     object cdsClientesid_2: TIntegerField
       FieldName = 'id_2'
-      Required = True
     end
     object cdsClientesuf: TStringField
       FieldName = 'uf'
@@ -110,7 +109,6 @@ object dm: Tdm
     end
     object cdsClientesid_1: TIntegerField
       FieldName = 'id_1'
-      Required = True
     end
   end
   object dSetClientes: TSQLDataSet
@@ -125,6 +123,62 @@ object dm: Tdm
     SQLConnection = SQLConn
     Left = 32
     Top = 24
+    object dSetClientesid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object dSetClientesfk_cidade: TIntegerField
+      FieldName = 'fk_cidade'
+    end
+    object dSetClientesnome: TStringField
+      FieldName = 'nome'
+      Size = 60
+    end
+    object dSetClientescpf: TStringField
+      FieldName = 'cpf'
+      Size = 16
+    end
+    object dSetClientestelefone: TStringField
+      FieldName = 'telefone'
+      Size = 15
+    end
+    object dSetClientesemail: TStringField
+      FieldName = 'email'
+      Size = 30
+    end
+    object dSetClientesdata_nascimento: TStringField
+      FieldName = 'data_nascimento'
+      Size = 10
+    end
+    object dSetClientesrua: TStringField
+      FieldName = 'rua'
+      Size = 50
+    end
+    object dSetClientesbairro: TStringField
+      FieldName = 'bairro'
+      Size = 50
+    end
+    object dSetClientesid_1: TIntegerField
+      FieldName = 'id_1'
+    end
+    object dSetClientesnome_1: TStringField
+      FieldName = 'nome_1'
+      Size = 80
+    end
+    object dSetClientesfk_estado: TIntegerField
+      FieldName = 'fk_estado'
+    end
+    object dSetClientesid_2: TIntegerField
+      FieldName = 'id_2'
+    end
+    object dSetClientesuf: TStringField
+      FieldName = 'uf'
+      Size = 2
+    end
+    object dSetClientesnome_2: TStringField
+      FieldName = 'nome_2'
+      Size = 100
+    end
   end
   object dspClientes: TDataSetProvider
     DataSet = dSetClientes
@@ -389,13 +443,5 @@ object dm: Tdm
       FieldName = 'valor_total'
       currency = True
     end
-  end
-  object queryEnderecoCliente: TSQLQuery
-    DataSource = dSourceClientes
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = SQLConn
-    Left = 496
-    Top = 72
   end
 end

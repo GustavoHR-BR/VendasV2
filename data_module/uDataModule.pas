@@ -67,7 +67,6 @@ type
     cdsClientesdata_nascimento: TStringField;
     cdsClientesrua: TStringField;
     cdsClientesbairro: TStringField;
-    queryEnderecoCliente: TSQLQuery;
     cdsCidadesuf: TStringField;
     cdsClientesnome_1: TStringField;
     cdsClientesfk_estado: TIntegerField;
@@ -75,6 +74,21 @@ type
     cdsClientesuf: TStringField;
     cdsClientesnome_2: TStringField;
     cdsClientesid_1: TIntegerField;
+    dSetClientesid: TIntegerField;
+    dSetClientesfk_cidade: TIntegerField;
+    dSetClientesnome: TStringField;
+    dSetClientescpf: TStringField;
+    dSetClientestelefone: TStringField;
+    dSetClientesemail: TStringField;
+    dSetClientesdata_nascimento: TStringField;
+    dSetClientesrua: TStringField;
+    dSetClientesbairro: TStringField;
+    dSetClientesid_1: TIntegerField;
+    dSetClientesnome_1: TStringField;
+    dSetClientesfk_estado: TIntegerField;
+    dSetClientesid_2: TIntegerField;
+    dSetClientesuf: TStringField;
+    dSetClientesnome_2: TStringField;
   private
     { Private declarations }
   public

@@ -10,7 +10,7 @@ uses
 type
   TfrmVendaReport = class(TForm)
     RvProject1: TRvProject;
-    rvsVENDAS: TRvSystem;
+    rvsVendas: TRvSystem;
     RvVendas: TRvDataSetConnection;
     rvRelVendasPDF: TRvRenderPDF;
     RvItens: TRvDataSetConnection;

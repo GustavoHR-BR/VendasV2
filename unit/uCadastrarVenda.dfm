@@ -357,7 +357,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     ParentFont = False
     TabOrder = 2
   end
-  object DBGridVendas: TDBGrid
+  object DBGridItens: TDBGrid
     Left = -4
     Top = 197
     Width = 749
@@ -376,7 +376,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OnCellClick = DBGridVendasCellClick
+    OnCellClick = DBGridItensCellClick
     Columns = <
       item
         Expanded = False
@@ -426,7 +426,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Style = []
     ParentFont = False
     TabOrder = 11
-    Text = '0'
+    Text = '100'
     OnChange = edtBuscarChange
   end
   object edtDesconto: TEdit
@@ -434,7 +434,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 417
     Width = 81
     Height = 23
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -450,7 +449,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 417
     Width = 81
     Height = 23
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -466,7 +464,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 417
     Width = 81
     Height = 23
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -571,7 +568,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TabOrder = 7
     OnClick = btnExcluirClick
   end
-  object dbgrid: TDBGrid
+  object dbgridClientes: TDBGrid
     Left = 24
     Top = 59
     Width = 321
@@ -591,7 +588,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     Visible = False
-    OnCellClick = dbgridCellClick
+    OnCellClick = dbgridClientesCellClick
     Columns = <
       item
         Expanded = False

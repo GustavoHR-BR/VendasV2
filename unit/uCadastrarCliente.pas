@@ -65,8 +65,6 @@ procedure TfrmCadastrarCliente.btnCadastrarClick(Sender: TObject);
 var
   dia, mes, ano: string;
 begin
-  dm.SQLConn.Close;
-  dm.SQLConn.Open;
 
   dia := Copy(dbEdtDtNascimento.Text, 0, 2);
   mes := Copy(dbEdtDtNascimento.Text, 4, 2);
@@ -253,7 +251,6 @@ end;
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-
   if (Tag <> 1) AND (Tag <> 2) then // Tag <> 1 e 2 -> close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
@@ -262,13 +259,21 @@ begin
   end
   else
   begin
-    if frmCadastrarVenda.Tag <> 2 then
+    if (frmCadastrarVenda.Tag <> 2) and ((frmCadastrarVenda.Tag <> 3)) then
     begin
       frmClientes.edtBuscar.Text := '';
       frmClientes.cbOrdenarPor.ItemIndex := 1;
+      dm.cdsClientes.Filtered := false;
+    end
+    else
+    begin
+      dm.cdsClientes.IndexFieldNames := 'id';
+      dm.cdsClientes.First;
+      frmCadastrarVenda.edtBuscar.Text := dm.cdsClientesnome.AsString;
+      frmCadastrarVenda.btnAdicionar.Enabled := true;
+      frmCadastrarVenda.btnAdicionar.SetFocus;
     end;
   end;
-  dm.cdsClientes.Filtered := false;
 end;
 
 procedure TfrmCadastrarCliente.FormShow(Sender: TObject);

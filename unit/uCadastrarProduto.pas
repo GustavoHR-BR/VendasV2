@@ -108,12 +108,7 @@ begin
   if (Tag <> 1) AND (Tag <> 2) then // close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
-      MB_YESNO + MB_ICONQUESTION) = mrYes then
-    begin
-      abrirDados('produto', false);
-      verificarOrdenacaoProduto;
-    end
-    else
+      MB_YESNO + MB_ICONQUESTION) <> mrYes then
       Abort;
   end;
   frmProdutos.edtBuscar.Text := '';

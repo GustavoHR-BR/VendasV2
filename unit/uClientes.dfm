@@ -252,7 +252,7 @@ object frmClientes: TfrmClientes
   end
   object cbOrdenarPor: TComboBox
     Left = 701
-    Top = 17
+    Top = 8
     Width = 145
     Height = 23
     Style = csDropDownList

@@ -70,15 +70,17 @@ var
   id: Integer;
 begin
   id := frmVendas.cdsVendasid.AsInteger;
+
   abrirDados('item', false);
   dm.cdsItens.CommandText := 'SELECT * FROM item ';
   abrirDados('item', True);
   abrirDados('venda', false);
   dm.cdsVendas.CommandText := 'SELECT * FROM venda WHERE id = ' + IntToStr(id);
   abrirDados('venda', True);
+   //VER COMO FAZER SEM BUSCAR NO BANCO
 
   frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
-  frmVendaReport.rvsVENDAS.DoNativeOutput := false;
+  frmVendaReport.rvsVENDAS.DoNativeOutput := False;
   frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) +
     'RELATORIO VENDA UNICA.pdf';

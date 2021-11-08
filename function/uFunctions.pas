@@ -54,12 +54,6 @@ begin
       dm.cdsClientes.FilterOptions := [foCaseInsensitive];
       dm.cdsClientes.Filter := 'nome LIKE ' + QuotedStr('%' + busca + '%');
       dm.cdsClientes.Filtered := true;
-
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmClientes.dbgrid.DataSource := dm.dSourceClientes;
-        end);
     end);
   t.FreeOnTerminate := true;
   t.Start;
@@ -114,13 +108,6 @@ begin
       dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
       dm.cdsProdutos.Filter := 'nome LIKE ' + QuotedStr(busca + '%');
       dm.cdsProdutos.Filtered := true;
-
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmProdutos.dbgrid.DataSource := dm.dSourceProdutos;
-          frmAdicionarItem.dbgrid.DataSource := dm.dSourceProdutos;
-        end);
     end);
   t.FreeOnTerminate := true;
   t.Start;
@@ -147,12 +134,6 @@ begin
       frmVendas.cdsVendas.Filter := ' nome LIKE ' +
         QuotedStr(LowerCase(Trim(frmVendas.edtBuscar.Text)) + '%');
       frmVendas.cdsVendas.Filtered := true;
-
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmVendas.DBGridVendas.DataSource := frmVendas.dSourceVendas;
-        end);
     end);
   t.FreeOnTerminate := true;
   t.Start;
@@ -185,11 +166,6 @@ begin
         QuotedStr(UpperCase(Trim(frmCadastrarCliente.cboxEstados.Text))) +
         ' AND nome LIKE ' + QuotedStr(frmCadastrarCliente.edtCidade.Text + '%');
       dm.cdsCidades.Filtered := true;
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmCadastrarCliente.gridCidades.DataSource := dm.dSourceCidades;
-        end);
     end);
   t.FreeOnTerminate := true;
   t.Start;
@@ -359,7 +335,7 @@ begin
   end
   else if frmCadastrarVenda.Tag = 3 then // editando um item
   begin
-    if frmCadastrarVenda.DBGridVendas.DataSource.DataSet.RecordCount = 0 then
+    if frmCadastrarVenda.DBGridItens.DataSource.DataSet.RecordCount = 0 then
       frmCadastrarVenda.edtSubtTotal.Text := '0'
     else
     begin
@@ -386,6 +362,14 @@ procedure calculaTotalVenda;
 var
   subTotal: Double;
 begin
+
+  if frmCadastrarVenda.edtDesconto.Text = '' then
+    frmCadastrarVenda.edtDesconto.Text := '0'
+  else if frmCadastrarVenda.edtAcrescimo.Text = '' then
+    frmCadastrarVenda.edtAcrescimo.Text := '0'
+  else if frmCadastrarVenda.edtFrete.Text = '' then
+    frmCadastrarVenda.edtFrete.Text := '0';
+
   desconto := StrToFloat(frmCadastrarVenda.edtDesconto.Text) / 100;
   acrescimo := StrToFloat(frmCadastrarVenda.edtAcrescimo.Text) / 100;
   frete := StrToFloat(frmCadastrarVenda.edtFrete.Text);

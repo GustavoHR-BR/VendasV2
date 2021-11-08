@@ -60,20 +60,18 @@ procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   abrirDados('cliente', false);
   abrirDados('produto', false);
-  abrirDados('rua', false);
-  abrirDados('bairro', false);
   abrirDados('cidade', false);
   abrirDados('estado', false);
   abrirDados('item', false);
   abrirDados('venda', false);
+  dm.SQLConn.Close;
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
+  dm.SQLConn.Open;
   abrirDados('cliente', true);
   abrirDados('produto', true);
-  abrirDados('rua', true);
-  abrirDados('bairro', true);
   abrirDados('cidade', true);
   abrirDados('estado', true);
   abrirDados('item', true);
@@ -104,10 +102,7 @@ procedure TfrmPrincipal.Produtos1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
-  abrirDados('produto', false);
-  dm.cdsProdutos.CommandText := 'SELECT * FROM produto ORDER BY id';
-  abrirDados('produto', true);
-
+  dm.cdsProdutos.Filtered := false;
   frmProdutoReport.rvsProdutos.DefaultDest := rdFile;
   frmProdutoReport.rvsProdutos.DoNativeOutput := false;
   frmProdutoReport.rvsProdutos.RenderObject := frmVendaReport.rvRelVendasPDF;
@@ -124,10 +119,7 @@ procedure TfrmPrincipal.Clientes1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
-  abrirDados('cliente', false);
-  dm.cdsClientes.CommandText := 'SELECT * FROM cliente ORDER BY id';
-  abrirDados('cliente', true);
-
+  dm.cdsClientes.Filtered := false;
   frmClienteReport.rvsClientes.DefaultDest := rdFile;
   frmClienteReport.rvsClientes.DoNativeOutput := false;
   frmClienteReport.rvsClientes.RenderObject := frmVendaReport.rvRelVendasPDF;
@@ -144,13 +136,8 @@ procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
-  abrirDados('item', false);
-  dm.cdsItens.CommandText := 'SELECT * FROM item';
-  abrirDados('item', true);
-  abrirDados('venda', false);
-  dm.cdsVendas.CommandText := 'SELECT * FROM venda';
-  abrirDados('venda', true);
-
+  dm.cdsVendas.Filtered := false;
+  dm.cdsItens.Filtered := false;
   frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
   frmVendaReport.rvsVENDAS.DoNativeOutput := false;
   frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;

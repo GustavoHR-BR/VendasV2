@@ -4,8 +4,8 @@ object frmPrincipal: TfrmPrincipal
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Sistema de vendas'
-  ClientHeight = 266
-  ClientWidth = 438
+  ClientHeight = 236
+  ClientWidth = 443
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

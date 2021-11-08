@@ -28,7 +28,6 @@ type
     Label8: TLabel;
     Label9: TLabel;
     procedure btnFiltrarClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
@@ -108,7 +107,6 @@ begin
             edtId.Clear;
           end;
           frmProdutos.btnLimparFiltros.Enabled := true;
-          frmProdutos.dbgrid.DataSource := dm.dSourceProdutos;
           frmFiltrarPro.Close;
         end
         else
@@ -162,12 +160,6 @@ begin
     frmProdutos.qtdEstoqueAte := edtEstoqueAte.Text;
     frmProdutos.descricao := edtDescricao.Text;
   end;
-end;
-
-procedure TfrmFiltrarPro.FormShow(Sender: TObject);
-begin
-  dm.SQLConn.Open;
-  abrirDados('produto', true);
 end;
 
 end.

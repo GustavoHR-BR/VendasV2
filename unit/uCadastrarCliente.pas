@@ -64,7 +64,7 @@ uses uClientes, uDataModule, uFiltroCli, uFunctions, uPrincipal,
 
 procedure TfrmCadastrarCliente.btnCadastrarClick(Sender: TObject);
 var
-  dia, mes, ano: string;
+  dia, mes, ano, msgErro, msgSucesso: string;
 begin
   dia := Copy(dbEdtDtNascimento.Text, 0, 2);
   mes := Copy(dbEdtDtNascimento.Text, 4, 2);
@@ -122,44 +122,34 @@ begin
   end
   else
   begin
-    if frmClientes.Tag = 2 then // Editando cliente
+    dm.cdsClientes.Edit;
+    if frmClientes.Tag = 1 then
     begin
-      try
-        dm.cdsClientes.Edit;
-        dm.cdsClientesfk_cidade.AsString := dm.cdsCidadesid.AsString;
-        dm.cdsClientesrua.AsString := Trim(edtRua.Text);
-        dm.cdsClientesbairro.AsString := Trim(edtBairro.Text);
-        dm.cdsClientes.Post;
-        dm.cdsClientes.ApplyUpdates(0);
-        ShowMessage('Cliente editado com sucesso! ');
-        Tag := 2;
-        frmCadastrarCliente.Close;
-      except
-        on E: Exception do
-          ShowMessage('Erro ao editar o cliente! ' + E.ToString);
-      end;
+      msgErro := 'cadastrar';
+      msgSucesso := 'cadastrado';
+      dm.cdsClientesid.Text := '0';
     end
-    else if frmClientes.Tag = 1 then // Cadastrando cliente
+    else
     begin
-      if frmClientes.Tag = 1 then
-      begin
-        dm.cdsClientesid.Text := '0';
-        try
-          dm.cdsClientes.Edit;
-          dm.cdsClientesfk_cidade.AsString := dm.cdsCidadesid.AsString;
-          dm.cdsClientesrua.AsString := Trim(edtRua.Text);
-          dm.cdsClientesbairro.AsString := Trim(edtBairro.Text);
-          dm.cdsClientes.Post;
-          dm.cdsClientes.ApplyUpdates(0);
-          ShowMessage('Cliente cadastrado com sucesso! ');
-          Tag := 1;
-          frmCadastrarCliente.Close;
-        except
-          on E: Exception do
-            ShowMessage('Erro ao cadastrar o cliente! ' + E.ToString);
-        end;
-      end;
+      msgErro := 'editar';
+      msgSucesso := 'editado';
     end;
+
+    dm.cdsClientesfk_cidade.AsString := dm.cdsCidadesid.AsString;
+    dm.cdsClientesrua.AsString := Trim(edtRua.Text);
+    dm.cdsClientesbairro.AsString := Trim(edtBairro.Text);
+
+    try
+      dm.cdsClientes.Post;
+      dm.cdsClientes.ApplyUpdates(0);
+    except
+      on E: Exception do
+        ShowMessage('Erro ao ' + msgErro + ' o cliente! ' + E.ToString);
+    end;
+    ShowMessage('Cliente ' + msgSucesso + ' com sucesso! ');
+
+    Tag := 2;
+    frmCadastrarCliente.Close;
   end;
 end;
 
@@ -195,7 +185,7 @@ end;
 
 procedure TfrmCadastrarCliente.cboxEstadosSelect(Sender: TObject);
 begin
-  edtCidade.Enabled := true;
+  edtCidade.Enabled := True;
   if edtCidade.Text <> '' then
     edtCidade.Clear;
   fechaBuscaCidade;
@@ -211,7 +201,7 @@ end;
 
 procedure TfrmCadastrarCliente.edtBairroChange(Sender: TObject);
 begin
-  edtRua.Enabled := true;
+  edtRua.Enabled := True;
 end;
 
 procedure TfrmCadastrarCliente.edtCidadeChange(Sender: TObject);
@@ -249,14 +239,14 @@ begin
   frmClientes.cbOrdenarPor.ItemIndex := 0;
   dm.cdsClientes.Filtered := false;
   abrirDados('cliente', false);
-  abrirDados('cliente', true);
+  abrirDados('cliente', True);
 
   if frmCadastrarVenda.Tag = 2 then // Cadastrando cliente pela venda
   begin
     dm.cdsClientes.IndexFieldNames := 'id';
     dm.cdsClientes.Last;
     frmCadastrarVenda.edtBuscar.Text := dm.cdsClientesnome.AsString;
-    frmCadastrarVenda.btnAdicionar.Enabled := true;
+    frmCadastrarVenda.btnAdicionar.Enabled := True;
     frmCadastrarVenda.btnAdicionar.SetFocus;
   end;
 end;
@@ -273,9 +263,9 @@ begin
     dm.cdsClientes.Edit;
     btnCadastrar.Caption := 'Editar';
     buscarEnderecoCliente(dm.cdsClientesid.AsInteger);
-    edtCidade.Enabled := true;
-    edtBairro.Enabled := true;
-    edtRua.Enabled := true;
+    edtCidade.Enabled := True;
+    edtBairro.Enabled := True;
+    edtRua.Enabled := True;
   end;
 end;
 
@@ -287,7 +277,7 @@ begin
   if edtCidade.Text <> '' then
   begin
     fechaBuscaCidade;
-    edtBairro.Enabled := true;
+    edtBairro.Enabled := True;
     edtBairro.SetFocus;
     edtBairro.Clear;
   end

@@ -89,7 +89,7 @@ object frmProdutos: TfrmProdutos
         Visible = True
       end
       item
-        Alignment = taCenter
+        Alignment = taLeftJustify
         Expanded = False
         FieldName = 'preco'
         Title.Caption = 'Pre'#231'o'

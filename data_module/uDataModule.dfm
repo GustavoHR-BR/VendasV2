@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
   Height = 424
-  Width = 459
+  Width = 453
   object SQLConn: TSQLConnection
     DriverName = 'MySQL'
     GetDriverFunc = 'getSQLDriverMYSQL'

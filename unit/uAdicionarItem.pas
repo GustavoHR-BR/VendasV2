@@ -67,24 +67,7 @@ uses
 
 procedure TfrmAdicionarItem.btnCancelarClick(Sender: TObject);
 begin
-  if frmCadastrarVenda.Tag = 4 then // Add item
-  begin
-    edtBuscar.Clear;
-    dbgrid.Visible := false;
-    btnCancelarItem.Visible := false;
-    edtQuantidade.Text := '1';
-    edtAcrescimo.Text := '0';
-    edtDesconto.Text := '0';
-    edtValUnitario.Text := '0';
-    edtEmEstoque.Text := '0';
-    edtBuscar.SetFocus;
-    calculaSubTotalItem;
-    calculaTotalItem;
-  end
-  else if frmCadastrarVenda.Tag = 3 then // Editando item
-  begin
-    frmAdicionarItem.Close;
-  end;
+  frmAdicionarItem.Close;
 end;
 
 procedure TfrmAdicionarItem.btnCancelarItemClick(Sender: TObject);
@@ -104,7 +87,8 @@ procedure TfrmAdicionarItem.btnFinalizarClick(Sender: TObject);
 var
   diferenca: integer;
 begin
-  if StrToInt(edtEmEstoque.Text) > 0 then
+  if (StrToInt(edtEmEstoque.Text) >= 0) AND
+    (dm.cdsProdutosquantidade_estoque.AsInteger > 0) then
   begin
     if Application.MessageBox('Adicionar Item?', 'Confirmação',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
@@ -149,9 +133,10 @@ begin
       dm.cdsProdutosquantidade_estoque.AsInteger :=
         dm.cdsProdutosquantidade_estoque.AsInteger -
         StrToInt(edtQuantidade.Text);
+
       try
-        dm.cdsProdutos.Post;
         dm.cdsItens.Post;
+        dm.cdsProdutos.Post;
       except
         on E: Exception do
           ShowMessage('Erro ao adicionar o item! ' + E.ToString);

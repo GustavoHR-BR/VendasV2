@@ -41,7 +41,7 @@ endobj
 endobj
 
 5 0 obj
-<< /Length 1388 >>
+<< /Length 1707 >>
 stream
 2 J
 [] 0 d
@@ -58,8 +58,8 @@ BT
 ET
 BT
 /F1 18.00 Tf
-298.4220 803.2000 Td
-( de)Tj
+298.3680 803.2000 Td
+( da)Tj
 ET
 BT
 /F1 18.00 Tf
@@ -69,12 +69,17 @@ ET
 BT
 /F2 10.00 Tf
 38.8800 738.8000 Td
-(1)Tj
+(4)Tj
 ET
 BT
 /F2 10.00 Tf
 403.2000 738.8000 Td
-(6890)Tj
+(R$)Tj
+ET
+BT
+/F2 10.00 Tf
+414.2800 738.8000 Td
+( 54.861,68)Tj
 ET
 BT
 /F2 10.00 Tf
@@ -111,17 +116,12 @@ BT
 0 0 0 rg
 /F2 10.00 Tf
 72.0000 738.8000 Td
-(Gustavo)Tj
+(Alex)Tj
 ET
 BT
 /F2 10.00 Tf
-105.1100 738.8000 Td
-( Henrique)Tj
-ET
-BT
-/F2 10.00 Tf
-144.7400 738.8000 Td
-( Reblin)Tj
+89.4400 738.8000 Td
+( Paulo)Tj
 ET
 BT
 /F1 10.00 Tf
@@ -156,12 +156,42 @@ ET
 BT
 /F2 10.00 Tf
 403.2000 681.2000 Td
-(6890)Tj
+(R$)Tj
+ET
+BT
+/F2 10.00 Tf
+414.8400 681.2000 Td
+( 6.890,00)Tj
 ET
 BT
 /F2 10.00 Tf
 482.4000 681.2000 Td
+(4)Tj
+ET
+BT
+/F2 10.00 Tf
+39.6000 652.4000 Td
 (1)Tj
+ET
+BT
+/F2 10.00 Tf
+72.0000 652.4000 Td
+(Celular)Tj
+ET
+BT
+/F2 10.00 Tf
+403.2000 652.4000 Td
+(R$)Tj
+ET
+BT
+/F2 10.00 Tf
+414.7000 652.4000 Td
+( 6.825,42)Tj
+ET
+BT
+/F2 10.00 Tf
+482.4000 652.4000 Td
+(4)Tj
 ET
 endstream
 endobj
@@ -286,7 +316,7 @@ endobj
 <<
 /Creator (Rave Reports \(http://www.nevrona.com/rave\))
 /Producer (Nevrona Designs)
-/CreationDate (D:20211109104734)
+/CreationDate (D:20211109111930)
 >>
 endobj
 
@@ -298,12 +328,12 @@ xref
 0000000147 00000 n
 0000000216 00000 n
 0000000386 00000 n
-0000001832 00000 n
-0000001865 00000 n
-0000003001 00000 n
-0000003281 00000 n
-0000004413 00000 n
-0000004689 00000 n
+0000002151 00000 n
+0000002184 00000 n
+0000003320 00000 n
+0000003600 00000 n
+0000004732 00000 n
+0000005008 00000 n
 
 trailer
 <<
@@ -313,5 +343,5 @@ trailer
 >>
 
 startxref
-4837
+5156
 %%EOF

@@ -101,6 +101,7 @@ object frmFiltrarPro: TfrmFiltrarPro
     Height = 21
     TabOrder = 2
     Text = '0'
+    OnChange = edtPrecoDeChange
   end
   object edtPrecoAte: TEdit
     Left = 134
@@ -109,6 +110,7 @@ object frmFiltrarPro: TfrmFiltrarPro
     Height = 21
     TabOrder = 3
     Text = '10000'
+    OnChange = edtPrecoAteChange
   end
   object edtDescricao: TEdit
     Left = 216
@@ -124,6 +126,7 @@ object frmFiltrarPro: TfrmFiltrarPro
     Height = 21
     TabOrder = 5
     Text = '0'
+    OnChange = edtEstoqueDeChange
   end
   object btnFiltrar: TButton
     Left = 367
@@ -162,5 +165,6 @@ object frmFiltrarPro: TfrmFiltrarPro
     Height = 21
     TabOrder = 8
     Text = '10000'
+    OnChange = edtEstoqueAteChange
   end
 end

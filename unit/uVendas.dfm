@@ -324,6 +324,7 @@ object frmVendas: TfrmVendas
     end
     object cdsVendastotal: TFMTBCDField
       FieldName = 'total'
+      currency = True
       Precision = 12
       Size = 2
     end
@@ -373,6 +374,7 @@ object frmVendas: TfrmVendas
     end
     object cdsItenspreco: TFMTBCDField
       FieldName = 'preco'
+      currency = True
       Precision = 12
       Size = 2
     end

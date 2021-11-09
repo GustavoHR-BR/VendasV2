@@ -30,6 +30,10 @@ type
     procedure btnFiltrarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edtEstoqueAteChange(Sender: TObject);
+    procedure edtPrecoDeChange(Sender: TObject);
+    procedure edtPrecoAteChange(Sender: TObject);
+    procedure edtEstoqueDeChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -68,20 +72,16 @@ begin
           begin
             dm.cdsProdutos.Filtered := false;
             dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
-            dm.cdsProdutos.Filter :=
-              '(id = '+(QuotedStr(Trim(edtId.Text))) +')' +
-              ' AND (nome LIKE ' +
-                (QuotedStr(Trim(edtNome.Text)+ '%')) +')' +
-              ' AND (preco >= ' +
-                (QuotedStr(Trim(edtPrecoDe.Text))) +')' +
-              ' AND (preco < ' +
-                (QuotedStr(Trim(edtPrecoAte.Text))) +')' +
+            dm.cdsProdutos.Filter := '(id = ' + (QuotedStr(Trim(edtId.Text))) +
+              ')' + ' AND (nome LIKE ' + (QuotedStr(Trim(edtNome.Text) + '%')) +
+              ')' + ' AND (preco >= ' + (QuotedStr(Trim(edtPrecoDe.Text))) + ')'
+              + ' AND (preco < ' + (QuotedStr(Trim(edtPrecoAte.Text))) + ')' +
               ' AND (descricao LIKE ' +
-                (QuotedStr( '%' + Trim(edtDescricao.Text)+ '%')) +')' +
+              (QuotedStr('%' + Trim(edtDescricao.Text) + '%')) + ')' +
               ' AND (quantidade_estoque >= ' +
-                (QuotedStr(Trim(edtEstoqueDe.Text))) +')' +
-              ' AND (quantidade_estoque < '  +
-                (QuotedStr(Trim(edtEstoqueAte.Text))) +')';
+              (QuotedStr(Trim(edtEstoqueDe.Text))) + ')' +
+              ' AND (quantidade_estoque < ' +
+              (QuotedStr(Trim(edtEstoqueAte.Text))) + ')';
             dm.cdsProdutos.Filtered := true;
           end
           else
@@ -89,20 +89,16 @@ begin
             edtId.Text := '0';
             dm.cdsProdutos.Filtered := false;
             dm.cdsProdutos.FilterOptions := [foCaseInsensitive];
-            dm.cdsProdutos.Filter :=
-              '(id > '+(QuotedStr(Trim(edtId.Text))) +')' +
-              ' AND (nome LIKE ' +
-                (QuotedStr(Trim(edtNome.Text)+ '%')) +')' +
-              ' AND (preco >= ' +
-                (QuotedStr(Trim(edtPrecoDe.Text))) +')' +
-              ' AND (preco < ' +
-                (QuotedStr(Trim(edtPrecoAte.Text))) +')' +
+            dm.cdsProdutos.Filter := '(id > ' + (QuotedStr(Trim(edtId.Text))) +
+              ')' + ' AND (nome LIKE ' + (QuotedStr(Trim(edtNome.Text) + '%')) +
+              ')' + ' AND (preco >= ' + (QuotedStr(Trim(edtPrecoDe.Text))) + ')'
+              + ' AND (preco < ' + (QuotedStr(Trim(edtPrecoAte.Text))) + ')' +
               ' AND (descricao LIKE ' +
-                (QuotedStr( '%' + Trim(edtDescricao.Text)+ '%')) +')' +
+              (QuotedStr('%' + Trim(edtDescricao.Text) + '%')) + ')' +
               ' AND (quantidade_estoque >= ' +
-                (QuotedStr(Trim(edtEstoqueDe.Text))) +')' +
-              ' AND (quantidade_estoque < '  +
-                (QuotedStr(Trim(edtEstoqueAte.Text))) +')';
+              (QuotedStr(Trim(edtEstoqueDe.Text))) + ')' +
+              ' AND (quantidade_estoque < ' +
+              (QuotedStr(Trim(edtEstoqueAte.Text))) + ')';
             dm.cdsProdutos.Filtered := true;
             edtId.Clear;
           end;
@@ -136,6 +132,30 @@ begin
     edtEstoqueDe.Text := '0';
     edtEstoqueDe.SetFocus;
   end;
+end;
+
+procedure TfrmFiltrarPro.edtEstoqueAteChange(Sender: TObject);
+begin
+  if edtEstoqueAte.Text = '' then
+    edtEstoqueAte.Text := '0';
+end;
+
+procedure TfrmFiltrarPro.edtEstoqueDeChange(Sender: TObject);
+begin
+  if edtEstoqueDe.Text = '' then
+    edtEstoqueDe.Text := '0';
+end;
+
+procedure TfrmFiltrarPro.edtPrecoAteChange(Sender: TObject);
+begin
+  if edtPrecoAte.Text = '' then
+    edtPrecoAte.Text := '0';
+end;
+
+procedure TfrmFiltrarPro.edtPrecoDeChange(Sender: TObject);
+begin
+  if edtPrecoDe.Text = '' then
+    edtPrecoDe.Text := '0';
 end;
 
 procedure TfrmFiltrarPro.FormClose(Sender: TObject; var Action: TCloseAction);

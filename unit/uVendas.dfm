@@ -204,7 +204,7 @@ object frmVendas: TfrmVendas
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 130
+        Width = 178
         Visible = True
       end>
   end

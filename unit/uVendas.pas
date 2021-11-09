@@ -71,6 +71,12 @@ var
 begin
   id := frmVendas.cdsVendasid.AsInteger;
 
+  if frmVendaReport = nil then
+    Application.CreateForm(TfrmVendaReport, frmVendaReport);
+
+  if frmClientes = nil then
+    Application.CreateForm(TfrmClientes, frmClientes);
+
   frmVendaReport.RvVendas.DataSet := cdsVendas;
   frmVendaReport.RvItens.DataSet := cdsItens;
 
@@ -85,13 +91,15 @@ begin
   arquivo_pdf := ExtractFilePath(Application.ExeName) +
     'RELATORIO VENDA UNICA.pdf';
   frmVendaReport.rvsVendas.OutputFileName := arquivo_pdf;
-  frmVendaReport.RvProject1.SetParam('titulo','Relatório da venda');
+  frmVendaReport.RvProject1.SetParam('titulo', 'Relatório da venda');
   frmVendaReport.RvProject1.Execute;
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
     SW_NORMAL);
 
   frmVendas.cdsVendas.Filtered := false;
+  FreeAndNil(frmVendaReport);
+  FreeAndNil(frmClientes);
 end;
 
 procedure TfrmVendas.btnNovaClick(Sender: TObject);

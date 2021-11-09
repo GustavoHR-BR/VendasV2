@@ -7208,9 +7208,7 @@ object frmClienteReport: TfrmClienteReport
       BFED84B0000000}
   end
   object rvsClientes: TRvSystem
-    SystemSetups = [ssAllowCopies, ssAllowCollate, ssAllowDuplex, ssAllowDestPreview, ssAllowDestPrinter, ssAllowDestFile, ssAllowPrinterSetup]
-    SystemFiler.FileName = 'GLUK - RELATORIO DE VENDAS POR CLIENTE'
-    SystemFiler.StatusFormat = 'Gerando P'#225'ginas %p'
+    SystemSetups = [ssAllowCopies, ssAllowCollate, ssAllowDuplex, ssAllowDestPreview, ssAllowDestPrinter, ssAllowDestFile, ssAllowPrinterSetup, ssAllowPreviewSetup]
     SystemFiler.StreamMode = smTempFile
     SystemPreview.ZoomFactor = 100.000000000000000000
     SystemPrinter.ScaleX = 100.000000000000000000

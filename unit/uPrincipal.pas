@@ -136,6 +136,8 @@ procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
+  frmVendaReport.RvVendas.DataSet := dm.cdsVendas;
+  frmVendaReport.RvItens.DataSet := dm.cdsItens;
   dm.cdsVendas.Filtered := false;
   dm.cdsItens.Filtered := false;
   frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
@@ -143,6 +145,7 @@ begin
   frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) + 'RELATORIO VENDAS.pdf';
   frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;
+  frmVendaReport.RvProject1.SetParam('titulo', 'Relatório de vendas');
   frmVendaReport.RvProject1.Execute;
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),

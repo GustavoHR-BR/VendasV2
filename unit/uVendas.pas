@@ -71,24 +71,27 @@ var
 begin
   id := frmVendas.cdsVendasid.AsInteger;
 
-  abrirDados('item', false);
-  dm.cdsItens.CommandText := 'SELECT * FROM item ';
-  abrirDados('item', True);
-  abrirDados('venda', false);
-  dm.cdsVendas.CommandText := 'SELECT * FROM venda WHERE id = ' + IntToStr(id);
-  abrirDados('venda', True);
-   //VER COMO FAZER SEM BUSCAR NO BANCO
+  frmVendaReport.RvVendas.DataSet := cdsVendas;
+  frmVendaReport.RvItens.DataSet := cdsItens;
 
-  frmVendaReport.rvsVENDAS.DefaultDest := rdFile;
-  frmVendaReport.rvsVENDAS.DoNativeOutput := False;
-  frmVendaReport.rvsVENDAS.RenderObject := frmVendaReport.rvRelVendasPDF;
+  cdsVendas.Filtered := false;
+  cdsVendas.FilterOptions := [foCaseInsensitive];
+  cdsVendas.Filter := 'id = ' + IntToStr(id);
+  cdsVendas.Filtered := True;
+
+  frmVendaReport.rvsVendas.DefaultDest := rdFile;
+  frmVendaReport.rvsVendas.DoNativeOutput := false;
+  frmVendaReport.rvsVendas.RenderObject := frmVendaReport.rvRelVendasPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) +
     'RELATORIO VENDA UNICA.pdf';
-  frmVendaReport.rvsVENDAS.OutputFileName := arquivo_pdf;
+  frmVendaReport.rvsVendas.OutputFileName := arquivo_pdf;
+  frmVendaReport.RvProject1.SetParam('titulo','Relatório da venda');
   frmVendaReport.RvProject1.Execute;
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
     SW_NORMAL);
+
+  frmVendas.cdsVendas.Filtered := false;
 end;
 
 procedure TfrmVendas.btnNovaClick(Sender: TObject);

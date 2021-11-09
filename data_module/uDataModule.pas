@@ -89,6 +89,12 @@ type
     cdsClientesid_2: TIntegerField;
     cdsClientesuf: TStringField;
     cdsClientesnome_2: TStringField;
+    cdsVendasnome: TStringField;
+    dSetVendasid: TIntegerField;
+    dSetVendasfk_cliente: TIntegerField;
+    dSetVendastotal: TFMTBCDField;
+    dSetVendasdata: TStringField;
+    dSetVendasnome: TStringField;
   private
     { Private declarations }
   public

@@ -322,16 +322,40 @@ object dm: Tdm
       FieldName = 'data'
       Size = 10
     end
+    object cdsVendasnome: TStringField
+      FieldName = 'nome'
+      Size = 60
+    end
   end
   object dSetVendas: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'SELECT * FROM venda;'
+    CommandText = 'SELECT * FROM venda v JOIN cliente c ON v.fk_cliente = c.id;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = SQLConn
     Left = 32
     Top = 288
+    object dSetVendasid: TIntegerField
+      FieldName = 'id'
+      Required = True
+    end
+    object dSetVendasfk_cliente: TIntegerField
+      FieldName = 'fk_cliente'
+    end
+    object dSetVendastotal: TFMTBCDField
+      FieldName = 'total'
+      Precision = 12
+      Size = 2
+    end
+    object dSetVendasdata: TStringField
+      FieldName = 'data'
+      Size = 10
+    end
+    object dSetVendasnome: TStringField
+      FieldName = 'nome'
+      Size = 60
+    end
   end
   object dspVendas: TDataSetProvider
     DataSet = dSetVendas

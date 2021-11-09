@@ -24,6 +24,7 @@ procedure calculaSubTotalVenda;
 procedure calculaTotalVenda;
 procedure atualizaEditEstoque;
 procedure removeFormatacaoPrecoProduto;
+procedure resetQuery;
 
 var
   subTotalDaVenda, totalDaVenda, frete, totalDoItem, valDescontoItem,
@@ -40,7 +41,6 @@ uses
 
 procedure buscarCliente(orderBy: string);
 begin
-  dm.cdsClientes.Filtered := false;
   dm.cdsClientes.IndexFieldNames := orderBy;
 end;
 
@@ -94,7 +94,6 @@ end;
 
 procedure buscarProduto(orderBy: string);
 begin
-  dm.cdsProdutos.Filtered := false;
   dm.cdsProdutos.IndexFieldNames := orderBy;
 end;
 
@@ -391,6 +390,15 @@ begin
     copy(frmCadastrarProduto.dbEdtPreco.Text, 4, 10);
   frmCadastrarProduto.dbEdtPreco.Text :=
     StringReplace(frmCadastrarProduto.dbEdtPreco.Text, '.', '', [rfReplaceAll]);
+end;
+
+procedure resetQuery;
+begin
+  abrirDados('cliente', false);
+  dm.cdsClientes.CommandText := 'SELECT * FROM cliente c' +
+    ' JOIN cidade cid ON cid.id = c.fk_cidade ' +
+    ' JOIN estado e ON e.id = cid.fk_estado';
+  abrirDados('cliente', true);
 end;
 
 end.

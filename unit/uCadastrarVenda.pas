@@ -291,6 +291,8 @@ end;
 procedure TfrmCadastrarVenda.btnCadastrarClienteClick(Sender: TObject);
 begin
   Tag := 2;
+  if frmClientes = nil then
+    Application.CreateForm(TfrmClientes, frmClientes);
   frmClientes.btnAdicionarClick(Self);
   dbgridClientes.Visible := false;
   btnFecharBusca.Visible := false;
@@ -299,6 +301,8 @@ end;
 procedure TfrmCadastrarVenda.btnEditarClienteClick(Sender: TObject);
 begin
   Tag := 3;
+  if frmClientes = nil then
+    Application.CreateForm(TfrmClientes, frmClientes);
   frmClientes.btnEditarClick(Self);
   dbgridClientes.Visible := false;
   btnFecharBusca.Visible := false;

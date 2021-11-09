@@ -114,7 +114,6 @@ object dm: Tdm
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    Active = True
     CommandText = 
       'SELECT * FROM cliente c '#13#10'JOIN cidade cid ON cid.id = c.fk_cidad' +
       'e'#13#10'JOIN estado e ON e.id = cid.fk_estado'

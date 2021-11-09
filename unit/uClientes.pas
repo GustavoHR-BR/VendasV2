@@ -45,7 +45,8 @@ uses uCadastrarCliente, uDataModule, uPrincipal, uFiltroCli, uFunctions;
 
 procedure TfrmClientes.btnAdicionarClick(Sender: TObject);
 begin
-  Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
+  if frmCadastrarCliente = nil then
+    Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
   Tag := 1;
   dm.cdsClientes.Append;
   try
@@ -58,7 +59,7 @@ end;
 procedure TfrmClientes.btnEditarClick(Sender: TObject);
 begin
   Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
-  Tag := 2;
+  frmClientes.Tag := 2;
   try
     frmCadastrarCliente.ShowModal;
   finally
@@ -109,6 +110,7 @@ begin
   telefone := '';
 
   dm.cdsClientes.Filtered := false;
+  btnLimparFiltros.Enabled := false;
 end;
 
 procedure TfrmClientes.btnSairClick(Sender: TObject);

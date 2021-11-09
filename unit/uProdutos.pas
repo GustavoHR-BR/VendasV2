@@ -96,6 +96,7 @@ begin
   descricao := '';
 
   dm.cdsProdutos.Filtered := false;
+  btnLimparFiltros.Enabled := false;
 end;
 
 procedure TfrmProdutos.btnSairClick(Sender: TObject);

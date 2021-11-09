@@ -87,74 +87,83 @@ procedure TfrmAdicionarItem.btnFinalizarClick(Sender: TObject);
 var
   diferenca: integer;
 begin
-  if (StrToInt(edtEmEstoque.Text) >= 0) AND
-    (dm.cdsProdutosquantidade_estoque.AsInteger > 0) then
+  if StrToInt(edtQuantidade.Text) > 0 then
   begin
-    if Application.MessageBox('Adicionar Item?', 'Confirmação',
-      MB_YESNO + MB_ICONQUESTION) = mrYes then
+    if (StrToInt(edtEmEstoque.Text) >= 0) AND
+      (dm.cdsProdutosquantidade_estoque.AsInteger > 0) then
     begin
-      calculaSubTotalItem;
-      calculaTotalItem;
-      calculaSubTotalVenda;
-      calculaTotalVenda;
-      Tag := 1;
-
-      if (dm.cdsItens.Locate('nome', edtBuscar.Text, [])) and
-        dm.cdsItens.Locate('fk_venda', dm.cdsVendasid.Text, []) then
-      // Já adicionado
+      if Application.MessageBox('Adicionar Item?', 'Confirmação',
+        MB_YESNO + MB_ICONQUESTION) = mrYes then
       begin
-        diferenca := StrToInt(edtQuantidade.Text) -
-          dm.cdsItensquantidade.AsInteger;
+        calculaSubTotalItem;
+        calculaTotalItem;
+        calculaSubTotalVenda;
+        calculaTotalVenda;
+        Tag := 1;
 
-        dm.cdsItens.Edit;
-        dm.cdsItensquantidade.AsInteger := dm.cdsItensquantidade.AsInteger +
-          diferenca;
-        dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
-        dm.cdsItensdesconto.AsString := edtDesconto.Text;
-        dm.cdsItensvalor_total.AsFloat := StrTofloat(edtValTotal.Text);
+        if (dm.cdsItens.Locate('nome', edtBuscar.Text, [])) and
+          dm.cdsItens.Locate('fk_venda', dm.cdsVendasid.Text, []) then
+        // Já adicionado
+        begin
+          diferenca := StrToInt(edtQuantidade.Text) -
+            dm.cdsItensquantidade.AsInteger;
+
+          dm.cdsItens.Edit;
+          dm.cdsItensquantidade.AsInteger := dm.cdsItensquantidade.AsInteger +
+            diferenca;
+          dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
+          dm.cdsItensdesconto.AsString := edtDesconto.Text;
+          dm.cdsItensvalor_total.AsFloat := StrTofloat(edtValTotal.Text);
+        end
+        else
+        begin
+          dm.cdsItens.Append;
+          dm.cdsItens.Edit;
+          dm.cdsItensid.Text := IntToStr(idNovoItem);
+          dm.cdsItensfk_venda.AsInteger := dm.cdsVendasid.AsInteger;
+          dm.cdsItensfk_produto.AsString := dm.cdsProdutosid.AsString;
+          dm.cdsItensnome.AsString := dm.cdsProdutosnome.AsString;
+          dm.cdsItenspreco.AsFloat := dm.cdsProdutospreco.AsFloat;
+          dm.cdsItensdescricao.AsString := dm.cdsProdutosdescricao.AsString;
+          dm.cdsItensquantidade.AsString := edtQuantidade.Text;
+          dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
+          dm.cdsItensdesconto.AsString := edtDesconto.Text;
+          dm.cdsItensvalor_total.AsString := edtValTotal.Text;
+        end;
+
+        dm.cdsProdutos.Edit;
+        dm.cdsProdutosquantidade_estoque.AsInteger :=
+          dm.cdsProdutosquantidade_estoque.AsInteger -
+          StrToInt(edtQuantidade.Text);
+
+        try
+          dm.cdsItens.Post;
+          dm.cdsProdutos.Post;
+        except
+          on E: Exception do
+            ShowMessage('Erro ao adicionar o item! ' + E.ToString);
+        end;
+        frmAdicionarItem.Close;
+        frmCadastrarVenda.edtDesconto.Enabled := True;
+        frmCadastrarVenda.edtAcrescimo.Enabled := True;
+        frmCadastrarVenda.edtFrete.Enabled := True;
+        frmCadastrarVenda.btnFinalizar.Enabled := True;
+        frmCadastrarVenda.btnEditar.Enabled := True;
+        frmCadastrarVenda.btnExcluir.Enabled := True;
       end
       else
-      begin
-        dm.cdsItens.Append;
-        dm.cdsItens.Edit;
-        dm.cdsItensid.Text := IntToStr(idNovoItem);
-        dm.cdsItensfk_venda.AsInteger := dm.cdsVendasid.AsInteger;
-        dm.cdsItensfk_produto.AsString := dm.cdsProdutosid.AsString;
-        dm.cdsItensnome.AsString := dm.cdsProdutosnome.AsString;
-        dm.cdsItenspreco.AsFloat := dm.cdsProdutospreco.AsFloat;
-        dm.cdsItensdescricao.AsString := dm.cdsProdutosdescricao.AsString;
-        dm.cdsItensquantidade.AsString := edtQuantidade.Text;
-        dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
-        dm.cdsItensdesconto.AsString := edtDesconto.Text;
-        dm.cdsItensvalor_total.AsString := edtValTotal.Text;
-      end;
-
-      dm.cdsProdutos.Edit;
-      dm.cdsProdutosquantidade_estoque.AsInteger :=
-        dm.cdsProdutosquantidade_estoque.AsInteger -
-        StrToInt(edtQuantidade.Text);
-
-      try
-        dm.cdsItens.Post;
-        dm.cdsProdutos.Post;
-      except
-        on E: Exception do
-          ShowMessage('Erro ao adicionar o item! ' + E.ToString);
-      end;
-      frmAdicionarItem.Close;
-      frmCadastrarVenda.edtDesconto.Enabled := True;
-      frmCadastrarVenda.edtAcrescimo.Enabled := True;
-      frmCadastrarVenda.edtFrete.Enabled := True;
-      frmCadastrarVenda.btnFinalizar.Enabled := True;
-      frmCadastrarVenda.btnEditar.Enabled := True;
-      frmCadastrarVenda.btnExcluir.Enabled := True;
+        Abort;
     end
     else
-      Abort;
+    begin
+      ShowMessage('Estoque insuficiente!');
+      edtQuantidade.Text := '1';
+      edtQuantidade.SetFocus;
+    end;
   end
   else
   begin
-    ShowMessage('Estoque insuficiente!');
+    ShowMessage('A quantidade mínima é de 1 item!');
     edtQuantidade.Text := '1';
     edtQuantidade.SetFocus;
   end;

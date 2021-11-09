@@ -23,20 +23,8 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(Tdm, dm);
-  Application.CreateForm(TfrmCadastrarCliente, frmCadastrarCliente);
-  Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(TfrmFiltrosCli, frmFiltrosCli);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmProdutos, frmProdutos);
-  Application.CreateForm(TfrmCadastrarProduto, frmCadastrarProduto);
-  Application.CreateForm(TfrmVendas, frmVendas);
-  Application.CreateForm(TfrmVendaReport, frmVendaReport);
   Application.CreateForm(TfrmCadastrarVenda, frmCadastrarVenda);
-  Application.CreateForm(TfrmAdicionarItem, frmAdicionarItem);
-  Application.CreateForm(TfrmFiltrarPro, frmFiltrarPro);
-  Application.CreateForm(TfrmClienteReport, frmClienteReport);
-  Application.CreateForm(TfrmProdutoReport, frmProdutoReport);
   Application.Run;
 end.

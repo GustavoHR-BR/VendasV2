@@ -42,22 +42,26 @@ uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
 procedure TfrmCadastrarProduto.btnCadastrarClick(Sender: TObject);
 begin
   removeFormatacaoPrecoProduto;
-  if (dbEdtNome.Text = '') OR (Length(dbEdtNome.Text) < 5) then
+  if (dbEdtNome.Text = '') OR (Length(dbEdtNome.Text) < 5) OR
+    (Length(dbEdtNome.Text) > 30) then
   begin
     ShowMessage('Nome inválido! ');
     dbEdtNome.SetFocus;
   end
-  else if (dbEdtPreco.Text = '') OR (StrToFloat(dbEdtPreco.Text) < 0) then
+  else if (dbEdtPreco.Text = '') OR (StrToFloat(dbEdtPreco.Text) < 0) OR
+    (StrToFloat(dbEdtPreco.Text) > 10) then
   begin
     ShowMessage('Preço inválido! ');
     dbEdtPreco.SetFocus;
   end
-  else if (dbEdtDescricao.Text = '') OR (Length(dbEdtDescricao.Text) < 5) then
+  else if (dbEdtDescricao.Text = '') OR (Length(dbEdtDescricao.Text) < 5) OR
+    (Length(dbEdtDescricao.Text) < 50) then
   begin
     ShowMessage('Descrição inválida! ');
     dbEdtDescricao.SetFocus;
   end
-  else if (dbEdtEstoque.Text = '') OR (StrToInt(dbEdtEstoque.Text) < 0) then
+  else if (dbEdtEstoque.Text = '') OR (StrToInt(dbEdtEstoque.Text) < 0) OR
+    (StrToInt(dbEdtEstoque.Text) > 6) then
   begin
     ShowMessage('Quantidade inválida! ');
     dbEdtEstoque.SetFocus;

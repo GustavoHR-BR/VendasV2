@@ -44,6 +44,7 @@ type
     procedure btnCadastrarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure edtBairroChange(Sender: TObject);
+    procedure FormClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -65,7 +66,6 @@ procedure TfrmCadastrarCliente.btnCadastrarClick(Sender: TObject);
 var
   dia, mes, ano: string;
 begin
-
   dia := Copy(dbEdtDtNascimento.Text, 0, 2);
   mes := Copy(dbEdtDtNascimento.Text, 4, 2);
   ano := Copy(dbEdtDtNascimento.Text, 7, 4);
@@ -122,25 +122,16 @@ begin
   end
   else
   begin
-    if frmClientes.Tag = 2 then
+    if frmClientes.Tag = 2 then // Editando cliente
     begin
       try
+        dm.cdsClientes.Edit;
         dm.cdsClientesfk_cidade.AsString := dm.cdsCidadesid.AsString;
         dm.cdsClientesrua.AsString := Trim(edtRua.Text);
         dm.cdsClientesbairro.AsString := Trim(edtBairro.Text);
         dm.cdsClientes.Post;
         dm.cdsClientes.ApplyUpdates(0);
         ShowMessage('Cliente editado com sucesso! ');
-        if frmCadastrarVenda.Tag = 2 then
-        begin
-          frmCadastrarVenda.dbEdtCpf.Text := dm.cdsClientescpf.Text;
-          frmCadastrarVenda.dbEdtTelefone.Text := dm.cdsClientestelefone.Text;
-          frmCadastrarVenda.dbEdtEmail.Text := dm.cdsClientesemail.Text;
-          frmCadastrarVenda.dbEdtDtNascimento.Text :=
-            dm.cdsClientesdata_nascimento.Text;
-          frmCadastrarVenda.DBEdtRua.Text := dm.cdsClientesrua.Text;
-          frmCadastrarVenda.DBEdtBairro.Text := dm.cdsClientesbairro.Text;
-        end;
         Tag := 2;
         frmCadastrarCliente.Close;
       except
@@ -148,29 +139,19 @@ begin
           ShowMessage('Erro ao editar o cliente! ' + E.ToString);
       end;
     end
-    else if frmClientes.Tag = 1 then
+    else if frmClientes.Tag = 1 then // Cadastrando cliente
     begin
       if frmClientes.Tag = 1 then
       begin
         dm.cdsClientesid.Text := '0';
         try
+          dm.cdsClientes.Edit;
           dm.cdsClientesfk_cidade.AsString := dm.cdsCidadesid.AsString;
           dm.cdsClientesrua.AsString := Trim(edtRua.Text);
           dm.cdsClientesbairro.AsString := Trim(edtBairro.Text);
           dm.cdsClientes.Post;
           dm.cdsClientes.ApplyUpdates(0);
           ShowMessage('Cliente cadastrado com sucesso! ');
-          if frmCadastrarVenda.Tag = 2 then
-          begin
-            frmCadastrarVenda.dbEdtCpf.Text := dm.cdsClientescpf.Text;
-            frmCadastrarVenda.dbEdtTelefone.Text := dm.cdsClientestelefone.Text;
-            frmCadastrarVenda.dbEdtEmail.Text := dm.cdsClientesemail.Text;
-            frmCadastrarVenda.dbEdtDtNascimento.Text :=
-              dm.cdsClientesdata_nascimento.Text;
-            frmCadastrarVenda.DBEdtRua.Text := dm.cdsClientesrua.Text;
-            frmCadastrarVenda.DBEdtBairro.Text := dm.cdsClientesbairro.Text;
-            frmCadastrarVenda.edtBuscar.Clear;
-          end;
           Tag := 1;
           frmCadastrarCliente.Close;
         except
@@ -248,42 +229,46 @@ begin
   buscarCidade;
 end;
 
+procedure TfrmCadastrarCliente.FormClick(Sender: TObject);
+begin
+  gridCidades.Visible := false;
+  btnCancelarCidade.Visible := false;
+end;
+
 procedure TfrmCadastrarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if (Tag <> 1) AND (Tag <> 2) then // Tag <> 1 e 2 -> close pelo usuário;
+  if (Tag <> 1) AND (Tag <> 2) then // close pelo usuário;
   begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) <> mrYes then
       Abort;
-  end
-  else
+  end;
+  // Após editar ou cadastrar, lista todos os clientes
+  frmClientes.edtBuscar.Text := '';
+  frmClientes.cbOrdenarPor.ItemIndex := 0;
+  dm.cdsClientes.Filtered := false;
+  abrirDados('cliente', false);
+  abrirDados('cliente', true);
+
+  if frmCadastrarVenda.Tag = 2 then // Cadastrando cliente pela venda
   begin
-    if (frmCadastrarVenda.Tag <> 2) and ((frmCadastrarVenda.Tag <> 3)) then
-    begin
-      frmClientes.edtBuscar.Text := '';
-      frmClientes.cbOrdenarPor.ItemIndex := 1;
-      dm.cdsClientes.Filtered := false;
-    end
-    else
-    begin
-      dm.cdsClientes.IndexFieldNames := 'id';
-      dm.cdsClientes.First;
-      frmCadastrarVenda.edtBuscar.Text := dm.cdsClientesnome.AsString;
-      frmCadastrarVenda.btnAdicionar.Enabled := true;
-      frmCadastrarVenda.btnAdicionar.SetFocus;
-    end;
+    dm.cdsClientes.IndexFieldNames := 'id';
+    dm.cdsClientes.Last;
+    frmCadastrarVenda.edtBuscar.Text := dm.cdsClientesnome.AsString;
+    frmCadastrarVenda.btnAdicionar.Enabled := true;
+    frmCadastrarVenda.btnAdicionar.SetFocus;
   end;
 end;
 
 procedure TfrmCadastrarCliente.FormShow(Sender: TObject);
 begin
-  if frmClientes.Tag = 1 then // Tag = 1 -> cadastrar
+  if frmClientes.Tag = 1 then // Cadastrando cliente
   begin
     dm.cdsClientes.Edit;
     dm.cdsClientes.ClearFields;
   end
-  else if frmClientes.Tag = 2 then // Tag = 2 -> editar
+  else if frmClientes.Tag = 2 then // Editando cliente
   begin
     dm.cdsClientes.Edit;
     btnCadastrar.Caption := 'Editar';

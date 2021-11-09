@@ -22,6 +22,7 @@ procedure calculaDescontoItem;
 procedure calculaTotalItem;
 procedure calculaSubTotalVenda;
 procedure calculaTotalVenda;
+procedure atualizaEditEstoque;
 procedure removeFormatacaoPrecoProduto;
 
 var
@@ -172,29 +173,16 @@ begin
 end;
 
 procedure buscarEnderecoCliente(id: Integer);
-var
-  t: TThread;
 begin
-  t := TThread.CreateAnonymousThread(
-    procedure
-    begin
-      dm.cdsClientes.Filtered := false;
-      dm.cdsClientes.FilterOptions := [foCaseInsensitive];
-      dm.cdsClientes.Filter := 'id = ' + IntToStr(id);
-      dm.cdsClientes.Filtered := true;
-      TThread.Synchronize(nil,
-        procedure
-        begin
-          frmCadastrarCliente.cboxEstados.ItemIndex :=
-            frmCadastrarCliente.cboxEstados.Items.IndexOf
-            (dm.cdsClientesuf.AsString);
-          frmCadastrarCliente.edtCidade.Text := (dm.cdsClientesnome_1.AsString);
-          frmCadastrarCliente.edtBairro.Text := (dm.cdsClientesbairro.AsString);
-          frmCadastrarCliente.EdtRua.Text := (dm.cdsClientesrua.AsString);
-        end);
-    end);
-  t.FreeOnTerminate := true;
-  t.Start;
+  dm.cdsClientes.Filtered := false;
+  dm.cdsClientes.FilterOptions := [foCaseInsensitive];
+  dm.cdsClientes.Filter := 'id = ' + IntToStr(id);
+  dm.cdsClientes.Filtered := true;
+  frmCadastrarCliente.cboxEstados.ItemIndex :=
+    frmCadastrarCliente.cboxEstados.Items.IndexOf(dm.cdsEstadosuf.AsString);
+  frmCadastrarCliente.edtCidade.Text := dm.cdsCidadesnome.AsString;
+  frmCadastrarCliente.edtBairro.Text := dm.cdsClientesbairro.AsString;
+  frmCadastrarCliente.edtRua.Text := dm.cdsClientesrua.AsString;
 end;
 
 procedure fechaBuscaCidade;
@@ -294,6 +282,9 @@ end;
 
 procedure calculaSubTotalItem;
 begin
+  if frmAdicionarItem.edtQuantidade.Text = '' then
+    frmAdicionarItem.edtQuantidade.Text := '1';
+
   quantidadeDeProdutos := StrToInt(frmAdicionarItem.edtQuantidade.Text);
   valUnitario := StrToFloat(frmAdicionarItem.edtValUnitario.Text);
   frmAdicionarItem.edtSubTotal.Text :=
@@ -302,6 +293,9 @@ end;
 
 procedure calculaAcrescimoItem;
 begin
+  if frmAdicionarItem.edtAcrescimo.Text = '' then
+    frmAdicionarItem.edtAcrescimo.Text := '0';
+
   acrescimoDoItem := StrToFloat(frmAdicionarItem.edtAcrescimo.Text) / 100;
   frmAdicionarItem.edtValAcrescimo.Text :=
     FloatToStr(acrescimoDoItem * StrToFloat(frmAdicionarItem.edtSubTotal.Text));
@@ -309,6 +303,9 @@ end;
 
 procedure calculaDescontoItem;
 begin
+  if frmAdicionarItem.edtDesconto.Text = '' then
+    frmAdicionarItem.edtDesconto.Text := '0';
+
   descontoDoItem := StrToFloat(frmAdicionarItem.edtDesconto.Text) / 100;
   frmAdicionarItem.edtValDesconto.Text :=
     FloatToStr(descontoDoItem * StrToFloat(frmAdicionarItem.edtSubTotal.Text));
@@ -325,7 +322,7 @@ end;
 
 procedure calculaSubTotalVenda;
 var
-  novoValDoItem, diferenca: Double;
+  diferenca: Double;
 begin
   if frmCadastrarVenda.Tag = 4 then // adicionando algum item
   begin
@@ -333,27 +330,24 @@ begin
       FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
       StrToFloat(frmAdicionarItem.edtValTotal.Text));
   end
+  else if frmCadastrarVenda.Tag = 5 then // excluindo um item
+  begin
+    frmCadastrarVenda.edtSubtTotal.Text :=
+      FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) -
+      dm.cdsItensvalor_total.AsFloat);
+  end
   else if frmCadastrarVenda.Tag = 3 then // editando um item
   begin
     if frmCadastrarVenda.DBGridItens.DataSource.DataSet.RecordCount = 0 then
       frmCadastrarVenda.edtSubtTotal.Text := '0'
     else
     begin
-      novoValDoItem := dm.cdsItensvalor_total.AsFloat;
-      diferenca := novoValDoItem - frmAdicionarItem.valAtualDoItem;
+      diferenca := StrToInt(frmAdicionarItem.edtQuantidade.Text) -
+        dm.cdsItensquantidade.AsInteger;
 
-      if diferenca > 0 then
-      begin
-        frmCadastrarVenda.edtSubtTotal.Text :=
-          FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
-          diferenca);
-      end
-      else
-      begin
-        frmCadastrarVenda.edtSubtTotal.Text :=
-          FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
-          diferenca);
-      end;
+      frmCadastrarVenda.edtSubtTotal.Text :=
+        FloatToStr(StrToFloat(frmCadastrarVenda.edtSubtTotal.Text) +
+        (dm.cdsItenspreco.AsFloat * diferenca));
     end;
   end;
 end;
@@ -362,7 +356,6 @@ procedure calculaTotalVenda;
 var
   subTotal: Double;
 begin
-
   if frmCadastrarVenda.edtDesconto.Text = '' then
     frmCadastrarVenda.edtDesconto.Text := '0'
   else if frmCadastrarVenda.edtAcrescimo.Text = '' then
@@ -377,6 +370,19 @@ begin
   frmCadastrarVenda.edtTotalVenda.Text :=
     FloatToStr(subTotal + frete + (subTotal * acrescimo) -
     (subTotal * desconto));
+end;
+
+procedure atualizaEditEstoque;
+begin
+  if frmAdicionarItem.edtQuantidade.Text = '' then
+    frmAdicionarItem.edtQuantidade.Text := '0';
+
+  if dm.cdsProdutosquantidade_estoque.AsInteger > 0 then
+  begin
+    frmAdicionarItem.edtEmEstoque.Text :=
+      IntToStr(dm.cdsProdutosquantidade_estoque.AsInteger -
+      StrToInt(frmAdicionarItem.edtQuantidade.Text));
+  end;
 end;
 
 procedure removeFormatacaoPrecoProduto;

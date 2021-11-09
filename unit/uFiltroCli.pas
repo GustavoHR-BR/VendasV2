@@ -52,6 +52,7 @@ procedure TfrmFiltrosCli.btnCancelarClick(Sender: TObject);
 begin
   Tag := -1;
   frmFiltrosCli.Close;
+  dm.cdsClientes.Filtered := false;
 end;
 
 procedure TfrmFiltrosCli.btnFiltrarClick(Sender: TObject);
@@ -64,11 +65,12 @@ begin
       ' AND (nome LIKE ' + QuotedStr(Trim(edtNome.Text) + '%') + ')' +
       ' AND (cpf LIKE ' + QuotedStr('%' + Trim(edtCpf.Text) + '%') + ')' +
       ' AND (uf LIKE ' + QuotedStr('%' + Trim(cboxEstados.Text) + '%') + ')' +
-      ' AND (nome LIKE ' + QuotedStr('%' + Trim(edtCidade.Text) + '%') + ')' +
+      ' AND (nome_1 LIKE ' + QuotedStr('%' + Trim(edtCidade.Text) + '%') + ')' +
       ' AND (bairro LIKE ' + QuotedStr('%' + Trim(edtBairro.Text) + '%') + ')' +
       ' AND (rua LIKE ' + QuotedStr('%' + Trim(edtRua.Text) + '%') + ')' +
-      ' AND (telefone LIKE ' + QuotedStr('%' + Trim(edtTelefone.Text) + '%') + ')';
-   dm.cdsClientes.Filtered := true;
+      ' AND (telefone LIKE ' + QuotedStr('%' + Trim(edtTelefone.Text) +
+      '%') + ')';
+    dm.cdsClientes.Filtered := true;
   end
   else
   begin
@@ -79,12 +81,13 @@ begin
       ' AND (nome LIKE ' + QuotedStr(Trim(edtNome.Text) + '%') + ')' +
       ' AND (cpf LIKE ' + QuotedStr('%' + Trim(edtCpf.Text) + '%') + ')' +
       ' AND (uf LIKE ' + QuotedStr('%' + Trim(cboxEstados.Text) + '%') + ')' +
-      ' AND (nome LIKE ' + QuotedStr('%' + Trim(edtCidade.Text) + '%') + ')' +
+      ' AND (nome_1 LIKE ' + QuotedStr('%' + Trim(edtCidade.Text) + '%') + ')' +
       ' AND (bairro LIKE ' + QuotedStr('%' + Trim(edtBairro.Text) + '%') + ')' +
       ' AND (rua LIKE ' + QuotedStr('%' + Trim(edtRua.Text) + '%') + ')' +
-      ' AND (telefone LIKE ' + QuotedStr('%' + Trim(edtTelefone.Text) + '%') + ')';
-   dm.cdsClientes.Filtered := true;
-   edtId.Clear;
+      ' AND (telefone LIKE ' + QuotedStr('%' + Trim(edtTelefone.Text) +
+      '%') + ')';
+    dm.cdsClientes.Filtered := true;
+    edtId.Clear;
   end;
   frmClientes.btnLimparFiltros.Enabled := true;
   frmFiltrosCli.Close;

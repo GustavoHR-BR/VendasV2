@@ -59,10 +59,9 @@ type
     procedure edtAcrescimoChange(Sender: TObject);
     procedure edtFreteChange(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
-    procedure DBGridItensCellClick(Column: TColumn);
     procedure btnEditarClick(Sender: TObject);
+    procedure FormClick(Sender: TObject);
   private
-    passouAqui: Boolean;
   public
     numeroDeItens, idPrimeiroItem: Integer;
     idDoItem: string;
@@ -87,20 +86,35 @@ begin
     frmAdicionarItem.ShowModal;
   finally
     FreeAndNil(frmAdicionarItem);
-    dm.cdsItens.Filtered := false;
   end;
 end;
 
 procedure TfrmCadastrarVenda.btnExcluirClick(Sender: TObject);
-var
-  idCliente: string;
-  I, J, idDoItemExcluido, qtdDoItemExcluido, novoEstoque, idProduto,
-    qtdAtualNoEstoque: Integer;
 begin
   if Application.MessageBox('Deseja realmente excluir?', 'Atenção',
     MB_YESNO + MB_ICONQUESTION) = mrYes then
   begin
-
+    dm.cdsProdutos.Edit;
+    dm.cdsProdutosquantidade_estoque.AsInteger :=
+      dm.cdsProdutosquantidade_estoque.AsInteger +
+      dm.cdsItensquantidade.AsInteger;
+    try
+      dm.cdsItens.Delete;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao excluir o item! ' + E.ToString);
+    end;
+    if DBGridItens.DataSource.DataSet.RecordCount = 0 then
+    begin
+      edtSubtTotal.Text := '0';
+      edtTotalVenda.Text := '0';
+      btnEditar.Enabled := false;
+      btnExcluir.Enabled := false;
+      btnFinalizar.Enabled := false;
+    end;
+    Tag := 5;
+    calculaSubTotalVenda;
+    calculaTotalVenda;
   end;
 end;
 
@@ -122,7 +136,6 @@ end;
 
 procedure TfrmCadastrarVenda.btnFinalizarClick(Sender: TObject);
 begin
-
   if DBGridItens.DataSource.DataSet.RecordCount > 0 then
   begin
     if edtBuscar.Text = dm.cdsClientesnome.Text then
@@ -130,7 +143,19 @@ begin
       if Application.MessageBox('Deseja relamente finalizar?', 'Atenção',
         MB_YESNO + MB_ICONQUESTION) = mrYes then
       begin
+        dm.cdsVendasfk_cliente.AsInteger := dm.cdsClientesid.AsInteger;
+        dm.cdsVendastotal.AsString := edtTotalVenda.Text;
+        dm.cdsVendasdata.AsString := DateToStr(now);
+        try
+          dm.cdsVendas.ApplyUpdates(0);
+          dm.cdsItens.ApplyUpdates(0);
+          dm.cdsProdutos.ApplyUpdates(0);
+        except
+          on E: Exception do
+            ShowMessage('Erro ao finalizar a venda: ' + E.ToString);
+        end;
         Tag := 1;
+        frmCadastrarVenda.Close;
       end
       else
         Abort;
@@ -153,21 +178,23 @@ begin
   btnAdicionar.SetFocus;
 end;
 
-procedure TfrmCadastrarVenda.DBGridItensCellClick(Column: TColumn);
-begin
-  //
-end;
-
 procedure TfrmCadastrarVenda.btnFecharBuscaClick(Sender: TObject);
 begin
   edtBuscar.Clear;
+  edtBuscar.SetFocus;
   dbgridClientes.Visible := false;
   btnFecharBusca.Visible := false;
   btnCadastrarCliente.Enabled := True;
   btnEditarCliente.Enabled := false;
   btnAdicionar.Enabled := false;
-  dm.cdsClientes.Edit;
-  dm.cdsClientes.ClearFields;
+
+  // Limpa edits cliente
+  DBEdtCpf.Text := '';
+  DBEdtTelefone.Text := '';
+  DBEdtEmail.Text := '';
+  DBEdtDtNascimento.Text := '';
+  DBEdtRua.Text := '';
+  DBEdtBairro.Text := '';
 end;
 
 procedure TfrmCadastrarVenda.edtBuscarChange(Sender: TObject);
@@ -184,52 +211,58 @@ procedure TfrmCadastrarVenda.edtBuscarClick(Sender: TObject);
 begin
   dbgridClientes.Visible := True;
   btnFecharBusca.Visible := True;
-  dbgridClientes.Refresh;
 end;
 
 procedure TfrmCadastrarVenda.edtAcrescimoChange(Sender: TObject);
 begin
-  calculaSubTotalVenda;
   calculaTotalVenda;
 end;
 
 procedure TfrmCadastrarVenda.edtDescontoChange(Sender: TObject);
 begin
-  calculaSubTotalVenda;
   calculaTotalVenda;
 end;
 
 procedure TfrmCadastrarVenda.edtFreteChange(Sender: TObject);
 begin
-  calculaSubTotalVenda;
   calculaTotalVenda;
+end;
+
+procedure TfrmCadastrarVenda.FormClick(Sender: TObject);
+begin
+  dbgridClientes.Visible := false;
+  btnFecharBusca.Visible := false;
 end;
 
 procedure TfrmCadastrarVenda.FormClose(Sender: TObject;
   var Action: TCloseAction);
-var
-  idVenda: string;
-  I, J, qtdDaqueleItem, idProduto, novoEstoque, estoqueAtual,
-    idDoItemExcluido: Integer;
 begin
   if Tag <> 1 then // USER ESTÁ CANCELANDO A VENDA
   begin
     if Application.MessageBox('Deseja realmente sair? A venda será cancelada!',
-      'Atenção', MB_YESNO + MB_ICONQUESTION) = mrYes then
-    begin
-
-    end
-    else
+      'Atenção', MB_YESNO + MB_ICONQUESTION) <> mrYes then
       Abort;
   end
   else
+  begin
     ShowMessage('Venda realizada com sucesso! ');
+    frmVendas.cdsVendas.Close;
+    frmVendas.dSetVendas.Close;
+    frmVendas.cdsItens.Close;
+    frmVendas.dSetItens.Close;
+    frmVendas.cdsVendas.Open;
+    frmVendas.dSetVendas.Open;
+    frmVendas.cdsItens.Open;
+    frmVendas.dSetItens.Open;
+  end;
 end;
 
 procedure TfrmCadastrarVenda.FormShow(Sender: TObject);
 var
   id: Integer;
 begin
+  dm.cdsClientes.Filtered := false;
+
   // Cria nova venda em memória
   dm.cdsVendas.Filtered := false;
   dm.cdsVendas.IndexFieldNames := 'id';
@@ -247,8 +280,12 @@ begin
   dm.cdsItens.Filtered := True;
 
   // Limpa edits clientes
-  dm.cdsClientes.Edit;
-  dm.cdsClientes.ClearFields;
+  DBEdtCpf.Text := '';
+  DBEdtTelefone.Text := '';
+  DBEdtEmail.Text := '';
+  DBEdtDtNascimento.Text := '';
+  DBEdtRua.Text := '';
+  DBEdtBairro.Text := '';
 end;
 
 procedure TfrmCadastrarVenda.btnCadastrarClienteClick(Sender: TObject);

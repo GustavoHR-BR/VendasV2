@@ -130,6 +130,7 @@ end;
 procedure TfrmClientes.FormShow(Sender: TObject);
 begin
   ufPosition := -1;
+  dm.cdsClientes.Filtered := false;
 end;
 
 end.

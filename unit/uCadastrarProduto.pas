@@ -113,6 +113,8 @@ begin
   end;
   frmProdutos.edtBuscar.Text := '';
   frmProdutos.cbOrdenarPor.ItemIndex := 1;
+  abrirDados('produto', false);
+  abrirDados('produto', true);
   dm.cdsProdutos.Filtered := false;
 end;
 

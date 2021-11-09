@@ -116,6 +116,8 @@ end;
 
 procedure TfrmProdutos.FormShow(Sender: TObject);
 begin
+  dm.cdsProdutos.Filtered := false;
+
   precoDe := '0';
   precoAte := '10000';
   qtdEstoqueDe := '0';

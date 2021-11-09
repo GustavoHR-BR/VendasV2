@@ -1,10 +1,11 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 418
-  Width = 590
+  Height = 424
+  Width = 459
   object SQLConn: TSQLConnection
     DriverName = 'MySQL'
     GetDriverFunc = 'getSQLDriverMYSQL'
+    KeepConnection = False
     LibraryName = 'dbxmys.dll'
     LoginPrompt = False
     Params.Strings = (
@@ -89,6 +90,9 @@ object dm: Tdm
       FieldName = 'bairro'
       Size = 50
     end
+    object cdsClientesid_1: TIntegerField
+      FieldName = 'id_1'
+    end
     object cdsClientesnome_1: TStringField
       FieldName = 'nome_1'
       Size = 80
@@ -107,16 +111,13 @@ object dm: Tdm
       FieldName = 'nome_2'
       Size = 100
     end
-    object cdsClientesid_1: TIntegerField
-      FieldName = 'id_1'
-    end
   end
   object dSetClientes: TSQLDataSet
     SchemaName = 'gustavo_reblin'
     Active = True
     CommandText = 
       'SELECT * FROM cliente c '#13#10'JOIN cidade cid ON cid.id = c.fk_cidad' +
-      'e'#13#10'JOIN estado e ON e.id = cid.fk_estado;'
+      'e'#13#10'JOIN estado e ON e.id = cid.fk_estado'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -193,7 +194,7 @@ object dm: Tdm
   end
   object dSetProdutos: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'SELECT * FROM produto ORDER BY nome ASC;'
+    CommandText = 'SELECT * FROM produto;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
     Params = <>
@@ -345,23 +346,18 @@ object dm: Tdm
   end
   object dSetItens: TSQLDataSet
     SchemaName = 'gustavo_reblin'
-    CommandText = 'select * from item order by id;'
+    CommandText = 'select * from item;'
     DbxCommandType = 'Dbx.SQL'
     MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'fk_venda'
-        ParamType = ptInput
-        Value = 1
-      end>
+    Params = <>
     SQLConnection = SQLConn
     Left = 32
     Top = 360
   end
   object dpsItens: TDataSetProvider
     DataSet = dSetItens
-    Options = [poAllowCommandText, poUseQuoteChar]
+    Constraints = False
+    Options = [poAllowMultiRecordUpdates, poAllowCommandText, poUseQuoteChar]
     Left = 128
     Top = 360
   end

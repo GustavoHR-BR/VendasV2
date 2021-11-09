@@ -5,7 +5,7 @@ object frmProdutos: TfrmProdutos
   BorderStyle = bsSingle
   Caption = 'Produtos'
   ClientHeight = 482
-  ClientWidth = 849
+  ClientWidth = 853
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -44,8 +44,8 @@ object frmProdutos: TfrmProdutos
     ParentFont = False
   end
   object dbgrid: TDBGrid
-    Left = -14
-    Top = 56
+    Left = 0
+    Top = 62
     Width = 853
     Height = 369
     DataSource = dm.dSourceProdutos
@@ -98,7 +98,7 @@ object frmProdutos: TfrmProdutos
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 80
+        Width = 100
         Visible = True
       end
       item
@@ -110,7 +110,7 @@ object frmProdutos: TfrmProdutos
         Title.Font.Height = -11
         Title.Font.Name = 'Tahoma'
         Title.Font.Style = [fsBold]
-        Width = 450
+        Width = 430
         Visible = True
       end
       item

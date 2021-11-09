@@ -252,7 +252,7 @@ object frmClientes: TfrmClientes
   end
   object cbOrdenarPor: TComboBox
     Left = 701
-    Top = 8
+    Top = 17
     Width = 145
     Height = 23
     Style = csDropDownList
@@ -261,10 +261,10 @@ object frmClientes: TfrmClientes
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
-    ItemIndex = 1
+    ItemIndex = 0
     ParentFont = False
     TabOrder = 3
-    Text = 'Nome'
+    Text = 'C'#243'digo'
     OnSelect = cbOrdenarPorSelect
     Items.Strings = (
       'C'#243'digo'

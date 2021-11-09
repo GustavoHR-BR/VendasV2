@@ -195,6 +195,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 13
+    Text = '0'
   end
   object edtValAcrescimo: TEdit
     Left = 184

@@ -68,12 +68,6 @@ type
     cdsClientesrua: TStringField;
     cdsClientesbairro: TStringField;
     cdsCidadesuf: TStringField;
-    cdsClientesnome_1: TStringField;
-    cdsClientesfk_estado: TIntegerField;
-    cdsClientesid_2: TIntegerField;
-    cdsClientesuf: TStringField;
-    cdsClientesnome_2: TStringField;
-    cdsClientesid_1: TIntegerField;
     dSetClientesid: TIntegerField;
     dSetClientesfk_cidade: TIntegerField;
     dSetClientesnome: TStringField;
@@ -89,6 +83,12 @@ type
     dSetClientesid_2: TIntegerField;
     dSetClientesuf: TStringField;
     dSetClientesnome_2: TStringField;
+    cdsClientesid_1: TIntegerField;
+    cdsClientesnome_1: TStringField;
+    cdsClientesfk_estado: TIntegerField;
+    cdsClientesid_2: TIntegerField;
+    cdsClientesuf: TStringField;
+    cdsClientesnome_2: TStringField;
   private
     { Private declarations }
   public

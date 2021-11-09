@@ -41,7 +41,7 @@ endobj
 endobj
 
 5 0 obj
-<< /Length 2254 >>
+<< /Length 2585 >>
 stream
 2 J
 BT
@@ -235,6 +235,36 @@ BT
 482.4000 594.0800 Td
 (Quantidade)Tj
 ET
+BT
+/F2 10.00 Tf
+39.6000 566.0000 Td
+(8)Tj
+ET
+BT
+/F2 10.00 Tf
+72.0000 566.0000 Td
+(Processador)Tj
+ET
+BT
+/F2 10.00 Tf
+120.5600 566.0000 Td
+( i5-9400F)Tj
+ET
+BT
+/F2 10.00 Tf
+403.2000 566.0000 Td
+(R$)Tj
+ET
+BT
+/F2 10.00 Tf
+415.0400 566.0000 Td
+( 1.125,90)Tj
+ET
+BT
+/F2 10.00 Tf
+482.4000 566.0000 Td
+(1)Tj
+ET
 endstream
 endobj
 
@@ -358,7 +388,7 @@ endobj
 <<
 /Creator (Rave Reports \(http://www.nevrona.com/rave\))
 /Producer (Nevrona Designs)
-/CreationDate (D:202111089:9:5 )
+/CreationDate (D:20211108101138)
 >>
 endobj
 
@@ -370,12 +400,12 @@ xref
 0000000147 00000 n
 0000000216 00000 n
 0000000386 00000 n
-0000002698 00000 n
-0000002731 00000 n
-0000003867 00000 n
-0000004147 00000 n
-0000005279 00000 n
-0000005555 00000 n
+0000003029 00000 n
+0000003062 00000 n
+0000004198 00000 n
+0000004478 00000 n
+0000005610 00000 n
+0000005886 00000 n
 
 trailer
 <<
@@ -385,5 +415,5 @@ trailer
 >>
 
 startxref
-5703
+6034
 %%EOF

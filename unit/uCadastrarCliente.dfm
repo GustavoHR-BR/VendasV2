@@ -14,6 +14,7 @@ object frmCadastrarCliente: TfrmCadastrarCliente
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClick = FormClick
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96

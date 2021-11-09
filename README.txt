@@ -1,3 +1,3 @@
 Incompleto -> 
   Relatórios com campos errados.
-  Implementar cds.Filter nos Itens da venda.
+  Edição de clientes não grava no banco. 

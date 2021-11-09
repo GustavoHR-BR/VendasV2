@@ -14,6 +14,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnClick = FormClick
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -376,7 +377,6 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OnCellClick = DBGridItensCellClick
     Columns = <
       item
         Expanded = False
@@ -426,7 +426,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Font.Style = []
     ParentFont = False
     TabOrder = 11
-    Text = '100'
+    Text = '0'
     OnChange = edtBuscarChange
   end
   object edtDesconto: TEdit
@@ -434,6 +434,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 417
     Width = 81
     Height = 23
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -449,6 +450,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 417
     Width = 81
     Height = 23
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -464,6 +466,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
     Top = 417
     Width = 81
     Height = 23
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

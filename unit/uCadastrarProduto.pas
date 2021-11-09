@@ -49,19 +49,19 @@ begin
     dbEdtNome.SetFocus;
   end
   else if (dbEdtPreco.Text = '') OR (StrToFloat(dbEdtPreco.Text) < 0) OR
-    (StrToFloat(dbEdtPreco.Text) > 10) then
+    (Length(dbEdtPreco.Text) < 0) OR (Length(dbEdtPreco.Text) > 10) then
   begin
     ShowMessage('Preço inválido! ');
     dbEdtPreco.SetFocus;
   end
   else if (dbEdtDescricao.Text = '') OR (Length(dbEdtDescricao.Text) < 5) OR
-    (Length(dbEdtDescricao.Text) < 50) then
+    (Length(dbEdtDescricao.Text) > 50) then
   begin
     ShowMessage('Descrição inválida! ');
     dbEdtDescricao.SetFocus;
   end
   else if (dbEdtEstoque.Text = '') OR (StrToInt(dbEdtEstoque.Text) < 0) OR
-    (StrToInt(dbEdtEstoque.Text) > 6) then
+    (Length(dbEdtEstoque.Text) < 0) OR (Length(dbEdtEstoque.Text) > 6) then
   begin
     ShowMessage('Quantidade inválida! ');
     dbEdtEstoque.SetFocus;

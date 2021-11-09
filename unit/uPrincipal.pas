@@ -102,6 +102,9 @@ procedure TfrmPrincipal.Produtos1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
+  if frmProdutoReport = nil then
+    Application.CreateForm(TfrmProdutoReport, frmProdutoReport);
+
   dm.cdsProdutos.Filtered := false;
   frmProdutoReport.rvsProdutos.DefaultDest := rdFile;
   frmProdutoReport.rvsProdutos.DoNativeOutput := false;
@@ -113,12 +116,17 @@ begin
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
     SW_NORMAL);
+
+  FreeAndNil(frmProdutoReport);
 end;
 
 procedure TfrmPrincipal.Clientes1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
+  if frmClienteReport = nil then
+    Application.CreateForm(TfrmClienteReport, frmClienteReport);
+
   dm.cdsClientes.Filtered := false;
   frmClienteReport.rvsClientes.DefaultDest := rdFile;
   frmClienteReport.rvsClientes.DoNativeOutput := false;
@@ -130,12 +138,17 @@ begin
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
     SW_NORMAL);
+
+  FreeAndNil(frmProdutoReport);
 end;
 
 procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
 var
   arquivo_pdf: string;
 begin
+  if frmVendaReport = nil then
+    Application.CreateForm(TfrmVendaReport, frmVendaReport);
+
   frmVendaReport.RvVendas.DataSet := dm.cdsVendas;
   frmVendaReport.RvItens.DataSet := dm.cdsItens;
   dm.cdsVendas.Filtered := false;
@@ -150,6 +163,8 @@ begin
   ShellExecute(0, nil, Pchar(arquivo_pdf), nil,
     Pchar(ExtractFilePath(Application.ExeName) + 'docs\relatorios\'),
     SW_NORMAL);
+
+  FreeAndNil(frmCadastrarCliente);
 end;
 
 end.

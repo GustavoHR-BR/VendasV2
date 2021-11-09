@@ -268,15 +268,20 @@ begin
     if Application.MessageBox('Deseja realmente sair?', 'Atenção',
       MB_YESNO + MB_ICONQUESTION) = mrYes then
     begin
-      // Atualiza os clientes
-      frmClientes.edtBuscar.Text := '';
-      resetQuery;
-      dm.cdsClientes.Filtered := false;
+      if (frmCadastrarVenda.Tag <> 2) AND (frmCadastrarVenda.Tag <> 3) then
+      // Tag = 2 Cancelando cadastro de cliente pela venda
+      // Tag = 3 Cancelando edição de cliente pela venda
+      begin
+        // Atualiza os clientes
+        frmClientes.edtBuscar.Text := '';
+        resetQuery;
+        dm.cdsClientes.Filtered := false;
+      end;
     end
     else
       Abort;
   end;
-  if (frmCadastrarVenda.Tag <> 2) and (frmCadastrarVenda.Tag <> 3) then
+  if (frmCadastrarVenda.Tag <> 2) AND (frmCadastrarVenda.Tag <> 3) then
   // Tag = 2 Cancelando cadastro de cliente pela venda
   // Tag = 3 Cancelando edição de cliente pela venda
   begin

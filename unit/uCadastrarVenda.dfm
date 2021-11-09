@@ -34,7 +34,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object btnCadastrarCliente: TSpeedButton
     Left = 351
-    Top = 39
+    Top = 37
     Width = 26
     Height = 23
     Hint = 'Cadastrar novo cliente'
@@ -80,7 +80,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object btnEditarCliente: TSpeedButton
     Left = 383
-    Top = 39
+    Top = 37
     Width = 26
     Height = 23
     Hint = 'Editar cliente selecionado'
@@ -134,7 +134,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object Label3: TLabel
     Left = 440
-    Top = 21
+    Top = 18
     Width = 25
     Height = 15
     Caption = 'CPF:'
@@ -176,7 +176,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object Label6: TLabel
     Left = 584
-    Top = 21
+    Top = 18
     Width = 55
     Height = 15
     Caption = 'Anivers'#225'rio'
@@ -296,7 +296,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object DBEdtCpf: TDBEdit
     Left = 440
-    Top = 40
+    Top = 37
     Width = 104
     Height = 23
     DataField = 'cpf'
@@ -344,7 +344,7 @@ object frmCadastrarVenda: TfrmCadastrarVenda
   end
   object DBEdtDtNascimento: TDBEdit
     Left = 584
-    Top = 40
+    Top = 37
     Width = 132
     Height = 23
     DataField = 'data_nascimento'

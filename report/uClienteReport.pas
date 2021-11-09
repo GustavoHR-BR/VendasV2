@@ -13,7 +13,7 @@ type
     RvProject1: TRvProject;
     rvsClientes: TRvSystem;
     RvClientes: TRvDataSetConnection;
-    RvRenderPDF1: TRvRenderPDF;
+    rvRelClientesPDF: TRvRenderPDF;
   private
     { Private declarations }
   public

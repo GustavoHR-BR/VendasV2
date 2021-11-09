@@ -12,7 +12,7 @@ type
     RvProject1: TRvProject;
     rvsProdutos: TRvSystem;
     rvProdutos: TRvDataSetConnection;
-    rvRelVendasPDF: TRvRenderPDF;
+    rvRelProdutosPDF: TRvRenderPDF;
   private
     { Private declarations }
   public

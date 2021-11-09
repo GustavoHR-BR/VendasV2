@@ -108,7 +108,8 @@ begin
   dm.cdsProdutos.Filtered := false;
   frmProdutoReport.rvsProdutos.DefaultDest := rdFile;
   frmProdutoReport.rvsProdutos.DoNativeOutput := false;
-  frmProdutoReport.rvsProdutos.RenderObject := frmVendaReport.rvRelVendasPDF;
+  frmProdutoReport.rvsProdutos.RenderObject :=
+    frmProdutoReport.rvRelProdutosPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) +
     'RELATORIO PRODUTOS.pdf';
   frmProdutoReport.rvsProdutos.OutputFileName := arquivo_pdf;
@@ -130,7 +131,8 @@ begin
   dm.cdsClientes.Filtered := false;
   frmClienteReport.rvsClientes.DefaultDest := rdFile;
   frmClienteReport.rvsClientes.DoNativeOutput := false;
-  frmClienteReport.rvsClientes.RenderObject := frmVendaReport.rvRelVendasPDF;
+  frmClienteReport.rvsClientes.RenderObject :=
+    frmClienteReport.rvRelClientesPDF;
   arquivo_pdf := ExtractFilePath(Application.ExeName) +
     'RELATORIO CLIENTES.pdf';
   frmClienteReport.rvsClientes.OutputFileName := arquivo_pdf;

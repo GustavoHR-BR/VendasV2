@@ -7167,7 +7167,7 @@ object frmProdutoReport: TfrmProdutoReport
     Left = 216
     Top = 24
   end
-  object rvRelVendasPDF: TRvRenderPDF
+  object rvRelProdutosPDF: TRvRenderPDF
     DisplayName = 'Adobe Acrobat (PDF)'
     FileExtension = '*.pdf'
     DocInfo.Creator = 'Rave Reports (http://www.nevrona.com/rave)'

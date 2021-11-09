@@ -7209,6 +7209,7 @@ object frmClienteReport: TfrmClienteReport
   end
   object rvsClientes: TRvSystem
     SystemSetups = [ssAllowCopies, ssAllowCollate, ssAllowDuplex, ssAllowDestPreview, ssAllowDestPrinter, ssAllowDestFile, ssAllowPrinterSetup, ssAllowPreviewSetup]
+    SystemFiler.StatusFormat = 'Generating page %p'
     SystemFiler.StreamMode = smTempFile
     SystemPreview.ZoomFactor = 100.000000000000000000
     SystemPrinter.ScaleX = 100.000000000000000000
@@ -7225,7 +7226,7 @@ object frmClienteReport: TfrmClienteReport
     Left = 224
     Top = 24
   end
-  object RvRenderPDF1: TRvRenderPDF
+  object rvRelClientesPDF: TRvRenderPDF
     DisplayName = 'Adobe Acrobat (PDF)'
     FileExtension = '*.pdf'
     DocInfo.Creator = 'Rave Reports (http://www.nevrona.com/rave)'

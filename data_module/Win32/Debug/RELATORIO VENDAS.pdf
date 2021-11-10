@@ -41,7 +41,7 @@ endobj
 endobj
 
 5 0 obj
-<< /Length 6658 >>
+<< /Length 7984 >>
 stream
 2 J
 [] 0 d
@@ -622,6 +622,122 @@ BT
 482.4000 191.6000 Td
 (1)Tj
 ET
+BT
+/F2 10.00 Tf
+38.8800 134.0000 Td
+(6)Tj
+ET
+BT
+/F2 10.00 Tf
+403.2000 134.0000 Td
+(R$)Tj
+ET
+BT
+/F2 10.00 Tf
+414.1800 134.0000 Td
+( 13.578,84)Tj
+ET
+BT
+/F2 10.00 Tf
+482.4000 134.0000 Td
+(10/11/2021)Tj
+ET
+BT
+/F1 10.00 Tf
+28.8000 154.8800 Td
+(Código)Tj
+ET
+BT
+/F1 10.00 Tf
+72.0000 154.8800 Td
+(Cliente)Tj
+ET
+BT
+/F1 10.00 Tf
+403.2000 154.8800 Td
+(Total)Tj
+ET
+BT
+/F1 10.00 Tf
+482.4000 154.8800 Td
+(Data)Tj
+ET
+0 0 0 RG
+0.502 0.502 0.502 rg
+14.4000 121.0800 m
+583.2000 121.0800 l S
+14.4000 179.4000 568.8000 -7.2000 re b
+BT
+0 0 0 rg
+/F2 10.00 Tf
+72.0000 134.0000 Td
+(Victor)Tj
+ET
+BT
+/F2 10.00 Tf
+97.1200 134.0000 Td
+( da)Tj
+ET
+BT
+/F2 10.00 Tf
+108.3400 134.0000 Td
+( Cunha)Tj
+ET
+BT
+/F2 10.00 Tf
+137.0000 134.0000 Td
+( Shimitz)Tj
+ET
+BT
+/F1 10.00 Tf
+28.8000 104.4800 Td
+(Código)Tj
+ET
+BT
+/F1 10.00 Tf
+72.0000 104.4800 Td
+(Produto)Tj
+ET
+BT
+/F1 10.00 Tf
+403.2000 104.4800 Td
+(Preço)Tj
+ET
+BT
+/F1 10.00 Tf
+482.4000 104.4800 Td
+(Quantidade)Tj
+ET
+BT
+/F2 10.00 Tf
+39.6000 76.4000 Td
+(3)Tj
+ET
+BT
+/F2 10.00 Tf
+72.0000 76.4000 Td
+(PC)Tj
+ET
+BT
+/F2 10.00 Tf
+84.5000 76.4000 Td
+( Gamer)Tj
+ET
+BT
+/F2 10.00 Tf
+403.2000 76.4000 Td
+(R$)Tj
+ET
+BT
+/F2 10.00 Tf
+414.7200 76.4000 Td
+( 6.789,42)Tj
+ET
+BT
+/F2 10.00 Tf
+482.4000 76.4000 Td
+(2)Tj
+ET
 endstream
 endobj
 
@@ -745,7 +861,7 @@ endobj
 <<
 /Creator (Rave Reports \(http://www.nevrona.com/rave\))
 /Producer (Nevrona Designs)
-/CreationDate (D:202111095:9:4 )
+/CreationDate (D:202111101:3:6 )
 >>
 endobj
 
@@ -757,12 +873,12 @@ xref
 0000000147 00000 n
 0000000216 00000 n
 0000000386 00000 n
-0000007102 00000 n
-0000007135 00000 n
-0000008271 00000 n
-0000008551 00000 n
-0000009683 00000 n
-0000009959 00000 n
+0000008428 00000 n
+0000008461 00000 n
+0000009597 00000 n
+0000009877 00000 n
+0000011009 00000 n
+0000011285 00000 n
 
 trailer
 <<
@@ -772,5 +888,5 @@ trailer
 >>
 
 startxref
-10107
+11433
 %%EOF

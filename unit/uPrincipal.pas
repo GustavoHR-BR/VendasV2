@@ -21,6 +21,7 @@ type
     Vendas1: TMenuItem;
     Clientes1: TMenuItem;
     Produtos1: TMenuItem;
+    Dashboard1: TMenuItem;
     procedure Cliente1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Nova1Click(Sender: TObject);
@@ -29,6 +30,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Clientes1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
+    procedure Dashboard1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +46,7 @@ implementation
 
 uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
   uProdutos, uCadastrarProduto, uVendas, uVendaReport, uCadastrarVenda,
-  uClienteReport, uAdicionarItem, uFiltroPro, uProdutoReport;
+  uClienteReport, uAdicionarItem, uFiltroPro, uProdutoReport, uDashboard;
 
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
@@ -142,6 +144,17 @@ begin
     SW_NORMAL);
 
   FreeAndNil(frmProdutoReport);
+end;
+
+procedure TfrmPrincipal.Dashboard1Click(Sender: TObject);
+begin
+  if frmDashboard = nil then
+    Application.CreateForm(TfrmDashboard, frmDashboard);
+  try
+    frmDashboard.ShowModal;
+  finally
+    FreeAndNil(frmDashboard);
+  end;
 end;
 
 procedure TfrmPrincipal.Vendas1Click(Sender: TObject);

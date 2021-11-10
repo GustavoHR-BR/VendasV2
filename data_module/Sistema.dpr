@@ -16,7 +16,8 @@ uses
   uAdicionarItem in '..\unit\uAdicionarItem.pas' {frmAdicionarItem},
   uFiltroPro in '..\unit\uFiltroPro.pas' {frmFiltrarPro},
   uClienteReport in '..\report\uClienteReport.pas' {frmClienteReport},
-  uProdutoReport in '..\report\uProdutoReport.pas' {frmProdutoReport};
+  uProdutoReport in '..\report\uProdutoReport.pas' {frmProdutoReport},
+  uDashboard in '..\unit\uDashboard.pas' {frmDashboard};
 
 {$R *.res}
 
@@ -26,5 +27,6 @@ begin
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmCadastrarVenda, frmCadastrarVenda);
+  Application.CreateForm(TfrmDashboard, frmDashboard);
   Application.Run;
 end.

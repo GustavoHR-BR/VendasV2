@@ -159,6 +159,30 @@ object frmClientes: TfrmClientes
         Title.Font.Style = [fsBold]
         Width = 90
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nome_1'
+        Title.Caption = 'Cidade'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 150
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'uf'
+        Title.Caption = 'UF'
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'Tahoma'
+        Title.Font.Style = [fsBold]
+        Width = 45
+        Visible = True
       end>
   end
   object btnAdicionar: TButton

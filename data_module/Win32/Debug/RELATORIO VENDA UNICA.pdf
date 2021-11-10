@@ -41,7 +41,7 @@ endobj
 endobj
 
 5 0 obj
-<< /Length 1707 >>
+<< /Length 1612 >>
 stream
 2 J
 [] 0 d
@@ -69,7 +69,7 @@ ET
 BT
 /F2 10.00 Tf
 38.8800 738.8000 Td
-(4)Tj
+(5)Tj
 ET
 BT
 /F2 10.00 Tf
@@ -78,8 +78,8 @@ BT
 ET
 BT
 /F2 10.00 Tf
-414.2800 738.8000 Td
-( 54.861,68)Tj
+415.4000 738.8000 Td
+( 2.000,00)Tj
 ET
 BT
 /F2 10.00 Tf
@@ -116,12 +116,22 @@ BT
 0 0 0 rg
 /F2 10.00 Tf
 72.0000 738.8000 Td
-(Alex)Tj
+(Victor)Tj
 ET
 BT
 /F2 10.00 Tf
-89.4400 738.8000 Td
-( Paulo)Tj
+97.1200 738.8000 Td
+( da)Tj
+ET
+BT
+/F2 10.00 Tf
+108.3400 738.8000 Td
+( Cunha)Tj
+ET
+BT
+/F2 10.00 Tf
+137.0000 738.8000 Td
+( Shimitz)Tj
 ET
 BT
 /F1 10.00 Tf
@@ -146,12 +156,17 @@ ET
 BT
 /F2 10.00 Tf
 39.6000 681.2000 Td
-(3)Tj
+(2)Tj
 ET
 BT
 /F2 10.00 Tf
 72.0000 681.2000 Td
-(PC)Tj
+(Notebook)Tj
+ET
+BT
+/F2 10.00 Tf
+112.4000 681.2000 Td
+( Acer)Tj
 ET
 BT
 /F2 10.00 Tf
@@ -160,38 +175,13 @@ BT
 ET
 BT
 /F2 10.00 Tf
-414.8400 681.2000 Td
-( 6.890,00)Tj
+414.9800 681.2000 Td
+( 1.999,99)Tj
 ET
 BT
 /F2 10.00 Tf
 482.4000 681.2000 Td
-(4)Tj
-ET
-BT
-/F2 10.00 Tf
-39.6000 652.4000 Td
 (1)Tj
-ET
-BT
-/F2 10.00 Tf
-72.0000 652.4000 Td
-(Celular)Tj
-ET
-BT
-/F2 10.00 Tf
-403.2000 652.4000 Td
-(R$)Tj
-ET
-BT
-/F2 10.00 Tf
-414.7000 652.4000 Td
-( 6.825,42)Tj
-ET
-BT
-/F2 10.00 Tf
-482.4000 652.4000 Td
-(4)Tj
 ET
 endstream
 endobj
@@ -316,7 +306,7 @@ endobj
 <<
 /Creator (Rave Reports \(http://www.nevrona.com/rave\))
 /Producer (Nevrona Designs)
-/CreationDate (D:202111095:0:9 )
+/CreationDate (D:202111095:7:5 )
 >>
 endobj
 
@@ -328,12 +318,12 @@ xref
 0000000147 00000 n
 0000000216 00000 n
 0000000386 00000 n
-0000002151 00000 n
-0000002184 00000 n
-0000003320 00000 n
-0000003600 00000 n
-0000004732 00000 n
-0000005008 00000 n
+0000002056 00000 n
+0000002089 00000 n
+0000003225 00000 n
+0000003505 00000 n
+0000004637 00000 n
+0000004913 00000 n
 
 trailer
 <<
@@ -343,5 +333,5 @@ trailer
 >>
 
 startxref
-5156
+5061
 %%EOF

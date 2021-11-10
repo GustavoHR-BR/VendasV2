@@ -178,8 +178,8 @@ begin
   dm.cdsClientes.Filter := 'id = ' + IntToStr(id);
   dm.cdsClientes.Filtered := true;
   frmCadastrarCliente.cboxEstados.ItemIndex :=
-    frmCadastrarCliente.cboxEstados.Items.IndexOf(dm.cdsEstadosuf.AsString);
-  frmCadastrarCliente.edtCidade.Text := dm.cdsCidadesnome.AsString;
+    frmCadastrarCliente.cboxEstados.Items.IndexOf(dm.cdsClientesuf.AsString);
+  frmCadastrarCliente.edtCidade.Text := dm.cdsClientesnome_1.AsString;
   frmCadastrarCliente.edtBairro.Text := dm.cdsClientesbairro.AsString;
   frmCadastrarCliente.edtRua.Text := dm.cdsClientesrua.AsString;
 end;

@@ -105,15 +105,28 @@ begin
           dm.cdsItens.Locate('fk_venda', dm.cdsVendasid.Text, []) then
         // Já adicionado
         begin
-          diferenca := StrToInt(edtQuantidade.Text) -
-            dm.cdsItensquantidade.AsInteger;
+          if frmCadastrarVenda.Tag = 3 then // Editando item já adicionado
+          begin
+            diferenca := StrToInt(edtQuantidade.Text) -
+              dm.cdsItensquantidade.AsInteger;
 
-          dm.cdsItens.Edit;
-          dm.cdsItensquantidade.AsInteger := dm.cdsItensquantidade.AsInteger +
-            diferenca;
-          dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
-          dm.cdsItensdesconto.AsString := edtDesconto.Text;
-          dm.cdsItensvalor_total.AsFloat := StrTofloat(edtValTotal.Text);
+            dm.cdsItens.Edit;
+            dm.cdsItensquantidade.AsInteger := dm.cdsItensquantidade.AsInteger +
+              diferenca;
+            dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
+            dm.cdsItensdesconto.AsString := edtDesconto.Text;
+            dm.cdsItensvalor_total.AsFloat := StrTofloat(edtValTotal.Text);
+          end
+          else if frmCadastrarVenda.Tag = 4 then
+          // Adicionando item novamente
+          begin
+            dm.cdsItens.Edit;
+            dm.cdsItensquantidade.AsInteger := dm.cdsItensquantidade.AsInteger +
+              StrToInt(edtQuantidade.Text);
+            dm.cdsItensacrescimo.AsString := edtAcrescimo.Text;
+            dm.cdsItensdesconto.AsString := edtDesconto.Text;
+            dm.cdsItensvalor_total.AsFloat := StrTofloat(edtValTotal.Text);
+          end;
         end
         else
         begin

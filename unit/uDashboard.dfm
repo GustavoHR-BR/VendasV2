@@ -98,8 +98,8 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Shape15: TShape
-    Left = 536
-    Top = 105
+    Left = 584
+    Top = 45
     Width = 57
     Height = 50
     Brush.Color = clSilver
@@ -108,17 +108,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Shape14: TShape
-    Left = 401
-    Top = 106
-    Width = 120
-    Height = 50
-    Brush.Color = clSilver
-    Pen.Color = clMedGray
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape13: TShape
-    Left = 401
+    Left = 380
     Top = 45
     Width = 192
     Height = 50
@@ -127,8 +117,18 @@ object frmDashboard: TfrmDashboard
     Pen.Width = 2
     Shape = stRoundRect
   end
+  object Shape13: TShape
+    Left = 369
+    Top = 108
+    Width = 192
+    Height = 50
+    Brush.Color = clSilver
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
   object Shape12: TShape
-    Left = 251
+    Left = 222
     Top = 108
     Width = 134
     Height = 50
@@ -140,7 +140,7 @@ object frmDashboard: TfrmDashboard
   object Shape11: TShape
     Left = 251
     Top = 45
-    Width = 134
+    Width = 114
     Height = 50
     Brush.Color = clSilver
     Pen.Color = clMedGray
@@ -170,7 +170,7 @@ object frmDashboard: TfrmDashboard
   object Shape8: TShape
     Left = 24
     Top = 108
-    Width = 212
+    Width = 185
     Height = 50
     Brush.Color = clSilver
     Pen.Color = clMedGray
@@ -178,7 +178,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Shape7: TShape
-    Left = 251
+    Left = 248
     Top = 231
     Width = 129
     Height = 50
@@ -188,7 +188,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Shape6: TShape
-    Left = 107
+    Left = 104
     Top = 231
     Width = 129
     Height = 50
@@ -242,6 +242,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -253,9 +254,9 @@ object frmDashboard: TfrmDashboard
   end
   object shpQtdItensVendidos: TShape
     Left = 470
-    Top = 346
+    Top = 349
     Width = 129
-    Height = 54
+    Height = 50
     Brush.Color = clSilver
     Pen.Color = clMedGray
     Pen.Width = 2
@@ -286,6 +287,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -330,6 +332,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -390,6 +393,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -401,9 +405,9 @@ object frmDashboard: TfrmDashboard
   end
   object Shape3: TShape
     Left = 618
-    Top = 346
+    Top = 349
     Width = 167
-    Height = 54
+    Height = 50
     Brush.Color = clSilver
     Pen.Color = clMedGray
     Pen.Width = 2
@@ -434,6 +438,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -498,12 +503,13 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object nomeCli: TLabel
-    Left = 24
-    Top = 131
-    Width = 212
+    Left = 33
+    Top = 132
+    Width = 176
     Height = 17
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -515,11 +521,12 @@ object frmDashboard: TfrmDashboard
   end
   object CpfCli: TLabel
     Left = 96
-    Top = 70
+    Top = 72
     Width = 140
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -530,12 +537,13 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object telefoneCli: TLabel
-    Left = 251
+    Left = 222
     Top = 131
     Width = 134
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -546,12 +554,13 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object emailCli: TLabel
-    Left = 401
-    Top = 72
+    Left = 369
+    Top = 132
     Width = 192
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -564,10 +573,11 @@ object frmDashboard: TfrmDashboard
   object nascimentoCli: TLabel
     Left = 251
     Top = 72
-    Width = 134
+    Width = 114
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -578,12 +588,13 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object cidadeCli: TLabel
-    Left = 401
-    Top = 131
-    Width = 120
+    Left = 380
+    Top = 72
+    Width = 192
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -600,6 +611,7 @@ object frmDashboard: TfrmDashboard
     Height = 15
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -610,12 +622,13 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object estadoCli: TLabel
-    Left = 536
-    Top = 131
+    Left = 585
+    Top = 72
     Width = 57
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -632,6 +645,7 @@ object frmDashboard: TfrmDashboard
     Height = 18
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -648,6 +662,7 @@ object frmDashboard: TfrmDashboard
     Height = 15
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -664,6 +679,7 @@ object frmDashboard: TfrmDashboard
     Height = 15
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -674,7 +690,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label15: TLabel
-    Left = 251
+    Left = 248
     Top = 234
     Width = 129
     Height = 16
@@ -691,7 +707,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label16: TLabel
-    Left = 107
+    Left = 104
     Top = 234
     Width = 129
     Height = 18
@@ -743,7 +759,7 @@ object frmDashboard: TfrmDashboard
   object Label14: TLabel
     Left = 24
     Top = 111
-    Width = 212
+    Width = 185
     Height = 15
     Alignment = taCenter
     AutoSize = False
@@ -793,8 +809,8 @@ object frmDashboard: TfrmDashboard
   end
   object Label21: TLabel
     Left = 251
-    Top = 51
-    Width = 134
+    Top = 49
+    Width = 114
     Height = 15
     Alignment = taCenter
     AutoSize = False
@@ -809,7 +825,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label22: TLabel
-    Left = 251
+    Left = 222
     Top = 111
     Width = 134
     Height = 15
@@ -826,8 +842,8 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label23: TLabel
-    Left = 401
-    Top = 51
+    Left = 369
+    Top = 111
     Width = 192
     Height = 15
     Alignment = taCenter
@@ -843,9 +859,9 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label24: TLabel
-    Left = 401
-    Top = 111
-    Width = 120
+    Left = 380
+    Top = 49
+    Width = 192
     Height = 16
     Alignment = taCenter
     AutoSize = False
@@ -860,8 +876,8 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label25: TLabel
-    Left = 536
-    Top = 111
+    Left = 585
+    Top = 49
     Width = 57
     Height = 18
     Alignment = taCenter
@@ -927,6 +943,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -971,6 +988,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1015,6 +1033,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1075,6 +1094,7 @@ object frmDashboard: TfrmDashboard
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1117,7 +1137,7 @@ object frmDashboard: TfrmDashboard
     Height = 17
     Alignment = taCenter
     AutoSize = False
-    Caption = '0%'
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1144,7 +1164,7 @@ object frmDashboard: TfrmDashboard
     Height = 17
     Alignment = taCenter
     AutoSize = False
-    Caption = '0%'
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1171,7 +1191,7 @@ object frmDashboard: TfrmDashboard
     Height = 17
     Alignment = taCenter
     AutoSize = False
-    Caption = '0%'
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1198,7 +1218,7 @@ object frmDashboard: TfrmDashboard
     Height = 17
     Alignment = taCenter
     AutoSize = False
-    Caption = '0%'
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1267,6 +1287,140 @@ object frmDashboard: TfrmDashboard
     Alignment = taCenter
     AutoSize = False
     Caption = 'Itens vendidos:'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Shape19: TShape
+    Left = 392
+    Top = 231
+    Width = 129
+    Height = 50
+    Brush.Color = clSilver
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object qtdProdMaisvendido: TLabel
+    Left = 392
+    Top = 258
+    Width = 129
+    Height = 15
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'NULL'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label34: TLabel
+    Left = 392
+    Top = 234
+    Width = 129
+    Height = 16
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Quantidade:'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Shape20: TShape
+    Left = 572
+    Top = 108
+    Width = 189
+    Height = 50
+    Brush.Color = clSilver
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object Label33: TLabel
+    Left = 572
+    Top = 111
+    Width = 189
+    Height = 15
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Total em vendas:'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object totalEmVendas: TLabel
+    Left = 572
+    Top = 133
+    Width = 189
+    Height = 15
+    Align = alCustom
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'NULL'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Shape21: TShape
+    Left = 653
+    Top = 45
+    Width = 108
+    Height = 50
+    Brush.Color = clSilver
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object Label35: TLabel
+    Left = 653
+    Top = 49
+    Width = 108
+    Height = 20
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'N'#186' compras:'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object numCompras: TLabel
+    Left = 653
+    Top = 72
+    Width = 108
+    Height = 15
+    Align = alCustom
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'NULL'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault

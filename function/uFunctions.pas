@@ -517,8 +517,7 @@ begin
   frmDashboard.mediaVendas.Caption := FloatToStr(dm.cdsVendas.RecordCount / 12);
   // Limita 2 casas e add % ao valor
   frmDashboard.mediaVendas.Caption :=
-    FormatFloat('#0.00',
-    StrToFloat(frmDashboard.mediaVendas.Caption)) + '%';
+    FormatFloat('#0.00', StrToFloat(frmDashboard.mediaVendas.Caption)) + '%';
 end;
 
 procedure calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
@@ -556,8 +555,9 @@ begin
 
     // Limita 2 casas e add % ao valor
     frmDashboard.porcTickMedio.Caption :=
-      FormatFloat('#0.00',
-      StrToFloat(frmDashboard.porcTickMedio.Caption)) + '%';
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTickMedio.Caption));
+    frmDashboard.porcTickMedio.Caption :=
+      frmDashboard.porcTickMedio.Caption + '%';
   end
   else if StrToFloat(frmDashboard.porcTickMedio.Caption) < 0 then
   begin
@@ -567,8 +567,9 @@ begin
 
     // Limita 2 casas e add % ao valor
     frmDashboard.porcTickMedio.Caption :=
-      FormatFloat('#0.00',
-      StrToFloat(frmDashboard.porcTickMedio.Caption)) + '%';
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTickMedio.Caption));
+    frmDashboard.porcTickMedio.Caption :=
+      frmDashboard.porcTickMedio.Caption + '%';
   end
   else
   begin
@@ -584,8 +585,7 @@ begin
   end;
 
   // Volta formato monetário
-  frmDashboard.ticketMedio.Caption := FormatFloat('R$ #,,,,0.00',
-    StrToFloat(frmDashboard.ticketMedio.Caption));
+  frmDashboard.ticketMedio.Caption := FormatFloat('R$ #,,,,0.00', ticketMedio);
 
   // --------------------------------------------------------- FIM TICKET MÉDIO
 
@@ -618,8 +618,9 @@ begin
 
     // Limita 2 casas e add % ao valor
     frmDashboard.porcTickTotal.Caption :=
-      FormatFloat('#0.00',
-      StrToFloat(frmDashboard.porcTickTotal.Caption)) + '%';
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTickTotal.Caption));
+    frmDashboard.porcTickTotal.Caption :=
+      frmDashboard.porcTickTotal.Caption + '%';
   end
   else if StrToFloat(frmDashboard.porcTickTotal.Caption) < 0 then
   begin
@@ -629,8 +630,9 @@ begin
 
     // Limita 2 casas e add % ao valor
     frmDashboard.porcTickTotal.Caption :=
-      FormatFloat('#0.00',
-      StrToFloat(frmDashboard.porcTickTotal.Caption)) + '%';
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTickTotal.Caption));
+    frmDashboard.porcTickTotal.Caption :=
+      frmDashboard.porcTickTotal.Caption + '%';
   end
   else
   begin
@@ -644,6 +646,9 @@ begin
     frmDashboard.porcTickTotal.Caption := '+' +
       frmDashboard.porcTickTotal.Caption + '%';
   end;
+
+  // Volta formato monetário
+  frmDashboard.ticketTotal.Caption := FormatFloat('R$ #,,,,0.00', ticketTotal);
 
   // --------------------------------------------------------- FIM TICKET TOTAL
 
@@ -705,7 +710,7 @@ begin
     frmDashboard.porcItensVendidos.Caption := '0'
   else
     frmDashboard.porcItensVendidos.Caption :=
-      FloatToStr((((itensVendidos * 100) / itensVendidosDataAtual)) - 100);
+      FloatToStr(100 - (((itensVendidos * 100) / itensVendidosDataAtual)));
 
   // Altera shape visivel
   if StrToFloat(frmDashboard.porcItensVendidos.Caption) = 0 then

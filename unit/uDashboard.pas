@@ -101,6 +101,15 @@ type
     shapeTotalVendasRed: TShape;
     shapeItensTotalGreen: TShape;
     shapeItensTotalBlue: TShape;
+    Shape19: TShape;
+    qtdProdMaisvendido: TLabel;
+    Label34: TLabel;
+    Shape20: TShape;
+    Label33: TLabel;
+    totalEmVendas: TLabel;
+    Shape21: TShape;
+    Label35: TLabel;
+    numCompras: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure cbMesSelect(Sender: TObject);
@@ -143,123 +152,135 @@ end;
 
 procedure TfrmDashboard.FormShow(Sender: TObject);
 var
-  total: Real;
+  total, valTotalCli: Real;
   dataAtual, mes, ano, aux: string;
   i, j, cont, idProdMaisVendido, qtdDoProdMaisVendido, idMelhorCli,
-    qtdDoMelhorCli: Integer;
+    qtdComprasCli: Integer;
 begin
-  dm.cdsClientes.Filtered := false;
-  dm.cdsProdutos.Filtered := false;
-  dm.cdsItens.Filtered := false;
-  dm.cdsVendas.Filtered := false;
-
-  // Total de vendas
-  totalVendasAll.Caption := IntToStr(dm.cdsVendas.RecordCount);
-
-  // Total de itens vendidos
-  totalItensAll.Caption := IntToStr(dm.cdsItens.RecordCount);
-
-  // Ticket médio
-  total := 0;
-  dm.cdsVendas.First;
-  for i := 1 to dm.cdsVendas.RecordCount do
+  if dm.cdsVendas.RecordCount > 0 then
   begin
-    total := total + dm.cdsVendastotal.AsFloat;
-    dm.cdsVendas.Next;
-  end;
-  // Ticket total
-  ticketTotalAll.Caption := FormatFloat('R$ #,,,,0.00', total);
-  // Ticket médio
-  total := total / dm.cdsVendas.RecordCount;
-  ticketMedioAll.Caption := FormatFloat('R$ #,,,,0.00', total);
+    dm.cdsClientes.Filtered := false;
+    dm.cdsProdutos.Filtered := false;
+    dm.cdsItens.Filtered := false;
+    dm.cdsVendas.Filtered := false;
 
-  // Produto mais vendido
-  dm.cdsItens.IndexFieldNames := 'id';
-  dm.cdsProdutos.IndexFieldNames := 'id';
-  dm.cdsItens.First;
-  dm.cdsProdutos.First;
-  qtdDoProdMaisVendido := 0;
-  for i := 1 to dm.cdsProdutos.RecordCount do
-  begin
-    for j := 1 to dm.cdsItens.RecordCount do
+    // Total de vendas
+    totalVendasAll.Caption := IntToStr(dm.cdsVendas.RecordCount);
+
+    // Total de itens vendidos
+    totalItensAll.Caption := IntToStr(dm.cdsItens.RecordCount);
+
+    // Ticket médio
+    total := 0;
+    dm.cdsVendas.First;
+    for i := 1 to dm.cdsVendas.RecordCount do
     begin
-      cont := 0;
-      if dm.cdsProdutosid.AsInteger = dm.cdsItensfk_produto.AsInteger then
-      begin
-        Inc(cont);
-      end;
-      if cont > qtdDoProdMaisVendido then
-        idProdMaisVendido := dm.cdsProdutosid.AsInteger;
-
-      qtdDoProdMaisVendido := cont;
-      dm.cdsItens.Next;
-    end;
-    dm.cdsProdutos.Next;
-  end;
-  dm.cdsProdutos.Locate('id', IntToStr(idProdMaisVendido), []);
-  idPro.Caption := dm.cdsProdutosid.AsString;
-  nomePro.Caption := dm.cdsProdutosnome.AsString;
-  precoPro.Caption := FormatFloat('R$ #,,,,0.00', dm.cdsProdutospreco.AsFloat);
-
-  // Cliente que mais comprou
-  dm.cdsVendas.IndexFieldNames := 'id';
-  dm.cdsClientes.IndexFieldNames := 'id';
-  dm.cdsVendas.First;
-  dm.cdsClientes.First;
-  qtdDoMelhorCli := 0;
-  for i := 1 to dm.cdsClientes.RecordCount do
-  begin
-    for j := 1 to dm.cdsVendas.RecordCount do
-    begin
-      cont := 0;
-      if dm.cdsClientesid.AsInteger = dm.cdsVendasfk_cliente.AsInteger then
-      begin
-        Inc(cont);
-      end;
-      if cont > qtdDoMelhorCli then
-        idMelhorCli := dm.cdsClientesid.AsInteger;
-
-      qtdDoMelhorCli := cont;
+      total := total + dm.cdsVendastotal.AsFloat;
       dm.cdsVendas.Next;
     end;
-    dm.cdsClientes.Next;
-  end;
-  dm.cdsClientes.Locate('id', IntToStr(idMelhorCli), []);
-  idCli.Caption := dm.cdsClientesid.AsString;
-  nomeCli.Caption := dm.cdsClientesnome.AsString;
-  CpfCli.Caption := dm.cdsClientescpf.AsString;
-  nascimentoCli.Caption := dm.cdsClientesdata_nascimento.AsString;
-  telefoneCli.Caption := dm.cdsClientestelefone.AsString;
-  emailCli.Caption := dm.cdsClientesemail.AsString;
-  cidadeCli.Caption := dm.cdsClientesnome_1.AsString;
-  estadoCli.Caption := dm.cdsClientesuf.AsString;
+    // Ticket total
+    ticketTotalAll.Caption := FormatFloat('R$ #,,,,0.00', total);
+    // Ticket médio
+    total := total / dm.cdsVendas.RecordCount;
+    ticketMedioAll.Caption := FormatFloat('R$ #,,,,0.00', total);
 
-  // Seta mês e ano atual
-  dataAtual := DateToStr(now);
-  mes := Copy(dataAtual, 4, 2);
-  ano := Copy(dataAtual, 7, 4);
-  setaMesAtual(StrToInt(mes));
-  cbAno.ItemIndex := cbAno.Items.IndexOf(ano);
+    // Produto mais vendido
+    dm.cdsItens.IndexFieldNames := 'id';
+    dm.cdsProdutos.IndexFieldNames := 'id';
+    dm.cdsItens.First;
+    dm.cdsProdutos.First;
+    qtdDoProdMaisVendido := 0;
+    for i := 1 to dm.cdsProdutos.RecordCount do
+    begin
+      for j := 1 to dm.cdsItens.RecordCount do
+      begin
+        cont := 0;
+        if dm.cdsProdutosid.AsInteger = dm.cdsItensfk_produto.AsInteger then
+        begin
+          cont := cont + dm.cdsItensquantidade.AsInteger;
+        end;
+        if cont > qtdDoProdMaisVendido then
+        begin
+          idProdMaisVendido := dm.cdsProdutosid.AsInteger;
+          qtdProdMaisvendido.Caption := IntToStr(cont);
+        end;
+        qtdDoProdMaisVendido := cont;
+        dm.cdsItens.Next;
+      end;
+      dm.cdsProdutos.Next;
+    end;
+    dm.cdsProdutos.Locate('id', IntToStr(idProdMaisVendido), []);
+    idPro.Caption := dm.cdsProdutosid.AsString;
+    nomePro.Caption := dm.cdsProdutosnome.AsString;
+    precoPro.Caption := FormatFloat('R$ #,,,,0.00',
+      dm.cdsProdutospreco.AsFloat);
 
-  // Calcula mês selecionado
-  calculaResumoDoMesSelecionado(mes, ano);
+    // Cliente que mais comprou
+    dm.cdsVendas.IndexFieldNames := 'id';
+    dm.cdsClientes.IndexFieldNames := 'id';
+    dm.cdsVendas.First;
+    dm.cdsClientes.First;
+    valTotalCli := 0;
+    for i := 1 to dm.cdsClientes.RecordCount do
+      total := 0;
+    begin
+      for j := 1 to dm.cdsVendas.RecordCount do
+      begin
+        if dm.cdsClientesid.AsInteger = dm.cdsVendasfk_cliente.AsInteger then
+        begin
+          total := total + dm.cdsVendastotal.AsFloat;
+          Inc(qtdComprasCli);
+        end;
+        if total > valTotalCli then
+        begin
+          idMelhorCli := dm.cdsClientesid.AsInteger;
+          totalEmVendas.Caption := FormatFloat('R$ #,,,,0.00', total);
+          numCompras.Caption := IntToStr(qtdComprasCli);
+        end;
+        valTotalCli := total;
+        dm.cdsVendas.Next;
+      end;
+      dm.cdsClientes.Next;
+    end;
+    dm.cdsClientes.Locate('id', IntToStr(idMelhorCli), []);
+    idCli.Caption := dm.cdsClientesid.AsString;
+    nomeCli.Caption := dm.cdsClientesnome.AsString;
+    CpfCli.Caption := dm.cdsClientescpf.AsString;
+    nascimentoCli.Caption := dm.cdsClientesdata_nascimento.AsString;
+    telefoneCli.Caption := dm.cdsClientestelefone.AsString;
+    emailCli.Caption := dm.cdsClientesemail.AsString;
+    cidadeCli.Caption := dm.cdsClientesnome_1.AsString;
+    estadoCli.Caption := dm.cdsClientesuf.AsString;
 
-  // Calcula média de vendas
-  calculaMediaVendasAno(cbAno.Text);
+    // Seta mês e ano atual
+    dataAtual := DateToStr(now);
+    mes := Copy(dataAtual, 4, 2);
+    ano := Copy(dataAtual, 7, 4);
+    setaMesAtual(StrToInt(mes));
+    cbAno.ItemIndex := cbAno.Items.IndexOf(ano);
 
-  // Calcula porcetagens
-  aux := Copy(ticketMedio.Caption, 4, 10);
-  ticketMedioDataAtual := StrToFloat(StringReplace(aux, '.', '', []));
+    // Calcula mês selecionado
+    calculaResumoDoMesSelecionado(mes, ano);
 
-  aux := Copy(ticketTotal.Caption, 4, 10);
-  ticketTotalDataAtual := StrToFloat(StringReplace(aux, '.', '', []));
+    // Calcula média de vendas
+    calculaMediaVendasAno(cbAno.Text);
 
-  totalVendasDataAtual := StrToFloat(totalVendas.Caption);
+    // Calcula porcetagens
+    aux := Copy(ticketMedio.Caption, 4, 10);
+    ticketMedioDataAtual := StrToFloat(StringReplace(aux, '.', '', []));
 
-  itensVendidosDataAtual := StrToFloat(totalItens.Caption);
+    aux := Copy(ticketTotal.Caption, 4, 10);
+    ticketTotalDataAtual := StrToFloat(StringReplace(aux, '.', '', []));
 
-  calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
-    totalVendasDataAtual, itensVendidosDataAtual);
+    totalVendasDataAtual := StrToFloat(totalVendas.Caption);
+
+    itensVendidosDataAtual := StrToFloat(totalItens.Caption);
+
+    calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
+      totalVendasDataAtual, itensVendidosDataAtual);
+  end
+  else
+    ShowMessage('Não existe nenhuma venda cadastrada!');
 end;
 
 end.

@@ -7,17 +7,17 @@ object frmAdicionarItem: TfrmAdicionarItem
   ClientHeight = 337
   ClientWidth = 500
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Arial Unicode MS'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object Label1: TLabel
     Left = 24
     Top = 26
@@ -191,7 +191,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 354
     Top = 112
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 13
@@ -201,7 +201,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 184
     Top = 176
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 6
@@ -211,7 +211,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 354
     Top = 176
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 9
@@ -221,7 +221,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 184
     Top = 112
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 4
@@ -231,7 +231,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 24
     Top = 176
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     TabOrder = 5
     Text = '0'
@@ -241,7 +241,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 24
     Top = 112
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     TabOrder = 3
     Text = '1'
@@ -251,7 +251,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 354
     Top = 244
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 10
@@ -261,7 +261,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 184
     Top = 248
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     Enabled = False
     TabOrder = 8
@@ -271,7 +271,7 @@ object frmAdicionarItem: TfrmAdicionarItem
     Left = 24
     Top = 248
     Width = 121
-    Height = 21
+    Height = 23
     Alignment = taRightJustify
     TabOrder = 7
     Text = '0'

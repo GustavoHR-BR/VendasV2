@@ -7,16 +7,16 @@ object frmDashboard: TfrmDashboard
   ClientHeight = 646
   ClientWidth = 804
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Bahnschrift Light SemiCondensed'
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 16
   object shapeItensTotalBlue: TShape
     Left = 470
     Top = 579
@@ -238,7 +238,7 @@ object frmDashboard: TfrmDashboard
     Left = 321
     Top = 376
     Width = 129
-    Height = 15
+    Height = 30
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -283,7 +283,7 @@ object frmDashboard: TfrmDashboard
     Left = 470
     Top = 376
     Width = 129
-    Height = 15
+    Height = 30
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -328,7 +328,7 @@ object frmDashboard: TfrmDashboard
     Left = 24
     Top = 376
     Width = 129
-    Height = 15
+    Height = 30
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -389,7 +389,7 @@ object frmDashboard: TfrmDashboard
     Left = 174
     Top = 376
     Width = 129
-    Height = 15
+    Height = 30
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -434,7 +434,7 @@ object frmDashboard: TfrmDashboard
     Left = 618
     Top = 376
     Width = 167
-    Height = 15
+    Height = 30
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -506,7 +506,7 @@ object frmDashboard: TfrmDashboard
     Left = 33
     Top = 132
     Width = 176
-    Height = 17
+    Height = 29
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -523,7 +523,7 @@ object frmDashboard: TfrmDashboard
     Left = 96
     Top = 72
     Width = 140
-    Height = 18
+    Height = 30
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -540,7 +540,7 @@ object frmDashboard: TfrmDashboard
     Left = 222
     Top = 131
     Width = 134
-    Height = 18
+    Height = 30
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -557,7 +557,7 @@ object frmDashboard: TfrmDashboard
     Left = 369
     Top = 132
     Width = 192
-    Height = 18
+    Height = 29
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -572,9 +572,9 @@ object frmDashboard: TfrmDashboard
   end
   object nascimentoCli: TLabel
     Left = 251
-    Top = 72
+    Top = 70
     Width = 114
-    Height = 18
+    Height = 32
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -591,7 +591,7 @@ object frmDashboard: TfrmDashboard
     Left = 380
     Top = 72
     Width = 192
-    Height = 18
+    Height = 30
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -608,7 +608,7 @@ object frmDashboard: TfrmDashboard
     Left = 24
     Top = 72
     Width = 57
-    Height = 15
+    Height = 30
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -625,7 +625,7 @@ object frmDashboard: TfrmDashboard
     Left = 585
     Top = 72
     Width = 57
-    Height = 18
+    Height = 30
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -642,7 +642,7 @@ object frmDashboard: TfrmDashboard
     Left = 24
     Top = 258
     Width = 65
-    Height = 18
+    Height = 26
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -659,7 +659,7 @@ object frmDashboard: TfrmDashboard
     Left = 251
     Top = 258
     Width = 129
-    Height = 15
+    Height = 26
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -676,7 +676,7 @@ object frmDashboard: TfrmDashboard
     Left = 107
     Top = 258
     Width = 129
-    Height = 15
+    Height = 26
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -939,7 +939,7 @@ object frmDashboard: TfrmDashboard
     Left = 321
     Top = 505
     Width = 129
-    Height = 15
+    Height = 32
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -984,7 +984,7 @@ object frmDashboard: TfrmDashboard
     Left = 24
     Top = 505
     Width = 129
-    Height = 15
+    Height = 32
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -1029,7 +1029,7 @@ object frmDashboard: TfrmDashboard
     Left = 174
     Top = 505
     Width = 129
-    Height = 15
+    Height = 32
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -1090,7 +1090,7 @@ object frmDashboard: TfrmDashboard
     Left = 470
     Top = 505
     Width = 129
-    Height = 15
+    Height = 32
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -1134,7 +1134,7 @@ object frmDashboard: TfrmDashboard
     Left = 24
     Top = 605
     Width = 129
-    Height = 17
+    Height = 33
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -1161,7 +1161,7 @@ object frmDashboard: TfrmDashboard
     Left = 174
     Top = 605
     Width = 129
-    Height = 17
+    Height = 33
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -1188,7 +1188,7 @@ object frmDashboard: TfrmDashboard
     Left = 324
     Top = 605
     Width = 129
-    Height = 17
+    Height = 33
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -1215,7 +1215,7 @@ object frmDashboard: TfrmDashboard
     Left = 474
     Top = 605
     Width = 129
-    Height = 17
+    Height = 33
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -1310,7 +1310,7 @@ object frmDashboard: TfrmDashboard
     Left = 392
     Top = 258
     Width = 129
-    Height = 15
+    Height = 26
     Alignment = taCenter
     AutoSize = False
     Caption = 'NULL'
@@ -1371,7 +1371,7 @@ object frmDashboard: TfrmDashboard
     Left = 572
     Top = 133
     Width = 189
-    Height = 15
+    Height = 28
     Align = alCustom
     Alignment = taCenter
     AutoSize = False
@@ -1416,7 +1416,7 @@ object frmDashboard: TfrmDashboard
     Left = 653
     Top = 72
     Width = 108
-    Height = 15
+    Height = 30
     Align = alCustom
     Alignment = taCenter
     AutoSize = False

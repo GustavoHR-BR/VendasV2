@@ -280,6 +280,7 @@ begin
   end
   else
   begin
+    edtBuscarClick(Self);
     dm.cdsProdutos.Filtered := false;
 
     // Lista todos os itens

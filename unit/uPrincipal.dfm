@@ -5,7 +5,7 @@ object frmPrincipal: TfrmPrincipal
   BorderStyle = bsSingle
   Caption = 'Sistema de vendas'
   ClientHeight = 236
-  ClientWidth = 443
+  ClientWidth = 482
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,9 +19,58 @@ object frmPrincipal: TfrmPrincipal
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 15
+  object lblLogin: TLabel
+    Left = 122
+    Top = 73
+    Width = 29
+    Height = 15
+    Caption = 'Login:'
+  end
+  object lblSenha: TLabel
+    Left = 117
+    Top = 115
+    Width = 34
+    Height = 15
+    Caption = 'Senha:'
+  end
+  object edtLogin: TEdit
+    Left = 160
+    Top = 70
+    Width = 169
+    Height = 23
+    Hint = 'Informe o usu'#225'rio'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object edtSenha: TEdit
+    Left = 160
+    Top = 112
+    Width = 169
+    Height = 23
+    Hint = 'Informe a senha'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object btnEntrar: TButton
+    Left = 264
+    Top = 153
+    Width = 65
+    Height = 25
+    Hint = 'Entrar'
+    Caption = 'Entrar'
+    TabOrder = 2
+    OnClick = btnEntrarClick
+  end
   object menu: TMainMenu
     Left = 16
     Top = 8
+    object N1: TMenuItem
+      Caption = '|'
+      Enabled = False
+      Visible = False
+    end
     object Cadastrar1: TMenuItem
       Bitmap.Data = {
         96030000424D960300000000000036000000280000000F000000120000000100
@@ -53,8 +102,9 @@ object frmPrincipal: TfrmPrincipal
         0101010101010101010101010101010101010101010101010101010101010101
         01000000B6B6B6000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
-      Caption = '  Cadastrar   '
+      Caption = 'Cadastrar'
       Hint = 'Menu de cadastros'
+      Visible = False
       object Cliente1: TMenuItem
         Bitmap.Data = {
           060C0000424D060C0000000000003600000028000000230000001C0000000100
@@ -261,6 +311,11 @@ object frmPrincipal: TfrmPrincipal
         OnClick = Produto1Click
       end
     end
+    object N2: TMenuItem
+      Caption = '|'
+      Enabled = False
+      Visible = False
+    end
     object Pedidosdevenda1: TMenuItem
       Bitmap.Data = {
         B60A0000424DB60A00000000000036000000280000001F0000001C0000000100
@@ -349,8 +404,9 @@ object frmPrincipal: TfrmPrincipal
         0000000000000000000000000000003D3D3DFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
-      Caption = ' Pedidos de venda   '
+      Caption = 'Pedidos de venda'
       Hint = 'Menu de vendas'
+      Visible = False
       object Nova1: TMenuItem
         Bitmap.Data = {
           EE0B0000424DEE0B0000000000003600000028000000210000001E0000000100
@@ -454,6 +510,11 @@ object frmPrincipal: TfrmPrincipal
         OnClick = Nova1Click
       end
     end
+    object N3: TMenuItem
+      Caption = '|'
+      Enabled = False
+      Visible = False
+    end
     object Relatrios1: TMenuItem
       Bitmap.Data = {
         4E060000424D4E060000000000003600000028000000130000001A0000000100
@@ -507,8 +568,9 @@ object frmPrincipal: TfrmPrincipal
         B7000000050505FFFFFFFFFFFFFFFFFFFFFFFF00000061616100000000000000
         0000000000000000000000000000000000000000000000FFFFFFB1B1B10D0D0D
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
-      Caption = ' Relat'#243'rios   '
+      Caption = 'Relat'#243'rios'
       Hint = 'Gerar relat'#243'rios'
+      Visible = False
       object Vendas1: TMenuItem
         Bitmap.Data = {
           B60A0000424DB60A00000000000036000000280000001F0000001C0000000100
@@ -805,6 +867,11 @@ object frmPrincipal: TfrmPrincipal
         OnClick = Produtos1Click
       end
     end
+    object N4: TMenuItem
+      Caption = '|'
+      Enabled = False
+      Visible = False
+    end
     object Dashboard1: TMenuItem
       Bitmap.Data = {
         E6040000424DE604000000000000360000002800000014000000140000000100
@@ -847,8 +914,14 @@ object frmPrincipal: TfrmPrincipal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFF}
-      Caption = ' Dashboard  '
+      Caption = 'Dashboard'
+      Visible = False
       OnClick = Dashboard1Click
+    end
+    object N5: TMenuItem
+      Caption = '|'
+      Enabled = False
+      Visible = False
     end
   end
 end

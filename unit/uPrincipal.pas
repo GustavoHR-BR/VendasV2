@@ -22,6 +22,16 @@ type
     Clientes1: TMenuItem;
     Produtos1: TMenuItem;
     Dashboard1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    edtLogin: TEdit;
+    edtSenha: TEdit;
+    lblLogin: TLabel;
+    lblSenha: TLabel;
+    btnEntrar: TButton;
     procedure Cliente1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Nova1Click(Sender: TObject);
@@ -31,6 +41,7 @@ type
     procedure Clientes1Click(Sender: TObject);
     procedure Produtos1Click(Sender: TObject);
     procedure Dashboard1Click(Sender: TObject);
+    procedure btnEntrarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,6 +59,35 @@ uses uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uFunctions,
   uProdutos, uCadastrarProduto, uVendas, uVendaReport, uCadastrarVenda,
   uClienteReport, uAdicionarItem, uFiltroPro, uProdutoReport, uDashboard;
 
+procedure TfrmPrincipal.btnEntrarClick(Sender: TObject);
+begin
+  if (LowerCase(edtLogin.Text) <> 'admin') OR (edtSenha.Text <> 'admin') then
+  begin
+    ShowMessage('Login inválido! ');
+    edtLogin.SetFocus;
+    edtLogin.Clear;
+    edtSenha.Clear;
+  end
+  else
+  begin
+    Cadastrar1.Visible := True;
+    Pedidosdevenda1.Visible := True;
+    Relatrios1.Visible := True;
+    Dashboard1.Visible := True;
+    N1.Visible := True;
+    N2.Visible := True;
+    N3.Visible := True;
+    N4.Visible := True;
+    N5.Visible := True;
+    lblLogin.Visible := false;
+    lblSenha.Visible := false;
+    edtLogin.Visible := false;
+    edtSenha.Visible := false;
+    btnEntrar.Visible := false;
+  end;
+
+end;
+
 procedure TfrmPrincipal.Cliente1Click(Sender: TObject);
 begin
   Application.CreateForm(TfrmClientes, frmClientes);
@@ -60,24 +100,30 @@ end;
 
 procedure TfrmPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  abrirDados('cliente', false);
-  abrirDados('produto', false);
-  abrirDados('cidade', false);
-  abrirDados('estado', false);
-  abrirDados('item', false);
-  abrirDados('venda', false);
-  dm.SQLConn.Close;
+  if Application.MessageBox('Deseja relamente sair?', 'Atenção',
+    MB_YESNO + MB_ICONQUESTION) = mrYes then
+  begin
+    abrirDados('cliente', false);
+    abrirDados('produto', false);
+    abrirDados('cidade', false);
+    abrirDados('estado', false);
+    abrirDados('item', false);
+    abrirDados('venda', false);
+    dm.SQLConn.Close;
+  end
+  else
+    Abort;
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 begin
   dm.SQLConn.Open;
-  abrirDados('cliente', true);
-  abrirDados('produto', true);
-  abrirDados('cidade', true);
-  abrirDados('estado', true);
-  abrirDados('item', true);
-  abrirDados('venda', true);
+  abrirDados('cliente', True);
+  abrirDados('produto', True);
+  abrirDados('cidade', True);
+  abrirDados('estado', True);
+  abrirDados('item', True);
+  abrirDados('venda', True);
 end;
 
 procedure TfrmPrincipal.Nova1Click(Sender: TObject);

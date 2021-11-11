@@ -76,25 +76,38 @@ type
     Label30: TLabel;
     cbMes: TComboBox;
     cbAno: TComboBox;
-    btnSair: TButton;
     Shape18: TShape;
     Label31: TLabel;
     totalItens: TLabel;
     Label8: TLabel;
-    Shape19: TShape;
+    shapeTicketMedioBlue: TShape;
+    porcTickMedio: TLabel;
+    shapeTicketTotalRed: TShape;
+    porcTickTotal: TLabel;
+    shapeTotalVendasGreen: TShape;
+    porcTotalVendas: TLabel;
+    shapeItensTotalRed: TShape;
+    porcItensVendidos: TLabel;
+    shapeTicketMedioRed: TShape;
+    shapeTicketMedioGreen: TShape;
+    shapeTicketTotalBlue: TShape;
+    shapeTicketTotalGreen: TShape;
     Label10: TLabel;
-    Shape20: TShape;
     Label27: TLabel;
-    Shape21: TShape;
     Label29: TLabel;
-    Shape22: TShape;
     Label32: TLabel;
-    Shape23: TShape;
-    Label33: TLabel;
+    btnSair: TButton;
+    shapeTotalVendasBlue: TShape;
+    shapeTotalVendasRed: TShape;
+    shapeItensTotalGreen: TShape;
+    shapeItensTotalBlue: TShape;
     procedure FormShow(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
+    procedure cbMesSelect(Sender: TObject);
+    procedure cbAnoSelect(Sender: TObject);
   private
-    { Private declarations }
+    ticketMedioDataAtual, ticketTotalDataAtual, totalVendasDataAtual,
+      itensVendidosDataAtual: Real;
   public
     { Public declarations }
   end;
@@ -105,7 +118,7 @@ var
 implementation
 
 uses
-  uDataModule, uPrincipal;
+  uDataModule, uPrincipal, uFunctions;
 
 {$R *.dfm}
 
@@ -114,9 +127,24 @@ begin
   frmDashboard.Close;
 end;
 
+procedure TfrmDashboard.cbAnoSelect(Sender: TObject);
+begin
+  setaMesSelected(cbMes.Text);
+  calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
+    totalVendasDataAtual, itensVendidosDataAtual);
+end;
+
+procedure TfrmDashboard.cbMesSelect(Sender: TObject);
+begin
+  setaMesSelected(cbMes.Text);
+  calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
+    totalVendasDataAtual, itensVendidosDataAtual);
+end;
+
 procedure TfrmDashboard.FormShow(Sender: TObject);
 var
   total: Real;
+  dataAtual, mes, ano, aux: string;
   i, j, cont, idProdMaisVendido, qtdDoProdMaisVendido, idMelhorCli,
     qtdDoMelhorCli: Integer;
 begin
@@ -139,7 +167,9 @@ begin
     total := total + dm.cdsVendastotal.AsFloat;
     dm.cdsVendas.Next;
   end;
+  // Ticket total
   ticketTotalAll.Caption := FormatFloat('R$ #,,,,0.00', total);
+  // Ticket médio
   total := total / dm.cdsVendas.RecordCount;
   ticketMedioAll.Caption := FormatFloat('R$ #,,,,0.00', total);
 
@@ -203,6 +233,33 @@ begin
   emailCli.Caption := dm.cdsClientesemail.AsString;
   cidadeCli.Caption := dm.cdsClientesnome_1.AsString;
   estadoCli.Caption := dm.cdsClientesuf.AsString;
+
+  // Seta mês e ano atual
+  dataAtual := DateToStr(now);
+  mes := Copy(dataAtual, 4, 2);
+  ano := Copy(dataAtual, 7, 4);
+  setaMesAtual(StrToInt(mes));
+  cbAno.ItemIndex := cbAno.Items.IndexOf(ano);
+
+  // Calcula mês selecionado
+  calculaResumoDoMesSelecionado(mes, ano);
+
+  // Calcula média de vendas
+  calculaMediaVendasAno(cbAno.Text);
+
+  // Calcula porcetagens
+  aux := Copy(ticketMedio.Caption, 4, 10);
+  ticketMedioDataAtual := StrToFloat(StringReplace(aux, '.', '', []));
+
+  aux := Copy(ticketTotal.Caption, 4, 10);
+  ticketTotalDataAtual := StrToFloat(StringReplace(aux, '.', '', []));
+
+  totalVendasDataAtual := StrToFloat(totalVendas.Caption);
+
+  itensVendidosDataAtual := StrToFloat(totalItens.Caption);
+
+  calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
+    totalVendasDataAtual, itensVendidosDataAtual);
 end;
 
 end.

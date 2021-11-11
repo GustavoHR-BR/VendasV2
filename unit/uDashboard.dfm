@@ -4,7 +4,7 @@ object frmDashboard: TfrmDashboard
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dashboard'
-  ClientHeight = 634
+  ClientHeight = 646
   ClientWidth = 804
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,6 +17,86 @@ object frmDashboard: TfrmDashboard
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object shapeItensTotalBlue: TShape
+    Left = 470
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = clSkyBlue
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeItensTotalGreen: TShape
+    Left = 470
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = clMoneyGreen
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeTotalVendasRed: TShape
+    Left = 321
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = 6973183
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeTotalVendasBlue: TShape
+    Left = 321
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = clSkyBlue
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeTicketTotalGreen: TShape
+    Left = 174
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = clMoneyGreen
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeTicketTotalBlue: TShape
+    Left = 174
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = clSkyBlue
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeTicketMedioGreen: TShape
+    Left = 24
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = clMoneyGreen
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object shapeTicketMedioRed: TShape
+    Left = 24
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = 6973183
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
   object Shape15: TShape
     Left = 536
     Top = 105
@@ -320,23 +400,23 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Shape3: TShape
-    Left = 490
-    Top = 479
-    Width = 129
-    Height = 51
+    Left = 618
+    Top = 346
+    Width = 167
+    Height = 54
     Brush.Color = clSilver
     Pen.Color = clMedGray
     Pen.Width = 2
     Shape = stRoundRect
   end
   object Label9: TLabel
-    Left = 490
-    Top = 485
-    Width = 129
-    Height = 15
+    Left = 618
+    Top = 353
+    Width = 167
+    Height = 17
     Alignment = taCenter
     AutoSize = False
-    Caption = 'M'#233'dia de vendas:'
+    Caption = 'M'#233'dia de vendas: [anual]'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -347,9 +427,9 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object mediaVendas: TLabel
-    Left = 490
-    Top = 505
-    Width = 129
+    Left = 618
+    Top = 376
+    Width = 167
     Height = 15
     Align = alCustom
     Alignment = taCenter
@@ -364,8 +444,8 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Label11: TLabel
-    Left = -61
-    Top = 414
+    Left = -13
+    Top = 412
     Width = 1548
     Height = 19
     Caption = 
@@ -799,10 +879,10 @@ object frmDashboard: TfrmDashboard
   object Label18: TLabel
     Left = 8
     Top = 439
-    Width = 209
+    Width = 241
     Height = 30
     AutoSize = False
-    Caption = '  Resumo vendas do m'#234's de:'
+    Caption = '  Resumo das vendas do m'#234's de:'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
@@ -813,7 +893,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Shape2: TShape
-    Left = 340
+    Left = 321
     Top = 479
     Width = 129
     Height = 51
@@ -823,7 +903,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Label7: TLabel
-    Left = 340
+    Left = 321
     Top = 485
     Width = 129
     Height = 15
@@ -840,7 +920,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object totalVendas: TLabel
-    Left = 340
+    Left = 321
     Top = 505
     Width = 129
     Height = 15
@@ -857,7 +937,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Shape16: TShape
-    Left = 40
+    Left = 24
     Top = 479
     Width = 129
     Height = 51
@@ -867,7 +947,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Label26: TLabel
-    Left = 40
+    Left = 24
     Top = 485
     Width = 129
     Height = 15
@@ -884,7 +964,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object ticketMedio: TLabel
-    Left = 40
+    Left = 24
     Top = 505
     Width = 129
     Height = 15
@@ -901,7 +981,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Shape17: TShape
-    Left = 190
+    Left = 174
     Top = 479
     Width = 129
     Height = 51
@@ -911,7 +991,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Label28: TLabel
-    Left = 190
+    Left = 174
     Top = 485
     Width = 129
     Height = 15
@@ -928,7 +1008,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object ticketTotal: TLabel
-    Left = 190
+    Left = 174
     Top = 505
     Width = 129
     Height = 15
@@ -961,7 +1041,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object Shape18: TShape
-    Left = 638
+    Left = 470
     Top = 479
     Width = 129
     Height = 51
@@ -971,7 +1051,7 @@ object frmDashboard: TfrmDashboard
     Shape = stRoundRect
   end
   object Label31: TLabel
-    Left = 638
+    Left = 470
     Top = 482
     Width = 129
     Height = 15
@@ -988,7 +1068,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object totalItens: TLabel
-    Left = 638
+    Left = 470
     Top = 505
     Width = 129
     Height = 15
@@ -1007,10 +1087,10 @@ object frmDashboard: TfrmDashboard
   object Label8: TLabel
     Left = 8
     Top = 543
-    Width = 89
+    Width = 357
     Height = 30
     AutoSize = False
-    Caption = '  M'#234's atual:'
+    Caption = '  M'#234's atual em rela'#231#227'o ao m'#234's selecionado:'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clBlack
@@ -1020,24 +1100,122 @@ object frmDashboard: TfrmDashboard
     ParentColor = False
     ParentFont = False
   end
-  object Shape19: TShape
-    Left = 40
+  object shapeTicketMedioBlue: TShape
+    Left = 24
     Top = 579
     Width = 129
-    Height = 38
+    Height = 51
+    Brush.Color = clSkyBlue
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object porcTickMedio: TLabel
+    Left = 24
+    Top = 605
+    Width = 129
+    Height = 17
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '0%'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object shapeTicketTotalRed: TShape
+    Left = 174
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = 6973183
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object porcTickTotal: TLabel
+    Left = 174
+    Top = 605
+    Width = 129
+    Height = 17
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '0%'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object shapeTotalVendasGreen: TShape
+    Left = 321
+    Top = 579
+    Width = 129
+    Height = 51
     Brush.Color = clMoneyGreen
     Pen.Color = clMedGray
     Pen.Width = 2
     Shape = stRoundRect
+  end
+  object porcTotalVendas: TLabel
+    Left = 324
+    Top = 605
+    Width = 129
+    Height = 17
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '0%'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object shapeItensTotalRed: TShape
+    Left = 470
+    Top = 579
+    Width = 129
+    Height = 51
+    Brush.Color = 6973183
+    Pen.Color = clMedGray
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object porcItensVendidos: TLabel
+    Left = 474
+    Top = 605
+    Width = 129
+    Height = 17
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '0%'
+    Color = clGray
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clDefault
+    Font.Height = -15
+    Font.Name = 'Bahnschrift Light SemiCondensed'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
   end
   object Label10: TLabel
-    Left = 40
-    Top = 588
+    Left = 24
+    Top = 585
     Width = 129
-    Height = 17
+    Height = 15
     Alignment = taCenter
     AutoSize = False
-    Caption = '+52%'
+    Caption = 'Ticket m'#233'dio:'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1046,25 +1224,15 @@ object frmDashboard: TfrmDashboard
     Font.Style = []
     ParentColor = False
     ParentFont = False
-  end
-  object Shape20: TShape
-    Left = 190
-    Top = 579
-    Width = 129
-    Height = 38
-    Brush.Color = 6973183
-    Pen.Color = clMedGray
-    Pen.Width = 2
-    Shape = stRoundRect
   end
   object Label27: TLabel
-    Left = 190
-    Top = 588
+    Left = 174
+    Top = 585
     Width = 129
-    Height = 17
+    Height = 15
     Alignment = taCenter
     AutoSize = False
-    Caption = '-12%'
+    Caption = 'Ticket total:'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1073,25 +1241,15 @@ object frmDashboard: TfrmDashboard
     Font.Style = []
     ParentColor = False
     ParentFont = False
-  end
-  object Shape21: TShape
-    Left = 340
-    Top = 579
-    Width = 129
-    Height = 38
-    Brush.Color = clMoneyGreen
-    Pen.Color = clMedGray
-    Pen.Width = 2
-    Shape = stRoundRect
   end
   object Label29: TLabel
-    Left = 340
-    Top = 588
+    Left = 324
+    Top = 585
     Width = 129
-    Height = 17
+    Height = 15
     Alignment = taCenter
     AutoSize = False
-    Caption = '+52%'
+    Caption = 'Total de vendas:'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1100,52 +1258,15 @@ object frmDashboard: TfrmDashboard
     Font.Style = []
     ParentColor = False
     ParentFont = False
-  end
-  object Shape22: TShape
-    Left = 490
-    Top = 579
-    Width = 129
-    Height = 38
-    Brush.Color = 6973183
-    Pen.Color = clMedGray
-    Pen.Width = 2
-    Shape = stRoundRect
   end
   object Label32: TLabel
-    Left = 490
-    Top = 588
+    Left = 474
+    Top = 585
     Width = 129
-    Height = 17
+    Height = 15
     Alignment = taCenter
     AutoSize = False
-    Caption = '-12%'
-    Color = clGray
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clDefault
-    Font.Height = -15
-    Font.Name = 'Bahnschrift Light SemiCondensed'
-    Font.Style = []
-    ParentColor = False
-    ParentFont = False
-  end
-  object Shape23: TShape
-    Left = 638
-    Top = 579
-    Width = 129
-    Height = 38
-    Brush.Color = clMoneyGreen
-    Pen.Color = clMedGray
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Label33: TLabel
-    Left = 638
-    Top = 588
-    Width = 129
-    Height = 17
-    Alignment = taCenter
-    AutoSize = False
-    Caption = '+52%'
+    Caption = 'Itens vendidos:'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -1156,7 +1277,7 @@ object frmDashboard: TfrmDashboard
     ParentFont = False
   end
   object cbMes: TComboBox
-    Left = 220
+    Left = 251
     Top = 437
     Width = 145
     Height = 27
@@ -1168,6 +1289,7 @@ object frmDashboard: TfrmDashboard
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    OnSelect = cbMesSelect
     Items.Strings = (
       'Janeiro'
       'Fevereiro'
@@ -1183,7 +1305,7 @@ object frmDashboard: TfrmDashboard
       'Dezembro')
   end
   object cbAno: TComboBox
-    Left = 374
+    Left = 405
     Top = 437
     Width = 145
     Height = 27
@@ -1195,6 +1317,7 @@ object frmDashboard: TfrmDashboard
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    OnSelect = cbAnoSelect
     Items.Strings = (
       '2011'
       '2012'
@@ -1209,10 +1332,10 @@ object frmDashboard: TfrmDashboard
       '2021')
   end
   object btnSair: TButton
-    Left = 715
-    Top = 126
-    Width = 81
-    Height = 33
+    Left = 710
+    Top = 600
+    Width = 75
+    Height = 30
     Caption = 'Sair'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText

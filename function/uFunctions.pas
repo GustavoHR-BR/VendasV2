@@ -25,6 +25,12 @@ procedure calculaTotalVenda;
 procedure atualizaEditEstoque;
 procedure removeFormatacaoPrecoProduto;
 procedure resetQuery;
+procedure setaMesAtual(mes: Integer);
+procedure setaMesSelected(mes: string);
+procedure calculaResumoDoMesSelecionado(mes, ano: string);
+procedure calculaMediaVendasAno(ano: string);
+procedure calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
+  totalVendasDataAtual, itensVendidosDataAtual: Real);
 
 var
   subTotalDaVenda, totalDaVenda, frete, totalDoItem, valDescontoItem,
@@ -35,9 +41,10 @@ var
 implementation
 
 uses
-  System.Classes, System.SysUtils,
-  uCadastrarCliente, uClientes, uDataModule, uFiltroCli, uPrincipal, uProdutos,
-  uCadastrarProduto, uVendas, uCadastrarVenda, uVendaReport, uAdicionarItem, db;
+  Winapi.Windows, Winapi.Messages, System.Classes, System.SysUtils,
+  System.Variants, uCadastrarCliente, uClientes, uDataModule, uFiltroCli,
+  uPrincipal, uProdutos, uCadastrarProduto, uVendas, uCadastrarVenda,
+  uVendaReport, uAdicionarItem, db, uDashboard, Vcl.ExtCtrls;
 
 procedure buscarCliente(orderBy: string);
 begin
@@ -399,6 +406,344 @@ begin
     ' JOIN cidade cid ON cid.id = c.fk_cidade ' +
     ' JOIN estado e ON e.id = cid.fk_estado';
   abrirDados('cliente', true);
+end;
+
+procedure setaMesAtual(mes: Integer);
+begin
+  if mes = 01 then
+    frmDashboard.cbMes.ItemIndex := 0
+  else if mes = 02 then
+    frmDashboard.cbMes.ItemIndex := 1
+  else if mes = 03 then
+    frmDashboard.cbMes.ItemIndex := 2
+  else if mes = 04 then
+    frmDashboard.cbMes.ItemIndex := 3
+  else if mes = 05 then
+    frmDashboard.cbMes.ItemIndex := 4
+  else if mes = 06 then
+    frmDashboard.cbMes.ItemIndex := 5
+  else if mes = 07 then
+    frmDashboard.cbMes.ItemIndex := 6
+  else if mes = 08 then
+    frmDashboard.cbMes.ItemIndex := 7
+  else if mes = 09 then
+    frmDashboard.cbMes.ItemIndex := 8
+  else if mes = 10 then
+    frmDashboard.cbMes.ItemIndex := 9
+  else if mes = 11 then
+    frmDashboard.cbMes.ItemIndex := 10
+  else if mes = 12 then
+    frmDashboard.cbMes.ItemIndex := 11;
+end;
+
+procedure setaMesSelected(mes: string);
+begin
+  if frmDashboard.cbMes.ItemIndex < 9 then
+    calculaResumoDoMesSelecionado('0' + IntToStr(frmDashboard.cbMes.ItemIndex +
+      1), frmDashboard.cbAno.Text)
+  else
+    calculaResumoDoMesSelecionado(IntToStr(frmDashboard.cbMes.ItemIndex + 1),
+      frmDashboard.cbAno.Text);
+end;
+
+procedure calculaResumoDoMesSelecionado(mes, ano: string);
+var
+  i: Integer;
+  total: Real;
+begin
+  dm.cdsVendas.Filtered := false;
+  dm.cdsVendas.Filter := 'data LIKE ' + QuotedStr('%/' + mes + '/' + ano);
+  dm.cdsVendas.Filtered := true;
+
+  dm.cdsVendas.IndexFieldNames := 'id';
+  dm.cdsVendas.First;
+  dm.cdsItens.Filtered := false;
+  dm.cdsItens.Filter := '';
+  for i := 1 to dm.cdsVendas.RecordCount do
+  begin
+    if i = 1 then
+    begin
+      dm.cdsItens.Filter := dm.cdsItens.Filter + '(fk_venda = ' +
+        IntToStr(dm.cdsVendasid.AsInteger) + ')';
+      dm.cdsVendas.Next;
+    end
+    else
+    begin
+      dm.cdsItens.Filter := dm.cdsItens.Filter + ' OR (fk_venda = ' +
+        IntToStr(dm.cdsVendasid.AsInteger) + ')';
+      dm.cdsVendas.Next;
+    end;
+  end;
+  dm.cdsItens.Filtered := true;
+
+  // Seta filtro pra zerar itens
+  if dm.cdsVendas.RecordCount = 0 then
+  begin
+    dm.cdsItens.Filter := 'id < 0';
+  end;
+
+  // Total de vendas
+  frmDashboard.totalVendas.Caption := IntToStr(dm.cdsVendas.RecordCount);
+
+  // Total de itens vendidos
+  frmDashboard.totalItens.Caption := IntToStr(dm.cdsItens.RecordCount);
+
+  // Ticket médio
+  total := 0;
+  dm.cdsVendas.First;
+  for i := 1 to dm.cdsVendas.RecordCount do
+  begin
+    total := total + dm.cdsVendastotal.AsFloat;
+    dm.cdsVendas.Next;
+  end;
+
+  // Ticket total
+  frmDashboard.ticketTotal.Caption := FormatFloat('R$ #,,,,0.00', total);
+  if dm.cdsVendas.RecordCount <> 0 then
+  begin
+    // Ticket médio
+    total := total / dm.cdsVendas.RecordCount;
+    frmDashboard.ticketMedio.Caption := FormatFloat('R$ #,,,,0.00', total);
+  end
+  else
+    frmDashboard.ticketMedio.Caption := FormatFloat('R$ #,,,,0.00', 0);
+end;
+
+procedure calculaMediaVendasAno(ano: string);
+begin
+  dm.cdsVendas.Filtered := false;
+  dm.cdsVendas.Filter := 'data LIKE ' + QuotedStr('%/%/' + ano);
+  dm.cdsVendas.Filtered := true;
+  frmDashboard.mediaVendas.Caption := FloatToStr(dm.cdsVendas.RecordCount / 12);
+  // Limita 2 casas e add % ao valor
+  frmDashboard.mediaVendas.Caption :=
+    FormatFloat('#0.00',
+    StrToFloat(frmDashboard.mediaVendas.Caption)) + '%';
+end;
+
+procedure calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,
+  totalVendasDataAtual, itensVendidosDataAtual: Real);
+var
+  ticketMedio, ticketTotal, totalVendas, itensVendidos: Real;
+begin
+
+  // ------------------------------------------------------ INÍCIO TICKET MÉDIO
+
+  // Pega só os números
+  frmDashboard.ticketMedio.Caption :=
+    copy(frmDashboard.ticketMedio.Caption, 4, 10);
+  // Tira o ponto da casa do milhar
+  ticketMedio := StrToFloat(StringReplace(frmDashboard.ticketMedio.Caption,
+    '.', '', []));
+
+  // Tira o símbolo da procentagem
+  frmDashboard.porcTickMedio.Caption :=
+    StringReplace(frmDashboard.porcTickMedio.Caption, '%', '', []);
+
+  // Calcula porcentagem
+  if ticketMedio = 0 then
+    frmDashboard.porcTickMedio.Caption := '0'
+  else
+    frmDashboard.porcTickMedio.Caption :=
+      FloatToStr(100 - (((ticketMedio * 100) / ticketMedioDataAtual)));
+
+  // Altera shape visivel
+  if StrToFloat(frmDashboard.porcTickMedio.Caption) = 0 then
+  begin
+    frmDashboard.shapeTicketMedioBlue.Visible := true;
+    frmDashboard.shapeTicketMedioRed.Visible := false;
+    frmDashboard.shapeTicketMedioGreen.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTickMedio.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcTickMedio.Caption)) + '%';
+  end
+  else if StrToFloat(frmDashboard.porcTickMedio.Caption) < 0 then
+  begin
+    frmDashboard.shapeTicketMedioRed.Visible := true;
+    frmDashboard.shapeTicketMedioGreen.Visible := false;
+    frmDashboard.shapeTicketMedioBlue.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTickMedio.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcTickMedio.Caption)) + '%';
+  end
+  else
+  begin
+    frmDashboard.shapeTicketMedioGreen.Visible := true;
+    frmDashboard.shapeTicketMedioBlue.Visible := false;
+    frmDashboard.shapeTicketMedioRed.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTickMedio.Caption :=
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTickMedio.Caption));
+    frmDashboard.porcTickMedio.Caption := '+' +
+      frmDashboard.porcTickMedio.Caption + '%';
+  end;
+
+  // Volta formato monetário
+  frmDashboard.ticketMedio.Caption := FormatFloat('R$ #,,,,0.00',
+    StrToFloat(frmDashboard.ticketMedio.Caption));
+
+  // --------------------------------------------------------- FIM TICKET MÉDIO
+
+  // ------------------------------------------------------ INÍCIO TICKET TOTAL
+
+  // Pega só os números
+  frmDashboard.ticketTotal.Caption :=
+    copy(frmDashboard.ticketTotal.Caption, 4, 10);
+  // Tira o ponto da casa do milhar
+  ticketTotal := StrToFloat(StringReplace(frmDashboard.ticketTotal.Caption,
+    '.', '', []));
+
+  // Tira o símbolo da procentagem
+  frmDashboard.porcTickTotal.Caption :=
+    StringReplace(frmDashboard.porcTickTotal.Caption, '%', '', []);
+
+  // Calcula porcentagem
+  if ticketTotal = 0 then
+    frmDashboard.porcTickTotal.Caption := '0'
+  else
+    frmDashboard.porcTickTotal.Caption :=
+      FloatToStr(100 - (((ticketTotal * 100) / ticketTotalDataAtual)));
+
+  // Altera shape visivel
+  if StrToFloat(frmDashboard.porcTickTotal.Caption) = 0 then
+  begin
+    frmDashboard.shapeTicketTotalBlue.Visible := true;
+    frmDashboard.shapeTicketTotalRed.Visible := false;
+    frmDashboard.shapeTicketTotalGreen.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTickTotal.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcTickTotal.Caption)) + '%';
+  end
+  else if StrToFloat(frmDashboard.porcTickTotal.Caption) < 0 then
+  begin
+    frmDashboard.shapeTicketTotalRed.Visible := true;
+    frmDashboard.shapeTicketTotalGreen.Visible := false;
+    frmDashboard.shapeTicketTotalBlue.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTickTotal.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcTickTotal.Caption)) + '%';
+  end
+  else
+  begin
+    frmDashboard.shapeTicketTotalGreen.Visible := true;
+    frmDashboard.shapeTicketTotalBlue.Visible := false;
+    frmDashboard.shapeTicketTotalRed.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTickTotal.Caption :=
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTickTotal.Caption));
+    frmDashboard.porcTickTotal.Caption := '+' +
+      frmDashboard.porcTickTotal.Caption + '%';
+  end;
+
+  // --------------------------------------------------------- FIM TICKET TOTAL
+
+  // --------------------------------------------------- INÍCIO TOTAL DE VENDAS
+
+  totalVendas := StrToFloat(frmDashboard.totalVendas.Caption);
+
+  // Calcula porcentagem
+  if totalVendas = 0 then
+    frmDashboard.porcTotalVendas.Caption := '0'
+  else
+    frmDashboard.porcTotalVendas.Caption :=
+      FloatToStr(100 - (((totalVendas * 100) / totalVendasDataAtual)));
+
+  // Altera shape visivel
+  if StrToFloat(frmDashboard.porcTotalVendas.Caption) = 0 then
+  begin
+    frmDashboard.shapeTotalVendasBlue.Visible := true;
+    frmDashboard.shapeTotalVendasRed.Visible := false;
+    frmDashboard.shapeTotalVendasGreen.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTotalVendas.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcTotalVendas.Caption)) + '%';
+  end
+  else if StrToFloat(frmDashboard.porcTotalVendas.Caption) < 0 then
+  begin
+    frmDashboard.shapeTotalVendasRed.Visible := true;
+    frmDashboard.shapeTotalVendasGreen.Visible := false;
+    frmDashboard.shapeTotalVendasBlue.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTotalVendas.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcTotalVendas.Caption)) + '%';
+  end
+  else
+  begin
+    frmDashboard.shapeTotalVendasGreen.Visible := true;
+    frmDashboard.shapeTotalVendasBlue.Visible := false;
+    frmDashboard.shapeTotalVendasRed.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcTotalVendas.Caption :=
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcTotalVendas.Caption));
+    frmDashboard.porcTotalVendas.Caption :=
+      '+' + frmDashboard.porcTotalVendas.Caption + '%';
+  end;
+
+  // ------------------------------------------------------ FIM TOTAL DE VENDAS
+
+  // ---------------------------------------------------- INÍCIO ITENS VENDIDOS
+
+  itensVendidos := StrToFloat(frmDashboard.totalItens.Caption);
+
+  // Calcula porcentagem
+  if itensVendidos = 0 then
+    frmDashboard.porcItensVendidos.Caption := '0'
+  else
+    frmDashboard.porcItensVendidos.Caption :=
+      FloatToStr((((itensVendidos * 100) / itensVendidosDataAtual)) - 100);
+
+  // Altera shape visivel
+  if StrToFloat(frmDashboard.porcItensVendidos.Caption) = 0 then
+  begin
+    frmDashboard.shapeItensTotalBlue.Visible := true;
+    frmDashboard.shapeItensTotalRed.Visible := false;
+    frmDashboard.shapeItensTotalGreen.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcItensVendidos.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcItensVendidos.Caption)) + '%';
+  end
+  else if StrToFloat(frmDashboard.porcItensVendidos.Caption) < 0 then
+  begin
+    frmDashboard.shapeItensTotalRed.Visible := true;
+    frmDashboard.shapeItensTotalGreen.Visible := false;
+    frmDashboard.shapeItensTotalBlue.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcItensVendidos.Caption :=
+      FormatFloat('#0.00',
+      StrToFloat(frmDashboard.porcItensVendidos.Caption)) + '%';
+  end
+  else
+  begin
+    frmDashboard.shapeItensTotalGreen.Visible := true;
+    frmDashboard.shapeItensTotalBlue.Visible := false;
+    frmDashboard.shapeItensTotalRed.Visible := false;
+
+    // Limita 2 casas e add % ao valor
+    frmDashboard.porcItensVendidos.Caption :=
+      FormatFloat('#0.00', StrToFloat(frmDashboard.porcItensVendidos.Caption));
+    frmDashboard.porcItensVendidos.Caption :=
+      '+' + frmDashboard.porcItensVendidos.Caption + '%';
+  end;
+
+  // ------------------------------------------------------- FIM ITENS VENDIDOS
 end;
 
 end.

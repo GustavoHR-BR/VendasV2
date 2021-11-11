@@ -187,14 +187,14 @@ begin
     // Produto mais vendido
     dm.cdsItens.IndexFieldNames := 'id';
     dm.cdsProdutos.IndexFieldNames := 'id';
-    dm.cdsItens.First;
     dm.cdsProdutos.First;
     qtdDoProdMaisVendido := 0;
     for i := 1 to dm.cdsProdutos.RecordCount do
     begin
+      cont := 0;
+      dm.cdsItens.First;
       for j := 1 to dm.cdsItens.RecordCount do
       begin
-        cont := 0;
         if dm.cdsProdutosid.AsInteger = dm.cdsItensfk_produto.AsInteger then
         begin
           cont := cont + dm.cdsItensquantidade.AsInteger;
@@ -203,8 +203,8 @@ begin
         begin
           idProdMaisVendido := dm.cdsProdutosid.AsInteger;
           qtdProdMaisvendido.Caption := IntToStr(cont);
+          qtdDoProdMaisVendido := cont;
         end;
-        qtdDoProdMaisVendido := cont;
         dm.cdsItens.Next;
       end;
       dm.cdsProdutos.Next;
@@ -218,12 +218,13 @@ begin
     // Cliente que mais comprou
     dm.cdsVendas.IndexFieldNames := 'id';
     dm.cdsClientes.IndexFieldNames := 'id';
-    dm.cdsVendas.First;
     dm.cdsClientes.First;
     valTotalCli := 0;
-    for i := 1 to dm.cdsClientes.RecordCount do
-      total := 0;
+    for i := 0 to dm.cdsClientes.RecordCount do
     begin
+      dm.cdsVendas.First;
+      qtdComprasCli := 0;
+      total := 0;
       for j := 1 to dm.cdsVendas.RecordCount do
       begin
         if dm.cdsClientesid.AsInteger = dm.cdsVendasfk_cliente.AsInteger then
@@ -236,8 +237,8 @@ begin
           idMelhorCli := dm.cdsClientesid.AsInteger;
           totalEmVendas.Caption := FormatFloat('R$ #,,,,0.00', total);
           numCompras.Caption := IntToStr(qtdComprasCli);
+          valTotalCli := total;
         end;
-        valTotalCli := total;
         dm.cdsVendas.Next;
       end;
       dm.cdsClientes.Next;

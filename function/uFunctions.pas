@@ -517,7 +517,7 @@ begin
   frmDashboard.mediaVendas.Caption := FloatToStr(dm.cdsVendas.RecordCount / 12);
   // Limita 2 casas e add % ao valor
   frmDashboard.mediaVendas.Caption :=
-    FormatFloat('#0.00', StrToFloat(frmDashboard.mediaVendas.Caption)) + '%';
+    FormatFloat('#0.00', StrToFloat(frmDashboard.mediaVendas.Caption));
 end;
 
 procedure calculaPorcentagens(ticketMedioDataAtual, ticketTotalDataAtual,

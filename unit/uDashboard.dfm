@@ -406,7 +406,7 @@ object frmDashboard: TfrmDashboard
   object Shape3: TShape
     Left = 618
     Top = 349
-    Width = 167
+    Width = 174
     Height = 50
     Brush.Color = clSilver
     Pen.Color = clMedGray
@@ -416,11 +416,11 @@ object frmDashboard: TfrmDashboard
   object Label9: TLabel
     Left = 618
     Top = 353
-    Width = 167
+    Width = 178
     Height = 17
     Alignment = taCenter
     AutoSize = False
-    Caption = 'M'#233'dia de vendas: [anual]'
+    Caption = 'M'#233'dia de vendas: [mensal]'
     Color = clGray
     Font.Charset = ANSI_CHARSET
     Font.Color = clDefault
@@ -433,7 +433,7 @@ object frmDashboard: TfrmDashboard
   object mediaVendas: TLabel
     Left = 618
     Top = 376
-    Width = 167
+    Width = 178
     Height = 30
     Align = alCustom
     Alignment = taCenter

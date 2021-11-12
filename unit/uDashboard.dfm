@@ -658,7 +658,7 @@ object frmDashboard: TfrmDashboard
   object precoPro: TLabel
     Left = 251
     Top = 258
-    Width = 129
+    Width = 126
     Height = 26
     Alignment = taCenter
     AutoSize = False
@@ -675,7 +675,7 @@ object frmDashboard: TfrmDashboard
   object nomePro: TLabel
     Left = 107
     Top = 258
-    Width = 129
+    Width = 126
     Height = 26
     Alignment = taCenter
     AutoSize = False

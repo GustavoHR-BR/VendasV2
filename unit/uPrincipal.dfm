@@ -5,7 +5,7 @@ object frmPrincipal: TfrmPrincipal
   BorderStyle = bsSingle
   Caption = 'Sistema de vendas'
   ClientHeight = 236
-  ClientWidth = 482
+  ClientWidth = 491
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -43,16 +43,6 @@ object frmPrincipal: TfrmPrincipal
     ShowHint = True
     TabOrder = 0
   end
-  object edtSenha: TEdit
-    Left = 160
-    Top = 112
-    Width = 169
-    Height = 23
-    Hint = 'Informe a senha'
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
-  end
   object btnEntrar: TButton
     Left = 264
     Top = 153
@@ -62,6 +52,14 @@ object frmPrincipal: TfrmPrincipal
     Caption = 'Entrar'
     TabOrder = 2
     OnClick = btnEntrarClick
+  end
+  object edtSenha: TMaskEdit
+    Left = 160
+    Top = 112
+    Width = 169
+    Height = 23
+    PasswordChar = '*'
+    TabOrder = 1
   end
   object menu: TMainMenu
     Left = 16
@@ -206,6 +204,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFF000000}
         Caption = ' Cliente '
         Hint = 'Novo cliente'
+        ShortCut = 112
         OnClick = Cliente1Click
       end
       object Produto1: TMenuItem
@@ -308,6 +307,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
         Caption = ' Produto '
         Hint = 'Novo produto'
+        ShortCut = 113
         OnClick = Produto1Click
       end
     end
@@ -507,6 +507,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
         Caption = ' Nova Venda  '
         Hint = 'Cadastrar nova venda'
+        ShortCut = 114
         OnClick = Nova1Click
       end
     end
@@ -661,6 +662,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
         Caption = ' Vendas  '
         Hint = 'Relat'#243'rio das vendas'
+        ShortCut = 16496
         OnClick = Vendas1Click
       end
       object Clientes1: TMenuItem
@@ -763,6 +765,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFF000000}
         Caption = ' Clientes  '
+        ShortCut = 16497
         OnClick = Clientes1Click
       end
       object Produtos1: TMenuItem
@@ -864,6 +867,7 @@ object frmPrincipal: TfrmPrincipal
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00}
         Caption = ' Produtos  '
+        ShortCut = 16498
         OnClick = Produtos1Click
       end
     end
@@ -915,6 +919,7 @@ object frmPrincipal: TfrmPrincipal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFF}
       Caption = 'Dashboard'
+      ShortCut = 121
       Visible = False
       OnClick = Dashboard1Click
     end

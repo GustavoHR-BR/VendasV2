@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, RpRave, RpBase, RpSystem,
   RpDefine, RpCon, RpConDS, RpRender, RpRenderPDF, Winapi.ShellAPI, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls;
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Mask;
 
 type
   TfrmPrincipal = class(TForm)
@@ -28,10 +28,10 @@ type
     N4: TMenuItem;
     N5: TMenuItem;
     edtLogin: TEdit;
-    edtSenha: TEdit;
     lblLogin: TLabel;
     lblSenha: TLabel;
     btnEntrar: TButton;
+    edtSenha: TMaskEdit;
     procedure Cliente1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Nova1Click(Sender: TObject);

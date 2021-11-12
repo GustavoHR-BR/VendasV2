@@ -544,7 +544,7 @@ begin
     frmDashboard.porcTickMedio.Caption := '0'
   else
     frmDashboard.porcTickMedio.Caption :=
-      FloatToStr(100 - (((ticketMedio * 100) / ticketMedioDataAtual)));
+      FloatToStr((((ticketMedioDataAtual * 100) / ticketMedio)) - 100);
 
   // Altera shape visivel
   if StrToFloat(frmDashboard.porcTickMedio.Caption) = 0 then
@@ -607,7 +607,7 @@ begin
     frmDashboard.porcTickTotal.Caption := '0'
   else
     frmDashboard.porcTickTotal.Caption :=
-      FloatToStr(100 - (((ticketTotal * 100) / ticketTotalDataAtual)));
+      FloatToStr((((ticketTotalDataAtual * 100) / ticketTotal)) - 100);
 
   // Altera shape visivel
   if StrToFloat(frmDashboard.porcTickTotal.Caption) = 0 then
@@ -661,7 +661,7 @@ begin
     frmDashboard.porcTotalVendas.Caption := '0'
   else
     frmDashboard.porcTotalVendas.Caption :=
-      FloatToStr(100 - (((totalVendas * 100) / totalVendasDataAtual)));
+      FloatToStr((((totalVendasDataAtual * 100) / totalVendas)) - 100);
 
   // Altera shape visivel
   if StrToFloat(frmDashboard.porcTotalVendas.Caption) = 0 then
@@ -710,7 +710,7 @@ begin
     frmDashboard.porcItensVendidos.Caption := '0'
   else
     frmDashboard.porcItensVendidos.Caption :=
-      FloatToStr(100 - (((itensVendidos * 100) / itensVendidosDataAtual)));
+      FloatToStr((((itensVendidosDataAtual * 100) / itensVendidos)) - 100);
 
   // Altera shape visivel
   if StrToFloat(frmDashboard.porcItensVendidos.Caption) = 0 then

@@ -126,10 +126,10 @@ object frmVendas: TfrmVendas
     Font.Height = -11
     Font.Name = 'Arial Unicode MS'
     Font.Style = []
-    ItemIndex = 0
+    ItemIndex = 1
     ParentFont = False
     TabOrder = 4
-    Text = 'C'#243'digo'
+    Text = 'Cliente'
     OnSelect = cbOrdenarPorSelect
     Items.Strings = (
       'C'#243'digo'
